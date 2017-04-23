@@ -1,0 +1,2 @@
+export const GET_HAR_CONTENT = 'GET_HAR_CONTENT'
+export const GET_HAR_SUCCESS = 'GET_HAR_SUCCESS'
