@@ -6,7 +6,7 @@ import {
 
 const initialState = {
     entries: [],
-    page: {},
+    pages: [],
     isDataLoad: false
 };
 
@@ -16,7 +16,7 @@ export default function rootReducer(state = initialState, action) {
             return Object.assign({}, state, {isDataLoad: true})
         }
         case GET_HAR_SUCCESS: {
-            return Object.assign({}, state, {entries: action.payload.entries, page: action.payload.page, isDataLoad: false})
+            return Object.assign({}, state, {entries: action.payload.entries, pages: action.payload.pages, isDataLoad: false})
         }
         default: {
             return state

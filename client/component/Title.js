@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import './style/Title.less'
 
 export default class Title extends Component {
     readFile(event) {

@@ -12,7 +12,7 @@ class App extends Component {
         return (<div>
                 <Title getHarContent={this.props.getHarActions.getHarContent}/>
                 <Statistics />
-                <HttpList entries={this.props.entries}/>
+                <HttpList entries={this.props.entries} pages={this.props.pages}/>
             </div>
         )
     }
@@ -21,7 +21,7 @@ class App extends Component {
 function stateToComponent(state) {
     return {
         entries: state.entries,
-        page: state.page,
+        pages: state.pages,
         isDataLoad: state.isDataLoad
     }
 }
