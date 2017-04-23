@@ -1,5 +1,5 @@
 const initialState = {
-    entries: [],
+    entries: [1, 2, 3, 4],
     page: {},
     isDataLoad: false
 };

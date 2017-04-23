@@ -10,7 +10,7 @@ class App extends Component {
         return (<div>
                 <Title />
                 <Statistics />
-                <HttpList/>
+                <HttpList entries={this.props.entries}/>
             </div>
         )
     }

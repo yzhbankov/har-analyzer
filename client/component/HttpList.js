@@ -7,7 +7,9 @@ export default class HttpList extends Component {
         return (
             <div>
                 <div>HttpList</div>
-                <HttpInfo />
+                {this.props.entries.map(entrie =>
+                    <HttpInfo />
+                )}
             </div>
         )
     }
