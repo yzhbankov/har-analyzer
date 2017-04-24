@@ -12,7 +12,7 @@ export default class HttpList extends Component {
         return (
             <div>
                 <div className="row">
-                    <div className="col-md-1 HttpInfoTime">Time</div>
+                    <div className="col-md-1 HttpInfoNumber">#</div>
                     <div className="col-md-2 HttpInfoTitle">Title</div>
                     <div className="col-md-1 HttpInfoMethod">Request</div>
                     <div className="col-md-1 HttpInfoStatus">Req status</div>
@@ -21,9 +21,10 @@ export default class HttpList extends Component {
                     <div className="col-md-1 HttpInfoTotalTime">Total time</div>
                     <div className="col-md-4 HttpInfoTimeLine">Time line</div>
                 </div>
-                {this.props.entries.map(entrie =>
+                {this.props.entries.map((entrie, number) =>
                     <HttpInfo
                         page={this.props.pages[0]}
+                        number={number}
                         entrie={entrie}
                         time={entrie.startedDateTime}
                         title={entrie.request.url}

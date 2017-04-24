@@ -18,7 +18,7 @@ export default class HttpInfo extends Component {
     render() {
         return (<div>
                 <div className="row" onClick={this.onBtnClick.bind(this)}>
-                    <div className="col-md-1 HttpInfoTime">{this.props.time}</div>
+                    <div className="col-md-1 HttpInfoNumber">{this.props.number + 1}</div>
                     <div className="col-md-2 HttpInfoTitle">{this.props.title}</div>
                     <div className="col-md-1 HttpInfoMethod">{this.props.reqMethod}</div>
                     <div className="col-md-1 HttpInfoStatus">{this.props.resStatus}</div>
