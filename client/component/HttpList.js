@@ -18,19 +18,21 @@ export default class HttpList extends Component {
                     <div className="col-md-1 HttpInfoStatus">Req status</div>
                     <div className="col-md-1 HttpInfoReqSize">Req size</div>
                     <div className="col-md-1 HttpInfoResSize">Res size</div>
-                    <div className="col-md-5 HttpInfoTotalTime">Time line</div>
+                    <div className="col-md-1 HttpInfoTotalTime">Total time</div>
+                    <div className="col-md-4 HttpInfoTimeLine">Time line</div>
                 </div>
                 {this.props.entries.map(entrie =>
-                        <HttpInfo
-                            entrie={entrie}
-                            time={entrie.startedDateTime}
-                            title={entrie.request.url}
-                            reqMethod={entrie.request.method}
-                            resStatus={entrie.response.status}
-                            reqSize={entrie.request.headersSize}
-                            resSize={entrie.response.headersSize + entrie.response.bodySize}
-                            totalTime={entrie.time}
-                            />
+                    <HttpInfo
+                        page={this.props.pages[0]}
+                        entrie={entrie}
+                        time={entrie.startedDateTime}
+                        title={entrie.request.url}
+                        reqMethod={entrie.request.method}
+                        resStatus={entrie.response.status}
+                        reqSize={entrie.request.headersSize}
+                        resSize={entrie.response.headersSize + entrie.response.bodySize}
+                        totalTime={entrie.time}
+                    />
                 )}
             </div>
         )

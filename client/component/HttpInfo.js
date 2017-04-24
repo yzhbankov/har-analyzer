@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 
 import HttpInfoDetails from '../component/HttpInfoDetails.js'
+import HttpInfoTimeLine from '../component/HttpInfoTimeLine'
 
 export default class HttpInfo extends Component {
     constructor(props) {
@@ -39,7 +40,9 @@ export default class HttpInfo extends Component {
                         })()
                     }
                     </div>
-                    <div className="col-md-5 HttpInfoTotalTime">{Math.round(this.props.totalTime * 100) / 100}</div>
+                    <div className="col-md-1 HttpInfoTotalTime">{Math.round(this.props.totalTime * 100) / 100}</div>
+                    <div className="col-md-4 HttpInfoTimeLine"><HttpInfoTimeLine entrie={this.props.entrie}
+                                                                                 page={this.props.page}/></div>
                 </div>
                 {!this.state.show || <HttpInfoDetails entrie={this.props.entrie}/>}
             </div>
