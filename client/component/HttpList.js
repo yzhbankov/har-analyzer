@@ -11,7 +11,6 @@ export default class HttpList extends Component {
         console.log(this.props.pages);
         return (
             <div>
-                <div>HttpList</div>
                 <div className="row">
                     <div className="col-md-1 HttpInfoTime">Time</div>
                     <div className="col-md-2 HttpInfoTitle">Title</div>
@@ -22,15 +21,16 @@ export default class HttpList extends Component {
                     <div className="col-md-5 HttpInfoTotalTime">Time line</div>
                 </div>
                 {this.props.entries.map(entrie =>
-                    <HttpInfo
-                        time={entrie.startedDateTime}
-                        title={entrie.request.url}
-                        reqMethod={entrie.request.method}
-                        resStatus={entrie.response.status}
-                        reqSize={entrie.request.headersSize}
-                        resSize={entrie.response.headersSize + entrie.response.bodySize}
-                        totalTime={entrie.time}
-                    />
+                        <HttpInfo
+                            entrie={entrie}
+                            time={entrie.startedDateTime}
+                            title={entrie.request.url}
+                            reqMethod={entrie.request.method}
+                            resStatus={entrie.response.status}
+                            reqSize={entrie.request.headersSize}
+                            resSize={entrie.response.headersSize + entrie.response.bodySize}
+                            totalTime={entrie.time}
+                            />
                 )}
             </div>
         )
