@@ -7,9 +7,13 @@ import StatisticsHeaderBodySendReceive from './Statistics/StatisticsHeaderBodySe
 import './style/Statistics.less'
 
 export default class Statistics extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {show: false};
+    }
+
     getStatistics() {
         this.props.getStatistics(this.props.entries);
-
     }
 
     render() {
@@ -18,9 +22,11 @@ export default class Statistics extends Component {
             <div>
                 <button onClick={this.getStatistics.bind(this)}>Get statistics</button>
                 <div className="row">
-                    <div className="col-md-4"><StatisticsResponseContent data={this.props.statistics.responseContent}/></div>
+                    <div className="col-md-4"><StatisticsResponseContent data={this.props.statistics.responseContent}/>
+                    </div>
                     <div className="col-md-4"><StatisticsTiming data={this.props.statistics.timing}/></div>
-                    <div className="col-md-4"><StatisticsHeaderBodySendReceive data={this.props.statistics.headBody}/></div>
+                    <div className="col-md-4"><StatisticsHeaderBodySendReceive data={this.props.statistics.headBody}/>
+                    </div>
                 </div>
             </div>
         )
