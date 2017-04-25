@@ -41,9 +41,16 @@ export function getStatistics(entries) {
             wait: 0,
             receive: 0
         };
+        const headBody = {
+            headSend: 0,
+            bodySend: 0,
+            headReceive: 0,
+            bodyReceive: 0
+        };
         const statistics = {
             responseContent: responseContent,
-            timing: timing
+            timing: timing,
+            headBody: headBody
         };
         entries.forEach(entrie => {
             let mimeType = entrie.response.content.mimeType;
@@ -63,6 +70,13 @@ export function getStatistics(entries) {
             if (entrie.timings.send >= 0) timing.send += Math.round(entrie.timings.send);
             if (entrie.timings.wait >= 0) timing.wait += Math.round(entrie.timings.wait);
             if (entrie.timings.receive >= 0) timing.receive += Math.round(entrie.timings.receive);
+        });
+
+        entries.forEach(entrie => {
+            if (entrie.request.bodySize >= 0) headBody.bodySend += entrie.request.bodySize;
+            if (entrie.request.headersSize >= 0) headBody.headSend += entrie.request.headersSize;
+            if (entrie.response.bodySize >= 0) headBody.bodyReceive += entrie.response.bodySize;
+            if (entrie.response.headersSize >= 0) headBody.headReceive += entrie.response.headersSize;
         });
 
         dispatch({

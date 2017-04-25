@@ -13,7 +13,6 @@ export default class StatisticsTiming extends Component {
     buildPieChart(props) {
         Chart.defaults.global.defaultFontSize = 30;
         const dataSet = props.data;
-        console.log(dataSet);
         const ctx = document.getElementById("timingPie");
         const data = {
             labels: [

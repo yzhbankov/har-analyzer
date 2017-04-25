@@ -20,7 +20,7 @@ export default class Statistics extends Component {
                 <div className="row">
                     <div className="col-md-4"><StatisticsResponseContent data={this.props.statistics.responseContent}/></div>
                     <div className="col-md-4"><StatisticsTiming data={this.props.statistics.timing}/></div>
-                    <div className="col-md-4"><StatisticsHeaderBodySendReceive /></div>
+                    <div className="col-md-4"><StatisticsHeaderBodySendReceive data={this.props.statistics.headBody}/></div>
                 </div>
             </div>
         )
