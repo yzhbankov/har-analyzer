@@ -35,7 +35,6 @@ export default class HttpInfoTimeLine extends Component {
     }
 
     render() {
-        console.log(this.props.entrie);
         const relativeReqTime = (this.state.totalReqTime / this.state.totalTime) * 100;
         const startStyle = {width: Math.abs(this.state.startTime / this.state.totalTime) * 100 + '%'};
         const dnsStyle = {width: Math.abs(this.state.dnsTime / this.state.totalReqTime) * relativeReqTime + '%'};
