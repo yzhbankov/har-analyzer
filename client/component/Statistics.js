@@ -19,7 +19,7 @@ export default class Statistics extends Component {
                 <button onClick={this.getStatistics.bind(this)}>Get statistics</button>
                 <div className="row">
                     <div className="col-md-4"><StatisticsResponseContent data={this.props.statistics.responseContent}/></div>
-                    <div className="col-md-4"><StatisticsTiming /></div>
+                    <div className="col-md-4"><StatisticsTiming data={this.props.statistics.timing}/></div>
                     <div className="col-md-4"><StatisticsHeaderBodySendReceive /></div>
                 </div>
             </div>

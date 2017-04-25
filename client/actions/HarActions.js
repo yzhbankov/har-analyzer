@@ -32,8 +32,20 @@ export function getStatistics(entries) {
             javascript: 0,
             others: 0
         };
-        const statistics = {responseContent: responseContent};
-        entries.forEach((entrie) => {
+        const timing = {
+            blocked: 0,
+            dns: 0,
+            ssl: 0,
+            connect: 0,
+            send: 0,
+            wait: 0,
+            receive: 0
+        };
+        const statistics = {
+            responseContent: responseContent,
+            timing: timing
+        };
+        entries.forEach(entrie => {
             let mimeType = entrie.response.content.mimeType;
             let size = entrie.response.content.size;
             if (mimeType.match('html')) responseContent.html += size;
@@ -41,6 +53,16 @@ export function getStatistics(entries) {
             else if (mimeType.match('image')) responseContent.image += size;
             else if (mimeType.match('javascript')) responseContent.javascript += size;
             else responseContent.others += size;
+        });
+
+        entries.forEach(entrie => {
+            if (entrie.timings.blocked >= 0) timing.blocked += Math.round(entrie.timings.blocked);
+            if (entrie.timings.dns >= 0) timing.dns += Math.round(entrie.timings.dns);
+            if (entrie.timings.ssl >= 0) timing.ssl += Math.round(entrie.timings.ssl);
+            if (entrie.timings.connect >= 0) timing.connect += Math.round(entrie.timings.connect);
+            if (entrie.timings.send >= 0) timing.send += Math.round(entrie.timings.send);
+            if (entrie.timings.wait >= 0) timing.wait += Math.round(entrie.timings.wait);
+            if (entrie.timings.receive >= 0) timing.receive += Math.round(entrie.timings.receive);
         });
 
         dispatch({

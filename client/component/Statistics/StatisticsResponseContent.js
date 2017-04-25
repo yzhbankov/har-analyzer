@@ -4,10 +4,16 @@ import Chart from 'chart.js'
 import '../style/Statistics.less'
 
 export default class StatisticsResponseContent extends Component {
-    componentWillReceiveProps(props){
-        console.log(props);
+    componentWillReceiveProps(props) {
+        if (props.data) {
+            this.buildPieChart(props);
+        }
+    }
+
+    buildPieChart(props) {
+        Chart.defaults.global.defaultFontSize = 30;
         const dataSet = props.data;
-        const ctx = document.getElementById("myChart");
+        const ctx = document.getElementById("receiveContentPie");
         const data = {
             labels: [
                 "Image",
@@ -39,23 +45,17 @@ export default class StatisticsResponseContent extends Component {
             type: 'pie',
             data: data,
             options: {
-                legend: {
-                    display: true,
-                    labels: {
-                        fontSize: 30
-                    }
-                },
-                animation:{
-                    animateScale:true
+
+                animation: {
+                    animateScale: true
                 }
             }
         });
     }
+
     render() {
         return (
-            <div>
-                <canvas id="myChart"></canvas>
-            </div>
+            <canvas id="receiveContentPie"></canvas>
         )
     }
 }
