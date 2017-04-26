@@ -11,23 +11,22 @@ export default class Statistics extends Component {
         super(props);
         this.state = {show: false};
     }
-
-    getStatistics() {
-        this.props.getStatistics(this.props.entries);
+    showHideStatistics(){
+        this.setState({
+            show: !this.state.show
+        })
     }
-
     render() {
-
         return (
             <div>
-                <button onClick={this.getStatistics.bind(this)}>Get statistics</button>
-                <div className="row">
+                <button onClick={this.showHideStatistics.bind(this)}>Get statistics</button>
+                {!this.state.show || <div className="row">
                     <div className="col-md-4"><StatisticsResponseContent data={this.props.statistics.responseContent}/>
                     </div>
                     <div className="col-md-4"><StatisticsTiming data={this.props.statistics.timing}/></div>
                     <div className="col-md-4"><StatisticsHeaderBodySendReceive data={this.props.statistics.headBody}/>
                     </div>
-                </div>
+                </div>}
             </div>
         )
     }

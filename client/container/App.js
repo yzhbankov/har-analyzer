@@ -11,8 +11,7 @@ class App extends Component {
     render() {
         return (<div>
                 <Title getHarContent={this.props.getHarActions.getHarContent}/>
-                <Statistics getStatistics={this.props.getHarActions.getStatistics} entries={this.props.entries}
-                            statistics={this.props.statistics}/>
+                <Statistics statistics={this.props.statistics}/>
                 <HttpList entries={this.props.entries} pages={this.props.pages}/>
             </div>
         )

@@ -21,11 +21,9 @@ export default function rootReducer(state = initialState, action) {
             return Object.assign({}, state, {
                 entries: action.payload.entries,
                 pages: action.payload.pages,
+                statistics: action.payload.statistics,
                 isDataLoad: false
             })
-        }
-        case GET_STATISTICS_SUCCESS: {
-            return Object.assign({}, state, {statistics: action.payload})
         }
         default: {
             return state

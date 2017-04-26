@@ -4,10 +4,9 @@ import Chart from 'chart.js'
 import '../style/Statistics.less'
 
 export default class StatisticsTiming extends Component {
-    componentWillReceiveProps(props) {
-        if (props.data) {
-            this.buildPieChart(props);
-        }
+    componentDidMount() {
+        if (this.props.data)
+            this.buildPieChart(this.props);
     }
 
     buildPieChart(props) {
