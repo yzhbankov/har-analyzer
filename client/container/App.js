@@ -10,7 +10,7 @@ import HttpList from '../component/HttpList'
 class App extends Component {
     render() {
         return (<div>
-                <Title getHarContent={this.props.getHarActions.getHarContent}/>
+                <Title loadHarContent={this.props.getHarActions.loadHarContent}/>
                 <Statistics statistics={this.props.statistics}/>
                 <HttpList entries={this.props.entries} pages={this.props.pages}/>
             </div>

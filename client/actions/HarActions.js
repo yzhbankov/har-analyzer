@@ -1,14 +1,13 @@
 import {
-    GET_HAR_CONTENT,
-    GET_HAR_SUCCESS,
-    GET_STATISTICS_SUCCESS
+    LOAD_HAR_CONTENT,
+    LOAD_HAR_SUCCESS
 } from '../constants/Constants'
 
 
-export function getHarContent(event) {
+export function loadHarContent(event) {
     return (dispatch) => {
         dispatch({
-            type: GET_HAR_CONTENT
+            type: LOAD_HAR_CONTENT
         });
         const input = event.target;
         const reader = new FileReader();
@@ -17,7 +16,7 @@ export function getHarContent(event) {
             let statistics = getStatistics(data.log.entries);
             data.log.statistics = statistics;
             dispatch({
-                type: GET_HAR_SUCCESS,
+                type: LOAD_HAR_SUCCESS,
                 payload: data.log
             })
         };

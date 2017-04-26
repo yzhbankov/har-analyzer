@@ -3,7 +3,7 @@ import './style/Title.less'
 
 export default class Title extends Component {
     readFile(event) {
-        this.props.getHarContent(event)
+        this.props.loadHarContent(event)
     }
 
     render() {
