@@ -5,6 +5,15 @@ const green = '#49C562';
 const red = '#F74040';
 const grey = '#1A2B33';
 
+//font colour
+const textMuted = '#636c72';
+const textPrimary = '#0275d8';
+const textSuccess = '#5cb85c';
+const textInfo = '#5bc0de';
+const textWarning = '#5bc0de';
+const textDanger = '#d9534f';
+const textWhite = '#fff';
+
 //shadow variables
 const shadowOne = '0px 3px 15px rgba(0, 0, 0, 0.2)';
 const shadowTwo = '0px 6px 30px rgba(0, 0, 0, 0.2)';
@@ -38,12 +47,7 @@ const letterSpacingTwo = '-1px';
 const letterSpacingThree = '-0.5px';
 const letterSpacingFour = '1px';
 
-const colours = {
-    base: {
-        width: '100px',
-        height: '50px',
-        margin: '10px'
-    },
+export const colours = {
     blue: {
         backgroundColor: blue
     },
@@ -58,43 +62,25 @@ const colours = {
     },
     gray: {
         backgroundColor: grey
-    },
-    paletteColours: {
-        display: 'flex'
     }
 };
 
-const shadows = {
-    set: {
-        display: 'flex'
-    },
+export const shadows = {
     one: {
-        boxShadow: shadowOne,
-        width: '100px',
-        height: '40px',
-        margin: '20px'
+        boxShadow: shadowOne
     },
     two: {
-        boxShadow: shadowTwo,
-        width: '100px',
-        height: '40px',
-        margin: '20px'
+        boxShadow: shadowTwo
     },
     three: {
-        boxShadow: shadowOne,
-        width: '100px',
-        height: '160px',
-        margin: '20px'
+        boxShadow: shadowOne
     },
     four: {
-        boxShadow: shadowTwo,
-        width: '200px',
-        height: '400px',
-        margin: '20px'
+        boxShadow: shadowTwo
     }
 };
 
-const typeScale = {
+export const typeScale = {
     one: {
         fontSize: typeScaleOne
     },
@@ -118,44 +104,19 @@ const typeScale = {
     }
 };
 
-const borderRadii = {
-    base: {
-        display: 'flex'
-    },
+export const borderRadii = {
     one: {
-        width: '100px',
-        height: '80px',
-        margin: '10px',
-        backgroundColor: grey,
         borderRadius: borderRadiiOne
     },
     two: {
-        width: '100px',
-        height: '80px',
-        margin: '10px',
-        backgroundColor: grey,
         borderRadius: borderRadiiTwo
     },
     three: {
-        width: '100px',
-        height: '80px',
-        margin: '10px',
-        backgroundColor: grey,
         borderRadius: borderRadiiThree
     }
 };
 
-const spacingScale = {
-    base: {
-        display: 'flex'
-    },
-    outer: {
-        width: '100px',
-        height: '200px',
-        backgroundColor: '#BCFCFF',
-        zIndex: 0,
-        marginRight: '20px'
-    },
+export const spacingScale = {
     one: {
         marginTop: spacingScaleOne,
         height: 200 - 2 * spacingScaleOne + 'px',
@@ -193,7 +154,7 @@ const spacingScale = {
     }
 };
 
-const letterSpacing = {
+export const letterSpacing = {
     base: {
         display: 'flex'
     },
@@ -218,3 +179,50 @@ const letterSpacing = {
         letterSpacing: letterSpacingFour
     }
 };
+
+export const textColor = {
+    muted: {
+        color: textMuted
+    },
+    primary: {
+        color: textPrimary
+    },
+    success: {
+        color: textSuccess
+    },
+    info: {
+        color: textInfo
+    },
+    warning: {
+        color: textWarning
+    },
+    danger: {
+        color: textDanger
+    },
+    white: {
+        color: textWhite
+    }
+}
+
+export const spacing = {
+    one:{
+        marginTop: spacingScaleOne,
+        marginBottom: spacingScaleOne
+    },
+    two:{
+        marginTop: spacingScaleTwo,
+        marginBottom: spacingScaleTwo
+    },
+    three:{
+        marginTop: spacingScaleThree,
+        marginBottom: spacingScaleThree
+    },
+    four:{
+        marginTop: spacingScaleFour,
+        marginBottom: spacingScaleFour
+    },
+    five:{
+        marginTop: spacingScaleFive,
+        marginBottom: spacingScaleFive
+    }
+}

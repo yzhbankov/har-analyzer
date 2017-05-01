@@ -1,8 +1,5 @@
-import '../style'
+import {colours, shadows, borderRadii, typeScale, textColor, spacing} from '../style'
 
-export const canvas = {
-    chart: {
-        width: '200px !important',
-        height: '200px !important'
-    }
+export const statistics = {
+    button: [colours.blue, shadows.two, borderRadii.two, typeScale.five, textColor.white, spacing.two]
 }

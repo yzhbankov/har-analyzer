@@ -10,7 +10,7 @@ export default class Title extends Component {
 
     render() {
         return (<div>
-                <div style={title.center}>Title</div>
+                <div style={title.center}>HAR Analyser</div>
                 <input type="file" onChange={this.readFile.bind(this)}/>
             </div>
         )

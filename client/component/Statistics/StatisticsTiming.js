@@ -64,7 +64,7 @@ export default class StatisticsTiming extends Component {
     render() {
         console.log(canvas);
         return (
-            <canvas id="timingPie" style={canvas.chart}></canvas>
+            <canvas id="timingPie"></canvas>
         )
     }
 }

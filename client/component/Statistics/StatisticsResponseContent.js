@@ -57,7 +57,7 @@ export default class StatisticsResponseContent extends Component {
 
     render() {
         return (
-            <canvas style={canvas.chart} id="receiveContentPie"> </canvas>
+            <canvas id="receiveContentPie"> </canvas>
         )
     }
 }

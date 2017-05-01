@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import Radium from 'radium'
-import {canvas} from '../style/component/statistics'
+import {statistics} from '../style/component/statistics'
 
 import StatisticsResponseContent from './Statistics/StatisticsResponseContent'
 import StatisticsTiming from './Statistics/StatisticsTiming'
@@ -21,7 +21,7 @@ export default class Statistics extends Component {
     render() {
         return (
             <div>
-                <button onClick={this.showHideStatistics.bind(this)}>Get statistics</button>
+                <button style={statistics.button} onClick={this.showHideStatistics.bind(this)}>Get statistics</button>
                 {!this.state.show || <div className="row">
                     <div className="col-md-4"><StatisticsResponseContent data={this.props.statistics.responseContent}/>
                     </div>

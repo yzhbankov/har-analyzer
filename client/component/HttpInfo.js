@@ -19,8 +19,13 @@ export default class HttpInfo extends Component {
     }
 
     render() {
+        let color = 'white';
+        if (this.props.number % 2 == 0) {
+            color = '#F8F8F8';
+        }
+        const backgroundStyle = {backgroundColor: color};
         return (<div>
-                <div className="row" onClick={this.onBtnClick.bind(this)}>
+                <div className="row" style={backgroundStyle} onClick={this.onBtnClick.bind(this)}>
                     <div className="col-md-1" style={httpList.infoNumber}>{this.props.number + 1}</div>
                     <div className="col-md-2" style={httpList.infoTitle}>{this.props.title}</div>
                     <div className="col-md-1" style={httpList.infoMethod}>{this.props.reqMethod}</div>

@@ -54,7 +54,7 @@ export default class StatisticsHeaderBodySendReceive extends Component {
 
     render() {
         return (
-            <canvas style={canvas.chart} id="headBodyPie"> </canvas>
+            <canvas id="headBodyPie"> </canvas>
         )
     }
 }
