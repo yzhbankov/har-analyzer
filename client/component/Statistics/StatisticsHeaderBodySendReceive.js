@@ -1,8 +1,10 @@
 import React, {Component} from 'react'
+import Radium from 'radium'
 import Chart from 'chart.js'
 
-import '../style/Statistics.less'
+import {canvas} from '../../style/component/statistics'
 
+@Radium
 export default class StatisticsHeaderBodySendReceive extends Component {
     componentDidMount() {
         if (this.props.data)
@@ -10,9 +12,10 @@ export default class StatisticsHeaderBodySendReceive extends Component {
     }
 
     buildPieChart(props) {
-        Chart.defaults.global.defaultFontSize = 30;
+        Chart.defaults.global.defaultFontSize = 15;
         const dataSet = props.data;
         const ctx = document.getElementById("headBodyPie");
+
         const data = {
             labels: [
                 "Bodies send",
@@ -41,7 +44,7 @@ export default class StatisticsHeaderBodySendReceive extends Component {
             type: 'pie',
             data: data,
             options: {
-
+                responsive: false,
                 animation: {
                     animateScale: true
                 }
@@ -51,7 +54,7 @@ export default class StatisticsHeaderBodySendReceive extends Component {
 
     render() {
         return (
-            <canvas id="headBodyPie"></canvas>
+            <canvas style={canvas.chart} id="headBodyPie"> </canvas>
         )
     }
 }

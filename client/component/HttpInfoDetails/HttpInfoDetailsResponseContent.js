@@ -1,11 +1,13 @@
 import React, {Component} from 'react'
+import Radium from 'radium'
 
-import '../style/HttpInfoDetailsResponseContent.less'
+import {httpInfoDetails} from '../../style/component/httpInfoDetails'
 
+@Radium
 export default class HttpInfoDetailsResponseContent extends Component {
     render() {
         return (
-            <div className='httpInfoDetailsResponseContent'>
+            <div className='httpInfoDetailsResponseContent' style={httpInfoDetails.responseContent}>
                 <div className='row'>
                     <div className='col-md-2'><h4>Size</h4></div>
                     <div className='col-md-2'>{this.props.content.size} B</div>

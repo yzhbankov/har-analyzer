@@ -1,8 +1,10 @@
 import React, {Component} from 'react'
+import Radium from 'radium'
 import Chart from 'chart.js'
 
-import '../style/Statistics.less'
+import {canvas} from '../../style/component/statistics'
 
+@Radium
 export default class StatisticsTiming extends Component {
     componentDidMount() {
         if (this.props.data)
@@ -10,9 +12,10 @@ export default class StatisticsTiming extends Component {
     }
 
     buildPieChart(props) {
-        Chart.defaults.global.defaultFontSize = 30;
+        Chart.defaults.global.defaultFontSize = 15;
         const dataSet = props.data;
         const ctx = document.getElementById("timingPie");
+
         const data = {
             labels: [
                 "Blocked",
@@ -50,7 +53,7 @@ export default class StatisticsTiming extends Component {
             type: 'pie',
             data: data,
             options: {
-
+                responsive: false,
                 animation: {
                     animateScale: true
                 }
@@ -59,8 +62,9 @@ export default class StatisticsTiming extends Component {
     }
 
     render() {
+        console.log(canvas);
         return (
-            <canvas id="timingPie"></canvas>
+            <canvas id="timingPie" style={canvas.chart}></canvas>
         )
     }
 }

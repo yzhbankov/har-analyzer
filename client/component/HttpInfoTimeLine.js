@@ -1,7 +1,8 @@
 import React, {Component} from 'react'
+import Radium from 'radium'
+import {httpInfoTimeLine} from '../style/component/httpInfoTimeLine'
 
-import './style/HttpInfoTimeLine.less'
-
+@Radium
 export default class HttpInfoTimeLine extends Component {
     constructor(props) {
         super(props);
@@ -45,16 +46,16 @@ export default class HttpInfoTimeLine extends Component {
         const receiveStyle = {width: Math.abs(this.state.receiveTime / this.state.totalReqTime) * relativeReqTime + '%'};
         const contentLoadStyle = {left: (this.state.contentLoadTime / this.state.totalTime) * 100 + '%'};
         return (
-            <div className="TimeLine">
-                <div className="startTime" style={startStyle}>{/*{this.state.startTime}*/}</div>
-                <div className="dnsTime" style={dnsStyle}>{/*{this.state.dnsTime}*/}</div>
-                <div className="connectTime" style={connectStyle}>{/*{this.state.connectTime}*/}</div>
-                <div className="blockTime" style={blockStyle}>{/*{this.state.blockTime}*/}</div>
-                <div className="sendTime" style={sendStyle}>{/*{this.state.sendTime}*/}</div>
-                <div className="waitTime" style={waitStyle}>{/*{this.state.waitTime}*/}</div>
-                <div className="receiveTime" style={receiveStyle}>{/*{this.state.receiveTime}*/}</div>
-                <div className="contentLoad" style={contentLoadStyle}></div>
-                <div className="pageLoad"></div>
+            <div style={httpInfoTimeLine.timeLine}>
+                <div style={[startStyle]}>{/*{this.state.startTime}*/}</div>
+                <div style={[dnsStyle, httpInfoTimeLine.dnsTime]}>{/*{this.state.dnsTime}*/}</div>
+                <div style={[connectStyle, httpInfoTimeLine.connectTime]}>{/*{this.state.connectTime}*/}</div>
+                <div style={[blockStyle, httpInfoTimeLine.blockTime]}>{/*{this.state.blockTime}*/}</div>
+                <div style={[sendStyle, httpInfoTimeLine.sendTime]}>{/*{this.state.sendTime}*/}</div>
+                <div style={[waitStyle, httpInfoTimeLine.waitTime]}>{/*{this.state.waitTime}*/}</div>
+                <div style={[receiveStyle, httpInfoTimeLine.receiveTime]}>{/*{this.state.receiveTime}*/}</div>
+                <div style={[contentLoadStyle, httpInfoTimeLine.contentLoad]}></div>
+                <div style={httpInfoTimeLine.pageLoad}></div>
             </div>
         )
     }

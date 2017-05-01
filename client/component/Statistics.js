@@ -1,11 +1,13 @@
 import React, {Component} from 'react'
+import Radium from 'radium'
+import {canvas} from '../style/component/statistics'
 
 import StatisticsResponseContent from './Statistics/StatisticsResponseContent'
 import StatisticsTiming from './Statistics/StatisticsTiming'
 import StatisticsHeaderBodySendReceive from './Statistics/StatisticsHeaderBodySendReceive'
 
-import './style/Statistics.less'
 
+@Radium
 export default class Statistics extends Component {
     constructor(props) {
         super(props);

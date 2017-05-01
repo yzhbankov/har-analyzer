@@ -1,5 +1,9 @@
 import React, {Component} from 'react'
+import Radium from 'radium'
 
+import {httpInfoDetails} from '../../style/component/httpInfoDetails'
+
+@Radium
 export default class HttpInfoDetailsResponse extends Component {
     render() {
         return (

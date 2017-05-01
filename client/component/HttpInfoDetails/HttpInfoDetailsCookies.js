@@ -1,11 +1,13 @@
 import React, {Component} from 'react'
+import Radium from 'radium'
 
-import '../style/HttpInfoDetailsCookies.less'
+import {httpInfoDetails} from '../../style/component/httpInfoDetails'
 
+@Radium
 export default class HttpInfoDetailsCookies extends Component {
     render() {
         return (
-            <div className='httpInfoDetailsCookies'>
+            <div style={httpInfoDetails.cookies}>
                 <div><h4>Request cookies</h4></div>
                 {(()=> {
                     if (this.props.request.cookies == 0) {

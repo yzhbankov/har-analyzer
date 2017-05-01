@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
-import './style/Title.less'
+import Radium from 'radium'
+import {title} from '../style/component/title'
 
+@Radium
 export default class Title extends Component {
     readFile(event) {
         this.props.loadHarContent(event)
@@ -8,7 +10,7 @@ export default class Title extends Component {
 
     render() {
         return (<div>
-                <div>Title</div>
+                <div style={title.center}>Title</div>
                 <input type="file" onChange={this.readFile.bind(this)}/>
             </div>
         )
