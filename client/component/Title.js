@@ -11,7 +11,11 @@ export default class Title extends Component {
     render() {
         return (<div>
                 <div style={title.center}>HAR Analyser</div>
-                <input type="file" onChange={this.readFile.bind(this)}/>
+                <div className="row">
+                    <div className="col-md-10"><input type="file" onChange={this.readFile.bind(this)}/></div>
+                    <div className="col-md-2"><a href="discuss.html">Let`s discuss</a>
+                    </div>
+                </div>
             </div>
         )
     }
