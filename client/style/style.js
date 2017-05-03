@@ -47,7 +47,7 @@ const letterSpacingTwo = '-1px';
 const letterSpacingThree = '-0.5px';
 const letterSpacingFour = '1px';
 
-//widths
+//scales
 const xxSmall = '30px';
 const xSmall = '60px';
 const small = '100px';
@@ -251,5 +251,35 @@ export const blockWidth = {
     },
     xxLarge: {
         width: xxLarge
+    }
+}
+
+export const blockHeight = {
+    xxSmall: {
+        height: xxSmall
+    },
+    xSmall: {
+        height: xSmall
+    },
+    small: {
+        height: small
+    },
+    medeum: {
+        height: medeum
+    },
+    xMedeum: {
+        height: xMedeum
+    },
+    xxMedeum: {
+        height: xxmedeum
+    },
+    large: {
+        height: large
+    },
+    xLarge: {
+        height: xLarge
+    },
+    xxLarge: {
+        height: xxLarge
     }
 }

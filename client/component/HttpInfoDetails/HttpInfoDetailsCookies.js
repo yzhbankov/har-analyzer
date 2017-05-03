@@ -1,13 +1,13 @@
 import React, {Component} from 'react'
 import Radium from 'radium'
 
-import {cookies} from '../../style/components.js'
+import {medeumBlockContent} from '../../style/components.js'
 
 @Radium
 export default class HttpInfoDetailsCookies extends Component {
     render() {
         return (
-            <div style={cookies}>
+            <div style={medeumBlockContent}>
                 <div><h4>Request cookies</h4></div>
                 {(()=> {
                     if (this.props.request.cookies == 0) {
