@@ -1,13 +1,13 @@
 import React, {Component} from 'react'
 import Radium from 'radium'
 
-import {httpInfoDetails} from '../../style/component/httpInfoDetails'
+import {medeumBlockContent} from '../../style/components.js'
 
 @Radium
 export default class HttpInfoDetailsResponse extends Component {
     render() {
         return (
-            <div>
+            <div style={medeumBlockContent}>
                 <div className='row'>
                     <div className='col-md-2'><h4>Status</h4></div>
                     <div className='col-md-10'>{this.props.response.status} {this.props.response.statusText}.

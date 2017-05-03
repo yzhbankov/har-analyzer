@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import Radium from 'radium'
 import Chart from 'chart.js'
 
-import {canvas} from '../../style/component/statistics'
+import {canvas} from '../../style/components'
 
 @Radium
 export default class StatisticsHeaderBodySendReceive extends Component {
@@ -54,7 +54,7 @@ export default class StatisticsHeaderBodySendReceive extends Component {
 
     render() {
         return (
-            <canvas id="headBodyPie"> </canvas>
+            <canvas style={{margin:'0 auto'}} id="headBodyPie"> </canvas>
         )
     }
 }
