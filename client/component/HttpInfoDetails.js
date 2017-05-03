@@ -39,6 +39,7 @@ class HttpInfoDetails extends Component {
         return (
             <div>
                 <div className='row'>
+                    <div className="col-md-1"></div>
                     <div className='col-md-1' style={chapterTitle} data-name='reqShow'
                          onClick={this.showHideComponent.bind(this)}>Request
                     </div>

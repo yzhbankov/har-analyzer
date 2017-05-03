@@ -256,30 +256,30 @@ export const blockWidth = {
 
 export const blockHeight = {
     xxSmall: {
-        height: xxSmall
+        maxHeight: xxSmall
     },
     xSmall: {
-        height: xSmall
+        maxHeight: xSmall
     },
     small: {
-        height: small
+        maxHeight: small
     },
     medeum: {
-        height: medeum
+        maxHeight: medeum
     },
     xMedeum: {
-        height: xMedeum
+        maxHeight: xMedeum
     },
     xxMedeum: {
-        height: xxmedeum
+        maxHeight: xxmedeum
     },
     large: {
-        height: large
+        maxHeight: large
     },
     xLarge: {
-        height: xLarge
+        maxHeight: xLarge
     },
     xxLarge: {
-        height: xxLarge
+        maxHeight: xxLarge
     }
 }
