@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import Radium from 'radium'
 
-import {httpInfoDetails} from '../../style/component/httpInfoDetails'
+import {cookies} from '../../style/components.js'
 
 @Radium
 export default class HttpInfoDetailsResponse extends Component {

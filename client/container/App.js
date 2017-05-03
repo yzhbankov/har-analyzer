@@ -8,12 +8,12 @@ import Title from '../component/Title'
 import Statistics from '../component/Statistics'
 import HttpList from '../component/HttpList'
 
-import {text} from '../style/component/app'
+import {regularText} from '../style/components.js'
 
 @Radium
 class App extends Component {
     render() {
-        return (<div style={text}>
+        return (<div style={regularText}>
                 <Title loadHarContent={this.props.getHarActions.loadHarContent}/>
                 <Statistics statistics={this.props.statistics}/>
                 <HttpList entries={this.props.entries} pages={this.props.pages}/>

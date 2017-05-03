@@ -1,4 +1,4 @@
-import {colours, shadows, borderRadii, fontSize, textColor, blockSpacing, elementSpacing, blockWidth} from 'style'
+import {colours, shadows, borderRadii, fontSize, textColor, blockSpacing, elementSpacing, blockWidth} from './style.js'
 
 //buttons
 export const defaultButton = [colours.default, borderRadii.two, fontSize.h5, textColor.white, blockSpacing.two, elementSpacing.two, {border: 'none'}];
