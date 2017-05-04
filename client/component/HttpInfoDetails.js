@@ -6,10 +6,11 @@ import HttpInfoDetailsResponse from './HttpInfoDetails/HttpInfoDetailsResponse.j
 import HttpInfoDetailsResponseContent from './HttpInfoDetails/HttpInfoDetailsResponseContent.js'
 import HtppInfoDetailsCookies from './HttpInfoDetails/HttpInfoDetailsCookies.js'
 
-import {httpInfoDetails} from '../style/component/httpInfoDetails'
+import {chapterTitle} from '../style/components.js'
 
 @Radium
-export default class HttpInfoDetails extends Component {
+export default
+class HttpInfoDetails extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -36,19 +37,20 @@ export default class HttpInfoDetails extends Component {
 
     render() {
         return (
-            <div style={httpInfoDetails.httpInfoDetails}>
+            <div>
                 <div className='row'>
-                    <div className='col-md-1' style={httpInfoDetails.detailsTitle} data-name='reqShow'
+                    <div className="col-md-1"></div>
+                    <div className='col-md-1' style={chapterTitle} data-name='reqShow'
                          onClick={this.showHideComponent.bind(this)}>Request
                     </div>
-                    <div className='col-md-1' style={httpInfoDetails.detailsTitle} data-name='resShow'
+                    <div className='col-md-1' style={chapterTitle} data-name='resShow'
                          onClick={this.showHideComponent.bind(this)}>Response
                     </div>
-                    <div className='col-md-2' style={httpInfoDetails.detailsTitle} data-name='contentShow'
+                    <div className='col-md-2' style={chapterTitle} data-name='contentShow'
                          onClick={this.showHideComponent.bind(this)}>
                         Response content
                     </div>
-                    <div className='col-md-1' style={httpInfoDetails.detailsTitle} data-name='cookiesShow'
+                    <div className='col-md-1' style={chapterTitle} data-name='cookiesShow'
                          onClick={this.showHideComponent.bind(this)}>
                         Cookies
                     </div>
