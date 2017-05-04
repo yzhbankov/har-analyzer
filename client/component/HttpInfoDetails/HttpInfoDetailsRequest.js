@@ -1,47 +1,50 @@
 import React, {Component} from 'react'
 import Radium from 'radium'
 
-import {httpInfoDetails} from '../../style/component/httpInfoDetails'
+import {medeumBlockContent, regularTitle} from '../../style/components.js'
+import {blockSpacing} from '../../style/style'
 
 @Radium
 export default class HttpInfoDetailsRequest extends Component {
     render() {
         return (
-            <div>
+            <div style={[medeumBlockContent, blockSpacing.two]}>
                 <div className='row'>
-                    <div className='col-md-2'><h4>Request URL</h4></div>
+                    <div className='col-md-2' style={[regularTitle, {textAlign:'right'}]}>Request URL</div>
                     <div className='col-md-10'>{this.props.request.url}</div>
                 </div>
                 <div className='row'>
-                    <div className='col-md-2'><h4>Request Method</h4></div>
+                    <div className='col-md-2' style={[regularTitle, {textAlign:'right'}]}>Request Method</div>
                     <div className='col-md-10'>{this.props.request.method}</div>
                 </div>
                 <div className='row'>
-                    <div className='col-md-2'><h4>Status</h4></div>
+                    <div className='col-md-2' style={[regularTitle, {textAlign:'right'}]}>Status</div>
                     <div className='col-md-10'>{this.props.response.status}</div>
                 </div>
-                <div><h4>Request headers</h4></div>
+                <div style={regularTitle}>Request headers</div>
+                <hr style={blockSpacing.one}/>
                 {
                     this.props.request.headers.map((header)=> {
                         return (
                             <div className='row'>
-                                <div className='col-md-2'><h5>{header.name}</h5></div>
+                                <div className='col-md-2' style={[regularTitle, {textAlign:'right'}]}>{header.name}</div>
                                 <div className='col-md-10'>{header.value}</div>
                             </div>
                         )
                     })
                 }
-                <div><h4>Size</h4></div>
+                <div style={regularTitle}>Size</div>
+                <hr style={blockSpacing.one}/>
                 <div className='row'>
-                    <div className='col-md-2'><h5>Body size</h5></div>
+                    <div className='col-md-2' style={[regularTitle, {textAlign:'right'}]}>Body size</div>
                     <div className='col-md-10'>{this.props.request.bodySize} B</div>
                 </div>
                 <div className='row'>
-                    <div className='col-md-2'><h5>Header size</h5></div>
+                    <div className='col-md-2' style={[regularTitle, {textAlign:'right'}]}>Header size</div>
                     <div className='col-md-10'>{this.props.request.headersSize} B</div>
                 </div>
                 <div className='row'>
-                    <div className='col-md-2'><h5>Total</h5></div>
+                    <div className='col-md-2' style={[regularTitle, {textAlign:'right'}]}>Total</div>
                     <div className='col-md-10'>{this.props.request.bodySize + this.props.request.headersSize} B</div>
                 </div>
             </div>

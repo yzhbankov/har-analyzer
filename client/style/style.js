@@ -25,7 +25,7 @@ const typeScaleThree = '2.4em';
 const typeScaleFour = '1.6em';
 const typeScaleFive = '1.25em';
 const typeScaleSix = '1em';
-const typeScaleSeven = '0.8em';
+const typeScaleSeven = '0.9em';
 
 //border radius
 const borderRadiiOne = '2px';
@@ -33,13 +33,13 @@ const borderRadiiTwo = '4px';
 const borderRadiiThree = '8px';
 
 //spacing scale
-const spacingScaleOne = 8;
-const spacingScaleTwo = 16;
-const spacingScaleThree = 24;
-const spacingScaleFour = 32;
-const spacingScaleFive = 40;
-const spacingScaleSix = 48;
-const spacingScaleSeven = 64;
+const spacingScaleOne = '4px';
+const spacingScaleTwo = '8px';
+const spacingScaleThree = '12px';
+const spacingScaleFour = '16px';
+const spacingScaleFive = '20px';
+const spacingScaleSix = '24px';
+const spacingScaleSeven = '32px';
 
 //letter spacing
 const letterSpacingOne = '-2px';
@@ -47,20 +47,31 @@ const letterSpacingTwo = '-1px';
 const letterSpacingThree = '-0.5px';
 const letterSpacingFour = '1px';
 
+//scales
+const xxSmall = '30px';
+const xSmall = '60px';
+const small = '100px';
+const medeum = '120px';
+const xMedeum = '240px';
+const xxmedeum = '480px';
+const large = '600px';
+const xLarge = '1000px';
+const xxLarge = '2000px';
+
 export const colours = {
-    blue: {
+    primary: {
         backgroundColor: blue
     },
-    orange: {
+    warning: {
         backgroundColor: orange
     },
-    red: {
+    danger: {
         backgroundColor: red
     },
-    green: {
+    success: {
         backgroundColor: green
     },
-    gray: {
+    default: {
         backgroundColor: grey
     }
 };
@@ -80,26 +91,26 @@ export const shadows = {
     }
 };
 
-export const typeScale = {
-    one: {
+export const fontSize = {
+    h1: {
         fontSize: typeScaleOne
     },
-    two: {
+    h2: {
         fontSize: typeScaleTwo
     },
-    three: {
+    h3: {
         fontSize: typeScaleThree
     },
-    four: {
+    h4: {
         fontSize: typeScaleFour
     },
-    five: {
+    h5: {
         fontSize: typeScaleFive
     },
-    six: {
+    h6: {
         fontSize: typeScaleSix
     },
-    seven: {
+    h7: {
         fontSize: typeScaleSeven
     }
 };
@@ -116,41 +127,27 @@ export const borderRadii = {
     }
 };
 
-export const spacingScale = {
+export const elementSpacing = {
     one: {
-        marginTop: spacingScaleOne,
-        height: 200 - 2 * spacingScaleOne + 'px',
-        backgroundColor: blue
+        padding: spacingScaleOne
     },
     two: {
-        marginTop: spacingScaleTwo,
-        height: 200 - 2 * spacingScaleTwo + 'px',
-        backgroundColor: blue
+        padding: spacingScaleTwo
     },
     three: {
-        marginTop: spacingScaleThree,
-        height: 200 - 2 * spacingScaleThree + 'px',
-        backgroundColor: blue
+        padding: spacingScaleThree
     },
     four: {
-        marginTop: spacingScaleFour,
-        height: 200 - 2 * spacingScaleFour + 'px',
-        backgroundColor: blue
+        padding: spacingScaleFour
     },
     five: {
-        marginTop: spacingScaleFive,
-        height: 200 - 2 * spacingScaleFive + 'px',
-        backgroundColor: blue
+        padding: spacingScaleFive
     },
     six: {
-        marginTop: spacingScaleSix,
-        height: 200 - 2 * spacingScaleSix + 'px',
-        backgroundColor: blue
+        padding: spacingScaleSix
     },
     seven: {
-        marginTop: spacingScaleSeven,
-        height: 200 - 2 * spacingScaleSeven + 'px',
-        backgroundColor: blue
+        padding: spacingScaleSeven
     }
 };
 
@@ -204,25 +201,85 @@ export const textColor = {
     }
 }
 
-export const spacing = {
-    one:{
+export const blockSpacing = {
+    one: {
         marginTop: spacingScaleOne,
         marginBottom: spacingScaleOne
     },
-    two:{
+    two: {
         marginTop: spacingScaleTwo,
         marginBottom: spacingScaleTwo
     },
-    three:{
+    three: {
         marginTop: spacingScaleThree,
         marginBottom: spacingScaleThree
     },
-    four:{
+    four: {
         marginTop: spacingScaleFour,
         marginBottom: spacingScaleFour
     },
-    five:{
+    five: {
         marginTop: spacingScaleFive,
         marginBottom: spacingScaleFive
+    }
+}
+
+export const blockWidth = {
+    xxSmall: {
+        width: xxSmall
+    },
+    xSmall: {
+        width: xSmall
+    },
+    small: {
+        width: small
+    },
+    medeum: {
+        width: medeum
+    },
+    xMedeum: {
+        width: xMedeum
+    },
+    xxMedeum: {
+        width: xxmedeum
+    },
+    large: {
+        width: large
+    },
+    xLarge: {
+        width: xLarge
+    },
+    xxLarge: {
+        width: xxLarge
+    }
+}
+
+export const blockHeight = {
+    xxSmall: {
+        maxHeight: xxSmall
+    },
+    xSmall: {
+        maxHeight: xSmall
+    },
+    small: {
+        maxHeight: small
+    },
+    medeum: {
+        maxHeight: medeum
+    },
+    xMedeum: {
+        maxHeight: xMedeum
+    },
+    xxMedeum: {
+        maxHeight: xxmedeum
+    },
+    large: {
+        maxHeight: large
+    },
+    xLarge: {
+        maxHeight: xLarge
+    },
+    xxLarge: {
+        maxHeight: xxLarge
     }
 }
