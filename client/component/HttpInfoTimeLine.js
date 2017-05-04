@@ -56,10 +56,18 @@ class HttpInfoTimeLine extends Component {
 
     posToolTip(e) {
         e.preventDefault();
+
+        if ((e.clientX + 440) > window.innerWidth){
+            e.clientX = e.clientX - 440
+        }
+        if ((e.clientY + 300) > window.innerHeight){
+            e.clientY = e.clientY - 300
+        }
+
         this.setState({
             toolTipPos: {
-                x: e.clientX,
-                y: e.clientY
+                x: e.clientX - 20,
+                y: e.clientY + 30
             }
         });
     }

@@ -21,7 +21,8 @@ class TimeLineToolTip extends Component {
             top: this.props.position.y + 'px',
             left: this.props.position.x + 20 + 'px',
             zIndex: 99999,
-            backgroundColor: 'white'
+            backgroundColor: 'white',
+            minWidth: '440px'
         };
 
         const blockTimeVal = isNegative(this.props.data.blockTime);
@@ -40,7 +41,7 @@ class TimeLineToolTip extends Component {
         const waitRelativeToReq = Math.round((sslRelativeToReq + sslTimeVal) * 100) / 100;
 
         return (
-            <div style={[pos, elementSpacing.two, shadows.one, borderRadii.one]}>
+            <div style={[pos, elementSpacing.two, shadows.one, borderRadii.two]}>
                 <div className='row'>
                     <div className='col-md-2'>+{Math.round(this.props.data.startTime)}ms</div>
                     <div className='col-md-10'>Request start time since the beginning</div>
