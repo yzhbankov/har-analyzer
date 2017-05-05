@@ -14,7 +14,7 @@ const initialState = {
 export default function rootReducer(state = initialState, action) {
     switch (action.type) {
         case LOAD_HAR_CONTENT: {
-            return Object.assign({}, state, {isDataLoad: true})
+            return Object.assign({}, state, {})
         }
         case LOAD_HAR_SUCCESS: {
             const val = Date.parse(action.payload.pages[0].startedDateTime);
@@ -23,7 +23,7 @@ export default function rootReducer(state = initialState, action) {
                 entries: action.payload.entries,
                 pages: action.payload.pages,
                 statistics: action.payload.statistics,
-                isDataLoad: false,
+                isDataLoad: true,
                 maxTime: maxTime
             })
         }

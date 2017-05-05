@@ -38,21 +38,23 @@ class HttpInfoDetails extends Component {
     render() {
         return (
             <div>
-                <div className='row'>
+                <div>
                     <div className="col-md-1"></div>
-                    <div className='col-md-1' style={chapterTitle} data-name='reqShow'
-                         onClick={this.showHideComponent.bind(this)}>Request
+                    <div className='col-md-1' style={chapterTitle}><a data-name='reqShow'
+                                                                      onClick={this.showHideComponent.bind(this)}
+                                                                      href='#'>Request</a>
                     </div>
-                    <div className='col-md-1' style={chapterTitle} data-name='resShow'
-                         onClick={this.showHideComponent.bind(this)}>Response
+                    <div className='col-md-1' style={chapterTitle}><a data-name='resShow'
+                                                                      onClick={this.showHideComponent.bind(this)}
+                                                                      href='#'>Response</a>
                     </div>
-                    <div className='col-md-2' style={chapterTitle} data-name='contentShow'
-                         onClick={this.showHideComponent.bind(this)}>
-                        Response content
+                    <div className='col-md-2' style={chapterTitle}>
+                        <a data-name='contentShow'
+                           onClick={this.showHideComponent.bind(this)} href='#'>Response content</a>
                     </div>
-                    <div className='col-md-1' style={chapterTitle} data-name='cookiesShow'
-                         onClick={this.showHideComponent.bind(this)}>
-                        Cookies
+                    <div className='col-md-1' style={chapterTitle}>
+                        <a data-name='cookiesShow'
+                           onClick={this.showHideComponent.bind(this)} href='#'>Cookies</a>
                     </div>
                 </div>
                 {!this.state.reqShow ||

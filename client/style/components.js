@@ -1,7 +1,7 @@
 import {colours, shadows, borderRadii, fontSize, textColor, blockSpacing, elementSpacing, blockWidth, blockHeight} from './style.js'
 
 //buttons
-export const defaultButton = [colours.default, borderRadii.two, fontSize.h5, textColor.white, blockSpacing.two, elementSpacing.two, {border: 'none'}];
+export const defaultButton = [colours.default, borderRadii.two, fontSize.h5, textColor.muted, blockSpacing.two, elementSpacing.two, {borderStyle: 'solid', borderWidth: '1px'}];
 export const primaryButton = [colours.primary, borderRadii.two, fontSize.h5, textColor.white, blockSpacing.two, elementSpacing.two, {border: 'none'}];
 export const successButton = [colours.success, borderRadii.two, fontSize.h5, textColor.white, blockSpacing.two, elementSpacing.two, {border: 'none'}];
 export const dangerButton = [colours.danger, borderRadii.two, fontSize.h5, textColor.white, blockSpacing.two, elementSpacing.two, {border: 'none'}];
@@ -37,9 +37,20 @@ export const pageLoad = {position: 'absolute', width: '1px', height: '110%', bac
 
 //block content
 export const smallBlockContent = [blockWidth.small, blockHeight.small];
-export const medeumBlockContent = [blockWidth.xLarge, blockHeight.large,{overflowX: 'hidden', overflowY: 'auto'}];
+export const medeumBlockContent = [blockWidth.xLarge, blockHeight.large, {overflowX: 'hidden', overflowY: 'auto'}];
 
 //details title
-export const httpInfoDetails = {backgroundColor: 'whitesmoke', borderStyle: 'solid', borderColor: 'ghostwhite', borderWidth: '1px', borderRadius: '10px'};
+export const httpInfoDetails = {
+    backgroundColor: 'whitesmoke',
+    borderStyle: 'solid',
+    borderColor: 'ghostwhite',
+    borderWidth: '1px',
+    borderRadius: '10px'
+};
 export const cookies = {height: '600px', overflowX: 'hidden', overflowY: 'auto'};
+
+//align
+export const center = {textAlign: 'center'};
+export const left = {textAlign: 'left'};
+export const right = {textAlign: 'right'};
 

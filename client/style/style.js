@@ -4,6 +4,7 @@ const orange = '#FA4E05';
 const green = '#49C562';
 const red = '#F74040';
 const grey = '#1A2B33';
+const white = '#FFFFFF';
 
 //font colour
 const textMuted = '#636c72';
@@ -72,7 +73,7 @@ export const colours = {
         backgroundColor: green
     },
     default: {
-        backgroundColor: grey
+        backgroundColor: white
     }
 };
 
