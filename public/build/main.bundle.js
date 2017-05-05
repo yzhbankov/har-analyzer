@@ -4710,6 +4710,10 @@ process.off = noop;
 process.removeListener = noop;
 process.removeAllListeners = noop;
 process.emit = noop;
+process.prependListener = noop;
+process.prependOnceListener = noop;
+
+process.listeners = function (name) { return [] }
 
 process.binding = function (name) {
     throw new Error('process.binding is not supported');
@@ -5297,7 +5301,7 @@ var waitTime = exports.waitTime = { backgroundColor: '#bf00ff', height: '15px' }
 var sslTime = exports.sslTime = { backgroundColor: '#3300ff', height: '15px' };
 var receiveTime = exports.receiveTime = { backgroundColor: '#ebebe0', height: '15px' };
 var contentLoad = exports.contentLoad = { position: 'absolute', width: '1px', height: '110%', background: '#1c80bd', top: '-5%' };
-var pageLoad = exports.pageLoad = { position: 'absolute', width: '1px', height: '110%', background: '#ff0024', top: '-5%', left: '100%' };
+var pageLoad = exports.pageLoad = { position: 'absolute', width: '1px', height: '110%', background: '#ff0024', top: '-5%' };
 
 //block content
 var smallBlockContent = exports.smallBlockContent = [_style.blockWidth.small, _style.blockHeight.small];
@@ -28242,7 +28246,7 @@ var App = (0, _radium2.default)(_class = function (_Component) {
     _createClass(App, [{
         key: 'render',
         value: function render() {
-            return _react2.default.createElement('div', { style: _components.regularText }, _react2.default.createElement(_Title2.default, { loadHarContent: this.props.getHarActions.loadHarContent }), _react2.default.createElement(_Statistics2.default, { statistics: this.props.statistics }), _react2.default.createElement(_HttpList2.default, { entries: this.props.entries, pages: this.props.pages }));
+            return _react2.default.createElement('div', { style: _components.regularText }, _react2.default.createElement(_Title2.default, { loadHarContent: this.props.getHarActions.loadHarContent }), _react2.default.createElement(_Statistics2.default, { statistics: this.props.statistics }), _react2.default.createElement(_HttpList2.default, { entries: this.props.entries, pages: this.props.pages, maxTime: this.props.maxTime }));
         }
     }]);
 
@@ -28254,7 +28258,8 @@ function stateToComponent(state) {
         entries: state.entries,
         pages: state.pages,
         isDataLoad: state.isDataLoad,
-        statistics: state.statistics
+        statistics: state.statistics,
+        maxTime: state.maxTime
     };
 }
 
@@ -28492,7 +28497,8 @@ var HttpInfo = (0, _radium2.default)(_class = function (_Component) {
                 color = '#F8F8F8';
             }
             var backgroundStyle = { backgroundColor: color };
-            return _react2.default.createElement('div', null, _react2.default.createElement('div', { className: 'row', style: backgroundStyle, onClick: this.onBtnClick.bind(this) }, _react2.default.createElement('div', { className: 'col-md-1', style: _components.xxSmallBlock }, this.props.number + 1), _react2.default.createElement('div', { className: 'col-md-2', style: [_components.xMedeumBlock, { overflowX: 'hidden', whiteSpace: 'nowrap' }] }, _react2.default.createElement('a', { href: '#' }, this.props.title)), _react2.default.createElement('div', { className: 'col-md-1', style: _components.xSmallBlock }, this.props.reqMethod), _react2.default.createElement('div', { className: 'col-md-1', style: _components.xSmallBlock }, this.props.resStatus), _react2.default.createElement('div', { className: 'col-md-1', style: _components.xSmallBlock }, function () {
+            return _react2.default.createElement('div', null, _react2.default.createElement('div', { className: 'row', style: backgroundStyle, onClick: this.onBtnClick.bind(this) }, _react2.default.createElement('div', { className: 'col-md-1', style: _components.xxSmallBlock }, this.props.number + 1), _react2.default.createElement('div', { className: 'col-md-2', style: [_components.xMedeumBlock, { overflowX: 'hidden', whiteSpace: 'nowrap' }] }, _react2.default.createElement('a', {
+                href: '#' }, this.props.title)), _react2.default.createElement('div', { className: 'col-md-1', style: _components.xSmallBlock }, this.props.reqMethod), _react2.default.createElement('div', { className: 'col-md-1', style: _components.xSmallBlock }, this.props.resStatus), _react2.default.createElement('div', { className: 'col-md-1', style: _components.xSmallBlock }, function () {
                 if (_this2.props.reqSize <= 0) {
                     return '-';
                 } else {
@@ -28506,7 +28512,8 @@ var HttpInfo = (0, _radium2.default)(_class = function (_Component) {
                 }
             }()), _react2.default.createElement('div', { className: 'col-md-1',
                 style: _components.xSmallBlock }, Math.round(this.props.totalTime * 100) / 100), _react2.default.createElement('div', { className: 'col-md-4', style: _components.xLargeBlock }, _react2.default.createElement(_HttpInfoTimeLine2.default, { entrie: this.props.entrie,
-                page: this.props.page }))), !this.state.show || _react2.default.createElement(_HttpInfoDetails2.default, { entrie: this.props.entrie }));
+                page: this.props.page,
+                maxTime: this.props.maxTime }))), !this.state.show || _react2.default.createElement(_HttpInfoDetails2.default, { entrie: this.props.entrie }));
         }
     }]);
 
@@ -29066,7 +29073,8 @@ var HttpInfoTimeLine = (0, _radium2.default)(_class = function (_Component) {
             waitTime: props.entrie.timings.wait,
             receiveTime: props.entrie.timings.receive,
             sslTime: props.entrie.timings.ssl,
-            showToolTip: false
+            showToolTip: false,
+            maxTime: props.maxTime
         };
         return _this;
     }
@@ -29085,7 +29093,8 @@ var HttpInfoTimeLine = (0, _radium2.default)(_class = function (_Component) {
                 sendTime: props.entrie.timings.send,
                 waitTime: props.entrie.timings.wait,
                 receiveTime: props.entrie.timings.receive,
-                sslTime: props.entrie.timings.ssl
+                sslTime: props.entrie.timings.ssl,
+                maxTime: props.maxTime
             });
         }
     }, {
@@ -29126,18 +29135,19 @@ var HttpInfoTimeLine = (0, _radium2.default)(_class = function (_Component) {
     }, {
         key: 'render',
         value: function render() {
-            var relativeReqTime = this.state.totalReqTime / this.state.totalTime * 100;
-            var startStyle = { width: Math.abs(this.state.startTime / this.state.totalTime) * 100 + '%' };
+            var relativeReqTime = this.state.totalReqTime / this.state.maxTime * 100;
+            var startStyle = { width: Math.abs(this.state.startTime / this.state.maxTime) * 100 + '%' };
             var dnsStyle = { width: Math.abs(this.state.dnsTime / this.state.totalReqTime) * relativeReqTime + '%' };
             var connectStyle = { width: Math.abs(this.state.connectTime / this.state.totalReqTime) * relativeReqTime + '%' };
             var blockStyle = { width: Math.abs(this.state.blockTime / this.state.totalReqTime) * relativeReqTime + '%' };
             var sendStyle = { width: Math.abs(this.state.sendTime / this.state.totalReqTime) * relativeReqTime + '%' };
             var waitStyle = { width: Math.abs(this.state.waitTime / this.state.totalReqTime) * relativeReqTime + '%' };
             var receiveStyle = { width: Math.abs(this.state.receiveTime / this.state.totalReqTime) * relativeReqTime + '%' };
-            var contentLoadStyle = { left: this.state.contentLoadTime / this.state.totalTime * 100 + '%' };
+            var contentLoadStyle = { left: this.state.contentLoadTime / this.state.maxTime * 100 + '%' };
             var sslStyle = { width: Math.abs(this.state.sslTime / this.state.totalReqTime) * relativeReqTime + '%' };
+            var pageLoadStyle = { left: this.state.totalTime / this.state.maxTime * 100 + '%' };
             return _react2.default.createElement('div', { style: _components.timeLine, onMouseOver: this.showToolTip.bind(this), onMouseOut: this.hideToolTip.bind(this),
-                onMouseMove: this.posToolTip.bind(this) }, _react2.default.createElement('div', { style: [startStyle] }), _react2.default.createElement('div', { style: [blockStyle, _components.blockTime] }), _react2.default.createElement('div', { style: [connectStyle, _components.connectTime] }), _react2.default.createElement('div', { style: [dnsStyle, _components.dnsTime] }), _react2.default.createElement('div', { style: [receiveStyle, _components.receiveTime] }), _react2.default.createElement('div', { style: [sendStyle, _components.sendTime] }), _react2.default.createElement('div', { style: [sslStyle, _components.sslTime] }), _react2.default.createElement('div', { style: [waitStyle, _components.waitTime] }), _react2.default.createElement('div', { style: [contentLoadStyle, _components.contentLoad] }), _react2.default.createElement('div', { style: _components.pageLoad }), !this.state.showToolTip || _react2.default.createElement(_TimeLineToolTip2.default, { data: this.state, position: this.state.toolTipPos }));
+                onMouseMove: this.posToolTip.bind(this) }, _react2.default.createElement('div', { style: [startStyle] }), _react2.default.createElement('div', { style: [blockStyle, _components.blockTime] }), _react2.default.createElement('div', { style: [connectStyle, _components.connectTime] }), _react2.default.createElement('div', { style: [dnsStyle, _components.dnsTime] }), _react2.default.createElement('div', { style: [receiveStyle, _components.receiveTime] }), _react2.default.createElement('div', { style: [sendStyle, _components.sendTime] }), _react2.default.createElement('div', { style: [sslStyle, _components.sslTime] }), _react2.default.createElement('div', { style: [waitStyle, _components.waitTime] }), _react2.default.createElement('div', { style: [contentLoadStyle, _components.contentLoad] }), _react2.default.createElement('div', { style: [_components.pageLoad, pageLoadStyle] }), !this.state.showToolTip || _react2.default.createElement(_TimeLineToolTip2.default, { data: this.state, position: this.state.toolTipPos }));
         }
     }]);
 
@@ -29226,6 +29236,8 @@ var HttpList = (0, _radium2.default)(_class = function (_Component) {
             console.log(this.props.entries);
             console.log('Page info');
             console.log(this.props.pages);
+            console.log('Max time');
+            console.log(this.props.maxTime);
             return _react2.default.createElement('div', null, _react2.default.createElement('div', { className: 'row' }, _react2.default.createElement('div', { className: 'col-md-1', style: [_components.xxSmallBlock, _components.regularTitle] }, '#'), _react2.default.createElement('div', { className: 'col-md-2', style: [_components.xMedeumBlock, _components.regularTitle] }, 'Title'), _react2.default.createElement('div', { className: 'col-md-1', style: [_components.xSmallBlock, _components.regularTitle] }, 'Method'), _react2.default.createElement('div', { className: 'col-md-1', style: [_components.xSmallBlock, _components.regularTitle] }, 'Status'), _react2.default.createElement('div', { className: 'col-md-1', style: [_components.xSmallBlock, _components.regularTitle] }, 'Req size'), _react2.default.createElement('div', { className: 'col-md-1', style: [_components.xSmallBlock, _components.regularTitle] }, 'Res size'), _react2.default.createElement('div', { className: 'col-md-1', style: [_components.xSmallBlock, _components.regularTitle] }, 'Total time'), _react2.default.createElement('div', { className: 'col-md-4', style: [_components.xLargeBlock, _components.regularTitle] }, 'Time line')), this.props.entries.map(function (entrie, number) {
                 return _react2.default.createElement(_HttpInfo2.default, {
                     page: _this2.props.pages[0],
@@ -29237,7 +29249,8 @@ var HttpList = (0, _radium2.default)(_class = function (_Component) {
                     resStatus: entrie.response.status,
                     reqSize: entrie.request.headersSize,
                     resSize: entrie.response.headersSize + entrie.response.bodySize,
-                    totalTime: entrie.time
+                    totalTime: entrie.time,
+                    maxTime: _this2.props.maxTime
                 });
             }));
         }
@@ -29953,11 +29966,14 @@ function rootReducer() {
             }
         case _Constants.LOAD_HAR_SUCCESS:
             {
+                var val = Date.parse(action.payload.pages[0].startedDateTime);
+                var maxTime = findMaxSubstract(val, action.payload.entries);
                 return Object.assign({}, state, {
                     entries: action.payload.entries,
                     pages: action.payload.pages,
                     statistics: action.payload.statistics,
-                    isDataLoad: false
+                    isDataLoad: false,
+                    maxTime: maxTime
                 });
             }
         default:
@@ -29965,6 +29981,15 @@ function rootReducer() {
                 return state;
             }
     }
+}
+
+function findMaxSubstract(val, arr) {
+    var result = 0;
+    arr.forEach(function (item, index) {
+        var maxDiff = Date.parse(item.startedDateTime) - val + item.time;
+        if (maxDiff > result) result = maxDiff;
+    });
+    return result;
 }
 
 /***/ }),
