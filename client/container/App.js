@@ -16,7 +16,7 @@ class App extends Component {
         return (<div style={regularText}>
                 <Title loadHarContent={this.props.getHarActions.loadHarContent}/>
                 <Statistics statistics={this.props.statistics}/>
-                <HttpList entries={this.props.entries} pages={this.props.pages} maxTime={this.props.maxTime}/>
+                <HttpList entries={this.props.entries} pages={this.props.pages} maxTime={this.props.maxTime} dataLoad={this.props.isDataLoad}/>
             </div>
         )
     }

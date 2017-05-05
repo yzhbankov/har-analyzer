@@ -31,7 +31,7 @@ class Title extends Component {
                 <div className="row">
                     <div className="col-md-10">
                         <div className="btn btn-primary" style={[fileUpload, primaryButton]}>
-                            <span>Upload</span>
+                            <span>Load HAR File</span>
                             <input type="file" style={upload} onChange={this.readFile.bind(this)}/>
                         </div>
                     </div>

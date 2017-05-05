@@ -23,10 +23,10 @@ class HttpInfo extends Component {
     render() {
         let color = 'white';
         if (this.props.number % 2 == 0) {
-            color = '#F8F8F8';
+            color = '#dfdfdf';
         }
         const backgroundStyle = {backgroundColor: color};
-        return (<div>
+        return (<div className="col-md-12">
                 <div className="row" style={backgroundStyle} onClick={this.onBtnClick.bind(this)}>
                     <div className="col-md-1" style={xxSmallBlock}>{this.props.number + 1}</div>
                     <div className="col-md-2" style={[xMedeumBlock, {overflowX: 'hidden', whiteSpace: 'nowrap'}]}><a

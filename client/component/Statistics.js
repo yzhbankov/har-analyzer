@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import Radium from 'radium'
-import {defaultButton, primaryButton, successButton, dangerButton, chapterTitle} from '../style/components'
+import {defaultButton, primaryButton, successButton, dangerButton, chapterTitle, center} from '../style/components'
 
 import StatisticsResponseContent from './Statistics/StatisticsResponseContent'
 import StatisticsTiming from './Statistics/StatisticsTiming'
@@ -22,7 +22,7 @@ export default class Statistics extends Component {
 
     render() {
         return (
-            <div>
+            <div style={center}>
                 <button style={defaultButton} onClick={this.showHideStatistics.bind(this)}>Get statistics</button>
                 {!this.state.show || <div className="row">
                     <div className="col-md-4" style={chapterTitle}>
