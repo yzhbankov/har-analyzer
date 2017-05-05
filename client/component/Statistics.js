@@ -23,7 +23,7 @@ export default class Statistics extends Component {
     render() {
         return (
             <div>
-                <button style={primaryButton} onClick={this.showHideStatistics.bind(this)}>Get statistics</button>
+                <button style={defaultButton} onClick={this.showHideStatistics.bind(this)}>Get statistics</button>
                 {!this.state.show || <div className="row">
                     <div className="col-md-4" style={chapterTitle}>
                         <div>Response content statistics</div>
