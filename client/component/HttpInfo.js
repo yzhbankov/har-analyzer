@@ -6,7 +6,8 @@ import HttpInfoDetails from '../component/HttpInfoDetails.js'
 import HttpInfoTimeLine from '../component/HttpInfoTimeLine'
 
 @Radium
-export default class HttpInfo extends Component {
+export default
+class HttpInfo extends Component {
     constructor(props) {
         super(props);
         this.state = {show: false};
@@ -28,7 +29,8 @@ export default class HttpInfo extends Component {
         return (<div>
                 <div className="row" style={backgroundStyle} onClick={this.onBtnClick.bind(this)}>
                     <div className="col-md-1" style={xxSmallBlock}>{this.props.number + 1}</div>
-                    <div className="col-md-2" style={[xMedeumBlock, {overflowX: 'hidden', whiteSpace: 'nowrap'}]}><a href='#'>{this.props.title}</a></div>
+                    <div className="col-md-2" style={[xMedeumBlock, {overflowX: 'hidden', whiteSpace: 'nowrap'}]}><a
+                        href='#'>{this.props.title}</a></div>
                     <div className="col-md-1" style={xSmallBlock}>{this.props.reqMethod}</div>
                     <div className="col-md-1" style={xSmallBlock}>{this.props.resStatus}</div>
                     <div className="col-md-1" style={xSmallBlock}>{(() => {
@@ -51,7 +53,8 @@ export default class HttpInfo extends Component {
                     <div className="col-md-1"
                          style={xSmallBlock}>{Math.round(this.props.totalTime * 100) / 100}</div>
                     <div className="col-md-4" style={xLargeBlock}><HttpInfoTimeLine entrie={this.props.entrie}
-                                                                                              page={this.props.page}/>
+                                                                                    page={this.props.page}
+                                                                                    maxTime={this.props.maxTime}/>
                     </div>
                 </div>
                 {!this.state.show || <HttpInfoDetails entrie={this.props.entrie}/>}

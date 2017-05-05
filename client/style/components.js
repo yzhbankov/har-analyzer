@@ -33,7 +33,7 @@ export const waitTime = {backgroundColor: '#bf00ff', height: '15px'};
 export const sslTime = {backgroundColor: '#3300ff', height: '15px'};
 export const receiveTime = {backgroundColor: '#ebebe0', height: '15px'};
 export const contentLoad = {position: 'absolute', width: '1px', height: '110%', background: '#1c80bd', top: '-5%'};
-export const pageLoad = {position: 'absolute', width: '1px', height: '110%', background: '#ff0024', top: '-5%', left: '100%'};
+export const pageLoad = {position: 'absolute', width: '1px', height: '110%', background: '#ff0024', top: '-5%'};
 
 //block content
 export const smallBlockContent = [blockWidth.small, blockHeight.small];

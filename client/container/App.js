@@ -16,7 +16,7 @@ class App extends Component {
         return (<div style={regularText}>
                 <Title loadHarContent={this.props.getHarActions.loadHarContent}/>
                 <Statistics statistics={this.props.statistics}/>
-                <HttpList entries={this.props.entries} pages={this.props.pages}/>
+                <HttpList entries={this.props.entries} pages={this.props.pages} maxTime={this.props.maxTime}/>
             </div>
         )
     }
@@ -27,7 +27,8 @@ function stateToComponent(state) {
         entries: state.entries,
         pages: state.pages,
         isDataLoad: state.isDataLoad,
-        statistics: state.statistics
+        statistics: state.statistics,
+        maxTime: state.maxTime
     }
 }
 

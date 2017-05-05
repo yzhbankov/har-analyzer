@@ -12,6 +12,8 @@ class HttpList extends Component {
         console.log(this.props.entries);
         console.log('Page info');
         console.log(this.props.pages);
+        console.log('Max time');
+        console.log(this.props.maxTime);
         return (
             <div>
                 <div className="row">
@@ -36,6 +38,7 @@ class HttpList extends Component {
                             reqSize={entrie.request.headersSize}
                             resSize={entrie.response.headersSize + entrie.response.bodySize}
                             totalTime={entrie.time}
+                            maxTime={this.props.maxTime}
                             />
                 )}
             </div>

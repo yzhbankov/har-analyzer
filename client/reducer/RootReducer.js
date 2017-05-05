@@ -17,15 +17,27 @@ export default function rootReducer(state = initialState, action) {
             return Object.assign({}, state, {isDataLoad: true})
         }
         case LOAD_HAR_SUCCESS: {
+            const val = Date.parse(action.payload.pages[0].startedDateTime);
+            const maxTime = findMaxSubstract(val, action.payload.entries);
             return Object.assign({}, state, {
                 entries: action.payload.entries,
                 pages: action.payload.pages,
                 statistics: action.payload.statistics,
-                isDataLoad: false
+                isDataLoad: false,
+                maxTime: maxTime
             })
         }
         default: {
             return state
         }
     }
+}
+
+function findMaxSubstract(val, arr){
+    var result = 0;
+    arr.forEach(function(item, index){
+        const maxDiff = Date.parse(item.startedDateTime) - val + item.time;
+        if (maxDiff > result) result = maxDiff;
+    });
+    return result
 }
