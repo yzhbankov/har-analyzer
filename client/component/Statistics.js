@@ -27,16 +27,16 @@ export default class Statistics extends Component {
 
                 {!this.state.show || this.props.statistics.map((statistic, number) =>
                     <div className="row">
-                        <div style={chapterTitle}>Page {number + 1}</div>
-                        <div className="col-md-4" style={chapterTitle}>
-                            <div style={regularTitle}>Response content statistics</div>
+                        <div style={chapterTitle}>{this.props.pages[number].title}</div>
+                        <div className="col-md-4" style={regularTitle}>
+                            <div>Response content statistics</div>
                             <StatisticsResponseContent data={statistic.responseContent} number={number}/>
                         </div>
-                        <div className="col-md-4" style={chapterTitle}>
-                            <div style={regularTitle}>Time statistics</div>
+                        <div className="col-md-4" style={regularTitle}>
+                            <div>Time statistics</div>
                             <StatisticsTiming data={statistic.timing} number={number}/></div>
-                        <div className="col-md-4" style={chapterTitle}>
-                            <div style={regularTitle}>Head/body statistics</div>
+                        <div className="col-md-4" style={regularTitle}>
+                            <div>Head/body statistics</div>
                             <StatisticsHeaderBodySendReceive data={statistic.headBody} number={number}/>
                         </div>
                     </div>)

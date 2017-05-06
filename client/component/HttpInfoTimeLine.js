@@ -97,7 +97,6 @@ class HttpInfoTimeLine extends Component {
         const sslStyle = {width: Math.abs(this.state.sslTime / this.state.totalReqTime) * relativeReqTime + '%'};
 
         const pageLoadStyle = {left: (this.state.totalTime / this.state.maxTime) * 100 + '%'};
-        console.log((this.state.totalTime / this.state.maxTime) * 100 + '%');
         return (
             <div style={timeLine} onMouseOver={this.showToolTip.bind(this)} onMouseOut={this.hideToolTip.bind(this)}
                  onMouseMove={this.posToolTip.bind(this)}>

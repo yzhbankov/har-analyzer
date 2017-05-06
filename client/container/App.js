@@ -15,11 +15,11 @@ class App extends Component {
     render() {
         return (<div style={regularText}>
                 <Title loadHarContent={this.props.getHarActions.loadHarContent}/>
-                <Statistics statistics={this.props.statistics}/>
+                <Statistics statistics={this.props.statistics} pages={this.props.pages}/>
 
                 {this.props.pages.map((page, number) =>
                     <div>
-                        <div style={chapterTitle}>Page {number + 1}</div>
+                        <div style={chapterTitle}>{page.title}</div>
                         <HttpList
                             entries={this.props.entries[number]}
                             page={page}
