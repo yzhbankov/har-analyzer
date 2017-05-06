@@ -12,16 +12,17 @@ export default class StatisticsHeaderBodySendReceive extends Component {
     }
 
     buildPieChart(props) {
-        Chart.defaults.global.defaultFontSize = 15;
+        Chart.defaults.global.defaultFontSize = 11;
         const dataSet = props.data;
-        const ctx = document.getElementById("headBodyPie");
+        const id = "headBodyPie" + this.props.number;
+        const ctx = document.getElementById(id);
 
         const data = {
             labels: [
-                "Bodies send",
-                "Headers send",
-                "Bodies receive",
-                "Headers receive"
+                "Bod/send",
+                "Head/send",
+                "Bod/receive",
+                "Head/receive"
             ],
             datasets: [
                 {
@@ -47,6 +48,15 @@ export default class StatisticsHeaderBodySendReceive extends Component {
                 responsive: false,
                 animation: {
                     animateScale: true
+                },
+                legend: {
+                    display: true,
+                    position: 'right',
+                    labels:{
+                        boxWidth: 10,
+                        padding: 5
+                    }
+
                 }
             }
         });
@@ -54,7 +64,7 @@ export default class StatisticsHeaderBodySendReceive extends Component {
 
     render() {
         return (
-            <canvas style={{margin:'0 auto'}} id="headBodyPie"> </canvas>
+            <canvas style={{margin:'0 auto', height: '230px', width:'230px'}} id={"headBodyPie" + this.props.number}> </canvas>
         )
     }
 }

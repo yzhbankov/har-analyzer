@@ -12,7 +12,7 @@ class HttpList extends Component {
         console.log('Entries');
         console.log(this.props.entries);
         console.log('Page info');
-        console.log(this.props.pages);
+        console.log(this.props.page);
         console.log('Max time');
         console.log(this.props.maxTime);
         console.log(this.props.dataLoad);
@@ -33,7 +33,7 @@ class HttpList extends Component {
                 <div className="col-md-12" style={[center, blockSpacing.five, chapterTitle]}>No info</div>}
                 {this.props.entries.map((entrie, number) =>
                         <HttpInfo
-                            page={this.props.pages[0]}
+                            page={this.props.page}
                             number={number}
                             entrie={entrie}
                             time={entrie.startedDateTime}

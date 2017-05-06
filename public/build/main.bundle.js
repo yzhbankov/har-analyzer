@@ -4710,10 +4710,13 @@ process.off = noop;
 process.removeListener = noop;
 process.removeAllListeners = noop;
 process.emit = noop;
+<<<<<<< HEAD
 process.prependListener = noop;
 process.prependOnceListener = noop;
 
 process.listeners = function (name) { return [] }
+=======
+>>>>>>> radium-styles
 
 process.binding = function (name) {
     throw new Error('process.binding is not supported');
@@ -28258,7 +28261,20 @@ var App = (0, _radium2.default)(_class = function (_Component) {
     _createClass(App, [{
         key: 'render',
         value: function render() {
+<<<<<<< HEAD
             return _react2.default.createElement('div', { style: _components.regularText }, _react2.default.createElement(_Title2.default, { loadHarContent: this.props.getHarActions.loadHarContent }), _react2.default.createElement(_Statistics2.default, { statistics: this.props.statistics }), _react2.default.createElement(_HttpList2.default, { entries: this.props.entries, pages: this.props.pages, maxTime: this.props.maxTime, dataLoad: this.props.isDataLoad }));
+=======
+            var _this2 = this;
+
+            return _react2.default.createElement('div', { style: _components.regularText }, _react2.default.createElement(_Title2.default, { loadHarContent: this.props.getHarActions.loadHarContent }), _react2.default.createElement(_Statistics2.default, { statistics: this.props.statistics }), this.props.pages.map(function (page, number) {
+                return _react2.default.createElement('div', null, _react2.default.createElement('div', { style: _components.chapterTitle }, 'Page ', number + 1), _react2.default.createElement(_HttpList2.default, {
+                    entries: _this2.props.entries[number],
+                    page: page,
+                    maxTime: _this2.props.maxTimes[number],
+                    dataLoad: _this2.props.isDataLoad
+                }));
+            }));
+>>>>>>> radium-styles
         }
     }]);
 
@@ -28271,7 +28287,11 @@ function stateToComponent(state) {
         pages: state.pages,
         isDataLoad: state.isDataLoad,
         statistics: state.statistics,
+<<<<<<< HEAD
         maxTime: state.maxTime
+=======
+        maxTimes: state.maxTimes
+>>>>>>> radium-styles
     };
 }
 
@@ -28349,8 +28369,13 @@ function loadHarContent(event) {
         var reader = new FileReader();
         reader.onload = function () {
             var data = JSON.parse(reader.result);
+<<<<<<< HEAD
             var statistics = getStatistics(data.log.entries);
             data.log.statistics = statistics;
+=======
+            //let statistics = getStatistics(data.log.entries);
+            //data.log.statistics = statistics;
+>>>>>>> radium-styles
             dispatch({
                 type: _Constants.LOAD_HAR_SUCCESS,
                 payload: data.log
@@ -28360,15 +28385,25 @@ function loadHarContent(event) {
     };
 }
 
+<<<<<<< HEAD
 function getStatistics(entries) {
     var responseContent = {
+=======
+/*
+function getStatistics(entries) {
+    const responseContent = {
+>>>>>>> radium-styles
         image: 0,
         css: 0,
         html: 0,
         javascript: 0,
         others: 0
     };
+<<<<<<< HEAD
     var timing = {
+=======
+    const timing = {
+>>>>>>> radium-styles
         blocked: 0,
         dns: 0,
         ssl: 0,
@@ -28377,17 +28412,26 @@ function getStatistics(entries) {
         wait: 0,
         receive: 0
     };
+<<<<<<< HEAD
     var headBody = {
+=======
+    const headBody = {
+>>>>>>> radium-styles
         headSend: 0,
         bodySend: 0,
         headReceive: 0,
         bodyReceive: 0
     };
+<<<<<<< HEAD
     var statistics = {
+=======
+    const statistics = {
+>>>>>>> radium-styles
         responseContent: responseContent,
         timing: timing,
         headBody: headBody
     };
+<<<<<<< HEAD
     entries.forEach(function (entrie) {
         var mimeType = entrie.response.content.mimeType;
         var size = entrie.response.content.size;
@@ -28395,6 +28439,19 @@ function getStatistics(entries) {
     });
 
     entries.forEach(function (entrie) {
+=======
+    entries.forEach(entrie => {
+        let mimeType = entrie.response.content.mimeType;
+        let size = entrie.response.content.size;
+        if (mimeType.match('html')) responseContent.html += size;
+        else if (mimeType.match('css')) responseContent.css += size;
+        else if (mimeType.match('image')) responseContent.image += size;
+        else if (mimeType.match('javascript')) responseContent.javascript += size;
+        else responseContent.others += size;
+    });
+
+    entries.forEach(entrie => {
+>>>>>>> radium-styles
         if (entrie.timings.blocked >= 0) timing.blocked += Math.round(entrie.timings.blocked);
         if (entrie.timings.dns >= 0) timing.dns += Math.round(entrie.timings.dns);
         if (entrie.timings.ssl >= 0) timing.ssl += Math.round(entrie.timings.ssl);
@@ -28404,14 +28461,22 @@ function getStatistics(entries) {
         if (entrie.timings.receive >= 0) timing.receive += Math.round(entrie.timings.receive);
     });
 
+<<<<<<< HEAD
     entries.forEach(function (entrie) {
+=======
+    entries.forEach(entrie => {
+>>>>>>> radium-styles
         if (entrie.request.bodySize >= 0) headBody.bodySend += entrie.request.bodySize;
         if (entrie.request.headersSize >= 0) headBody.headSend += entrie.request.headersSize;
         if (entrie.response.bodySize >= 0) headBody.bodyReceive += entrie.response.bodySize;
         if (entrie.response.headersSize >= 0) headBody.headReceive += entrie.response.headersSize;
     });
     return statistics;
+<<<<<<< HEAD
 }
+=======
+}*/
+>>>>>>> radium-styles
 
 /***/ }),
 /* 240 */
@@ -29251,14 +29316,22 @@ var HttpList = (0, _radium2.default)(_class = function (_Component) {
             console.log('Entries');
             console.log(this.props.entries);
             console.log('Page info');
+<<<<<<< HEAD
             console.log(this.props.pages);
+=======
+            console.log(this.props.page);
+>>>>>>> radium-styles
             console.log('Max time');
             console.log(this.props.maxTime);
             console.log(this.props.dataLoad);
             return _react2.default.createElement('div', { className: 'row',
                 style: { minHeight: '200px', borderStyle: 'solid', borderWidth: '1px', borderColor: '#c6c6c6' } }, _react2.default.createElement('div', { style: { height: '32px', backgroundColor: '#c6c6c6' } }, _react2.default.createElement('div', { className: 'col-md-1', style: [_components.xxSmallBlock, _components.regularTitle] }, '#'), _react2.default.createElement('div', { className: 'col-md-2', style: [_components.xMedeumBlock, _components.regularTitle] }, 'Title'), _react2.default.createElement('div', { className: 'col-md-1', style: [_components.xSmallBlock, _components.regularTitle] }, 'Method'), _react2.default.createElement('div', { className: 'col-md-1', style: [_components.xSmallBlock, _components.regularTitle] }, 'Status'), _react2.default.createElement('div', { className: 'col-md-1', style: [_components.xSmallBlock, _components.regularTitle] }, 'Req size'), _react2.default.createElement('div', { className: 'col-md-1', style: [_components.xSmallBlock, _components.regularTitle] }, 'Res size'), _react2.default.createElement('div', { className: 'col-md-1', style: [_components.xSmallBlock, _components.regularTitle] }, 'Total time'), _react2.default.createElement('div', { className: 'col-md-4', style: [_components.xLargeBlock, _components.regularTitle] }, 'Time line')), this.props.dataLoad || _react2.default.createElement('div', { className: 'col-md-12', style: [_components.center, _style.blockSpacing.five, _components.chapterTitle] }, 'No info'), this.props.entries.map(function (entrie, number) {
                 return _react2.default.createElement(_HttpInfo2.default, {
+<<<<<<< HEAD
                     page: _this2.props.pages[0],
+=======
+                    page: _this2.props.page,
+>>>>>>> radium-styles
                     number: number,
                     entrie: entrie,
                     time: entrie.startedDateTime,
@@ -29371,7 +29444,13 @@ var Statistics = (0, _radium2.default)(_class = function (_Component) {
     }, {
         key: 'render',
         value: function render() {
+<<<<<<< HEAD
             return _react2.default.createElement('div', { style: _components.center }, _react2.default.createElement('button', { style: _components.defaultButton, onClick: this.showHideStatistics.bind(this) }, 'Get statistics'), !this.state.show || _react2.default.createElement('div', { className: 'row' }, _react2.default.createElement('div', { className: 'col-md-4', style: _components.chapterTitle }, _react2.default.createElement('div', null, 'Response content statistics'), _react2.default.createElement(_StatisticsResponseContent2.default, { data: this.props.statistics.responseContent })), _react2.default.createElement('div', { className: 'col-md-4', style: _components.chapterTitle }, _react2.default.createElement('div', null, 'Time statistics'), _react2.default.createElement(_StatisticsTiming2.default, { data: this.props.statistics.timing })), _react2.default.createElement('div', { className: 'col-md-4', style: _components.chapterTitle }, _react2.default.createElement('div', null, 'Head/body statistics'), _react2.default.createElement(_StatisticsHeaderBodySendReceive2.default, { data: this.props.statistics.headBody }))));
+=======
+            return _react2.default.createElement('div', { style: _components.center }, _react2.default.createElement('button', { style: _components.defaultButton, onClick: this.showHideStatistics.bind(this) }, 'Get statistics'), !this.state.show || this.props.statistics.map(function (statistic, number) {
+                return _react2.default.createElement('div', { className: 'row' }, _react2.default.createElement('div', { style: _components.chapterTitle }, 'Page ', number + 1), _react2.default.createElement('div', { className: 'col-md-4', style: _components.chapterTitle }, _react2.default.createElement('div', { style: _components.regularTitle }, 'Response content statistics'), _react2.default.createElement(_StatisticsResponseContent2.default, { data: statistic.responseContent, number: number })), _react2.default.createElement('div', { className: 'col-md-4', style: _components.chapterTitle }, _react2.default.createElement('div', { style: _components.regularTitle }, 'Time statistics'), _react2.default.createElement(_StatisticsTiming2.default, { data: statistic.timing, number: number })), _react2.default.createElement('div', { className: 'col-md-4', style: _components.chapterTitle }, _react2.default.createElement('div', { style: _components.regularTitle }, 'Head/body statistics'), _react2.default.createElement(_StatisticsHeaderBodySendReceive2.default, { data: statistic.headBody, number: number })));
+            }));
+>>>>>>> radium-styles
         }
     }]);
 
@@ -29459,12 +29538,22 @@ var StatisticsHeaderBodySendReceive = (0, _radium2.default)(_class = function (_
     }, {
         key: 'buildPieChart',
         value: function buildPieChart(props) {
+<<<<<<< HEAD
             _chart2.default.defaults.global.defaultFontSize = 15;
             var dataSet = props.data;
             var ctx = document.getElementById("headBodyPie");
 
             var data = {
                 labels: ["Bodies send", "Headers send", "Bodies receive", "Headers receive"],
+=======
+            _chart2.default.defaults.global.defaultFontSize = 11;
+            var dataSet = props.data;
+            var id = "headBodyPie" + this.props.number;
+            var ctx = document.getElementById(id);
+
+            var data = {
+                labels: ["Bod/send", "Head/send", "Bod/receive", "Head/receive"],
+>>>>>>> radium-styles
                 datasets: [{
                     data: [dataSet.bodySend, dataSet.headSend, dataSet.bodyReceive, dataSet.headReceive],
                     backgroundColor: ["#FF6384", "#4BC0C0", "#FFCE56", "#E7E9ED"],
@@ -29478,6 +29567,18 @@ var StatisticsHeaderBodySendReceive = (0, _radium2.default)(_class = function (_
                     responsive: false,
                     animation: {
                         animateScale: true
+<<<<<<< HEAD
+=======
+                    },
+                    legend: {
+                        display: true,
+                        position: 'right',
+                        labels: {
+                            boxWidth: 10,
+                            padding: 5
+                        }
+
+>>>>>>> radium-styles
                     }
                 }
             });
@@ -29485,7 +29586,11 @@ var StatisticsHeaderBodySendReceive = (0, _radium2.default)(_class = function (_
     }, {
         key: 'render',
         value: function render() {
+<<<<<<< HEAD
             return _react2.default.createElement('canvas', { style: { margin: '0 auto' }, id: 'headBodyPie' }, ' ');
+=======
+            return _react2.default.createElement('canvas', { style: { margin: '0 auto', height: '230px', width: '230px' }, id: "headBodyPie" + this.props.number }, ' ');
+>>>>>>> radium-styles
         }
     }]);
 
@@ -29573,9 +29678,16 @@ var StatisticsResponseContent = (0, _radium2.default)(_class = function (_Compon
     }, {
         key: 'buildPieChart',
         value: function buildPieChart(props) {
+<<<<<<< HEAD
             _chart2.default.defaults.global.defaultFontSize = 15;
             var dataSet = props.data;
             var ctx = document.getElementById("receiveContentPie");
+=======
+            _chart2.default.defaults.global.defaultFontSize = 11;
+            var dataSet = props.data;
+            var id = "receiveContentPie" + this.props.number;
+            var ctx = document.getElementById(id);
+>>>>>>> radium-styles
 
             var data = {
                 labels: ["Image", "CSS", "Html", "Javascript", "Others"],
@@ -29592,6 +29704,18 @@ var StatisticsResponseContent = (0, _radium2.default)(_class = function (_Compon
                     responsive: false,
                     animation: {
                         animateScale: true
+<<<<<<< HEAD
+=======
+                    },
+                    legend: {
+                        display: true,
+                        position: 'right',
+                        labels: {
+                            boxWidth: 10,
+                            padding: 5
+                        }
+
+>>>>>>> radium-styles
                     }
                 }
             });
@@ -29599,7 +29723,11 @@ var StatisticsResponseContent = (0, _radium2.default)(_class = function (_Compon
     }, {
         key: 'render',
         value: function render() {
+<<<<<<< HEAD
             return _react2.default.createElement('canvas', { style: { margin: '0 auto' }, id: 'receiveContentPie' }, ' ');
+=======
+            return _react2.default.createElement('canvas', { style: { margin: '0 auto', height: '230px', width: '230px' }, id: "receiveContentPie" + this.props.number }, ' ');
+>>>>>>> radium-styles
         }
     }]);
 
@@ -29687,9 +29815,16 @@ var StatisticsTiming = (0, _radium2.default)(_class = function (_Component) {
     }, {
         key: 'buildPieChart',
         value: function buildPieChart(props) {
+<<<<<<< HEAD
             _chart2.default.defaults.global.defaultFontSize = 15;
             var dataSet = props.data;
             var ctx = document.getElementById("timingPie");
+=======
+            _chart2.default.defaults.global.defaultFontSize = 11;
+            var dataSet = props.data;
+            var id = 'timingPie' + this.props.number;
+            var ctx = document.getElementById(id);
+>>>>>>> radium-styles
 
             var data = {
                 labels: ["Blocked", "Connect", "DNS", "Receive", "Send", "SSL", "Wait"],
@@ -29706,6 +29841,18 @@ var StatisticsTiming = (0, _radium2.default)(_class = function (_Component) {
                     responsive: false,
                     animation: {
                         animateScale: true
+<<<<<<< HEAD
+=======
+                    },
+                    legend: {
+                        display: true,
+                        position: 'right',
+                        labels: {
+                            boxWidth: 10,
+                            padding: 5
+                        }
+
+>>>>>>> radium-styles
                     }
                 }
             });
@@ -29713,8 +29860,12 @@ var StatisticsTiming = (0, _radium2.default)(_class = function (_Component) {
     }, {
         key: 'render',
         value: function render() {
+<<<<<<< HEAD
             console.log(_components.canvas);
             return _react2.default.createElement('canvas', { style: { margin: '0 auto' }, id: 'timingPie' });
+=======
+            return _react2.default.createElement('canvas', { style: { margin: '0 auto', height: '200px', width: '200px' }, id: "timingPie" + this.props.number }, ' ');
+>>>>>>> radium-styles
         }
     }]);
 
@@ -30000,6 +30151,7 @@ function rootReducer() {
             }
         case _Constants.LOAD_HAR_SUCCESS:
             {
+<<<<<<< HEAD
                 var val = Date.parse(action.payload.pages[0].startedDateTime);
                 var maxTime = findMaxSubstract(val, action.payload.entries);
                 return Object.assign({}, state, {
@@ -30008,6 +30160,18 @@ function rootReducer() {
                     statistics: action.payload.statistics,
                     isDataLoad: true,
                     maxTime: maxTime
+=======
+                var pages = action.payload.pages;
+                var entries = getPagesEntriesList(action.payload.entries, action.payload.pages);
+                var maxTimes = getSetOfMaxTimes(entries, pages);
+                var statistics = getPagesListStatistics(entries);
+                return Object.assign({}, state, {
+                    entries: entries,
+                    pages: pages,
+                    statistics: statistics,
+                    isDataLoad: true,
+                    maxTimes: maxTimes
+>>>>>>> radium-styles
                 });
             }
         default:
@@ -30026,6 +30190,95 @@ function findMaxSubstract(val, arr) {
     return result;
 }
 
+<<<<<<< HEAD
+=======
+function getPagesEntriesList(entriesList, pagesList) {
+    var result = [];
+    var temp = [];
+    for (var i = 0; i < pagesList.length; i++) {
+        for (var j = 0; j < entriesList.length; j++) {
+            if (pagesList[i].id == entriesList[j].pageref) {
+                temp.push(entriesList[j]);
+            }
+        }
+        result.push(temp);
+        temp = [];
+    }
+    return result;
+}
+
+function getSetOfMaxTimes(entries, pages) {
+    var result = [];
+    for (var i = 0; i < pages.length; i++) {
+        var val = Date.parse(pages[i].startedDateTime);
+        var maxTime = findMaxSubstract(val, entries[i]);
+        result.push(maxTime);
+    }
+    return result;
+}
+
+function getPageStatistics(entries) {
+    var responseContent = {
+        image: 0,
+        css: 0,
+        html: 0,
+        javascript: 0,
+        others: 0
+    };
+    var timing = {
+        blocked: 0,
+        dns: 0,
+        ssl: 0,
+        connect: 0,
+        send: 0,
+        wait: 0,
+        receive: 0
+    };
+    var headBody = {
+        headSend: 0,
+        bodySend: 0,
+        headReceive: 0,
+        bodyReceive: 0
+    };
+    var statistics = {
+        responseContent: responseContent,
+        timing: timing,
+        headBody: headBody
+    };
+    entries.forEach(function (entrie) {
+        var mimeType = entrie.response.content.mimeType;
+        var size = entrie.response.content.size;
+        if (mimeType.match('html')) responseContent.html += size;else if (mimeType.match('css')) responseContent.css += size;else if (mimeType.match('image')) responseContent.image += size;else if (mimeType.match('javascript')) responseContent.javascript += size;else responseContent.others += size;
+    });
+
+    entries.forEach(function (entrie) {
+        if (entrie.timings.blocked >= 0) timing.blocked += Math.round(entrie.timings.blocked);
+        if (entrie.timings.dns >= 0) timing.dns += Math.round(entrie.timings.dns);
+        if (entrie.timings.ssl >= 0) timing.ssl += Math.round(entrie.timings.ssl);
+        if (entrie.timings.connect >= 0) timing.connect += Math.round(entrie.timings.connect);
+        if (entrie.timings.send >= 0) timing.send += Math.round(entrie.timings.send);
+        if (entrie.timings.wait >= 0) timing.wait += Math.round(entrie.timings.wait);
+        if (entrie.timings.receive >= 0) timing.receive += Math.round(entrie.timings.receive);
+    });
+
+    entries.forEach(function (entrie) {
+        if (entrie.request.bodySize >= 0) headBody.bodySend += entrie.request.bodySize;
+        if (entrie.request.headersSize >= 0) headBody.headSend += entrie.request.headersSize;
+        if (entrie.response.bodySize >= 0) headBody.bodyReceive += entrie.response.bodySize;
+        if (entrie.response.headersSize >= 0) headBody.headReceive += entrie.response.headersSize;
+    });
+    return statistics;
+}
+
+function getPagesListStatistics(entries) {
+    var result = [];
+    for (var i = 0; i < entries.length; i++) {
+        result.push(getPageStatistics(entries[i]));
+    }
+    return result;
+}
+
+>>>>>>> radium-styles
 /***/ }),
 /* 256 */
 /***/ (function(module, exports, __webpack_require__) {

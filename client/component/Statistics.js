@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import Radium from 'radium'
-import {defaultButton, primaryButton, successButton, dangerButton, chapterTitle, center} from '../style/components'
+import {defaultButton, primaryButton, successButton, regularTitle, chapterTitle, center} from '../style/components'
 
 import StatisticsResponseContent from './Statistics/StatisticsResponseContent'
 import StatisticsTiming from './Statistics/StatisticsTiming'
@@ -24,19 +24,24 @@ export default class Statistics extends Component {
         return (
             <div style={center}>
                 <button style={defaultButton} onClick={this.showHideStatistics.bind(this)}>Get statistics</button>
-                {!this.state.show || <div className="row">
-                    <div className="col-md-4" style={chapterTitle}>
-                        <div>Response content statistics</div>
-                        <StatisticsResponseContent data={this.props.statistics.responseContent}/>
-                    </div>
-                    <div className="col-md-4" style={chapterTitle}>
-                        <div>Time statistics</div>
-                        <StatisticsTiming data={this.props.statistics.timing}/></div>
-                    <div className="col-md-4" style={chapterTitle}>
-                        <div>Head/body statistics</div>
-                        <StatisticsHeaderBodySendReceive data={this.props.statistics.headBody}/>
-                    </div>
-                </div>}
+
+                {!this.state.show || this.props.statistics.map((statistic, number) =>
+                    <div className="row">
+                        <div style={chapterTitle}>{this.props.pages[number].title}</div>
+                        <div className="col-md-4" style={regularTitle}>
+                            <div>Response content statistics</div>
+                            <StatisticsResponseContent data={statistic.responseContent} number={number}/>
+                        </div>
+                        <div className="col-md-4" style={regularTitle}>
+                            <div>Time statistics</div>
+                            <StatisticsTiming data={statistic.timing} number={number}/></div>
+                        <div className="col-md-4" style={regularTitle}>
+                            <div>Head/body statistics</div>
+                            <StatisticsHeaderBodySendReceive data={statistic.headBody} number={number}/>
+                        </div>
+                    </div>)
+                }
+
             </div>
         )
     }

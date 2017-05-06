@@ -7,9 +7,14 @@ import {timeLine, dnsTime, connectTime, sslTime, blockTime, sendTime, waitTime, 
 export default
 class HttpInfoTimeLine extends Component {
     constructor(props) {
+        let totalTime = props.page.pageTimings.onLoad;
+        let maxTime = props.maxTime;
+        if (totalTime > maxTime){
+            maxTime = totalTime;
+        }
         super(props);
         this.state = {
-            totalTime: props.page.pageTimings.onLoad,
+            totalTime: totalTime,
             contentLoadTime: props.page.pageTimings.onContentLoad,
             totalReqTime: props.entrie.time,
             startTime: Date.parse(props.entrie.startedDateTime) - Date.parse(props.page.startedDateTime),
@@ -21,13 +26,18 @@ class HttpInfoTimeLine extends Component {
             receiveTime: props.entrie.timings.receive,
             sslTime: props.entrie.timings.ssl,
             showToolTip: false,
-            maxTime: props.maxTime
+            maxTime: maxTime
         };
     }
 
     componentWillReceiveProps(props) {
+        let totalTime = props.page.pageTimings.onLoad;
+        let maxTime = props.maxTime;
+        if (totalTime > maxTime){
+            maxTime = totalTime;
+        }
         this.setState({
-            totalTime: props.page.pageTimings.onLoad,
+            totalTime: totalTime,
             contentLoadTime: props.page.pageTimings.onContentLoad,
             totalReqTime: props.entrie.time,
             startTime: Date.parse(props.entrie.startedDateTime) - Date.parse(props.page.startedDateTime),
@@ -38,7 +48,7 @@ class HttpInfoTimeLine extends Component {
             waitTime: props.entrie.timings.wait,
             receiveTime: props.entrie.timings.receive,
             sslTime: props.entrie.timings.ssl,
-            maxTime: props.maxTime
+            maxTime: maxTime
         })
     }
 
@@ -85,6 +95,7 @@ class HttpInfoTimeLine extends Component {
         const receiveStyle = {width: Math.abs(this.state.receiveTime / this.state.totalReqTime) * relativeReqTime + '%'};
         const contentLoadStyle = {left: (this.state.contentLoadTime / this.state.maxTime) * 100 + '%'};
         const sslStyle = {width: Math.abs(this.state.sslTime / this.state.totalReqTime) * relativeReqTime + '%'};
+
         const pageLoadStyle = {left: (this.state.totalTime / this.state.maxTime) * 100 + '%'};
         return (
             <div style={timeLine} onMouseOver={this.showToolTip.bind(this)} onMouseOut={this.hideToolTip.bind(this)}

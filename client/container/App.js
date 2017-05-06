@@ -8,15 +8,26 @@ import Title from '../component/Title'
 import Statistics from '../component/Statistics'
 import HttpList from '../component/HttpList'
 
-import {regularText} from '../style/components.js'
+import {regularText, chapterTitle} from '../style/components.js'
 
 @Radium
 class App extends Component {
     render() {
         return (<div style={regularText}>
                 <Title loadHarContent={this.props.getHarActions.loadHarContent}/>
-                <Statistics statistics={this.props.statistics}/>
-                <HttpList entries={this.props.entries} pages={this.props.pages} maxTime={this.props.maxTime} dataLoad={this.props.isDataLoad}/>
+                <Statistics statistics={this.props.statistics} pages={this.props.pages}/>
+
+                {this.props.pages.map((page, number) =>
+                    <div>
+                        <div style={chapterTitle}>{page.title}</div>
+                        <HttpList
+                            entries={this.props.entries[number]}
+                            page={page}
+                            maxTime={this.props.maxTimes[number]}
+                            dataLoad={this.props.isDataLoad}
+                        />
+                    </div>
+                )}
             </div>
         )
     }
@@ -28,7 +39,7 @@ function stateToComponent(state) {
         pages: state.pages,
         isDataLoad: state.isDataLoad,
         statistics: state.statistics,
-        maxTime: state.maxTime
+        maxTimes: state.maxTimes
     }
 }
 
