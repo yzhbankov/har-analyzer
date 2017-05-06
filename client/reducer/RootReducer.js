@@ -17,14 +17,15 @@ export default function rootReducer(state = initialState, action) {
             return Object.assign({}, state, {})
         }
         case LOAD_HAR_SUCCESS: {
-            const val = Date.parse(action.payload.pages[0].startedDateTime);
-            const maxTime = findMaxSubstract(val, action.payload.entries);
+            const pages = action.payload.pages;
+            const entries = getPagesEntriesList(action.payload.entries, action.payload.pages);
+            const maxTimes = getSetOfMaxTimes(entries, pages);
             return Object.assign({}, state, {
-                entries: action.payload.entries,
-                pages: action.payload.pages,
+                entries: entries,
+                pages: pages,
                 statistics: action.payload.statistics,
                 isDataLoad: true,
-                maxTime: maxTime
+                maxTimes: maxTimes
             })
         }
         default: {
@@ -33,11 +34,36 @@ export default function rootReducer(state = initialState, action) {
     }
 }
 
-function findMaxSubstract(val, arr){
+function findMaxSubstract(val, arr) {
     var result = 0;
-    arr.forEach(function(item, index){
+    arr.forEach(function (item, index) {
         const maxDiff = Date.parse(item.startedDateTime) - val + item.time;
         if (maxDiff > result) result = maxDiff;
     });
     return result
+}
+
+function getPagesEntriesList(entriesList, pagesList) {
+    let result = [];
+    let temp = [];
+    for (let i = 0; i < pagesList.length; i++) {
+        for (let j = 0; j < entriesList.length; j++) {
+            if (pagesList[i].id == entriesList[j].pageref) {
+                temp.push(entriesList[j]);
+            }
+        }
+        result.push(temp);
+        temp = [];
+    }
+    return result;
+}
+
+function getSetOfMaxTimes(entries, pages) {
+    let result = [];
+    for (let i = 0; i < pages.length; i++) {
+        let val = Date.parse(pages[i].startedDateTime);
+        let maxTime = findMaxSubstract(val, entries[i]);
+        result.push(maxTime);
+    }
+    return result;
 }
