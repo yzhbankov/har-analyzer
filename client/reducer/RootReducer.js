@@ -20,6 +20,12 @@ export default function rootReducer(state = initialState, action) {
             const pages = action.payload.pages;
             const entries = getPagesEntriesList(action.payload.entries, action.payload.pages);
             const maxTimes = getSetOfMaxTimes(entries, pages);
+            console.log('Entries');
+            console.log(entries);
+            console.log('MaxTimes');
+            console.log(maxTimes);
+            console.log('Pages');
+            console.log(pages);
             const statistics = getPagesListStatistics(entries);
             return Object.assign({}, state, {
                 entries: entries,
