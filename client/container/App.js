@@ -8,7 +8,7 @@ import Title from '../component/Title'
 import Statistics from '../component/Statistics'
 import HttpList from '../component/HttpList'
 
-import {regularText} from '../style/components.js'
+import {regularText, chapterTitle} from '../style/components.js'
 
 @Radium
 class App extends Component {
@@ -19,7 +19,7 @@ class App extends Component {
 
                 {this.props.pages.map((page, number) =>
                     <div>
-                        <div>Page {number}</div>
+                        <div style={chapterTitle}>Page {number + 1}</div>
                         <HttpList
                             entries={this.props.entries[number]}
                             page={page}

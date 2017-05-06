@@ -13,8 +13,8 @@ export function loadHarContent(event) {
         const reader = new FileReader();
         reader.onload = function () {
             let data = JSON.parse(reader.result);
-            let statistics = getStatistics(data.log.entries);
-            data.log.statistics = statistics;
+            //let statistics = getStatistics(data.log.entries);
+            //data.log.statistics = statistics;
             dispatch({
                 type: LOAD_HAR_SUCCESS,
                 payload: data.log
@@ -24,6 +24,7 @@ export function loadHarContent(event) {
     }
 }
 
+/*
 function getStatistics(entries) {
     const responseContent = {
         image: 0,
@@ -79,4 +80,4 @@ function getStatistics(entries) {
         if (entrie.response.headersSize >= 0) headBody.headReceive += entrie.response.headersSize;
     });
     return statistics;
-}
+}*/
