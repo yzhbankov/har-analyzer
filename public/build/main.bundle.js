@@ -29210,13 +29210,6 @@ var HttpList = (0, _radium2.default)(_class = function (_Component) {
         value: function render() {
             var _this2 = this;
 
-            console.log('Entries');
-            console.log(this.props.entries);
-            console.log('Page info');
-            console.log(this.props.page);
-            console.log('Max time');
-            console.log(this.props.maxTime);
-            console.log(this.props.dataLoad);
             return _react2.default.createElement('div', { className: 'row',
                 style: { minHeight: '200px', borderStyle: 'solid', borderWidth: '1px', borderColor: '#c6c6c6' } }, _react2.default.createElement('div', { style: { height: '32px', backgroundColor: '#c6c6c6' } }, _react2.default.createElement('div', { className: 'col-md-1', style: [_components.xxSmallBlock, _components.regularTitle] }, '#'), _react2.default.createElement('div', { className: 'col-md-2', style: [_components.xMedeumBlock, _components.regularTitle] }, 'Title'), _react2.default.createElement('div', { className: 'col-md-1', style: [_components.xSmallBlock, _components.regularTitle] }, 'Method'), _react2.default.createElement('div', { className: 'col-md-1', style: [_components.xSmallBlock, _components.regularTitle] }, 'Status'), _react2.default.createElement('div', { className: 'col-md-1', style: [_components.xSmallBlock, _components.regularTitle] }, 'Req size'), _react2.default.createElement('div', { className: 'col-md-1', style: [_components.xSmallBlock, _components.regularTitle] }, 'Res size'), _react2.default.createElement('div', { className: 'col-md-1', style: [_components.xSmallBlock, _components.regularTitle] }, 'Total time'), _react2.default.createElement('div', { className: 'col-md-4', style: [_components.xLargeBlock, _components.regularTitle] }, 'Time line')), this.props.dataLoad || _react2.default.createElement('div', { className: 'col-md-12', style: [_components.center, _style.blockSpacing.five, _components.chapterTitle] }, 'No info'), this.props.entries.map(function (entrie, number) {
                 return _react2.default.createElement(_HttpInfo2.default, {
@@ -29348,8 +29341,8 @@ var Statistics = (0, _radium2.default)(_class = function (_Component) {
         value: function render() {
             var _this2 = this;
 
-            return _react2.default.createElement('div', { style: _components.center }, _react2.default.createElement('button', { style: _components.defaultButton, onClick: this.showHideStatistics.bind(this) }, 'Get statistics'), !this.state.show || this.props.statistics.map(function (statistic, number) {
-                return _react2.default.createElement('div', null, _react2.default.createElement('button', {
+            return _react2.default.createElement('div', { style: _components.center }, _react2.default.createElement('button', { style: _components.defaultButton, onClick: this.showHideStatistics.bind(this) }, 'Show statistics'), !this.state.show || this.props.statistics.map(function (statistic, number) {
+                return _react2.default.createElement('div', null, _react2.default.createElement('button', { style: _components.primaryButton,
                     onClick: _this2.showHidePageStatistics.bind(_this2, number) }, _this2.props.pages[number].title), !_this2.state.showPage[number] || _react2.default.createElement('div', { className: 'row' }, _react2.default.createElement('div', { style: _components.chapterTitle }, _this2.props.pages[number].title), _react2.default.createElement('div', { className: 'col-md-4', style: _components.regularTitle }, _react2.default.createElement('div', null, 'Response content statistics'), _react2.default.createElement(_StatisticsResponseContent2.default, { data: statistic.responseContent, number: number })), _react2.default.createElement('div', { className: 'col-md-4', style: _components.regularTitle }, _react2.default.createElement('div', null, 'Time statistics'), _react2.default.createElement(_StatisticsTiming2.default, { data: statistic.timing, number: number })), _react2.default.createElement('div', { className: 'col-md-4', style: _components.regularTitle }, _react2.default.createElement('div', null, 'Head/body statistics'), _react2.default.createElement(_StatisticsHeaderBodySendReceive2.default, { data: statistic.headBody, number: number }))));
             }));
         }
@@ -29813,10 +29806,17 @@ var TimeLineToolTip = (0, _radium2.default)(_class = function (_Component) {
                 }
             }
 
+            var top = 0;
+            var left = 0;
+
+            if (this.props.position) {
+                top = this.props.position.y + 'px';
+                left = this.props.position.x + 20 + 'px';
+            }
             var pos = {
                 position: 'fixed',
-                top: this.props.position.y + 'px',
-                left: this.props.position.x + 20 + 'px',
+                top: top,
+                left: left,
                 zIndex: 99999,
                 backgroundColor: 'white',
                 minWidth: '440px'
