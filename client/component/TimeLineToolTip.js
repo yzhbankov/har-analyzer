@@ -1,6 +1,17 @@
 import React, {Component} from 'react'
 import Radium from 'radium'
-import {regularTitle, dnsTime, connectTime, sslTime, blockTime, sendTime, waitTime, contentLoad, pageLoad, receiveTime} from '../style/components.js'
+import {
+    regularTitle,
+    dnsTime,
+    connectTime,
+    sslTime,
+    blockTime,
+    sendTime,
+    waitTime,
+    contentLoad,
+    pageLoad,
+    receiveTime
+} from '../style/components.js'
 import {blockSpacing, elementSpacing, shadows, borderRadii} from '../style/style'
 
 @Radium
@@ -16,10 +27,17 @@ class TimeLineToolTip extends Component {
             }
         }
 
+        let top = 0;
+        let left = 0;
+
+        if (this.props.position) {
+            top = this.props.position.y + 'px';
+            left = this.props.position.x + 20 + 'px';
+        }
         const pos = {
             position: 'fixed',
-            top: this.props.position.y + 'px',
-            left: this.props.position.x + 20 + 'px',
+            top: top,
+            left: left,
             zIndex: 99999,
             backgroundColor: 'white',
             minWidth: '440px'
@@ -118,7 +136,7 @@ class TimeLineToolTip extends Component {
                 <hr style={blockSpacing.one}/>
                 <div className='row'>
                     <div className='col-md-1'>
-                        <div style={[contentLoad, {height:'15px'}]}></div>
+                        <div style={[contentLoad, {height: '15px'}]}></div>
                     </div>
                     <div className='col-md-4'>{Math.round(this.props.data.contentLoadTime - this.props.data.startTime)}ms
                     </div>
@@ -127,7 +145,7 @@ class TimeLineToolTip extends Component {
                 </div>
                 <div className='row'>
                     <div className='col-md-1'>
-                        <div style={[pageLoad, {height:'15px', left: 'none'}]}></div>
+                        <div style={[pageLoad, {height: '15px', left: 'none'}]}></div>
                     </div>
                     <div className='col-md-4'>{Math.round(this.props.data.totalTime - this.props.data.startTime)}ms
                     </div>
