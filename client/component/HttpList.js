@@ -9,13 +9,6 @@ import {blockSpacing} from '../style/style.js'
 export default
 class HttpList extends Component {
     render() {
-        console.log('Entries');
-        console.log(this.props.entries);
-        console.log('Page info');
-        console.log(this.props.page);
-        console.log('Max time');
-        console.log(this.props.maxTime);
-        console.log(this.props.dataLoad);
         return (
             <div className='row'
                  style={{minHeight: '200px', borderStyle:'solid', borderWidth:'1px', borderColor:'#c6c6c6'}}>

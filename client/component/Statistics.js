@@ -35,10 +35,10 @@ export default class Statistics extends Component {
     render() {
         return (
             <div style={center}>
-                <button style={defaultButton} onClick={this.showHideStatistics.bind(this)}>Get statistics</button>
+                <button style={defaultButton} onClick={this.showHideStatistics.bind(this)}>Show statistics</button>
                 {!this.state.show || this.props.statistics.map((statistic, number) =>
                     <div>
-                        <button
+                        <button style={primaryButton}
                             onClick={this.showHidePageStatistics.bind(this, number)}>{this.props.pages[number].title}</button>
                         {!this.state.showPage[number] || <div className="row">
                             <div style={chapterTitle}>{this.props.pages[number].title}</div>
