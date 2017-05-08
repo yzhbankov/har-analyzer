@@ -20,14 +20,26 @@ class HttpInfo extends Component {
         })
     }
 
+    hightLightRow(e) {
+        e.preventDefault();
+        this.setState({
+            color: '#dfdfdf'
+        })
+    }
+
+    desLightRow(e) {
+        e.preventDefault();
+        this.setState({
+            color: 'white'
+        })
+    }
+
     render() {
-        let color = 'white';
-        if (this.props.number % 2 == 0) {
-            color = '#dfdfdf';
-        }
-        const backgroundStyle = {backgroundColor: color};
+        const backgroundStyle = {backgroundColor: this.state.color};
         return (<div className="col-md-12">
-                <div className="row" style={backgroundStyle} onClick={this.onBtnClick.bind(this)}>
+                <hr style={{margin: 0, width: '100%'}}/>
+                <div className="row" style={backgroundStyle} onClick={this.onBtnClick.bind(this)}
+                     onMouseOver={this.hightLightRow.bind(this)} onMouseOut={this.desLightRow.bind(this)}>
                     <div className="col-md-1" style={xxSmallBlock}>{this.props.number + 1}</div>
                     <div className="col-md-2" style={[xMedeumBlock, {overflowX: 'hidden', whiteSpace: 'nowrap'}]}><a
                         href='#'>{this.props.title}</a></div>
