@@ -5260,7 +5260,7 @@ module.exports = ExecutionEnvironment;
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.right = exports.left = exports.center = exports.cookies = exports.httpInfoDetails = exports.medeumBlockContent = exports.smallBlockContent = exports.pageLoad = exports.contentLoad = exports.receiveTime = exports.sslTime = exports.waitTime = exports.sendTime = exports.blockTime = exports.connectTime = exports.dnsTime = exports.timeLine = exports.xxLargeBlock = exports.xLargeBlock = exports.largeBlock = exports.xxMedeumBlock = exports.xMedeumBlock = exports.medeumBlock = exports.smallBlock = exports.xSmallBlock = exports.xxSmallBlock = exports.regularText = exports.regularTitle = exports.chapterTitle = exports.primaryTitle = exports.dangerButton = exports.successButton = exports.primaryButton = exports.defaultButton = undefined;
+exports.right = exports.left = exports.center = exports.cookies = exports.httpInfoDetails = exports.medeumBlockContent = exports.smallBlockContent = exports.pageLoad = exports.contentLoad = exports.sslTime = exports.waitTime = exports.sendTime = exports.blockTime = exports.receiveTime = exports.connectTime = exports.dnsTime = exports.startTime = exports.timeLine = exports.xxLargeBlock = exports.xLargeBlock = exports.largeBlock = exports.xxMedeumBlock = exports.xMedeumBlock = exports.medeumBlock = exports.smallBlock = exports.xSmallBlock = exports.xxSmallBlock = exports.regularText = exports.regularTitle = exports.chapterTitle = exports.primaryTitle = exports.dangerButton = exports.successButton = exports.primaryButton = exports.defaultButton = undefined;
 
 var _style = __webpack_require__(19);
 
@@ -5289,15 +5289,17 @@ var xxLargeBlock = exports.xxLargeBlock = [_style.blockWidth.xxLarge];
 
 //time line
 var timeLine = exports.timeLine = { position: 'relative', float: 'left', display: 'flex', height: '15px', width: '100%' };
-var dnsTime = exports.dnsTime = { backgroundColor: '#00bfff', height: '15px' };
-var connectTime = exports.connectTime = { backgroundColor: '#40ff00', height: '15px' };
-var blockTime = exports.blockTime = { backgroundColor: '#ffbf00', height: '15px' };
-var sendTime = exports.sendTime = { backgroundColor: '#ff0000', height: '15px' };
+var startTime = exports.startTime = { borderRight: '1px solid black' };
+var dnsTime = exports.dnsTime = { backgroundColor: '#FFCE56', height: '15px' };
+var connectTime = exports.connectTime = { backgroundColor: '#4BC0C0', height: '15px' };
+var receiveTime = exports.receiveTime = { backgroundColor: '#3ce200', height: '15px' };
+var blockTime = exports.blockTime = { backgroundColor: '#ff0024', height: '15px' };
+var sendTime = exports.sendTime = { backgroundColor: '#36A2EB', height: '15px' };
 var waitTime = exports.waitTime = { backgroundColor: '#bf00ff', height: '15px' };
-var sslTime = exports.sslTime = { backgroundColor: '#3300ff', height: '15px' };
-var receiveTime = exports.receiveTime = { backgroundColor: '#ebebe0', height: '15px' };
-var contentLoad = exports.contentLoad = { position: 'absolute', width: '1px', height: '110%', background: '#1c80bd', top: '-5%' };
-var pageLoad = exports.pageLoad = { position: 'absolute', width: '1px', height: '110%', background: '#ff0024', top: '-5%' };
+var sslTime = exports.sslTime = { backgroundColor: '#f46133', height: '15px' };
+
+var contentLoad = exports.contentLoad = { position: 'absolute', width: '1px', height: '115%', background: '#1c80bd', top: '-5%' };
+var pageLoad = exports.pageLoad = { position: 'absolute', width: '1px', height: '115%', background: '#ff0024', top: '-5%' };
 
 //block content
 var smallBlockContent = exports.smallBlockContent = [_style.blockWidth.small, _style.blockHeight.small];
@@ -28450,16 +28452,29 @@ var HttpInfo = (0, _radium2.default)(_class = function (_Component) {
             });
         }
     }, {
+        key: 'hightLightRow',
+        value: function hightLightRow(e) {
+            e.preventDefault();
+            this.setState({
+                color: '#dfdfdf'
+            });
+        }
+    }, {
+        key: 'desLightRow',
+        value: function desLightRow(e) {
+            e.preventDefault();
+            this.setState({
+                color: 'white'
+            });
+        }
+    }, {
         key: 'render',
         value: function render() {
             var _this2 = this;
 
-            var color = 'white';
-            if (this.props.number % 2 == 0) {
-                color = '#dfdfdf';
-            }
-            var backgroundStyle = { backgroundColor: color };
-            return _react2.default.createElement('div', { className: 'col-md-12' }, _react2.default.createElement('div', { className: 'row', style: backgroundStyle, onClick: this.onBtnClick.bind(this) }, _react2.default.createElement('div', { className: 'col-md-1', style: _components.xxSmallBlock }, this.props.number + 1), _react2.default.createElement('div', { className: 'col-md-2', style: [_components.xMedeumBlock, { overflowX: 'hidden', whiteSpace: 'nowrap' }] }, _react2.default.createElement('a', {
+            var backgroundStyle = { backgroundColor: this.state.color };
+            return _react2.default.createElement('div', { className: 'col-md-12' }, _react2.default.createElement('hr', { style: { margin: 0, width: '100%' } }), _react2.default.createElement('div', { className: 'row', style: backgroundStyle, onClick: this.onBtnClick.bind(this),
+                onMouseOver: this.hightLightRow.bind(this), onMouseOut: this.desLightRow.bind(this) }, _react2.default.createElement('div', { className: 'col-md-1', style: _components.xxSmallBlock }, this.props.number + 1), _react2.default.createElement('div', { className: 'col-md-2', style: [_components.xMedeumBlock, { overflowX: 'hidden', whiteSpace: 'nowrap' }] }, _react2.default.createElement('a', {
                 href: '#' }, this.props.title)), _react2.default.createElement('div', { className: 'col-md-1', style: _components.xSmallBlock }, this.props.reqMethod), _react2.default.createElement('div', { className: 'col-md-1', style: _components.xSmallBlock }, this.props.resStatus), _react2.default.createElement('div', { className: 'col-md-1', style: _components.xSmallBlock }, function () {
                 if (_this2.props.reqSize <= 0) {
                     return '-';
@@ -29123,7 +29138,7 @@ var HttpInfoTimeLine = (0, _radium2.default)(_class = function (_Component) {
 
             var pageLoadStyle = { left: this.state.totalTime / this.state.maxTime * 100 + '%' };
             return _react2.default.createElement('div', { style: _components.timeLine, onMouseOver: this.showToolTip.bind(this), onMouseOut: this.hideToolTip.bind(this),
-                onMouseMove: this.posToolTip.bind(this) }, _react2.default.createElement('div', { style: [startStyle] }), _react2.default.createElement('div', { style: [blockStyle, _components.blockTime] }), _react2.default.createElement('div', { style: [connectStyle, _components.connectTime] }), _react2.default.createElement('div', { style: [dnsStyle, _components.dnsTime] }), _react2.default.createElement('div', { style: [receiveStyle, _components.receiveTime] }), _react2.default.createElement('div', { style: [sendStyle, _components.sendTime] }), _react2.default.createElement('div', { style: [sslStyle, _components.sslTime] }), _react2.default.createElement('div', { style: [waitStyle, _components.waitTime] }), _react2.default.createElement('div', { style: [contentLoadStyle, _components.contentLoad] }), _react2.default.createElement('div', { style: [_components.pageLoad, pageLoadStyle] }), !this.state.showToolTip || _react2.default.createElement(_TimeLineToolTip2.default, { data: this.state, position: this.state.toolTipPos }));
+                onMouseMove: this.posToolTip.bind(this) }, _react2.default.createElement('div', { style: [startStyle, _components.startTime] }), _react2.default.createElement('div', { style: [blockStyle, _components.blockTime] }), _react2.default.createElement('div', { style: [dnsStyle, _components.dnsTime] }), _react2.default.createElement('div', { style: [connectStyle, _components.connectTime] }), _react2.default.createElement('div', { style: [sslStyle, _components.sslTime] }), _react2.default.createElement('div', { style: [sendStyle, _components.sendTime] }), _react2.default.createElement('div', { style: [waitStyle, _components.waitTime] }), _react2.default.createElement('div', { style: [receiveStyle, _components.receiveTime] }), _react2.default.createElement('div', null, Math.round(this.state.totalReqTime * 10) / 10, 'ms'), _react2.default.createElement('div', { style: [contentLoadStyle, _components.contentLoad] }), _react2.default.createElement('div', { style: [_components.pageLoad, pageLoadStyle] }), !this.state.showToolTip || _react2.default.createElement(_TimeLineToolTip2.default, { data: this.state, position: this.state.toolTipPos }));
         }
     }]);
 
@@ -29688,8 +29703,8 @@ var StatisticsTiming = (0, _radium2.default)(_class = function (_Component) {
             var data = {
                 labels: ["Blocked", "Connect", "DNS", "Receive", "Send", "SSL", "Wait"],
                 datasets: [{
-                    data: [dataSet.blocked, dataSet.dns, dataSet.ssl, dataSet.connect, dataSet.send, dataSet.wait, dataSet.receive],
-                    backgroundColor: ["#FF6384", "#4BC0C0", "#FFCE56", "#E7E9ED", "#36A2EB", "#f46133", "#7ceb59"],
+                    data: [dataSet.blocked, dataSet.connect, dataSet.dns, dataSet.receive, dataSet.send, dataSet.ssl, dataSet.wait],
+                    backgroundColor: ["#ff0024", "#4BC0C0", "#FFCE56", "#3ce200", "#36A2EB", "#f46133", "#bf00ff"],
                     hoverBackgroundColor: ["#FF6384", "#4BC0C0", "#FFCE56", "#E7E9ED", "#36A2EB", "#f46133", "#7ceb59"]
                 }]
             };
@@ -29830,14 +29845,14 @@ var TimeLineToolTip = (0, _radium2.default)(_class = function (_Component) {
             var sslTimeVal = isNegative(this.props.data.sslTime);
             var waitTimeVal = isNegative(this.props.data.waitTime);
 
-            var connectRelativeToReq = Math.round(blockTimeVal * 100) / 100;
-            var dnsRelativeToReq = Math.round((connectRelativeToReq + connectTimeVal) * 100) / 100;
-            var receiveRelativeToReq = Math.round((dnsRelativeToReq + dnsTimeVal) * 100) / 100;
-            var sendRelativeToReq = Math.round((receiveRelativeToReq + receiveTimeVal) * 100) / 100;
-            var sslRelativeToReq = Math.round((sendRelativeToReq + sendTimeVal) * 100) / 100;
-            var waitRelativeToReq = Math.round((sslRelativeToReq + sslTimeVal) * 100) / 100;
+            var dnsRelativeToReq = Math.round(blockTimeVal * 100) / 100;
+            var connectRelativeToReq = Math.round((dnsRelativeToReq + dnsTimeVal) * 100) / 100;
+            var sslRelativeToReq = Math.round((connectRelativeToReq + connectTimeVal) * 100) / 100;
+            var sendRelativeToReq = Math.round((sslRelativeToReq + sslTimeVal) * 100) / 100;
+            var waitRelativeToReq = Math.round((sendRelativeToReq + sendTimeVal) * 100) / 100;
+            var receiveRelativeToReq = Math.round((waitRelativeToReq + waitTimeVal) * 100) / 100;
 
-            return _react2.default.createElement('div', { style: [pos, _style.elementSpacing.two, _style.shadows.one, _style.borderRadii.two] }, _react2.default.createElement('div', { className: 'row' }, _react2.default.createElement('div', { className: 'col-md-2' }, '+', Math.round(this.props.data.startTime), 'ms'), _react2.default.createElement('div', { className: 'col-md-10' }, 'Request start time since the beginning')), _react2.default.createElement('hr', { style: _style.blockSpacing.one }), _react2.default.createElement('div', { style: _components.regularTitle }, 'Request phases start and elapsed time relative to the request status:'), _react2.default.createElement('hr', { style: _style.blockSpacing.one }), _react2.default.createElement('div', { className: 'row' }, _react2.default.createElement('div', { className: 'col-md-1' }, _react2.default.createElement('div', { style: [_components.blockTime] })), _react2.default.createElement('div', { className: 'col-md-1' }, '0ms'), _react2.default.createElement('div', { className: 'col-md-1' }), _react2.default.createElement('div', { className: 'col-md-5' }, blockTimeVal, 'ms'), _react2.default.createElement('div', { className: 'col-md-3' }, 'Blocking')), _react2.default.createElement('div', { className: 'row' }, _react2.default.createElement('div', { className: 'col-md-1' }, _react2.default.createElement('div', { style: [_components.connectTime] })), _react2.default.createElement('div', { className: 'col-md-1' }, '+', connectRelativeToReq, 'ms'), _react2.default.createElement('div', { className: 'col-md-1' }), _react2.default.createElement('div', { className: 'col-md-5' }, connectTimeVal, 'ms'), _react2.default.createElement('div', { className: 'col-md-3' }, 'Connecting')), _react2.default.createElement('div', { className: 'row' }, _react2.default.createElement('div', { className: 'col-md-1' }, _react2.default.createElement('div', { style: [_components.dnsTime] })), _react2.default.createElement('div', { className: 'col-md-1' }, '+', dnsRelativeToReq, 'ms'), _react2.default.createElement('div', { className: 'col-md-1' }), _react2.default.createElement('div', { className: 'col-md-5' }, dnsTimeVal, 'ms'), _react2.default.createElement('div', { className: 'col-md-3' }, 'DNS Lookup')), _react2.default.createElement('div', { className: 'row' }, _react2.default.createElement('div', { className: 'col-md-1' }, _react2.default.createElement('div', { style: [_components.receiveTime] })), _react2.default.createElement('div', { className: 'col-md-1' }, '+', receiveRelativeToReq, 'ms'), _react2.default.createElement('div', { className: 'col-md-1' }), _react2.default.createElement('div', { className: 'col-md-5' }, receiveTimeVal, 'ms'), _react2.default.createElement('div', { className: 'col-md-3' }, 'Receiving')), _react2.default.createElement('div', { className: 'row' }, _react2.default.createElement('div', { className: 'col-md-1' }, _react2.default.createElement('div', { style: [_components.sendTime] })), _react2.default.createElement('div', { className: 'col-md-1' }, '+', sendRelativeToReq, 'ms'), _react2.default.createElement('div', { className: 'col-md-1' }), _react2.default.createElement('div', { className: 'col-md-5' }, sendTimeVal, 'ms'), _react2.default.createElement('div', { className: 'col-md-3' }, 'Sending')), _react2.default.createElement('div', { className: 'row' }, _react2.default.createElement('div', { className: 'col-md-1' }, _react2.default.createElement('div', { style: [_components.sslTime] })), _react2.default.createElement('div', { className: 'col-md-1' }, '+', sslRelativeToReq, 'ms'), _react2.default.createElement('div', { className: 'col-md-1' }), _react2.default.createElement('div', { className: 'col-md-5' }, sslTimeVal, 'ms'), _react2.default.createElement('div', { className: 'col-md-3' }, 'SSL')), _react2.default.createElement('div', { className: 'row' }, _react2.default.createElement('div', { className: 'col-md-1' }, _react2.default.createElement('div', { style: [_components.waitTime] })), _react2.default.createElement('div', { className: 'col-md-1' }, '+', waitRelativeToReq, 'ms'), _react2.default.createElement('div', { className: 'col-md-1' }), _react2.default.createElement('div', { className: 'col-md-5' }, waitTimeVal, 'ms'), _react2.default.createElement('div', { className: 'col-md-3' }, 'Waiting')), _react2.default.createElement('hr', { style: _style.blockSpacing.one }), _react2.default.createElement('div', { style: _components.regularTitle }, 'Event timing relative to the request start:'), _react2.default.createElement('hr', { style: _style.blockSpacing.one }), _react2.default.createElement('div', { className: 'row' }, _react2.default.createElement('div', { className: 'col-md-1' }, _react2.default.createElement('div', { style: [_components.contentLoad, { height: '15px' }] })), _react2.default.createElement('div', { className: 'col-md-4' }, Math.round(this.props.data.contentLoadTime - this.props.data.startTime), 'ms'), _react2.default.createElement('div', { className: 'col-md-1' }), _react2.default.createElement('div', { className: 'col-md-3' }, 'DOM Loaded')), _react2.default.createElement('div', { className: 'row' }, _react2.default.createElement('div', { className: 'col-md-1' }, _react2.default.createElement('div', { style: [_components.pageLoad, { height: '15px', left: 'none' }] })), _react2.default.createElement('div', { className: 'col-md-4' }, Math.round(this.props.data.totalTime - this.props.data.startTime), 'ms'), _react2.default.createElement('div', { className: 'col-md-1' }), _react2.default.createElement('div', { className: 'col-md-3' }, 'Page Loaded')));
+            return _react2.default.createElement('div', { style: [pos, _style.elementSpacing.two, _style.shadows.one, _style.borderRadii.two] }, _react2.default.createElement('div', { className: 'row' }, _react2.default.createElement('div', { className: 'col-md-2' }, '+', Math.round(this.props.data.startTime), 'ms'), _react2.default.createElement('div', { className: 'col-md-10' }, 'Request start time since the beginning')), _react2.default.createElement('hr', { style: _style.blockSpacing.one }), _react2.default.createElement('div', { style: _components.regularTitle }, 'Request phases start and elapsed time relative to the request status:'), _react2.default.createElement('hr', { style: _style.blockSpacing.one }), _react2.default.createElement('div', { className: 'row' }, _react2.default.createElement('div', { className: 'col-md-1' }, _react2.default.createElement('div', { style: [_components.blockTime] })), _react2.default.createElement('div', { className: 'col-md-1' }, '0ms'), _react2.default.createElement('div', { className: 'col-md-1' }), _react2.default.createElement('div', { className: 'col-md-5' }, blockTimeVal, 'ms'), _react2.default.createElement('div', { className: 'col-md-3' }, 'Blocking')), _react2.default.createElement('div', { className: 'row' }, _react2.default.createElement('div', { className: 'col-md-1' }, _react2.default.createElement('div', { style: [_components.dnsTime] })), _react2.default.createElement('div', { className: 'col-md-1' }, '+', dnsRelativeToReq, 'ms'), _react2.default.createElement('div', { className: 'col-md-1' }), _react2.default.createElement('div', { className: 'col-md-5' }, dnsTimeVal, 'ms'), _react2.default.createElement('div', { className: 'col-md-3' }, 'DNS Lookup')), _react2.default.createElement('div', { className: 'row' }, _react2.default.createElement('div', { className: 'col-md-1' }, _react2.default.createElement('div', { style: [_components.connectTime] })), _react2.default.createElement('div', { className: 'col-md-1' }, '+', connectRelativeToReq, 'ms'), _react2.default.createElement('div', { className: 'col-md-1' }), _react2.default.createElement('div', { className: 'col-md-5' }, connectTimeVal, 'ms'), _react2.default.createElement('div', { className: 'col-md-3' }, 'Connecting')), _react2.default.createElement('div', { className: 'row' }, _react2.default.createElement('div', { className: 'col-md-1' }, _react2.default.createElement('div', { style: [_components.sslTime] })), _react2.default.createElement('div', { className: 'col-md-1' }, '+', sslRelativeToReq, 'ms'), _react2.default.createElement('div', { className: 'col-md-1' }), _react2.default.createElement('div', { className: 'col-md-5' }, sslTimeVal, 'ms'), _react2.default.createElement('div', { className: 'col-md-3' }, 'SSL')), _react2.default.createElement('div', { className: 'row' }, _react2.default.createElement('div', { className: 'col-md-1' }, _react2.default.createElement('div', { style: [_components.sendTime] })), _react2.default.createElement('div', { className: 'col-md-1' }, '+', sendRelativeToReq, 'ms'), _react2.default.createElement('div', { className: 'col-md-1' }), _react2.default.createElement('div', { className: 'col-md-5' }, sendTimeVal, 'ms'), _react2.default.createElement('div', { className: 'col-md-3' }, 'Sending')), _react2.default.createElement('div', { className: 'row' }, _react2.default.createElement('div', { className: 'col-md-1' }, _react2.default.createElement('div', { style: [_components.waitTime] })), _react2.default.createElement('div', { className: 'col-md-1' }, '+', waitRelativeToReq, 'ms'), _react2.default.createElement('div', { className: 'col-md-1' }), _react2.default.createElement('div', { className: 'col-md-5' }, waitTimeVal, 'ms'), _react2.default.createElement('div', { className: 'col-md-3' }, 'Waiting')), _react2.default.createElement('div', { className: 'row' }, _react2.default.createElement('div', { className: 'col-md-1' }, _react2.default.createElement('div', { style: [_components.receiveTime] })), _react2.default.createElement('div', { className: 'col-md-1' }, '+', receiveRelativeToReq, 'ms'), _react2.default.createElement('div', { className: 'col-md-1' }), _react2.default.createElement('div', { className: 'col-md-5' }, receiveTimeVal, 'ms'), _react2.default.createElement('div', { className: 'col-md-3' }, 'Receiving')), _react2.default.createElement('hr', { style: _style.blockSpacing.one }), _react2.default.createElement('div', { style: _components.regularTitle }, 'Event timing relative to the request start:'), _react2.default.createElement('hr', { style: _style.blockSpacing.one }), _react2.default.createElement('div', { className: 'row' }, _react2.default.createElement('div', { className: 'col-md-1' }, _react2.default.createElement('div', { style: [_components.contentLoad, { height: '15px' }] })), _react2.default.createElement('div', { className: 'col-md-4' }, Math.round(this.props.data.contentLoadTime - this.props.data.startTime), 'ms'), _react2.default.createElement('div', { className: 'col-md-1' }), _react2.default.createElement('div', { className: 'col-md-3' }, 'DOM Loaded')), _react2.default.createElement('div', { className: 'row' }, _react2.default.createElement('div', { className: 'col-md-1' }, _react2.default.createElement('div', { style: [_components.pageLoad, { height: '15px', left: 'none' }] })), _react2.default.createElement('div', { className: 'col-md-4' }, Math.round(this.props.data.totalTime - this.props.data.startTime), 'ms'), _react2.default.createElement('div', { className: 'col-md-1' }), _react2.default.createElement('div', { className: 'col-md-3' }, 'Page Loaded')));
         }
     }]);
 
