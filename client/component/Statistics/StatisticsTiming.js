@@ -29,7 +29,7 @@ export default class StatisticsTiming extends Component {
             ],
             datasets: [
                 {
-                    data: [dataSet.blocked, dataSet.dns, dataSet.ssl, dataSet.connect, dataSet.send, dataSet.wait, dataSet.receive],
+                    data: [dataSet.blocked, dataSet.connect, dataSet.dns, dataSet.receive, dataSet.send, dataSet.ssl, dataSet.wait],
                     backgroundColor: [
                         "#FF6384",
                         "#4BC0C0",
