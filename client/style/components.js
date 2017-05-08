@@ -10,7 +10,7 @@ export const dangerButton = [colours.danger, borderRadii.two, fontSize.h5, textC
 export const primaryTitle = [fontSize.h2, {textAlign: 'center', fontWeight: 'bold'}];
 export const chapterTitle = [fontSize.h5, {textAlign: 'center', fontWeight: 'bold'}];
 export const regularTitle = [fontSize.h6, {textAlign: 'center', fontWeight: 'bold'}];
-export const regularText = [fontSize.h7];
+export const regularText = [fontSize.h7, {fontFamily: 'Mada'}];
 
 //block width
 export const xxSmallBlock = [blockWidth.xxSmall];
