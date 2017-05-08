@@ -40,7 +40,6 @@ class HttpInfo extends Component {
                 <hr style={{margin: 0, width: '100%'}}/>
                 <div className="row" style={backgroundStyle} onClick={this.onBtnClick.bind(this)}
                      onMouseOver={this.hightLightRow.bind(this)} onMouseOut={this.desLightRow.bind(this)}>
-
                     <div className="col-md-1" style={xxSmallBlock}>{this.props.number + 1}</div>
                     <div className="col-md-2" style={[xMedeumBlock, {overflowX: 'hidden', whiteSpace: 'nowrap'}]}><a
                         href='#'>{this.props.title}</a></div>

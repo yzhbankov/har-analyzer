@@ -31,13 +31,13 @@ export default class StatisticsTiming extends Component {
                 {
                     data: [dataSet.blocked, dataSet.connect, dataSet.dns, dataSet.receive, dataSet.send, dataSet.ssl, dataSet.wait],
                     backgroundColor: [
-                        "#FF6384",
+                        "#ff0024",
                         "#4BC0C0",
                         "#FFCE56",
-                        "#E7E9ED",
+                        "#3ce200",
                         "#36A2EB",
                         "#f46133",
-                        "#7ceb59"
+                        "#bf00ff"
                     ],
                     hoverBackgroundColor: [
                         "#FF6384",
