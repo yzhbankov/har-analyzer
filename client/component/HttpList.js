@@ -20,12 +20,14 @@ class HttpList extends Component {
     constructor(props) {
         super(props);
         this.state = {show: false};
+        this.center = false
     }
 
     onBtnClick(e) {
         e.preventDefault();
         this.setState({
-            show: !this.state.show
+            show: !this.state.show,
+            center: !this.state.center
         })
     }
 
@@ -38,6 +40,12 @@ class HttpList extends Component {
 
     render() {
         let color = 'white';
+        let centerTemp = {};
+        if (!this.state.center) {
+            centerTemp = {}
+        } else {
+            centerTemp = center
+        }
 
         if (this.props.number % 2 != 0) {
             color = '#f8f8ff';
@@ -46,7 +54,7 @@ class HttpList extends Component {
         return (<div>
                 <hr style={{margin: 0}}/>
                 <a href='#' style={{textDecoration: 'none'}}>
-                    <div style={[chapterTitle, left, backgroundStyle]}
+                    <div style={[chapterTitle, left, backgroundStyle, centerTemp]}
                          onClick={this.onBtnClick.bind(this)}>{this.props.page.title}
                     </div>
                 </a>
@@ -71,19 +79,19 @@ class HttpList extends Component {
                         <div className="col-md-4" style={[xLargeBlock, regularTitle]}>Time line</div>
                     </div>
                     {this.props.entries.map((entrie, number) =>
-                        <HttpInfo
-                            page={this.props.page}
-                            number={number}
-                            entrie={entrie}
-                            time={entrie.startedDateTime}
-                            title={entrie.request.url}
-                            reqMethod={entrie.request.method}
-                            resStatus={entrie.response.status}
-                            reqSize={entrie.request.headersSize}
-                            resSize={entrie.response.headersSize + entrie.response.bodySize}
-                            totalTime={entrie.time}
-                            maxTime={this.props.maxTime}
-                        />
+                            <HttpInfo
+                                page={this.props.page}
+                                number={number}
+                                entrie={entrie}
+                                time={entrie.startedDateTime}
+                                title={entrie.request.url}
+                                reqMethod={entrie.request.method}
+                                resStatus={entrie.response.status}
+                                reqSize={entrie.request.headersSize}
+                                resSize={entrie.response.headersSize + entrie.response.bodySize}
+                                totalTime={entrie.time}
+                                maxTime={this.props.maxTime}
+                                />
                     )}
                 </div>}</div>
         )

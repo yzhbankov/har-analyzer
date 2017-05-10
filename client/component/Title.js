@@ -37,8 +37,8 @@ class Title extends Component {
         };
         return (
             <div style={{backgroundColor:'grey', overflow:'hidden', margin:'0', display:"flex"}}>
-                <div style={{width: '140px'}}>
-                    <div style={[fileUpload, defaultButton]}>
+                <div style={{width: '110px'}}>
+                    <div style={[fileUpload, defaultButton, {width: '110px'}]}>
                         <span>Load HAR File</span>
                         <input type="file" style={upload} onChange={this.readFile.bind(this)}/>
                     </div>
