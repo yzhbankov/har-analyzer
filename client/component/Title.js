@@ -7,7 +7,7 @@ import {
     primaryButton,
     successButton,
     dangerButton,
-    center
+    center, right
 } from '../style/components.js'
 import {textColor, blockSpacing} from '../style/style'
 
@@ -35,18 +35,21 @@ class Title extends Component {
             opacity: 0,
             filter: 'alpha(opacity=0)'
         };
+        let display = {display: 'true'};
+        if (window.innerWidth < 1200) {
+            display = {display: 'none'}
+        }
         return (
-            <div style={{backgroundColor:'grey', overflow:'hidden', margin:'0', display:"flex"}}>
+            <div style={{backgroundColor:'grey', margin:'0', display:"flex"}}>
                 <div style={{width: '110px'}}>
                     <div style={[fileUpload, defaultButton, {width: '110px'}]}>
                         <span>Load HAR File</span>
                         <input type="file" style={upload} onChange={this.readFile.bind(this)}/>
                     </div>
                 </div>
-                <div ></div>
-                <div style={[primaryTitle, center, textColor.white, blockSpacing.one, {marginLeft:'auto', marginRight:'auto'}]}>HAR VIEWER</div>
+                <div style={[primaryTitle, textColor.white, blockSpacing.one, {marginLeft:'auto', marginRight:'auto'}, display]}>HAR VIEWER</div>
                 <div ><a href="discuss.html" style={{textDecoration: 'none'}}>
-                    <div style={[blockSpacing.five, chapterTitle, center, textColor.white, {marginRight: '50px'}]}>Let`s discuss</div>
+                    <div style={[blockSpacing.five, chapterTitle, textColor.white, {position: 'absolute', top:0, right:'50px'}]}>Let`s discuss</div>
                 </a>
                 </div>
             </div>
