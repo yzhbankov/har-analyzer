@@ -35,9 +35,11 @@ export default class Statistics extends Component {
 
     render() {
         return (<div style={left}>
-                <button style={[defaultButton, {position: 'absolute', top: '1px', left: '150px'}]}
-                        onClick={this.showHideStatistics.bind(this)}>Show/hide statistics
-                </button>
+                <a href='#' onClick={this.showHideStatistics.bind(this)} style={{decoration:'none'}}>
+                <div style={[defaultButton, {position: 'absolute', top: 0, left: '150px', borderWidth:'1px'}]}
+                        >Show/hide statistics
+                </div>
+                    </a>
                 {!this.state.show || <div style={chapterTitle}>STATISTICS</div>}
                 {!this.state.show || this.props.statistics.map((statistic, number) => {
                     let color = 'white';

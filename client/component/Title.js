@@ -36,20 +36,20 @@ class Title extends Component {
             filter: 'alpha(opacity=0)'
         };
         return (
-                <div className="row" style={{backgroundColor:'grey', overflow:'hidden', margin:'0'}}>
-                    <div className="col-md-1">
-                        <div style={[fileUpload, defaultButton]}>
-                            <span>Load HAR File</span>
-                            <input type="file" style={upload} onChange={this.readFile.bind(this)}/>
-                        </div>
-                    </div>
-                    <div className="col-md-1"></div>
-                    <div className="col-md-8" style={[primaryTitle, center, textColor.white, blockSpacing.one]}>HAR VIEWER</div>
-                    <div className="col-md-2"><a href="discuss.html" style={{textDecoration: 'none'}}>
-                        <div style={[blockSpacing.five, chapterTitle, center, textColor.white]}>Let`s discuss</div>
-                    </a>
+            <div style={{backgroundColor:'grey', overflow:'hidden', margin:'0', display:"flex"}}>
+                <div style={{width: '140px'}}>
+                    <div style={[fileUpload, defaultButton]}>
+                        <span>Load HAR File</span>
+                        <input type="file" style={upload} onChange={this.readFile.bind(this)}/>
                     </div>
                 </div>
+                <div ></div>
+                <div style={[primaryTitle, center, textColor.white, blockSpacing.one, {marginLeft:'auto', marginRight:'auto'}]}>HAR VIEWER</div>
+                <div ><a href="discuss.html" style={{textDecoration: 'none'}}>
+                    <div style={[blockSpacing.five, chapterTitle, center, textColor.white, {marginRight: '50px'}]}>Let`s discuss</div>
+                </a>
+                </div>
+            </div>
         )
     }
 }
