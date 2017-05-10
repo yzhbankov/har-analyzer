@@ -22,12 +22,13 @@ class HttpInfo extends Component {
 
     render() {
         let color = 'white';
-        if (this.props.number % 2 == 0) {
-            color = '#dfdfdf';
+        if (this.props.number % 2 != 0) {
+            color = '#f8f8ff';
         }
         const backgroundStyle = {backgroundColor: color};
         return (<div className="col-md-12">
-                <div className="row" style={backgroundStyle} onClick={this.onBtnClick.bind(this)}>
+                <hr style={{margin: 0, width: '100%'}}/>
+                <div className="row" style={[backgroundStyle]} onClick={this.onBtnClick.bind(this)}>
                     <div className="col-md-1" style={xxSmallBlock}>{this.props.number + 1}</div>
                     <div className="col-md-2" style={[xMedeumBlock, {overflowX: 'hidden', whiteSpace: 'nowrap'}]}><a
                         href='#'>{this.props.title}</a></div>

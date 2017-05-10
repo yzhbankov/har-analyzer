@@ -12,9 +12,10 @@ export default class StatisticsResponseContent extends Component {
     }
 
     buildPieChart(props) {
-        Chart.defaults.global.defaultFontSize = 15;
+        Chart.defaults.global.defaultFontSize = 11;
         const dataSet = props.data;
-        const ctx = document.getElementById("receiveContentPie");
+        const id = "receiveContentPie" + this.props.number;
+        const ctx = document.getElementById(id);
 
         const data = {
             labels: [
@@ -50,6 +51,15 @@ export default class StatisticsResponseContent extends Component {
                 responsive: false,
                 animation: {
                     animateScale: true
+                },
+                legend: {
+                    display: true,
+                    position: 'right',
+                    labels:{
+                        boxWidth: 10,
+                        padding: 5
+                    }
+
                 }
             }
         });
@@ -57,7 +67,7 @@ export default class StatisticsResponseContent extends Component {
 
     render() {
         return (
-            <canvas style={{margin:'0 auto'}} id="receiveContentPie"> </canvas>
+            <canvas style={{margin:'0 auto', height: '230px', width:'230px'}} id={"receiveContentPie" + this.props.number}> </canvas>
         )
     }
 }

@@ -1,6 +1,17 @@
 import React, {Component} from 'react'
 import Radium from 'radium'
-import {regularTitle, dnsTime, connectTime, sslTime, blockTime, sendTime, waitTime, contentLoad, pageLoad, receiveTime} from '../style/components.js'
+import {
+    regularTitle,
+    dnsTime,
+    connectTime,
+    sslTime,
+    blockTime,
+    sendTime,
+    waitTime,
+    contentLoad,
+    pageLoad,
+    receiveTime
+} from '../style/components.js'
 import {blockSpacing, elementSpacing, shadows, borderRadii} from '../style/style'
 
 @Radium
@@ -16,10 +27,17 @@ class TimeLineToolTip extends Component {
             }
         }
 
+        let top = 0;
+        let left = 0;
+
+        if (this.props.position) {
+            top = this.props.position.y + 'px';
+            left = this.props.position.x + 20 + 'px';
+        }
         const pos = {
             position: 'fixed',
-            top: this.props.position.y + 'px',
-            left: this.props.position.x + 20 + 'px',
+            top: top,
+            left: left,
             zIndex: 99999,
             backgroundColor: 'white',
             minWidth: '440px'
@@ -33,12 +51,12 @@ class TimeLineToolTip extends Component {
         const sslTimeVal = isNegative(this.props.data.sslTime);
         const waitTimeVal = isNegative(this.props.data.waitTime);
 
-        const connectRelativeToReq = Math.round(blockTimeVal * 100) / 100;
-        const dnsRelativeToReq = Math.round((connectRelativeToReq + connectTimeVal) * 100) / 100;
-        const receiveRelativeToReq = Math.round((dnsRelativeToReq + dnsTimeVal) * 100) / 100;
-        const sendRelativeToReq = Math.round((receiveRelativeToReq + receiveTimeVal) * 100) / 100;
-        const sslRelativeToReq = Math.round((sendRelativeToReq + sendTimeVal) * 100) / 100;
-        const waitRelativeToReq = Math.round((sslRelativeToReq + sslTimeVal) * 100) / 100;
+        const dnsRelativeToReq = Math.round(blockTimeVal * 100) / 100;
+        const connectRelativeToReq = Math.round((dnsRelativeToReq + dnsTimeVal) * 100) / 100;
+        const sslRelativeToReq = Math.round((connectRelativeToReq + connectTimeVal) * 100) / 100;
+        const sendRelativeToReq = Math.round((sslRelativeToReq + sslTimeVal) * 100) / 100;
+        const waitRelativeToReq = Math.round((sendRelativeToReq + sendTimeVal) * 100) / 100;
+        const receiveRelativeToReq = Math.round((waitRelativeToReq + waitTimeVal) * 100) / 100;
 
         return (
             <div style={[pos, elementSpacing.two, shadows.one, borderRadii.two]}>
@@ -60,15 +78,6 @@ class TimeLineToolTip extends Component {
                 </div>
                 <div className='row'>
                     <div className='col-md-1'>
-                        <div style={[connectTime]}></div>
-                    </div>
-                    <div className='col-md-1'>+{connectRelativeToReq}ms</div>
-                    <div className='col-md-1'></div>
-                    <div className='col-md-5'>{connectTimeVal}ms</div>
-                    <div className='col-md-3'>Connecting</div>
-                </div>
-                <div className='row'>
-                    <div className='col-md-1'>
                         <div style={[dnsTime]}></div>
                     </div>
                     <div className='col-md-1'>+{dnsRelativeToReq}ms</div>
@@ -78,21 +87,12 @@ class TimeLineToolTip extends Component {
                 </div>
                 <div className='row'>
                     <div className='col-md-1'>
-                        <div style={[receiveTime]}></div>
+                        <div style={[connectTime]}></div>
                     </div>
-                    <div className='col-md-1'>+{receiveRelativeToReq}ms</div>
+                    <div className='col-md-1'>+{connectRelativeToReq}ms</div>
                     <div className='col-md-1'></div>
-                    <div className='col-md-5'>{receiveTimeVal}ms</div>
-                    <div className='col-md-3'>Receiving</div>
-                </div>
-                <div className='row'>
-                    <div className='col-md-1'>
-                        <div style={[sendTime]}></div>
-                    </div>
-                    <div className='col-md-1'>+{sendRelativeToReq}ms</div>
-                    <div className='col-md-1'></div>
-                    <div className='col-md-5'>{sendTimeVal}ms</div>
-                    <div className='col-md-3'>Sending</div>
+                    <div className='col-md-5'>{connectTimeVal}ms</div>
+                    <div className='col-md-3'>Connecting</div>
                 </div>
                 <div className='row'>
                     <div className='col-md-1'>
@@ -105,6 +105,15 @@ class TimeLineToolTip extends Component {
                 </div>
                 <div className='row'>
                     <div className='col-md-1'>
+                        <div style={[sendTime]}></div>
+                    </div>
+                    <div className='col-md-1'>+{sendRelativeToReq}ms</div>
+                    <div className='col-md-1'></div>
+                    <div className='col-md-5'>{sendTimeVal}ms</div>
+                    <div className='col-md-3'>Sending</div>
+                </div>
+                <div className='row'>
+                    <div className='col-md-1'>
                         <div style={[waitTime]}></div>
                     </div>
                     <div className='col-md-1'>+{waitRelativeToReq}ms</div>
@@ -112,13 +121,21 @@ class TimeLineToolTip extends Component {
                     <div className='col-md-5'>{waitTimeVal}ms</div>
                     <div className='col-md-3'>Waiting</div>
                 </div>
-
+                <div className='row'>
+                    <div className='col-md-1'>
+                        <div style={[receiveTime]}></div>
+                    </div>
+                    <div className='col-md-1'>+{receiveRelativeToReq}ms</div>
+                    <div className='col-md-1'></div>
+                    <div className='col-md-5'>{receiveTimeVal}ms</div>
+                    <div className='col-md-3'>Receiving</div>
+                </div>
                 <hr style={blockSpacing.one}/>
                 <div style={regularTitle}>Event timing relative to the request start:</div>
                 <hr style={blockSpacing.one}/>
                 <div className='row'>
                     <div className='col-md-1'>
-                        <div style={[contentLoad, {height:'15px'}]}></div>
+                        <div style={[contentLoad, {height: '15px'}]}></div>
                     </div>
                     <div className='col-md-4'>{Math.round(this.props.data.contentLoadTime - this.props.data.startTime)}ms
                     </div>
@@ -127,7 +144,7 @@ class TimeLineToolTip extends Component {
                 </div>
                 <div className='row'>
                     <div className='col-md-1'>
-                        <div style={[pageLoad, {height:'15px', left: 'none'}]}></div>
+                        <div style={[pageLoad, {height: '15px', left: 'none'}]}></div>
                     </div>
                     <div className='col-md-4'>{Math.round(this.props.data.totalTime - this.props.data.startTime)}ms
                     </div>

@@ -1,6 +1,15 @@
 import React, {Component} from 'react'
 import Radium from 'radium'
-import {primaryTitle, chapterTitle, defaultButton, primaryButton, successButton, dangerButton, medeumBlock, center} from '../style/components.js'
+import {
+    primaryTitle,
+    chapterTitle,
+    defaultButton,
+    primaryButton,
+    successButton,
+    dangerButton,
+    center
+} from '../style/components.js'
+import {textColor, blockSpacing} from '../style/style'
 
 @Radium
 export default
@@ -26,19 +35,19 @@ class Title extends Component {
             opacity: 0,
             filter: 'alpha(opacity=0)'
         };
-        return (<div>
-                <div style={primaryTitle}>HAR Analyser</div>
-                <div className="row">
-                    <div className="col-md-10">
-                        <div className="btn btn-primary" style={[fileUpload, primaryButton]}>
-                            <span>Load HAR File</span>
-                            <input type="file" style={upload} onChange={this.readFile.bind(this)}/>
-                        </div>
+        return (
+            <div style={{backgroundColor:'grey', overflow:'hidden', margin:'0', display:"flex"}}>
+                <div style={{width: '140px'}}>
+                    <div style={[fileUpload, defaultButton]}>
+                        <span>Load HAR File</span>
+                        <input type="file" style={upload} onChange={this.readFile.bind(this)}/>
                     </div>
-                    <div className="col-md-2"><a href="discuss.html" style={{textDecoration:'none'}}>
-                        <div style={[successButton, medeumBlock, center]}>Let`s discuss</div>
-                    </a>
-                    </div>
+                </div>
+                <div ></div>
+                <div style={[primaryTitle, center, textColor.white, blockSpacing.one, {marginLeft:'auto', marginRight:'auto'}]}>HAR VIEWER</div>
+                <div ><a href="discuss.html" style={{textDecoration: 'none'}}>
+                    <div style={[blockSpacing.five, chapterTitle, center, textColor.white, {marginRight: '50px'}]}>Let`s discuss</div>
+                </a>
                 </div>
             </div>
         )

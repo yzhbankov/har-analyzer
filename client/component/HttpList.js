@@ -2,38 +2,77 @@ import React, {Component} from 'react'
 import Radium from 'radium'
 
 import HttpInfo from '../component/HttpInfo'
-import {regularTitle, xxSmallBlock, xSmallBlock, xMedeumBlock, xLargeBlock, center, chapterTitle} from '../style/components.js'
+import {
+    regularTitle,
+    xxSmallBlock,
+    xSmallBlock,
+    xMedeumBlock,
+    xLargeBlock,
+    center,
+    chapterTitle,
+    left
+} from '../style/components.js'
 import {blockSpacing} from '../style/style.js'
 
 @Radium
 export default
 class HttpList extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {show: false};
+    }
+
+    onBtnClick(e) {
+        e.preventDefault();
+        this.setState({
+            show: !this.state.show
+        })
+    }
+
+    hightLightRow(e) {
+        e.preventDefault();
+        this.setState({
+            color: '#dfdfdf'
+        })
+    }
+
     render() {
-        console.log('Entries');
-        console.log(this.props.entries);
-        console.log('Page info');
-        console.log(this.props.pages);
-        console.log('Max time');
-        console.log(this.props.maxTime);
-        console.log(this.props.dataLoad);
-        return (
-            <div className='row'
-                 style={{minHeight: '200px', borderStyle:'solid', borderWidth:'1px', borderColor:'#c6c6c6'}}>
-                <div style={{height:'32px', backgroundColor:'#c6c6c6'}}>
-                    <div className="col-md-1" style={[xxSmallBlock, regularTitle]}>#</div>
-                    <div className="col-md-2" style={[xMedeumBlock, regularTitle]}>Title</div>
-                    <div className="col-md-1" style={[xSmallBlock, regularTitle]}>Method</div>
-                    <div className="col-md-1" style={[xSmallBlock, regularTitle]}>Status</div>
-                    <div className="col-md-1" style={[xSmallBlock, regularTitle]}>Req size</div>
-                    <div className="col-md-1" style={[xSmallBlock, regularTitle]}>Res size</div>
-                    <div className="col-md-1" style={[xSmallBlock, regularTitle]}>Total time</div>
-                    <div className="col-md-4" style={[xLargeBlock, regularTitle]}>Time line</div>
-                </div>
-                {this.props.dataLoad ||
-                <div className="col-md-12" style={[center, blockSpacing.five, chapterTitle]}>No info</div>}
-                {this.props.entries.map((entrie, number) =>
+        let color = 'white';
+
+        if (this.props.number % 2 != 0) {
+            color = '#f8f8ff';
+        }
+        const backgroundStyle = {backgroundColor: color};
+        return (<div>
+                <hr style={{margin: 0}}/>
+                <a href='#' style={{textDecoration: 'none'}}>
+                    <div style={[chapterTitle, left, backgroundStyle]}
+                         onClick={this.onBtnClick.bind(this)}>{this.props.page.title}
+                    </div>
+                </a>
+                <hr style={{margin: 0}}/>
+
+                {!this.state.show || <div className='row'
+                                          style={{
+                                              minHeight: '200px',
+                                              borderStyle: 'solid',
+                                              borderWidth: '1px',
+                                              borderColor: '#c6c6c6',
+                                              margin: 0
+                                          }}>
+                    <div style={{height: '32px', backgroundColor: '#c6c6c6'}}>
+                        <div className="col-md-1" style={[xxSmallBlock, regularTitle]}>#</div>
+                        <div className="col-md-2" style={[xMedeumBlock, regularTitle]}>Title</div>
+                        <div className="col-md-1" style={[xSmallBlock, regularTitle]}>Method</div>
+                        <div className="col-md-1" style={[xSmallBlock, regularTitle]}>Status</div>
+                        <div className="col-md-1" style={[xSmallBlock, regularTitle]}>Req size</div>
+                        <div className="col-md-1" style={[xSmallBlock, regularTitle]}>Res size</div>
+                        <div className="col-md-1" style={[xSmallBlock, regularTitle]}>Total time</div>
+                        <div className="col-md-4" style={[xLargeBlock, regularTitle]}>Time line</div>
+                    </div>
+                    {this.props.entries.map((entrie, number) =>
                         <HttpInfo
-                            page={this.props.pages[0]}
+                            page={this.props.page}
                             number={number}
                             entrie={entrie}
                             time={entrie.startedDateTime}
@@ -44,9 +83,9 @@ class HttpList extends Component {
                             resSize={entrie.response.headersSize + entrie.response.bodySize}
                             totalTime={entrie.time}
                             maxTime={this.props.maxTime}
-                            />
-                )}
-            </div>
+                        />
+                    )}
+                </div>}</div>
         )
     }
 }

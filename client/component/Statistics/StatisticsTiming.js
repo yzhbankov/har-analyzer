@@ -12,9 +12,10 @@ export default class StatisticsTiming extends Component {
     }
 
     buildPieChart(props) {
-        Chart.defaults.global.defaultFontSize = 15;
+        Chart.defaults.global.defaultFontSize = 11;
         const dataSet = props.data;
-        const ctx = document.getElementById("timingPie");
+        const id = 'timingPie' + this.props.number;
+        const ctx = document.getElementById(id);
 
         const data = {
             labels: [
@@ -28,15 +29,15 @@ export default class StatisticsTiming extends Component {
             ],
             datasets: [
                 {
-                    data: [dataSet.blocked, dataSet.dns, dataSet.ssl, dataSet.connect, dataSet.send, dataSet.wait, dataSet.receive],
+                    data: [dataSet.blocked, dataSet.connect, dataSet.dns, dataSet.receive, dataSet.send, dataSet.ssl, dataSet.wait],
                     backgroundColor: [
-                        "#FF6384",
+                        "#ff0024",
                         "#4BC0C0",
                         "#FFCE56",
-                        "#E7E9ED",
+                        "#3ce200",
                         "#36A2EB",
                         "#f46133",
-                        "#7ceb59"
+                        "#bf00ff"
                     ],
                     hoverBackgroundColor: [
                         "#FF6384",
@@ -56,15 +57,23 @@ export default class StatisticsTiming extends Component {
                 responsive: false,
                 animation: {
                     animateScale: true
+                },
+                legend: {
+                    display: true,
+                    position: 'right',
+                    labels:{
+                        boxWidth: 10,
+                        padding: 5
+                    }
+
                 }
             }
         });
     }
 
     render() {
-        console.log(canvas);
         return (
-            <canvas style={{margin:'0 auto'}} id="timingPie"></canvas>
+            <canvas style={{margin:'0 auto', height: '200px', width:'200px'}} id={"timingPie" + this.props.number}> </canvas>
         )
     }
 }
