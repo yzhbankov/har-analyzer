@@ -36,23 +36,24 @@ class HttpInfoDetails extends Component {
     }
 
     render() {
+        console.log(this.props.entrie.response);
         return (
             <div>
-                <div>
-                    <div className="col-md-1"></div>
-                    <div className='col-md-1' style={chapterTitle}><a data-name='reqShow'
+                <div className='row'>
+                    <div className="col-md-1 hidden-xs hidden-md hidden-sm"></div>
+                    <div className='col-md-1 col-lg-1 col-sm-2 col-xs-2' style={chapterTitle}><a data-name='reqShow'
                                                                       onClick={this.showHideComponent.bind(this)}
                                                                       href='#'>Request</a>
                     </div>
-                    <div className='col-md-1' style={chapterTitle}><a data-name='resShow'
+                    <div className='col-md-1 col-lg-1 col-sm-2 col-xs-2' style={chapterTitle}><a data-name='resShow'
                                                                       onClick={this.showHideComponent.bind(this)}
                                                                       href='#'>Response</a>
                     </div>
-                    <div className='col-md-2' style={chapterTitle}>
+                    <div className='col-md-2 col-lg-2 col-sm-4 col-xs-4' style={chapterTitle}>
                         <a data-name='contentShow'
                            onClick={this.showHideComponent.bind(this)} href='#'>Response content</a>
                     </div>
-                    <div className='col-md-1' style={chapterTitle}>
+                    <div className='col-md-1 col-lg-1 col-sm-2 col-xs-2' style={chapterTitle}>
                         <a data-name='cookiesShow'
                            onClick={this.showHideComponent.bind(this)} href='#'>Cookies</a>
                     </div>

@@ -8,7 +8,7 @@ import {blockSpacing, borderRadii, elementSpacing} from '../../style/style'
 export default class HttpInfoDetailsCookies extends Component {
     render() {
         return (
-            <div style={[medeumBlockContent, blockSpacing.two, {borderWidth: '1px', borderStyle:'solid', borderColor:'#c6c6c6'}, borderRadii.two, elementSpacing.two]}>
+            <div className='col-md-9 col-lg-6 col-sm-12 col-xs-12' style={[blockSpacing.two, {borderWidth: '1px', borderStyle:'solid', borderColor:'#c6c6c6', overflowX: 'auto'}, borderRadii.two, elementSpacing.two]}>
                 <div style={[regularTitle]}>Request cookies</div>
                 <hr style={blockSpacing.one}/>
                 {(() => {
