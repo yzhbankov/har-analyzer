@@ -19,13 +19,28 @@ export default
 class HttpList extends Component {
     constructor(props) {
         super(props);
-        this.state = {show: false};
+        this.state = {
+            show: false,
+            timeLineWidth: {width: 'calc(100% - 570px)'},
+            center: false
+        };
+    }
+
+    componentDidMount() {
+        window.addEventListener("resize", ()=> {
+            if (window.innerWidth < 1200) {
+                this.setState({timeLineWidth: {width: 'calc(100% - 240px)'}})
+            } else{
+                this.setState({timeLineWidth: {width: 'calc(100% - 570px)'}})
+            }
+        });
     }
 
     onBtnClick(e) {
         e.preventDefault();
         this.setState({
-            show: !this.state.show
+            show: !this.state.show,
+            center: !this.state.center
         })
     }
 
@@ -38,15 +53,22 @@ class HttpList extends Component {
 
     render() {
         let color = 'white';
+        let centerTemp = {};
+        if (!this.state.center) {
+            centerTemp = {}
+        } else {
+            centerTemp = center
+        }
 
         if (this.props.number % 2 != 0) {
             color = '#f8f8ff';
         }
         const backgroundStyle = {backgroundColor: color};
+
         return (<div>
                 <hr style={{margin: 0}}/>
                 <a href='#' style={{textDecoration: 'none'}}>
-                    <div style={[chapterTitle, left, backgroundStyle]}
+                    <div style={[chapterTitle, left, backgroundStyle, centerTemp, {marginLeft: '10px'}]}
                          onClick={this.onBtnClick.bind(this)}>{this.props.page.title}
                     </div>
                 </a>
@@ -60,30 +82,46 @@ class HttpList extends Component {
                                               borderColor: '#c6c6c6',
                                               margin: 0
                                           }}>
-                    <div style={{height: '32px', backgroundColor: '#c6c6c6'}}>
-                        <div className="col-md-1" style={[xxSmallBlock, regularTitle]}>#</div>
-                        <div className="col-md-2" style={[xMedeumBlock, regularTitle]}>Title</div>
-                        <div className="col-md-1" style={[xSmallBlock, regularTitle]}>Method</div>
-                        <div className="col-md-1" style={[xSmallBlock, regularTitle]}>Status</div>
-                        <div className="col-md-1" style={[xSmallBlock, regularTitle]}>Req size</div>
-                        <div className="col-md-1" style={[xSmallBlock, regularTitle]}>Res size</div>
-                        <div className="col-md-1" style={[xSmallBlock, regularTitle]}>Total time</div>
-                        <div className="col-md-4" style={[xLargeBlock, regularTitle]}>Time line</div>
+                    <div className='row' style={{height: '32px', backgroundColor: '#c6c6c6'}}>
+                        <div className="col-lg-1 hidden-xs hidden-md hidden-sm" style={[xxSmallBlock, regularTitle]}>#
+                        </div>
+                        <div className="col-lg-2 col-md-2 col-xs-2 col-sm-2" style={[xMedeumBlock, regularTitle]}>
+                            Title
+                        </div>
+                        <div className="col-lg-1 hidden-xs hidden-md hidden-sm" style={[xSmallBlock, regularTitle]}>
+                            Method
+                        </div>
+                        <div className="col-lg-1 hidden-xs hidden-md hidden-sm" style={[xSmallBlock, regularTitle]}>
+                            Status
+                        </div>
+                        <div className="col-lg-1 hidden-xs hidden-md hidden-sm" style={[xSmallBlock, regularTitle]}>Req
+                            size
+                        </div>
+                        <div className="col-lg-1 hidden-xs hidden-md hidden-sm" style={[xSmallBlock, regularTitle]}>Res
+                            size
+                        </div>
+                        <div className="col-lg-1 hidden-xs hidden-md hidden-sm" style={[xSmallBlock, regularTitle]}>
+                            Total time
+                        </div>
+                        <div className="col-lg-4 col-md-10 col-xs-10 col-sm-10"
+                             style={[this.state.timeLineWidth, regularTitle]}>
+                            Time line
+                        </div>
                     </div>
                     {this.props.entries.map((entrie, number) =>
-                        <HttpInfo
-                            page={this.props.page}
-                            number={number}
-                            entrie={entrie}
-                            time={entrie.startedDateTime}
-                            title={entrie.request.url}
-                            reqMethod={entrie.request.method}
-                            resStatus={entrie.response.status}
-                            reqSize={entrie.request.headersSize}
-                            resSize={entrie.response.headersSize + entrie.response.bodySize}
-                            totalTime={entrie.time}
-                            maxTime={this.props.maxTime}
-                        />
+                            <HttpInfo
+                                page={this.props.page}
+                                number={number}
+                                entrie={entrie}
+                                time={entrie.startedDateTime}
+                                title={entrie.request.url}
+                                reqMethod={entrie.request.method}
+                                resStatus={entrie.response.status}
+                                reqSize={entrie.request.headersSize}
+                                resSize={entrie.response.headersSize + entrie.response.bodySize}
+                                totalTime={entrie.time}
+                                maxTime={this.props.maxTime}
+                                />
                     )}
                 </div>}</div>
         )
