@@ -8,18 +8,18 @@ import {blockSpacing, borderRadii, elementSpacing} from '../../style/style'
 export default class HttpInfoDetailsResponseContent extends Component {
     render() {
         return (
-            <div style={[medeumBlockContent, blockSpacing.two, {borderWidth: '1px', borderStyle:'solid', borderColor:'#c6c6c6'}, borderRadii.two, elementSpacing.two]}>
+            <div className='col-md-9 col-lg-6 col-sm-12 col-xs-12' style={[blockSpacing.two, {borderWidth: '1px', borderStyle:'solid', borderColor:'#c6c6c6', overflowX: 'auto'}, borderRadii.two, elementSpacing.two]}>
                 <div className='row'>
-                    <div className='col-md-2' style={[regularTitle, {textAlign: 'right'}]}>Size</div>
-                    <div className='col-md-2'>{this.props.content.size} B</div>
+                    <div className='col-md-3 col-lg-3 col-sm-3 col-xs-4' style={[regularTitle, {textAlign: 'right'}]}>Size</div>
+                    <div className='col-md-3 col-lg-3 col-sm-3 col-xs-4'>{this.props.content.size} B</div>
                 </div>
                 <div className='row'>
-                    <div className='col-md-2' style={[regularTitle, {textAlign: 'right'}]}>MIME Type</div>
-                    <div className='col-md-2'>{this.props.content.mimeType}</div>
+                    <div className='col-md-3 col-lg-3 col-sm-3 col-xs-4' style={[regularTitle, {textAlign: 'right'}]}>MIME Type</div>
+                    <div className='col-md-3 col-lg-3 col-sm-3 col-xs-4'>{this.props.content.mimeType}</div>
                 </div>
                 <div className='row'>
-                    <div className='col-md-2' style={[regularTitle, {textAlign: 'right'}]}>Response content</div>
-                    <div className='col-md-10'>{this.props.content.text}</div>
+                    <div className='col-md-3 col-lg-3 col-sm-3 col-xs-4' style={[regularTitle, {textAlign: 'right'}]}>Response content</div>
+                    <div className='col-md-9 col-lg-9 col-sm-9 col-xs-8'>{this.props.content.text}</div>
                 </div>
             </div>
         )
