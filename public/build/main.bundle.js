@@ -5031,7 +5031,7 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 
 var _prodInvariant = __webpack_require__(4);
 
-var DOMProperty = __webpack_require__(18);
+var DOMProperty = __webpack_require__(19);
 var ReactDOMComponentFlags = __webpack_require__(206);
 
 var invariant = __webpack_require__(2);
@@ -5264,9 +5264,9 @@ module.exports = ExecutionEnvironment;
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.right = exports.left = exports.center = exports.cookies = exports.httpInfoDetails = exports.medeumBlockContent = exports.smallBlockContent = exports.pageLoad = exports.contentLoad = exports.receiveTime = exports.sslTime = exports.waitTime = exports.sendTime = exports.blockTime = exports.connectTime = exports.dnsTime = exports.timeLine = exports.xxLargeBlock = exports.xLargeBlock = exports.largeBlock = exports.xxMedeumBlock = exports.xMedeumBlock = exports.medeumBlock = exports.smallBlock = exports.xSmallBlock = exports.xxSmallBlock = exports.regularText = exports.regularTitle = exports.chapterTitle = exports.primaryTitle = exports.dangerButton = exports.successButton = exports.primaryButton = exports.defaultButton = undefined;
+exports.right = exports.left = exports.center = exports.cookies = exports.httpInfoDetails = exports.medeumBlockContent = exports.smallBlockContent = exports.pageLoad = exports.contentLoad = exports.sslTime = exports.waitTime = exports.sendTime = exports.blockTime = exports.receiveTime = exports.connectTime = exports.dnsTime = exports.startTime = exports.timeLine = exports.xxLargeBlock = exports.xLargeBlock = exports.largeBlock = exports.xxMedeumBlock = exports.xMedeumBlock = exports.medeumBlock = exports.smallBlock = exports.xSmallBlock = exports.xxSmallBlock = exports.regularText = exports.regularTitle = exports.chapterTitle = exports.primaryTitle = exports.dangerButton = exports.successButton = exports.primaryButton = exports.defaultButton = undefined;
 
-var _style = __webpack_require__(19);
+var _style = __webpack_require__(16);
 
 //buttons
 var defaultButton = exports.defaultButton = [_style.colours.default, _style.borderRadii.two, _style.fontSize.h5, _style.textColor.muted, _style.blockSpacing.two, _style.elementSpacing.two, { borderStyle: 'solid', borderWidth: '1px' }];
@@ -5278,7 +5278,7 @@ var dangerButton = exports.dangerButton = [_style.colours.danger, _style.borderR
 var primaryTitle = exports.primaryTitle = [_style.fontSize.h2, { textAlign: 'center', fontWeight: 'bold' }];
 var chapterTitle = exports.chapterTitle = [_style.fontSize.h5, { textAlign: 'center', fontWeight: 'bold' }];
 var regularTitle = exports.regularTitle = [_style.fontSize.h6, { textAlign: 'center', fontWeight: 'bold' }];
-var regularText = exports.regularText = [_style.fontSize.h7];
+var regularText = exports.regularText = [_style.fontSize.h7, { fontFamily: 'Mada' }];
 
 //block width
 var xxSmallBlock = exports.xxSmallBlock = [_style.blockWidth.xxSmall];
@@ -5293,15 +5293,17 @@ var xxLargeBlock = exports.xxLargeBlock = [_style.blockWidth.xxLarge];
 
 //time line
 var timeLine = exports.timeLine = { position: 'relative', float: 'left', display: 'flex', height: '15px', width: '100%' };
-var dnsTime = exports.dnsTime = { backgroundColor: '#00bfff', height: '15px' };
-var connectTime = exports.connectTime = { backgroundColor: '#40ff00', height: '15px' };
-var blockTime = exports.blockTime = { backgroundColor: '#ffbf00', height: '15px' };
-var sendTime = exports.sendTime = { backgroundColor: '#ff0000', height: '15px' };
+var startTime = exports.startTime = { borderRight: '1px solid black' };
+var dnsTime = exports.dnsTime = { backgroundColor: '#FFCE56', height: '15px' };
+var connectTime = exports.connectTime = { backgroundColor: '#4BC0C0', height: '15px' };
+var receiveTime = exports.receiveTime = { backgroundColor: '#3ce200', height: '15px' };
+var blockTime = exports.blockTime = { backgroundColor: '#ff0024', height: '15px' };
+var sendTime = exports.sendTime = { backgroundColor: '#36A2EB', height: '15px' };
 var waitTime = exports.waitTime = { backgroundColor: '#bf00ff', height: '15px' };
-var sslTime = exports.sslTime = { backgroundColor: '#3300ff', height: '15px' };
-var receiveTime = exports.receiveTime = { backgroundColor: '#ebebe0', height: '15px' };
-var contentLoad = exports.contentLoad = { position: 'absolute', width: '1px', height: '110%', background: '#1c80bd', top: '-5%' };
-var pageLoad = exports.pageLoad = { position: 'absolute', width: '1px', height: '110%', background: '#ff0024', top: '-5%' };
+var sslTime = exports.sslTime = { backgroundColor: '#f46133', height: '15px' };
+
+var contentLoad = exports.contentLoad = { position: 'absolute', width: '1px', height: '115%', background: '#1c80bd', top: '-5%' };
+var pageLoad = exports.pageLoad = { position: 'absolute', width: '1px', height: '115%', background: '#ff0024', top: '-5%' };
 
 //block content
 var smallBlockContent = exports.smallBlockContent = [_style.blockWidth.small, _style.blockHeight.small];
@@ -6098,513 +6100,6 @@ module.exports = ReactCurrentOwner;
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-exports.default = function (prefixedValue, value, keepUnprefixed) {
-  return keepUnprefixed ? [prefixedValue, value] : prefixedValue;
-};
-
-module.exports = exports["default"];
-
-/***/ }),
-/* 17 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(process) {/**
- * Copyright 2013-present, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- */
-
-
-
-var _assign = __webpack_require__(6);
-
-var PooledClass = __webpack_require__(20);
-
-var emptyFunction = __webpack_require__(12);
-var warning = __webpack_require__(3);
-
-var didWarnForAddedNewProperty = false;
-var isProxySupported = typeof Proxy === 'function';
-
-var shouldBeReleasedProperties = ['dispatchConfig', '_targetInst', 'nativeEvent', 'isDefaultPrevented', 'isPropagationStopped', '_dispatchListeners', '_dispatchInstances'];
-
-/**
- * @interface Event
- * @see http://www.w3.org/TR/DOM-Level-3-Events/
- */
-var EventInterface = {
-  type: null,
-  target: null,
-  // currentTarget is set when dispatching; no use in copying it here
-  currentTarget: emptyFunction.thatReturnsNull,
-  eventPhase: null,
-  bubbles: null,
-  cancelable: null,
-  timeStamp: function (event) {
-    return event.timeStamp || Date.now();
-  },
-  defaultPrevented: null,
-  isTrusted: null
-};
-
-/**
- * Synthetic events are dispatched by event plugins, typically in response to a
- * top-level event delegation handler.
- *
- * These systems should generally use pooling to reduce the frequency of garbage
- * collection. The system should check `isPersistent` to determine whether the
- * event should be released into the pool after being dispatched. Users that
- * need a persisted event should invoke `persist`.
- *
- * Synthetic events (and subclasses) implement the DOM Level 3 Events API by
- * normalizing browser quirks. Subclasses do not necessarily have to implement a
- * DOM interface; custom application-specific events can also subclass this.
- *
- * @param {object} dispatchConfig Configuration used to dispatch this event.
- * @param {*} targetInst Marker identifying the event target.
- * @param {object} nativeEvent Native browser event.
- * @param {DOMEventTarget} nativeEventTarget Target node.
- */
-function SyntheticEvent(dispatchConfig, targetInst, nativeEvent, nativeEventTarget) {
-  if (process.env.NODE_ENV !== 'production') {
-    // these have a getter/setter for warnings
-    delete this.nativeEvent;
-    delete this.preventDefault;
-    delete this.stopPropagation;
-  }
-
-  this.dispatchConfig = dispatchConfig;
-  this._targetInst = targetInst;
-  this.nativeEvent = nativeEvent;
-
-  var Interface = this.constructor.Interface;
-  for (var propName in Interface) {
-    if (!Interface.hasOwnProperty(propName)) {
-      continue;
-    }
-    if (process.env.NODE_ENV !== 'production') {
-      delete this[propName]; // this has a getter/setter for warnings
-    }
-    var normalize = Interface[propName];
-    if (normalize) {
-      this[propName] = normalize(nativeEvent);
-    } else {
-      if (propName === 'target') {
-        this.target = nativeEventTarget;
-      } else {
-        this[propName] = nativeEvent[propName];
-      }
-    }
-  }
-
-  var defaultPrevented = nativeEvent.defaultPrevented != null ? nativeEvent.defaultPrevented : nativeEvent.returnValue === false;
-  if (defaultPrevented) {
-    this.isDefaultPrevented = emptyFunction.thatReturnsTrue;
-  } else {
-    this.isDefaultPrevented = emptyFunction.thatReturnsFalse;
-  }
-  this.isPropagationStopped = emptyFunction.thatReturnsFalse;
-  return this;
-}
-
-_assign(SyntheticEvent.prototype, {
-
-  preventDefault: function () {
-    this.defaultPrevented = true;
-    var event = this.nativeEvent;
-    if (!event) {
-      return;
-    }
-
-    if (event.preventDefault) {
-      event.preventDefault();
-    } else if (typeof event.returnValue !== 'unknown') {
-      // eslint-disable-line valid-typeof
-      event.returnValue = false;
-    }
-    this.isDefaultPrevented = emptyFunction.thatReturnsTrue;
-  },
-
-  stopPropagation: function () {
-    var event = this.nativeEvent;
-    if (!event) {
-      return;
-    }
-
-    if (event.stopPropagation) {
-      event.stopPropagation();
-    } else if (typeof event.cancelBubble !== 'unknown') {
-      // eslint-disable-line valid-typeof
-      // The ChangeEventPlugin registers a "propertychange" event for
-      // IE. This event does not support bubbling or cancelling, and
-      // any references to cancelBubble throw "Member not found".  A
-      // typeof check of "unknown" circumvents this issue (and is also
-      // IE specific).
-      event.cancelBubble = true;
-    }
-
-    this.isPropagationStopped = emptyFunction.thatReturnsTrue;
-  },
-
-  /**
-   * We release all dispatched `SyntheticEvent`s after each event loop, adding
-   * them back into the pool. This allows a way to hold onto a reference that
-   * won't be added back into the pool.
-   */
-  persist: function () {
-    this.isPersistent = emptyFunction.thatReturnsTrue;
-  },
-
-  /**
-   * Checks if this event should be released back into the pool.
-   *
-   * @return {boolean} True if this should not be released, false otherwise.
-   */
-  isPersistent: emptyFunction.thatReturnsFalse,
-
-  /**
-   * `PooledClass` looks for `destructor` on each instance it releases.
-   */
-  destructor: function () {
-    var Interface = this.constructor.Interface;
-    for (var propName in Interface) {
-      if (process.env.NODE_ENV !== 'production') {
-        Object.defineProperty(this, propName, getPooledWarningPropertyDefinition(propName, Interface[propName]));
-      } else {
-        this[propName] = null;
-      }
-    }
-    for (var i = 0; i < shouldBeReleasedProperties.length; i++) {
-      this[shouldBeReleasedProperties[i]] = null;
-    }
-    if (process.env.NODE_ENV !== 'production') {
-      Object.defineProperty(this, 'nativeEvent', getPooledWarningPropertyDefinition('nativeEvent', null));
-      Object.defineProperty(this, 'preventDefault', getPooledWarningPropertyDefinition('preventDefault', emptyFunction));
-      Object.defineProperty(this, 'stopPropagation', getPooledWarningPropertyDefinition('stopPropagation', emptyFunction));
-    }
-  }
-
-});
-
-SyntheticEvent.Interface = EventInterface;
-
-if (process.env.NODE_ENV !== 'production') {
-  if (isProxySupported) {
-    /*eslint-disable no-func-assign */
-    SyntheticEvent = new Proxy(SyntheticEvent, {
-      construct: function (target, args) {
-        return this.apply(target, Object.create(target.prototype), args);
-      },
-      apply: function (constructor, that, args) {
-        return new Proxy(constructor.apply(that, args), {
-          set: function (target, prop, value) {
-            if (prop !== 'isPersistent' && !target.constructor.Interface.hasOwnProperty(prop) && shouldBeReleasedProperties.indexOf(prop) === -1) {
-              process.env.NODE_ENV !== 'production' ? warning(didWarnForAddedNewProperty || target.isPersistent(), 'This synthetic event is reused for performance reasons. If you\'re ' + 'seeing this, you\'re adding a new property in the synthetic event object. ' + 'The property is never released. See ' + 'https://fb.me/react-event-pooling for more information.') : void 0;
-              didWarnForAddedNewProperty = true;
-            }
-            target[prop] = value;
-            return true;
-          }
-        });
-      }
-    });
-    /*eslint-enable no-func-assign */
-  }
-}
-/**
- * Helper to reduce boilerplate when creating subclasses.
- *
- * @param {function} Class
- * @param {?object} Interface
- */
-SyntheticEvent.augmentClass = function (Class, Interface) {
-  var Super = this;
-
-  var E = function () {};
-  E.prototype = Super.prototype;
-  var prototype = new E();
-
-  _assign(prototype, Class.prototype);
-  Class.prototype = prototype;
-  Class.prototype.constructor = Class;
-
-  Class.Interface = _assign({}, Super.Interface, Interface);
-  Class.augmentClass = Super.augmentClass;
-
-  PooledClass.addPoolingTo(Class, PooledClass.fourArgumentPooler);
-};
-
-PooledClass.addPoolingTo(SyntheticEvent, PooledClass.fourArgumentPooler);
-
-module.exports = SyntheticEvent;
-
-/**
-  * Helper to nullify syntheticEvent instance properties when destructing
-  *
-  * @param {object} SyntheticEvent
-  * @param {String} propName
-  * @return {object} defineProperty object
-  */
-function getPooledWarningPropertyDefinition(propName, getVal) {
-  var isFunction = typeof getVal === 'function';
-  return {
-    configurable: true,
-    set: set,
-    get: get
-  };
-
-  function set(val) {
-    var action = isFunction ? 'setting the method' : 'setting the property';
-    warn(action, 'This is effectively a no-op');
-    return val;
-  }
-
-  function get() {
-    var action = isFunction ? 'accessing the method' : 'accessing the property';
-    var result = isFunction ? 'This is a no-op function' : 'This is set to null';
-    warn(action, result);
-    return getVal;
-  }
-
-  function warn(action, result) {
-    var warningCondition = false;
-    process.env.NODE_ENV !== 'production' ? warning(warningCondition, 'This synthetic event is reused for performance reasons. If you\'re seeing this, ' + 'you\'re %s `%s` on a released/nullified synthetic event. %s. ' + 'If you must keep the original synthetic event around, use event.persist(). ' + 'See https://fb.me/react-event-pooling for more information.', action, propName, result) : void 0;
-  }
-}
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
-
-/***/ }),
-/* 18 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(process) {/**
- * Copyright 2013-present, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- */
-
-
-
-var _prodInvariant = __webpack_require__(4);
-
-var invariant = __webpack_require__(2);
-
-function checkMask(value, bitmask) {
-  return (value & bitmask) === bitmask;
-}
-
-var DOMPropertyInjection = {
-  /**
-   * Mapping from normalized, camelcased property names to a configuration that
-   * specifies how the associated DOM property should be accessed or rendered.
-   */
-  MUST_USE_PROPERTY: 0x1,
-  HAS_BOOLEAN_VALUE: 0x4,
-  HAS_NUMERIC_VALUE: 0x8,
-  HAS_POSITIVE_NUMERIC_VALUE: 0x10 | 0x8,
-  HAS_OVERLOADED_BOOLEAN_VALUE: 0x20,
-
-  /**
-   * Inject some specialized knowledge about the DOM. This takes a config object
-   * with the following properties:
-   *
-   * isCustomAttribute: function that given an attribute name will return true
-   * if it can be inserted into the DOM verbatim. Useful for data-* or aria-*
-   * attributes where it's impossible to enumerate all of the possible
-   * attribute names,
-   *
-   * Properties: object mapping DOM property name to one of the
-   * DOMPropertyInjection constants or null. If your attribute isn't in here,
-   * it won't get written to the DOM.
-   *
-   * DOMAttributeNames: object mapping React attribute name to the DOM
-   * attribute name. Attribute names not specified use the **lowercase**
-   * normalized name.
-   *
-   * DOMAttributeNamespaces: object mapping React attribute name to the DOM
-   * attribute namespace URL. (Attribute names not specified use no namespace.)
-   *
-   * DOMPropertyNames: similar to DOMAttributeNames but for DOM properties.
-   * Property names not specified use the normalized name.
-   *
-   * DOMMutationMethods: Properties that require special mutation methods. If
-   * `value` is undefined, the mutation method should unset the property.
-   *
-   * @param {object} domPropertyConfig the config as described above.
-   */
-  injectDOMPropertyConfig: function (domPropertyConfig) {
-    var Injection = DOMPropertyInjection;
-    var Properties = domPropertyConfig.Properties || {};
-    var DOMAttributeNamespaces = domPropertyConfig.DOMAttributeNamespaces || {};
-    var DOMAttributeNames = domPropertyConfig.DOMAttributeNames || {};
-    var DOMPropertyNames = domPropertyConfig.DOMPropertyNames || {};
-    var DOMMutationMethods = domPropertyConfig.DOMMutationMethods || {};
-
-    if (domPropertyConfig.isCustomAttribute) {
-      DOMProperty._isCustomAttributeFunctions.push(domPropertyConfig.isCustomAttribute);
-    }
-
-    for (var propName in Properties) {
-      !!DOMProperty.properties.hasOwnProperty(propName) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'injectDOMPropertyConfig(...): You\'re trying to inject DOM property \'%s\' which has already been injected. You may be accidentally injecting the same DOM property config twice, or you may be injecting two configs that have conflicting property names.', propName) : _prodInvariant('48', propName) : void 0;
-
-      var lowerCased = propName.toLowerCase();
-      var propConfig = Properties[propName];
-
-      var propertyInfo = {
-        attributeName: lowerCased,
-        attributeNamespace: null,
-        propertyName: propName,
-        mutationMethod: null,
-
-        mustUseProperty: checkMask(propConfig, Injection.MUST_USE_PROPERTY),
-        hasBooleanValue: checkMask(propConfig, Injection.HAS_BOOLEAN_VALUE),
-        hasNumericValue: checkMask(propConfig, Injection.HAS_NUMERIC_VALUE),
-        hasPositiveNumericValue: checkMask(propConfig, Injection.HAS_POSITIVE_NUMERIC_VALUE),
-        hasOverloadedBooleanValue: checkMask(propConfig, Injection.HAS_OVERLOADED_BOOLEAN_VALUE)
-      };
-      !(propertyInfo.hasBooleanValue + propertyInfo.hasNumericValue + propertyInfo.hasOverloadedBooleanValue <= 1) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'DOMProperty: Value can be one of boolean, overloaded boolean, or numeric value, but not a combination: %s', propName) : _prodInvariant('50', propName) : void 0;
-
-      if (process.env.NODE_ENV !== 'production') {
-        DOMProperty.getPossibleStandardName[lowerCased] = propName;
-      }
-
-      if (DOMAttributeNames.hasOwnProperty(propName)) {
-        var attributeName = DOMAttributeNames[propName];
-        propertyInfo.attributeName = attributeName;
-        if (process.env.NODE_ENV !== 'production') {
-          DOMProperty.getPossibleStandardName[attributeName] = propName;
-        }
-      }
-
-      if (DOMAttributeNamespaces.hasOwnProperty(propName)) {
-        propertyInfo.attributeNamespace = DOMAttributeNamespaces[propName];
-      }
-
-      if (DOMPropertyNames.hasOwnProperty(propName)) {
-        propertyInfo.propertyName = DOMPropertyNames[propName];
-      }
-
-      if (DOMMutationMethods.hasOwnProperty(propName)) {
-        propertyInfo.mutationMethod = DOMMutationMethods[propName];
-      }
-
-      DOMProperty.properties[propName] = propertyInfo;
-    }
-  }
-};
-
-/* eslint-disable max-len */
-var ATTRIBUTE_NAME_START_CHAR = ':A-Z_a-z\\u00C0-\\u00D6\\u00D8-\\u00F6\\u00F8-\\u02FF\\u0370-\\u037D\\u037F-\\u1FFF\\u200C-\\u200D\\u2070-\\u218F\\u2C00-\\u2FEF\\u3001-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFFD';
-/* eslint-enable max-len */
-
-/**
- * DOMProperty exports lookup objects that can be used like functions:
- *
- *   > DOMProperty.isValid['id']
- *   true
- *   > DOMProperty.isValid['foobar']
- *   undefined
- *
- * Although this may be confusing, it performs better in general.
- *
- * @see http://jsperf.com/key-exists
- * @see http://jsperf.com/key-missing
- */
-var DOMProperty = {
-
-  ID_ATTRIBUTE_NAME: 'data-reactid',
-  ROOT_ATTRIBUTE_NAME: 'data-reactroot',
-
-  ATTRIBUTE_NAME_START_CHAR: ATTRIBUTE_NAME_START_CHAR,
-  ATTRIBUTE_NAME_CHAR: ATTRIBUTE_NAME_START_CHAR + '\\-.0-9\\u00B7\\u0300-\\u036F\\u203F-\\u2040',
-
-  /**
-   * Map from property "standard name" to an object with info about how to set
-   * the property in the DOM. Each object contains:
-   *
-   * attributeName:
-   *   Used when rendering markup or with `*Attribute()`.
-   * attributeNamespace
-   * propertyName:
-   *   Used on DOM node instances. (This includes properties that mutate due to
-   *   external factors.)
-   * mutationMethod:
-   *   If non-null, used instead of the property or `setAttribute()` after
-   *   initial render.
-   * mustUseProperty:
-   *   Whether the property must be accessed and mutated as an object property.
-   * hasBooleanValue:
-   *   Whether the property should be removed when set to a falsey value.
-   * hasNumericValue:
-   *   Whether the property must be numeric or parse as a numeric and should be
-   *   removed when set to a falsey value.
-   * hasPositiveNumericValue:
-   *   Whether the property must be positive numeric or parse as a positive
-   *   numeric and should be removed when set to a falsey value.
-   * hasOverloadedBooleanValue:
-   *   Whether the property can be used as a flag as well as with a value.
-   *   Removed when strictly equal to false; present without a value when
-   *   strictly equal to true; present with a value otherwise.
-   */
-  properties: {},
-
-  /**
-   * Mapping from lowercase property names to the properly cased version, used
-   * to warn in the case of missing properties. Available only in __DEV__.
-   *
-   * autofocus is predefined, because adding it to the property whitelist
-   * causes unintended side effects.
-   *
-   * @type {Object}
-   */
-  getPossibleStandardName: process.env.NODE_ENV !== 'production' ? { autofocus: 'autoFocus' } : null,
-
-  /**
-   * All of the isCustomAttribute() functions that have been injected.
-   */
-  _isCustomAttributeFunctions: [],
-
-  /**
-   * Checks whether a property name is a custom attribute.
-   * @method
-   */
-  isCustomAttribute: function (attributeName) {
-    for (var i = 0; i < DOMProperty._isCustomAttributeFunctions.length; i++) {
-      var isCustomAttributeFn = DOMProperty._isCustomAttributeFunctions[i];
-      if (isCustomAttributeFn(attributeName)) {
-        return true;
-      }
-    }
-    return false;
-  },
-
-  injection: DOMPropertyInjection
-};
-
-module.exports = DOMProperty;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
-
-/***/ }),
-/* 19 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
     value: true
 });
 //colour variables
@@ -6893,6 +6388,513 @@ var blockHeight = exports.blockHeight = {
         maxHeight: xxLarge
     }
 };
+
+/***/ }),
+/* 17 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+exports.default = function (prefixedValue, value, keepUnprefixed) {
+  return keepUnprefixed ? [prefixedValue, value] : prefixedValue;
+};
+
+module.exports = exports["default"];
+
+/***/ }),
+/* 18 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(process) {/**
+ * Copyright 2013-present, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ *
+ */
+
+
+
+var _assign = __webpack_require__(6);
+
+var PooledClass = __webpack_require__(20);
+
+var emptyFunction = __webpack_require__(12);
+var warning = __webpack_require__(3);
+
+var didWarnForAddedNewProperty = false;
+var isProxySupported = typeof Proxy === 'function';
+
+var shouldBeReleasedProperties = ['dispatchConfig', '_targetInst', 'nativeEvent', 'isDefaultPrevented', 'isPropagationStopped', '_dispatchListeners', '_dispatchInstances'];
+
+/**
+ * @interface Event
+ * @see http://www.w3.org/TR/DOM-Level-3-Events/
+ */
+var EventInterface = {
+  type: null,
+  target: null,
+  // currentTarget is set when dispatching; no use in copying it here
+  currentTarget: emptyFunction.thatReturnsNull,
+  eventPhase: null,
+  bubbles: null,
+  cancelable: null,
+  timeStamp: function (event) {
+    return event.timeStamp || Date.now();
+  },
+  defaultPrevented: null,
+  isTrusted: null
+};
+
+/**
+ * Synthetic events are dispatched by event plugins, typically in response to a
+ * top-level event delegation handler.
+ *
+ * These systems should generally use pooling to reduce the frequency of garbage
+ * collection. The system should check `isPersistent` to determine whether the
+ * event should be released into the pool after being dispatched. Users that
+ * need a persisted event should invoke `persist`.
+ *
+ * Synthetic events (and subclasses) implement the DOM Level 3 Events API by
+ * normalizing browser quirks. Subclasses do not necessarily have to implement a
+ * DOM interface; custom application-specific events can also subclass this.
+ *
+ * @param {object} dispatchConfig Configuration used to dispatch this event.
+ * @param {*} targetInst Marker identifying the event target.
+ * @param {object} nativeEvent Native browser event.
+ * @param {DOMEventTarget} nativeEventTarget Target node.
+ */
+function SyntheticEvent(dispatchConfig, targetInst, nativeEvent, nativeEventTarget) {
+  if (process.env.NODE_ENV !== 'production') {
+    // these have a getter/setter for warnings
+    delete this.nativeEvent;
+    delete this.preventDefault;
+    delete this.stopPropagation;
+  }
+
+  this.dispatchConfig = dispatchConfig;
+  this._targetInst = targetInst;
+  this.nativeEvent = nativeEvent;
+
+  var Interface = this.constructor.Interface;
+  for (var propName in Interface) {
+    if (!Interface.hasOwnProperty(propName)) {
+      continue;
+    }
+    if (process.env.NODE_ENV !== 'production') {
+      delete this[propName]; // this has a getter/setter for warnings
+    }
+    var normalize = Interface[propName];
+    if (normalize) {
+      this[propName] = normalize(nativeEvent);
+    } else {
+      if (propName === 'target') {
+        this.target = nativeEventTarget;
+      } else {
+        this[propName] = nativeEvent[propName];
+      }
+    }
+  }
+
+  var defaultPrevented = nativeEvent.defaultPrevented != null ? nativeEvent.defaultPrevented : nativeEvent.returnValue === false;
+  if (defaultPrevented) {
+    this.isDefaultPrevented = emptyFunction.thatReturnsTrue;
+  } else {
+    this.isDefaultPrevented = emptyFunction.thatReturnsFalse;
+  }
+  this.isPropagationStopped = emptyFunction.thatReturnsFalse;
+  return this;
+}
+
+_assign(SyntheticEvent.prototype, {
+
+  preventDefault: function () {
+    this.defaultPrevented = true;
+    var event = this.nativeEvent;
+    if (!event) {
+      return;
+    }
+
+    if (event.preventDefault) {
+      event.preventDefault();
+    } else if (typeof event.returnValue !== 'unknown') {
+      // eslint-disable-line valid-typeof
+      event.returnValue = false;
+    }
+    this.isDefaultPrevented = emptyFunction.thatReturnsTrue;
+  },
+
+  stopPropagation: function () {
+    var event = this.nativeEvent;
+    if (!event) {
+      return;
+    }
+
+    if (event.stopPropagation) {
+      event.stopPropagation();
+    } else if (typeof event.cancelBubble !== 'unknown') {
+      // eslint-disable-line valid-typeof
+      // The ChangeEventPlugin registers a "propertychange" event for
+      // IE. This event does not support bubbling or cancelling, and
+      // any references to cancelBubble throw "Member not found".  A
+      // typeof check of "unknown" circumvents this issue (and is also
+      // IE specific).
+      event.cancelBubble = true;
+    }
+
+    this.isPropagationStopped = emptyFunction.thatReturnsTrue;
+  },
+
+  /**
+   * We release all dispatched `SyntheticEvent`s after each event loop, adding
+   * them back into the pool. This allows a way to hold onto a reference that
+   * won't be added back into the pool.
+   */
+  persist: function () {
+    this.isPersistent = emptyFunction.thatReturnsTrue;
+  },
+
+  /**
+   * Checks if this event should be released back into the pool.
+   *
+   * @return {boolean} True if this should not be released, false otherwise.
+   */
+  isPersistent: emptyFunction.thatReturnsFalse,
+
+  /**
+   * `PooledClass` looks for `destructor` on each instance it releases.
+   */
+  destructor: function () {
+    var Interface = this.constructor.Interface;
+    for (var propName in Interface) {
+      if (process.env.NODE_ENV !== 'production') {
+        Object.defineProperty(this, propName, getPooledWarningPropertyDefinition(propName, Interface[propName]));
+      } else {
+        this[propName] = null;
+      }
+    }
+    for (var i = 0; i < shouldBeReleasedProperties.length; i++) {
+      this[shouldBeReleasedProperties[i]] = null;
+    }
+    if (process.env.NODE_ENV !== 'production') {
+      Object.defineProperty(this, 'nativeEvent', getPooledWarningPropertyDefinition('nativeEvent', null));
+      Object.defineProperty(this, 'preventDefault', getPooledWarningPropertyDefinition('preventDefault', emptyFunction));
+      Object.defineProperty(this, 'stopPropagation', getPooledWarningPropertyDefinition('stopPropagation', emptyFunction));
+    }
+  }
+
+});
+
+SyntheticEvent.Interface = EventInterface;
+
+if (process.env.NODE_ENV !== 'production') {
+  if (isProxySupported) {
+    /*eslint-disable no-func-assign */
+    SyntheticEvent = new Proxy(SyntheticEvent, {
+      construct: function (target, args) {
+        return this.apply(target, Object.create(target.prototype), args);
+      },
+      apply: function (constructor, that, args) {
+        return new Proxy(constructor.apply(that, args), {
+          set: function (target, prop, value) {
+            if (prop !== 'isPersistent' && !target.constructor.Interface.hasOwnProperty(prop) && shouldBeReleasedProperties.indexOf(prop) === -1) {
+              process.env.NODE_ENV !== 'production' ? warning(didWarnForAddedNewProperty || target.isPersistent(), 'This synthetic event is reused for performance reasons. If you\'re ' + 'seeing this, you\'re adding a new property in the synthetic event object. ' + 'The property is never released. See ' + 'https://fb.me/react-event-pooling for more information.') : void 0;
+              didWarnForAddedNewProperty = true;
+            }
+            target[prop] = value;
+            return true;
+          }
+        });
+      }
+    });
+    /*eslint-enable no-func-assign */
+  }
+}
+/**
+ * Helper to reduce boilerplate when creating subclasses.
+ *
+ * @param {function} Class
+ * @param {?object} Interface
+ */
+SyntheticEvent.augmentClass = function (Class, Interface) {
+  var Super = this;
+
+  var E = function () {};
+  E.prototype = Super.prototype;
+  var prototype = new E();
+
+  _assign(prototype, Class.prototype);
+  Class.prototype = prototype;
+  Class.prototype.constructor = Class;
+
+  Class.Interface = _assign({}, Super.Interface, Interface);
+  Class.augmentClass = Super.augmentClass;
+
+  PooledClass.addPoolingTo(Class, PooledClass.fourArgumentPooler);
+};
+
+PooledClass.addPoolingTo(SyntheticEvent, PooledClass.fourArgumentPooler);
+
+module.exports = SyntheticEvent;
+
+/**
+  * Helper to nullify syntheticEvent instance properties when destructing
+  *
+  * @param {object} SyntheticEvent
+  * @param {String} propName
+  * @return {object} defineProperty object
+  */
+function getPooledWarningPropertyDefinition(propName, getVal) {
+  var isFunction = typeof getVal === 'function';
+  return {
+    configurable: true,
+    set: set,
+    get: get
+  };
+
+  function set(val) {
+    var action = isFunction ? 'setting the method' : 'setting the property';
+    warn(action, 'This is effectively a no-op');
+    return val;
+  }
+
+  function get() {
+    var action = isFunction ? 'accessing the method' : 'accessing the property';
+    var result = isFunction ? 'This is a no-op function' : 'This is set to null';
+    warn(action, result);
+    return getVal;
+  }
+
+  function warn(action, result) {
+    var warningCondition = false;
+    process.env.NODE_ENV !== 'production' ? warning(warningCondition, 'This synthetic event is reused for performance reasons. If you\'re seeing this, ' + 'you\'re %s `%s` on a released/nullified synthetic event. %s. ' + 'If you must keep the original synthetic event around, use event.persist(). ' + 'See https://fb.me/react-event-pooling for more information.', action, propName, result) : void 0;
+  }
+}
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
+
+/***/ }),
+/* 19 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(process) {/**
+ * Copyright 2013-present, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ *
+ */
+
+
+
+var _prodInvariant = __webpack_require__(4);
+
+var invariant = __webpack_require__(2);
+
+function checkMask(value, bitmask) {
+  return (value & bitmask) === bitmask;
+}
+
+var DOMPropertyInjection = {
+  /**
+   * Mapping from normalized, camelcased property names to a configuration that
+   * specifies how the associated DOM property should be accessed or rendered.
+   */
+  MUST_USE_PROPERTY: 0x1,
+  HAS_BOOLEAN_VALUE: 0x4,
+  HAS_NUMERIC_VALUE: 0x8,
+  HAS_POSITIVE_NUMERIC_VALUE: 0x10 | 0x8,
+  HAS_OVERLOADED_BOOLEAN_VALUE: 0x20,
+
+  /**
+   * Inject some specialized knowledge about the DOM. This takes a config object
+   * with the following properties:
+   *
+   * isCustomAttribute: function that given an attribute name will return true
+   * if it can be inserted into the DOM verbatim. Useful for data-* or aria-*
+   * attributes where it's impossible to enumerate all of the possible
+   * attribute names,
+   *
+   * Properties: object mapping DOM property name to one of the
+   * DOMPropertyInjection constants or null. If your attribute isn't in here,
+   * it won't get written to the DOM.
+   *
+   * DOMAttributeNames: object mapping React attribute name to the DOM
+   * attribute name. Attribute names not specified use the **lowercase**
+   * normalized name.
+   *
+   * DOMAttributeNamespaces: object mapping React attribute name to the DOM
+   * attribute namespace URL. (Attribute names not specified use no namespace.)
+   *
+   * DOMPropertyNames: similar to DOMAttributeNames but for DOM properties.
+   * Property names not specified use the normalized name.
+   *
+   * DOMMutationMethods: Properties that require special mutation methods. If
+   * `value` is undefined, the mutation method should unset the property.
+   *
+   * @param {object} domPropertyConfig the config as described above.
+   */
+  injectDOMPropertyConfig: function (domPropertyConfig) {
+    var Injection = DOMPropertyInjection;
+    var Properties = domPropertyConfig.Properties || {};
+    var DOMAttributeNamespaces = domPropertyConfig.DOMAttributeNamespaces || {};
+    var DOMAttributeNames = domPropertyConfig.DOMAttributeNames || {};
+    var DOMPropertyNames = domPropertyConfig.DOMPropertyNames || {};
+    var DOMMutationMethods = domPropertyConfig.DOMMutationMethods || {};
+
+    if (domPropertyConfig.isCustomAttribute) {
+      DOMProperty._isCustomAttributeFunctions.push(domPropertyConfig.isCustomAttribute);
+    }
+
+    for (var propName in Properties) {
+      !!DOMProperty.properties.hasOwnProperty(propName) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'injectDOMPropertyConfig(...): You\'re trying to inject DOM property \'%s\' which has already been injected. You may be accidentally injecting the same DOM property config twice, or you may be injecting two configs that have conflicting property names.', propName) : _prodInvariant('48', propName) : void 0;
+
+      var lowerCased = propName.toLowerCase();
+      var propConfig = Properties[propName];
+
+      var propertyInfo = {
+        attributeName: lowerCased,
+        attributeNamespace: null,
+        propertyName: propName,
+        mutationMethod: null,
+
+        mustUseProperty: checkMask(propConfig, Injection.MUST_USE_PROPERTY),
+        hasBooleanValue: checkMask(propConfig, Injection.HAS_BOOLEAN_VALUE),
+        hasNumericValue: checkMask(propConfig, Injection.HAS_NUMERIC_VALUE),
+        hasPositiveNumericValue: checkMask(propConfig, Injection.HAS_POSITIVE_NUMERIC_VALUE),
+        hasOverloadedBooleanValue: checkMask(propConfig, Injection.HAS_OVERLOADED_BOOLEAN_VALUE)
+      };
+      !(propertyInfo.hasBooleanValue + propertyInfo.hasNumericValue + propertyInfo.hasOverloadedBooleanValue <= 1) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'DOMProperty: Value can be one of boolean, overloaded boolean, or numeric value, but not a combination: %s', propName) : _prodInvariant('50', propName) : void 0;
+
+      if (process.env.NODE_ENV !== 'production') {
+        DOMProperty.getPossibleStandardName[lowerCased] = propName;
+      }
+
+      if (DOMAttributeNames.hasOwnProperty(propName)) {
+        var attributeName = DOMAttributeNames[propName];
+        propertyInfo.attributeName = attributeName;
+        if (process.env.NODE_ENV !== 'production') {
+          DOMProperty.getPossibleStandardName[attributeName] = propName;
+        }
+      }
+
+      if (DOMAttributeNamespaces.hasOwnProperty(propName)) {
+        propertyInfo.attributeNamespace = DOMAttributeNamespaces[propName];
+      }
+
+      if (DOMPropertyNames.hasOwnProperty(propName)) {
+        propertyInfo.propertyName = DOMPropertyNames[propName];
+      }
+
+      if (DOMMutationMethods.hasOwnProperty(propName)) {
+        propertyInfo.mutationMethod = DOMMutationMethods[propName];
+      }
+
+      DOMProperty.properties[propName] = propertyInfo;
+    }
+  }
+};
+
+/* eslint-disable max-len */
+var ATTRIBUTE_NAME_START_CHAR = ':A-Z_a-z\\u00C0-\\u00D6\\u00D8-\\u00F6\\u00F8-\\u02FF\\u0370-\\u037D\\u037F-\\u1FFF\\u200C-\\u200D\\u2070-\\u218F\\u2C00-\\u2FEF\\u3001-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFFD';
+/* eslint-enable max-len */
+
+/**
+ * DOMProperty exports lookup objects that can be used like functions:
+ *
+ *   > DOMProperty.isValid['id']
+ *   true
+ *   > DOMProperty.isValid['foobar']
+ *   undefined
+ *
+ * Although this may be confusing, it performs better in general.
+ *
+ * @see http://jsperf.com/key-exists
+ * @see http://jsperf.com/key-missing
+ */
+var DOMProperty = {
+
+  ID_ATTRIBUTE_NAME: 'data-reactid',
+  ROOT_ATTRIBUTE_NAME: 'data-reactroot',
+
+  ATTRIBUTE_NAME_START_CHAR: ATTRIBUTE_NAME_START_CHAR,
+  ATTRIBUTE_NAME_CHAR: ATTRIBUTE_NAME_START_CHAR + '\\-.0-9\\u00B7\\u0300-\\u036F\\u203F-\\u2040',
+
+  /**
+   * Map from property "standard name" to an object with info about how to set
+   * the property in the DOM. Each object contains:
+   *
+   * attributeName:
+   *   Used when rendering markup or with `*Attribute()`.
+   * attributeNamespace
+   * propertyName:
+   *   Used on DOM node instances. (This includes properties that mutate due to
+   *   external factors.)
+   * mutationMethod:
+   *   If non-null, used instead of the property or `setAttribute()` after
+   *   initial render.
+   * mustUseProperty:
+   *   Whether the property must be accessed and mutated as an object property.
+   * hasBooleanValue:
+   *   Whether the property should be removed when set to a falsey value.
+   * hasNumericValue:
+   *   Whether the property must be numeric or parse as a numeric and should be
+   *   removed when set to a falsey value.
+   * hasPositiveNumericValue:
+   *   Whether the property must be positive numeric or parse as a positive
+   *   numeric and should be removed when set to a falsey value.
+   * hasOverloadedBooleanValue:
+   *   Whether the property can be used as a flag as well as with a value.
+   *   Removed when strictly equal to false; present without a value when
+   *   strictly equal to true; present with a value otherwise.
+   */
+  properties: {},
+
+  /**
+   * Mapping from lowercase property names to the properly cased version, used
+   * to warn in the case of missing properties. Available only in __DEV__.
+   *
+   * autofocus is predefined, because adding it to the property whitelist
+   * causes unintended side effects.
+   *
+   * @type {Object}
+   */
+  getPossibleStandardName: process.env.NODE_ENV !== 'production' ? { autofocus: 'autoFocus' } : null,
+
+  /**
+   * All of the isCustomAttribute() functions that have been injected.
+   */
+  _isCustomAttributeFunctions: [],
+
+  /**
+   * Checks whether a property name is a custom attribute.
+   * @method
+   */
+  isCustomAttribute: function (attributeName) {
+    for (var i = 0; i < DOMProperty._isCustomAttributeFunctions.length; i++) {
+      var isCustomAttributeFn = DOMProperty._isCustomAttributeFunctions[i];
+      if (isCustomAttributeFn(attributeName)) {
+        return true;
+      }
+    }
+    return false;
+  },
+
+  injection: DOMPropertyInjection
+};
+
+module.exports = DOMProperty;
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
 /* 20 */
@@ -8330,7 +8332,7 @@ module.exports = ReactInstanceMap;
 
 
 
-var SyntheticEvent = __webpack_require__(17);
+var SyntheticEvent = __webpack_require__(18);
 
 var getEventTarget = __webpack_require__(58);
 
@@ -25066,7 +25068,7 @@ module.exports = PooledClass.addPoolingTo(CallbackQueue);
 
 
 
-var DOMProperty = __webpack_require__(18);
+var DOMProperty = __webpack_require__(19);
 var ReactDOMComponentTree = __webpack_require__(7);
 var ReactInstrumentation = __webpack_require__(13);
 
@@ -25806,7 +25808,7 @@ module.exports = ReactInputSelection;
 var _prodInvariant = __webpack_require__(4);
 
 var DOMLazyTree = __webpack_require__(23);
-var DOMProperty = __webpack_require__(18);
+var DOMProperty = __webpack_require__(19);
 var React = __webpack_require__(25);
 var ReactBrowserEventEmitter = __webpack_require__(33);
 var ReactCurrentOwner = __webpack_require__(15);
@@ -28202,13 +28204,13 @@ var _Title = __webpack_require__(253);
 
 var _Title2 = _interopRequireDefault(_Title);
 
-var _Statistics = __webpack_require__(248);
-
-var _Statistics2 = _interopRequireDefault(_Statistics);
-
 var _HttpList = __webpack_require__(247);
 
 var _HttpList2 = _interopRequireDefault(_HttpList);
+
+var _Statistics = __webpack_require__(248);
+
+var _Statistics2 = _interopRequireDefault(_Statistics);
 
 var _components = __webpack_require__(9);
 
@@ -28258,7 +28260,17 @@ var App = (0, _radium2.default)(_class = function (_Component) {
     _createClass(App, [{
         key: 'render',
         value: function render() {
-            return _react2.default.createElement('div', { style: _components.regularText }, _react2.default.createElement(_Title2.default, { loadHarContent: this.props.getHarActions.loadHarContent }), _react2.default.createElement(_Statistics2.default, { statistics: this.props.statistics }), _react2.default.createElement(_HttpList2.default, { entries: this.props.entries, pages: this.props.pages, maxTime: this.props.maxTime, dataLoad: this.props.isDataLoad }));
+            var _this2 = this;
+
+            return _react2.default.createElement('div', { style: _components.regularText }, _react2.default.createElement(_Title2.default, { loadHarContent: this.props.getHarActions.loadHarContent }), _react2.default.createElement(_Statistics2.default, { statistics: this.props.statistics, pages: this.props.pages }), _react2.default.createElement('div', { style: { overflow: 'auto' } }, !this.props.isDataLoad || _react2.default.createElement('div', { style: _components.chapterTitle }, 'PAGES'), this.props.pages.map(function (page, number) {
+                return _react2.default.createElement(_HttpList2.default, {
+                    entries: _this2.props.entries[number],
+                    page: page,
+                    maxTime: _this2.props.maxTimes[number],
+                    dataLoad: _this2.props.isDataLoad,
+                    number: number
+                });
+            })));
         }
     }]);
 
@@ -28271,7 +28283,7 @@ function stateToComponent(state) {
         pages: state.pages,
         isDataLoad: state.isDataLoad,
         statistics: state.statistics,
-        maxTime: state.maxTime
+        maxTimes: state.maxTimes
     };
 }
 
@@ -28349,8 +28361,6 @@ function loadHarContent(event) {
         var reader = new FileReader();
         reader.onload = function () {
             var data = JSON.parse(reader.result);
-            var statistics = getStatistics(data.log.entries);
-            data.log.statistics = statistics;
             dispatch({
                 type: _Constants.LOAD_HAR_SUCCESS,
                 payload: data.log
@@ -28358,59 +28368,6 @@ function loadHarContent(event) {
         };
         reader.readAsText(input.files[0]);
     };
-}
-
-function getStatistics(entries) {
-    var responseContent = {
-        image: 0,
-        css: 0,
-        html: 0,
-        javascript: 0,
-        others: 0
-    };
-    var timing = {
-        blocked: 0,
-        dns: 0,
-        ssl: 0,
-        connect: 0,
-        send: 0,
-        wait: 0,
-        receive: 0
-    };
-    var headBody = {
-        headSend: 0,
-        bodySend: 0,
-        headReceive: 0,
-        bodyReceive: 0
-    };
-    var statistics = {
-        responseContent: responseContent,
-        timing: timing,
-        headBody: headBody
-    };
-    entries.forEach(function (entrie) {
-        var mimeType = entrie.response.content.mimeType;
-        var size = entrie.response.content.size;
-        if (mimeType.match('html')) responseContent.html += size;else if (mimeType.match('css')) responseContent.css += size;else if (mimeType.match('image')) responseContent.image += size;else if (mimeType.match('javascript')) responseContent.javascript += size;else responseContent.others += size;
-    });
-
-    entries.forEach(function (entrie) {
-        if (entrie.timings.blocked >= 0) timing.blocked += Math.round(entrie.timings.blocked);
-        if (entrie.timings.dns >= 0) timing.dns += Math.round(entrie.timings.dns);
-        if (entrie.timings.ssl >= 0) timing.ssl += Math.round(entrie.timings.ssl);
-        if (entrie.timings.connect >= 0) timing.connect += Math.round(entrie.timings.connect);
-        if (entrie.timings.send >= 0) timing.send += Math.round(entrie.timings.send);
-        if (entrie.timings.wait >= 0) timing.wait += Math.round(entrie.timings.wait);
-        if (entrie.timings.receive >= 0) timing.receive += Math.round(entrie.timings.receive);
-    });
-
-    entries.forEach(function (entrie) {
-        if (entrie.request.bodySize >= 0) headBody.bodySend += entrie.request.bodySize;
-        if (entrie.request.headersSize >= 0) headBody.headSend += entrie.request.headersSize;
-        if (entrie.response.bodySize >= 0) headBody.bodyReceive += entrie.response.bodySize;
-        if (entrie.response.headersSize >= 0) headBody.headReceive += entrie.response.headersSize;
-    });
-    return statistics;
 }
 
 /***/ }),
@@ -28505,11 +28462,11 @@ var HttpInfo = (0, _radium2.default)(_class = function (_Component) {
             var _this2 = this;
 
             var color = 'white';
-            if (this.props.number % 2 == 0) {
-                color = '#dfdfdf';
+            if (this.props.number % 2 != 0) {
+                color = '#f8f8ff';
             }
             var backgroundStyle = { backgroundColor: color };
-            return _react2.default.createElement('div', { className: 'col-md-12' }, _react2.default.createElement('div', { className: 'row', style: backgroundStyle, onClick: this.onBtnClick.bind(this) }, _react2.default.createElement('div', { className: 'col-md-1', style: _components.xxSmallBlock }, this.props.number + 1), _react2.default.createElement('div', { className: 'col-md-2', style: [_components.xMedeumBlock, { overflowX: 'hidden', whiteSpace: 'nowrap' }] }, _react2.default.createElement('a', {
+            return _react2.default.createElement('div', { className: 'col-md-12' }, _react2.default.createElement('hr', { style: { margin: 0, width: '100%' } }), _react2.default.createElement('div', { className: 'row', style: [backgroundStyle], onClick: this.onBtnClick.bind(this) }, _react2.default.createElement('div', { className: 'col-md-1', style: _components.xxSmallBlock }, this.props.number + 1), _react2.default.createElement('div', { className: 'col-md-2', style: [_components.xMedeumBlock, { overflowX: 'hidden', whiteSpace: 'nowrap' }] }, _react2.default.createElement('a', {
                 href: '#' }, this.props.title)), _react2.default.createElement('div', { className: 'col-md-1', style: _components.xSmallBlock }, this.props.reqMethod), _react2.default.createElement('div', { className: 'col-md-1', style: _components.xSmallBlock }, this.props.resStatus), _react2.default.createElement('div', { className: 'col-md-1', style: _components.xSmallBlock }, function () {
                 if (_this2.props.reqSize <= 0) {
                     return '-';
@@ -28694,7 +28651,7 @@ var _radium2 = _interopRequireDefault(_radium);
 
 var _components = __webpack_require__(9);
 
-var _style = __webpack_require__(19);
+var _style = __webpack_require__(16);
 
 function _interopRequireDefault(obj) {
     return obj && obj.__esModule ? obj : { default: obj };
@@ -28793,7 +28750,7 @@ var _radium2 = _interopRequireDefault(_radium);
 
 var _components = __webpack_require__(9);
 
-var _style = __webpack_require__(19);
+var _style = __webpack_require__(16);
 
 function _interopRequireDefault(obj) {
     return obj && obj.__esModule ? obj : { default: obj };
@@ -28876,7 +28833,7 @@ var _radium2 = _interopRequireDefault(_radium);
 
 var _components = __webpack_require__(9);
 
-var _style = __webpack_require__(19);
+var _style = __webpack_require__(16);
 
 function _interopRequireDefault(obj) {
     return obj && obj.__esModule ? obj : { default: obj };
@@ -28960,7 +28917,7 @@ var _radium2 = _interopRequireDefault(_radium);
 
 var _components = __webpack_require__(9);
 
-var _style = __webpack_require__(19);
+var _style = __webpack_require__(16);
 
 function _interopRequireDefault(obj) {
     return obj && obj.__esModule ? obj : { default: obj };
@@ -29073,10 +29030,16 @@ var HttpInfoTimeLine = (0, _radium2.default)(_class = function (_Component) {
     function HttpInfoTimeLine(props) {
         _classCallCheck(this, HttpInfoTimeLine);
 
+        var totalTime = props.page.pageTimings.onLoad;
+        var maxTime = props.maxTime;
+        if (totalTime > maxTime) {
+            maxTime = totalTime;
+        }
+
         var _this = _possibleConstructorReturn(this, (HttpInfoTimeLine.__proto__ || Object.getPrototypeOf(HttpInfoTimeLine)).call(this, props));
 
         _this.state = {
-            totalTime: props.page.pageTimings.onLoad,
+            totalTime: totalTime,
             contentLoadTime: props.page.pageTimings.onContentLoad,
             totalReqTime: props.entrie.time,
             startTime: Date.parse(props.entrie.startedDateTime) - Date.parse(props.page.startedDateTime),
@@ -29088,7 +29051,7 @@ var HttpInfoTimeLine = (0, _radium2.default)(_class = function (_Component) {
             receiveTime: props.entrie.timings.receive,
             sslTime: props.entrie.timings.ssl,
             showToolTip: false,
-            maxTime: props.maxTime
+            maxTime: maxTime
         };
         return _this;
     }
@@ -29096,8 +29059,13 @@ var HttpInfoTimeLine = (0, _radium2.default)(_class = function (_Component) {
     _createClass(HttpInfoTimeLine, [{
         key: 'componentWillReceiveProps',
         value: function componentWillReceiveProps(props) {
+            var totalTime = props.page.pageTimings.onLoad;
+            var maxTime = props.maxTime;
+            if (totalTime > maxTime) {
+                maxTime = totalTime;
+            }
             this.setState({
-                totalTime: props.page.pageTimings.onLoad,
+                totalTime: totalTime,
                 contentLoadTime: props.page.pageTimings.onContentLoad,
                 totalReqTime: props.entrie.time,
                 startTime: Date.parse(props.entrie.startedDateTime) - Date.parse(props.page.startedDateTime),
@@ -29108,7 +29076,7 @@ var HttpInfoTimeLine = (0, _radium2.default)(_class = function (_Component) {
                 waitTime: props.entrie.timings.wait,
                 receiveTime: props.entrie.timings.receive,
                 sslTime: props.entrie.timings.ssl,
-                maxTime: props.maxTime
+                maxTime: maxTime
             });
         }
     }, {
@@ -29159,9 +29127,10 @@ var HttpInfoTimeLine = (0, _radium2.default)(_class = function (_Component) {
             var receiveStyle = { width: Math.abs(this.state.receiveTime / this.state.totalReqTime) * relativeReqTime + '%' };
             var contentLoadStyle = { left: this.state.contentLoadTime / this.state.maxTime * 100 + '%' };
             var sslStyle = { width: Math.abs(this.state.sslTime / this.state.totalReqTime) * relativeReqTime + '%' };
+
             var pageLoadStyle = { left: this.state.totalTime / this.state.maxTime * 100 + '%' };
             return _react2.default.createElement('div', { style: _components.timeLine, onMouseOver: this.showToolTip.bind(this), onMouseOut: this.hideToolTip.bind(this),
-                onMouseMove: this.posToolTip.bind(this) }, _react2.default.createElement('div', { style: [startStyle] }), _react2.default.createElement('div', { style: [blockStyle, _components.blockTime] }), _react2.default.createElement('div', { style: [connectStyle, _components.connectTime] }), _react2.default.createElement('div', { style: [dnsStyle, _components.dnsTime] }), _react2.default.createElement('div', { style: [receiveStyle, _components.receiveTime] }), _react2.default.createElement('div', { style: [sendStyle, _components.sendTime] }), _react2.default.createElement('div', { style: [sslStyle, _components.sslTime] }), _react2.default.createElement('div', { style: [waitStyle, _components.waitTime] }), _react2.default.createElement('div', { style: [contentLoadStyle, _components.contentLoad] }), _react2.default.createElement('div', { style: [_components.pageLoad, pageLoadStyle] }), !this.state.showToolTip || _react2.default.createElement(_TimeLineToolTip2.default, { data: this.state, position: this.state.toolTipPos }));
+                onMouseMove: this.posToolTip.bind(this) }, _react2.default.createElement('div', { style: [startStyle, _components.startTime] }), _react2.default.createElement('div', { style: [blockStyle, _components.blockTime] }), _react2.default.createElement('div', { style: [dnsStyle, _components.dnsTime] }), _react2.default.createElement('div', { style: [connectStyle, _components.connectTime] }), _react2.default.createElement('div', { style: [sslStyle, _components.sslTime] }), _react2.default.createElement('div', { style: [sendStyle, _components.sendTime] }), _react2.default.createElement('div', { style: [waitStyle, _components.waitTime] }), _react2.default.createElement('div', { style: [receiveStyle, _components.receiveTime] }), _react2.default.createElement('div', null, Math.round(this.state.totalReqTime * 10) / 10, 'ms'), _react2.default.createElement('div', { style: [contentLoadStyle, _components.contentLoad] }), _react2.default.createElement('div', { style: [_components.pageLoad, pageLoadStyle] }), !this.state.showToolTip || _react2.default.createElement(_TimeLineToolTip2.default, { data: this.state, position: this.state.toolTipPos }));
         }
     }]);
 
@@ -29210,7 +29179,7 @@ var _HttpInfo2 = _interopRequireDefault(_HttpInfo);
 
 var _components = __webpack_require__(9);
 
-var _style = __webpack_require__(19);
+var _style = __webpack_require__(16);
 
 function _interopRequireDefault(obj) {
     return obj && obj.__esModule ? obj : { default: obj };
@@ -29237,28 +29206,53 @@ function _inherits(subClass, superClass) {
 var HttpList = (0, _radium2.default)(_class = function (_Component) {
     _inherits(HttpList, _Component);
 
-    function HttpList() {
+    function HttpList(props) {
         _classCallCheck(this, HttpList);
 
-        return _possibleConstructorReturn(this, (HttpList.__proto__ || Object.getPrototypeOf(HttpList)).apply(this, arguments));
+        var _this = _possibleConstructorReturn(this, (HttpList.__proto__ || Object.getPrototypeOf(HttpList)).call(this, props));
+
+        _this.state = { show: false };
+        return _this;
     }
 
     _createClass(HttpList, [{
+        key: 'onBtnClick',
+        value: function onBtnClick(e) {
+            e.preventDefault();
+            this.setState({
+                show: !this.state.show
+            });
+        }
+    }, {
+        key: 'hightLightRow',
+        value: function hightLightRow(e) {
+            e.preventDefault();
+            this.setState({
+                color: '#dfdfdf'
+            });
+        }
+    }, {
         key: 'render',
         value: function render() {
             var _this2 = this;
 
-            console.log('Entries');
-            console.log(this.props.entries);
-            console.log('Page info');
-            console.log(this.props.pages);
-            console.log('Max time');
-            console.log(this.props.maxTime);
-            console.log(this.props.dataLoad);
-            return _react2.default.createElement('div', { className: 'row',
-                style: { minHeight: '200px', borderStyle: 'solid', borderWidth: '1px', borderColor: '#c6c6c6' } }, _react2.default.createElement('div', { style: { height: '32px', backgroundColor: '#c6c6c6' } }, _react2.default.createElement('div', { className: 'col-md-1', style: [_components.xxSmallBlock, _components.regularTitle] }, '#'), _react2.default.createElement('div', { className: 'col-md-2', style: [_components.xMedeumBlock, _components.regularTitle] }, 'Title'), _react2.default.createElement('div', { className: 'col-md-1', style: [_components.xSmallBlock, _components.regularTitle] }, 'Method'), _react2.default.createElement('div', { className: 'col-md-1', style: [_components.xSmallBlock, _components.regularTitle] }, 'Status'), _react2.default.createElement('div', { className: 'col-md-1', style: [_components.xSmallBlock, _components.regularTitle] }, 'Req size'), _react2.default.createElement('div', { className: 'col-md-1', style: [_components.xSmallBlock, _components.regularTitle] }, 'Res size'), _react2.default.createElement('div', { className: 'col-md-1', style: [_components.xSmallBlock, _components.regularTitle] }, 'Total time'), _react2.default.createElement('div', { className: 'col-md-4', style: [_components.xLargeBlock, _components.regularTitle] }, 'Time line')), this.props.dataLoad || _react2.default.createElement('div', { className: 'col-md-12', style: [_components.center, _style.blockSpacing.five, _components.chapterTitle] }, 'No info'), this.props.entries.map(function (entrie, number) {
+            var color = 'white';
+
+            if (this.props.number % 2 != 0) {
+                color = '#f8f8ff';
+            }
+            var backgroundStyle = { backgroundColor: color };
+            return _react2.default.createElement('div', null, _react2.default.createElement('hr', { style: { margin: 0 } }), _react2.default.createElement('a', { href: '#', style: { textDecoration: 'none' } }, _react2.default.createElement('div', { style: [_components.chapterTitle, _components.left, backgroundStyle],
+                onClick: this.onBtnClick.bind(this) }, this.props.page.title)), _react2.default.createElement('hr', { style: { margin: 0 } }), !this.state.show || _react2.default.createElement('div', { className: 'row',
+                style: {
+                    minHeight: '200px',
+                    borderStyle: 'solid',
+                    borderWidth: '1px',
+                    borderColor: '#c6c6c6',
+                    margin: 0
+                } }, _react2.default.createElement('div', { style: { height: '32px', backgroundColor: '#c6c6c6' } }, _react2.default.createElement('div', { className: 'col-md-1', style: [_components.xxSmallBlock, _components.regularTitle] }, '#'), _react2.default.createElement('div', { className: 'col-md-2', style: [_components.xMedeumBlock, _components.regularTitle] }, 'Title'), _react2.default.createElement('div', { className: 'col-md-1', style: [_components.xSmallBlock, _components.regularTitle] }, 'Method'), _react2.default.createElement('div', { className: 'col-md-1', style: [_components.xSmallBlock, _components.regularTitle] }, 'Status'), _react2.default.createElement('div', { className: 'col-md-1', style: [_components.xSmallBlock, _components.regularTitle] }, 'Req size'), _react2.default.createElement('div', { className: 'col-md-1', style: [_components.xSmallBlock, _components.regularTitle] }, 'Res size'), _react2.default.createElement('div', { className: 'col-md-1', style: [_components.xSmallBlock, _components.regularTitle] }, 'Total time'), _react2.default.createElement('div', { className: 'col-md-4', style: [_components.xLargeBlock, _components.regularTitle] }, 'Time line')), this.props.entries.map(function (entrie, number) {
                 return _react2.default.createElement(_HttpInfo2.default, {
-                    page: _this2.props.pages[0],
+                    page: _this2.props.page,
                     number: number,
                     entrie: entrie,
                     time: entrie.startedDateTime,
@@ -29270,7 +29264,7 @@ var HttpList = (0, _radium2.default)(_class = function (_Component) {
                     totalTime: entrie.time,
                     maxTime: _this2.props.maxTime
                 });
-            }));
+            })));
         }
     }]);
 
@@ -29315,6 +29309,8 @@ var _radium2 = _interopRequireDefault(_radium);
 
 var _components = __webpack_require__(9);
 
+var _style = __webpack_require__(16);
+
 var _StatisticsResponseContent = __webpack_require__(250);
 
 var _StatisticsResponseContent2 = _interopRequireDefault(_StatisticsResponseContent);
@@ -29357,21 +29353,45 @@ var Statistics = (0, _radium2.default)(_class = function (_Component) {
 
         var _this = _possibleConstructorReturn(this, (Statistics.__proto__ || Object.getPrototypeOf(Statistics)).call(this, props));
 
-        _this.state = { show: false };
+        _this.state = {
+            show: false,
+            showPage: [false, false, false]
+        };
         return _this;
     }
 
     _createClass(Statistics, [{
         key: 'showHideStatistics',
         value: function showHideStatistics() {
+
             this.setState({
                 show: !this.state.show
             });
         }
     }, {
+        key: 'showHidePageStatistics',
+        value: function showHidePageStatistics(number) {
+            var showPage = this.state.showPage;
+            showPage[number] = !showPage[number];
+            this.setState({
+                showPage: showPage
+            });
+        }
+    }, {
         key: 'render',
         value: function render() {
-            return _react2.default.createElement('div', { style: _components.center }, _react2.default.createElement('button', { style: _components.defaultButton, onClick: this.showHideStatistics.bind(this) }, 'Get statistics'), !this.state.show || _react2.default.createElement('div', { className: 'row' }, _react2.default.createElement('div', { className: 'col-md-4', style: _components.chapterTitle }, _react2.default.createElement('div', null, 'Response content statistics'), _react2.default.createElement(_StatisticsResponseContent2.default, { data: this.props.statistics.responseContent })), _react2.default.createElement('div', { className: 'col-md-4', style: _components.chapterTitle }, _react2.default.createElement('div', null, 'Time statistics'), _react2.default.createElement(_StatisticsTiming2.default, { data: this.props.statistics.timing })), _react2.default.createElement('div', { className: 'col-md-4', style: _components.chapterTitle }, _react2.default.createElement('div', null, 'Head/body statistics'), _react2.default.createElement(_StatisticsHeaderBodySendReceive2.default, { data: this.props.statistics.headBody }))));
+            var _this2 = this;
+
+            return _react2.default.createElement('div', { style: _components.left }, _react2.default.createElement('a', { href: '#', onClick: this.showHideStatistics.bind(this), style: { decoration: 'none' } }, _react2.default.createElement('div', { style: [_components.defaultButton, { position: 'absolute', top: 0, left: '150px', borderWidth: '1px' }]
+            }, 'Show/hide statistics')), !this.state.show || _react2.default.createElement('div', { style: _components.chapterTitle }, 'STATISTICS'), !this.state.show || this.props.statistics.map(function (statistic, number) {
+                var color = 'white';
+                if (number % 2 != 0) {
+                    color = '#f8f8ff';
+                }
+                var backgroundStyle = { backgroundColor: color };
+                return _react2.default.createElement('div', null, _react2.default.createElement('hr', { style: { margin: 0 } }), _react2.default.createElement('a', { href: '#', style: { textDecoration: 'none' } }, _react2.default.createElement('div', { style: [_components.chapterTitle, _components.left, backgroundStyle],
+                    onClick: _this2.showHidePageStatistics.bind(_this2, number) }, _this2.props.pages[number].title)), _react2.default.createElement('hr', { style: { margin: 0 } }), !_this2.state.showPage[number] || _react2.default.createElement('div', { className: 'row', style: { margin: 0 } }, _react2.default.createElement('div', { style: _components.chapterTitle }, _this2.props.pages[number].title), _react2.default.createElement('div', { className: 'col-md-4', style: _components.regularTitle }, _react2.default.createElement('div', null, 'Response content statistics'), _react2.default.createElement(_StatisticsResponseContent2.default, { data: statistic.responseContent, number: number })), _react2.default.createElement('div', { className: 'col-md-4', style: _components.regularTitle }, _react2.default.createElement('div', null, 'Time statistics'), _react2.default.createElement(_StatisticsTiming2.default, { data: statistic.timing, number: number })), _react2.default.createElement('div', { className: 'col-md-4', style: _components.regularTitle }, _react2.default.createElement('div', null, 'Head/body statistics'), _react2.default.createElement(_StatisticsHeaderBodySendReceive2.default, { data: statistic.headBody, number: number }))));
+            }));
         }
     }]);
 
@@ -29459,12 +29479,13 @@ var StatisticsHeaderBodySendReceive = (0, _radium2.default)(_class = function (_
     }, {
         key: 'buildPieChart',
         value: function buildPieChart(props) {
-            _chart2.default.defaults.global.defaultFontSize = 15;
+            _chart2.default.defaults.global.defaultFontSize = 11;
             var dataSet = props.data;
-            var ctx = document.getElementById("headBodyPie");
+            var id = "headBodyPie" + this.props.number;
+            var ctx = document.getElementById(id);
 
             var data = {
-                labels: ["Bodies send", "Headers send", "Bodies receive", "Headers receive"],
+                labels: ["Bod/send", "Head/send", "Bod/receive", "Head/receive"],
                 datasets: [{
                     data: [dataSet.bodySend, dataSet.headSend, dataSet.bodyReceive, dataSet.headReceive],
                     backgroundColor: ["#FF6384", "#4BC0C0", "#FFCE56", "#E7E9ED"],
@@ -29478,6 +29499,15 @@ var StatisticsHeaderBodySendReceive = (0, _radium2.default)(_class = function (_
                     responsive: false,
                     animation: {
                         animateScale: true
+                    },
+                    legend: {
+                        display: true,
+                        position: 'right',
+                        labels: {
+                            boxWidth: 10,
+                            padding: 5
+                        }
+
                     }
                 }
             });
@@ -29485,7 +29515,7 @@ var StatisticsHeaderBodySendReceive = (0, _radium2.default)(_class = function (_
     }, {
         key: 'render',
         value: function render() {
-            return _react2.default.createElement('canvas', { style: { margin: '0 auto' }, id: 'headBodyPie' }, ' ');
+            return _react2.default.createElement('canvas', { style: { margin: '0 auto', height: '230px', width: '230px' }, id: "headBodyPie" + this.props.number }, ' ');
         }
     }]);
 
@@ -29573,9 +29603,10 @@ var StatisticsResponseContent = (0, _radium2.default)(_class = function (_Compon
     }, {
         key: 'buildPieChart',
         value: function buildPieChart(props) {
-            _chart2.default.defaults.global.defaultFontSize = 15;
+            _chart2.default.defaults.global.defaultFontSize = 11;
             var dataSet = props.data;
-            var ctx = document.getElementById("receiveContentPie");
+            var id = "receiveContentPie" + this.props.number;
+            var ctx = document.getElementById(id);
 
             var data = {
                 labels: ["Image", "CSS", "Html", "Javascript", "Others"],
@@ -29592,6 +29623,15 @@ var StatisticsResponseContent = (0, _radium2.default)(_class = function (_Compon
                     responsive: false,
                     animation: {
                         animateScale: true
+                    },
+                    legend: {
+                        display: true,
+                        position: 'right',
+                        labels: {
+                            boxWidth: 10,
+                            padding: 5
+                        }
+
                     }
                 }
             });
@@ -29599,7 +29639,7 @@ var StatisticsResponseContent = (0, _radium2.default)(_class = function (_Compon
     }, {
         key: 'render',
         value: function render() {
-            return _react2.default.createElement('canvas', { style: { margin: '0 auto' }, id: 'receiveContentPie' }, ' ');
+            return _react2.default.createElement('canvas', { style: { margin: '0 auto', height: '230px', width: '230px' }, id: "receiveContentPie" + this.props.number }, ' ');
         }
     }]);
 
@@ -29687,15 +29727,16 @@ var StatisticsTiming = (0, _radium2.default)(_class = function (_Component) {
     }, {
         key: 'buildPieChart',
         value: function buildPieChart(props) {
-            _chart2.default.defaults.global.defaultFontSize = 15;
+            _chart2.default.defaults.global.defaultFontSize = 11;
             var dataSet = props.data;
-            var ctx = document.getElementById("timingPie");
+            var id = 'timingPie' + this.props.number;
+            var ctx = document.getElementById(id);
 
             var data = {
                 labels: ["Blocked", "Connect", "DNS", "Receive", "Send", "SSL", "Wait"],
                 datasets: [{
-                    data: [dataSet.blocked, dataSet.dns, dataSet.ssl, dataSet.connect, dataSet.send, dataSet.wait, dataSet.receive],
-                    backgroundColor: ["#FF6384", "#4BC0C0", "#FFCE56", "#E7E9ED", "#36A2EB", "#f46133", "#7ceb59"],
+                    data: [dataSet.blocked, dataSet.connect, dataSet.dns, dataSet.receive, dataSet.send, dataSet.ssl, dataSet.wait],
+                    backgroundColor: ["#ff0024", "#4BC0C0", "#FFCE56", "#3ce200", "#36A2EB", "#f46133", "#bf00ff"],
                     hoverBackgroundColor: ["#FF6384", "#4BC0C0", "#FFCE56", "#E7E9ED", "#36A2EB", "#f46133", "#7ceb59"]
                 }]
             };
@@ -29706,6 +29747,15 @@ var StatisticsTiming = (0, _radium2.default)(_class = function (_Component) {
                     responsive: false,
                     animation: {
                         animateScale: true
+                    },
+                    legend: {
+                        display: true,
+                        position: 'right',
+                        labels: {
+                            boxWidth: 10,
+                            padding: 5
+                        }
+
                     }
                 }
             });
@@ -29713,8 +29763,7 @@ var StatisticsTiming = (0, _radium2.default)(_class = function (_Component) {
     }, {
         key: 'render',
         value: function render() {
-            console.log(_components.canvas);
-            return _react2.default.createElement('canvas', { style: { margin: '0 auto' }, id: 'timingPie' });
+            return _react2.default.createElement('canvas', { style: { margin: '0 auto', height: '200px', width: '200px' }, id: "timingPie" + this.props.number }, ' ');
         }
     }]);
 
@@ -29759,7 +29808,7 @@ var _radium2 = _interopRequireDefault(_radium);
 
 var _components = __webpack_require__(9);
 
-var _style = __webpack_require__(19);
+var _style = __webpack_require__(16);
 
 function _interopRequireDefault(obj) {
     return obj && obj.__esModule ? obj : { default: obj };
@@ -29804,10 +29853,17 @@ var TimeLineToolTip = (0, _radium2.default)(_class = function (_Component) {
                 }
             }
 
+            var top = 0;
+            var left = 0;
+
+            if (this.props.position) {
+                top = this.props.position.y + 'px';
+                left = this.props.position.x + 20 + 'px';
+            }
             var pos = {
                 position: 'fixed',
-                top: this.props.position.y + 'px',
-                left: this.props.position.x + 20 + 'px',
+                top: top,
+                left: left,
                 zIndex: 99999,
                 backgroundColor: 'white',
                 minWidth: '440px'
@@ -29821,14 +29877,14 @@ var TimeLineToolTip = (0, _radium2.default)(_class = function (_Component) {
             var sslTimeVal = isNegative(this.props.data.sslTime);
             var waitTimeVal = isNegative(this.props.data.waitTime);
 
-            var connectRelativeToReq = Math.round(blockTimeVal * 100) / 100;
-            var dnsRelativeToReq = Math.round((connectRelativeToReq + connectTimeVal) * 100) / 100;
-            var receiveRelativeToReq = Math.round((dnsRelativeToReq + dnsTimeVal) * 100) / 100;
-            var sendRelativeToReq = Math.round((receiveRelativeToReq + receiveTimeVal) * 100) / 100;
-            var sslRelativeToReq = Math.round((sendRelativeToReq + sendTimeVal) * 100) / 100;
-            var waitRelativeToReq = Math.round((sslRelativeToReq + sslTimeVal) * 100) / 100;
+            var dnsRelativeToReq = Math.round(blockTimeVal * 100) / 100;
+            var connectRelativeToReq = Math.round((dnsRelativeToReq + dnsTimeVal) * 100) / 100;
+            var sslRelativeToReq = Math.round((connectRelativeToReq + connectTimeVal) * 100) / 100;
+            var sendRelativeToReq = Math.round((sslRelativeToReq + sslTimeVal) * 100) / 100;
+            var waitRelativeToReq = Math.round((sendRelativeToReq + sendTimeVal) * 100) / 100;
+            var receiveRelativeToReq = Math.round((waitRelativeToReq + waitTimeVal) * 100) / 100;
 
-            return _react2.default.createElement('div', { style: [pos, _style.elementSpacing.two, _style.shadows.one, _style.borderRadii.two] }, _react2.default.createElement('div', { className: 'row' }, _react2.default.createElement('div', { className: 'col-md-2' }, '+', Math.round(this.props.data.startTime), 'ms'), _react2.default.createElement('div', { className: 'col-md-10' }, 'Request start time since the beginning')), _react2.default.createElement('hr', { style: _style.blockSpacing.one }), _react2.default.createElement('div', { style: _components.regularTitle }, 'Request phases start and elapsed time relative to the request status:'), _react2.default.createElement('hr', { style: _style.blockSpacing.one }), _react2.default.createElement('div', { className: 'row' }, _react2.default.createElement('div', { className: 'col-md-1' }, _react2.default.createElement('div', { style: [_components.blockTime] })), _react2.default.createElement('div', { className: 'col-md-1' }, '0ms'), _react2.default.createElement('div', { className: 'col-md-1' }), _react2.default.createElement('div', { className: 'col-md-5' }, blockTimeVal, 'ms'), _react2.default.createElement('div', { className: 'col-md-3' }, 'Blocking')), _react2.default.createElement('div', { className: 'row' }, _react2.default.createElement('div', { className: 'col-md-1' }, _react2.default.createElement('div', { style: [_components.connectTime] })), _react2.default.createElement('div', { className: 'col-md-1' }, '+', connectRelativeToReq, 'ms'), _react2.default.createElement('div', { className: 'col-md-1' }), _react2.default.createElement('div', { className: 'col-md-5' }, connectTimeVal, 'ms'), _react2.default.createElement('div', { className: 'col-md-3' }, 'Connecting')), _react2.default.createElement('div', { className: 'row' }, _react2.default.createElement('div', { className: 'col-md-1' }, _react2.default.createElement('div', { style: [_components.dnsTime] })), _react2.default.createElement('div', { className: 'col-md-1' }, '+', dnsRelativeToReq, 'ms'), _react2.default.createElement('div', { className: 'col-md-1' }), _react2.default.createElement('div', { className: 'col-md-5' }, dnsTimeVal, 'ms'), _react2.default.createElement('div', { className: 'col-md-3' }, 'DNS Lookup')), _react2.default.createElement('div', { className: 'row' }, _react2.default.createElement('div', { className: 'col-md-1' }, _react2.default.createElement('div', { style: [_components.receiveTime] })), _react2.default.createElement('div', { className: 'col-md-1' }, '+', receiveRelativeToReq, 'ms'), _react2.default.createElement('div', { className: 'col-md-1' }), _react2.default.createElement('div', { className: 'col-md-5' }, receiveTimeVal, 'ms'), _react2.default.createElement('div', { className: 'col-md-3' }, 'Receiving')), _react2.default.createElement('div', { className: 'row' }, _react2.default.createElement('div', { className: 'col-md-1' }, _react2.default.createElement('div', { style: [_components.sendTime] })), _react2.default.createElement('div', { className: 'col-md-1' }, '+', sendRelativeToReq, 'ms'), _react2.default.createElement('div', { className: 'col-md-1' }), _react2.default.createElement('div', { className: 'col-md-5' }, sendTimeVal, 'ms'), _react2.default.createElement('div', { className: 'col-md-3' }, 'Sending')), _react2.default.createElement('div', { className: 'row' }, _react2.default.createElement('div', { className: 'col-md-1' }, _react2.default.createElement('div', { style: [_components.sslTime] })), _react2.default.createElement('div', { className: 'col-md-1' }, '+', sslRelativeToReq, 'ms'), _react2.default.createElement('div', { className: 'col-md-1' }), _react2.default.createElement('div', { className: 'col-md-5' }, sslTimeVal, 'ms'), _react2.default.createElement('div', { className: 'col-md-3' }, 'SSL')), _react2.default.createElement('div', { className: 'row' }, _react2.default.createElement('div', { className: 'col-md-1' }, _react2.default.createElement('div', { style: [_components.waitTime] })), _react2.default.createElement('div', { className: 'col-md-1' }, '+', waitRelativeToReq, 'ms'), _react2.default.createElement('div', { className: 'col-md-1' }), _react2.default.createElement('div', { className: 'col-md-5' }, waitTimeVal, 'ms'), _react2.default.createElement('div', { className: 'col-md-3' }, 'Waiting')), _react2.default.createElement('hr', { style: _style.blockSpacing.one }), _react2.default.createElement('div', { style: _components.regularTitle }, 'Event timing relative to the request start:'), _react2.default.createElement('hr', { style: _style.blockSpacing.one }), _react2.default.createElement('div', { className: 'row' }, _react2.default.createElement('div', { className: 'col-md-1' }, _react2.default.createElement('div', { style: [_components.contentLoad, { height: '15px' }] })), _react2.default.createElement('div', { className: 'col-md-4' }, Math.round(this.props.data.contentLoadTime - this.props.data.startTime), 'ms'), _react2.default.createElement('div', { className: 'col-md-1' }), _react2.default.createElement('div', { className: 'col-md-3' }, 'DOM Loaded')), _react2.default.createElement('div', { className: 'row' }, _react2.default.createElement('div', { className: 'col-md-1' }, _react2.default.createElement('div', { style: [_components.pageLoad, { height: '15px', left: 'none' }] })), _react2.default.createElement('div', { className: 'col-md-4' }, Math.round(this.props.data.totalTime - this.props.data.startTime), 'ms'), _react2.default.createElement('div', { className: 'col-md-1' }), _react2.default.createElement('div', { className: 'col-md-3' }, 'Page Loaded')));
+            return _react2.default.createElement('div', { style: [pos, _style.elementSpacing.two, _style.shadows.one, _style.borderRadii.two] }, _react2.default.createElement('div', { className: 'row' }, _react2.default.createElement('div', { className: 'col-md-2' }, '+', Math.round(this.props.data.startTime), 'ms'), _react2.default.createElement('div', { className: 'col-md-10' }, 'Request start time since the beginning')), _react2.default.createElement('hr', { style: _style.blockSpacing.one }), _react2.default.createElement('div', { style: _components.regularTitle }, 'Request phases start and elapsed time relative to the request status:'), _react2.default.createElement('hr', { style: _style.blockSpacing.one }), _react2.default.createElement('div', { className: 'row' }, _react2.default.createElement('div', { className: 'col-md-1' }, _react2.default.createElement('div', { style: [_components.blockTime] })), _react2.default.createElement('div', { className: 'col-md-1' }, '0ms'), _react2.default.createElement('div', { className: 'col-md-1' }), _react2.default.createElement('div', { className: 'col-md-5' }, blockTimeVal, 'ms'), _react2.default.createElement('div', { className: 'col-md-3' }, 'Blocking')), _react2.default.createElement('div', { className: 'row' }, _react2.default.createElement('div', { className: 'col-md-1' }, _react2.default.createElement('div', { style: [_components.dnsTime] })), _react2.default.createElement('div', { className: 'col-md-1' }, '+', dnsRelativeToReq, 'ms'), _react2.default.createElement('div', { className: 'col-md-1' }), _react2.default.createElement('div', { className: 'col-md-5' }, dnsTimeVal, 'ms'), _react2.default.createElement('div', { className: 'col-md-3' }, 'DNS Lookup')), _react2.default.createElement('div', { className: 'row' }, _react2.default.createElement('div', { className: 'col-md-1' }, _react2.default.createElement('div', { style: [_components.connectTime] })), _react2.default.createElement('div', { className: 'col-md-1' }, '+', connectRelativeToReq, 'ms'), _react2.default.createElement('div', { className: 'col-md-1' }), _react2.default.createElement('div', { className: 'col-md-5' }, connectTimeVal, 'ms'), _react2.default.createElement('div', { className: 'col-md-3' }, 'Connecting')), _react2.default.createElement('div', { className: 'row' }, _react2.default.createElement('div', { className: 'col-md-1' }, _react2.default.createElement('div', { style: [_components.sslTime] })), _react2.default.createElement('div', { className: 'col-md-1' }, '+', sslRelativeToReq, 'ms'), _react2.default.createElement('div', { className: 'col-md-1' }), _react2.default.createElement('div', { className: 'col-md-5' }, sslTimeVal, 'ms'), _react2.default.createElement('div', { className: 'col-md-3' }, 'SSL')), _react2.default.createElement('div', { className: 'row' }, _react2.default.createElement('div', { className: 'col-md-1' }, _react2.default.createElement('div', { style: [_components.sendTime] })), _react2.default.createElement('div', { className: 'col-md-1' }, '+', sendRelativeToReq, 'ms'), _react2.default.createElement('div', { className: 'col-md-1' }), _react2.default.createElement('div', { className: 'col-md-5' }, sendTimeVal, 'ms'), _react2.default.createElement('div', { className: 'col-md-3' }, 'Sending')), _react2.default.createElement('div', { className: 'row' }, _react2.default.createElement('div', { className: 'col-md-1' }, _react2.default.createElement('div', { style: [_components.waitTime] })), _react2.default.createElement('div', { className: 'col-md-1' }, '+', waitRelativeToReq, 'ms'), _react2.default.createElement('div', { className: 'col-md-1' }), _react2.default.createElement('div', { className: 'col-md-5' }, waitTimeVal, 'ms'), _react2.default.createElement('div', { className: 'col-md-3' }, 'Waiting')), _react2.default.createElement('div', { className: 'row' }, _react2.default.createElement('div', { className: 'col-md-1' }, _react2.default.createElement('div', { style: [_components.receiveTime] })), _react2.default.createElement('div', { className: 'col-md-1' }, '+', receiveRelativeToReq, 'ms'), _react2.default.createElement('div', { className: 'col-md-1' }), _react2.default.createElement('div', { className: 'col-md-5' }, receiveTimeVal, 'ms'), _react2.default.createElement('div', { className: 'col-md-3' }, 'Receiving')), _react2.default.createElement('hr', { style: _style.blockSpacing.one }), _react2.default.createElement('div', { style: _components.regularTitle }, 'Event timing relative to the request start:'), _react2.default.createElement('hr', { style: _style.blockSpacing.one }), _react2.default.createElement('div', { className: 'row' }, _react2.default.createElement('div', { className: 'col-md-1' }, _react2.default.createElement('div', { style: [_components.contentLoad, { height: '15px' }] })), _react2.default.createElement('div', { className: 'col-md-4' }, Math.round(this.props.data.contentLoadTime - this.props.data.startTime), 'ms'), _react2.default.createElement('div', { className: 'col-md-1' }), _react2.default.createElement('div', { className: 'col-md-3' }, 'DOM Loaded')), _react2.default.createElement('div', { className: 'row' }, _react2.default.createElement('div', { className: 'col-md-1' }, _react2.default.createElement('div', { style: [_components.pageLoad, { height: '15px', left: 'none' }] })), _react2.default.createElement('div', { className: 'col-md-4' }, Math.round(this.props.data.totalTime - this.props.data.startTime), 'ms'), _react2.default.createElement('div', { className: 'col-md-1' }), _react2.default.createElement('div', { className: 'col-md-3' }, 'Page Loaded')));
         }
     }]);
 
@@ -29872,6 +29928,8 @@ var _radium = __webpack_require__(10);
 var _radium2 = _interopRequireDefault(_radium);
 
 var _components = __webpack_require__(9);
+
+var _style = __webpack_require__(16);
 
 function _interopRequireDefault(obj) {
     return obj && obj.__esModule ? obj : { default: obj };
@@ -29928,7 +29986,7 @@ var Title = (0, _radium2.default)(_class = function (_Component) {
                 opacity: 0,
                 filter: 'alpha(opacity=0)'
             };
-            return _react2.default.createElement('div', null, _react2.default.createElement('div', { style: _components.primaryTitle }, 'HAR Analyser'), _react2.default.createElement('div', { className: 'row' }, _react2.default.createElement('div', { className: 'col-md-10' }, _react2.default.createElement('div', { className: 'btn btn-primary', style: [fileUpload, _components.primaryButton] }, _react2.default.createElement('span', null, 'Load HAR File'), _react2.default.createElement('input', { type: 'file', style: upload, onChange: this.readFile.bind(this) }))), _react2.default.createElement('div', { className: 'col-md-2' }, _react2.default.createElement('a', { href: 'discuss.html', style: { textDecoration: 'none' } }, _react2.default.createElement('div', { style: [_components.successButton, _components.medeumBlock, _components.center] }, 'Let`s discuss')))));
+            return _react2.default.createElement('div', { style: { backgroundColor: 'grey', overflow: 'hidden', margin: '0', display: "flex" } }, _react2.default.createElement('div', { style: { width: '140px' } }, _react2.default.createElement('div', { style: [fileUpload, _components.defaultButton] }, _react2.default.createElement('span', null, 'Load HAR File'), _react2.default.createElement('input', { type: 'file', style: upload, onChange: this.readFile.bind(this) }))), _react2.default.createElement('div', null), _react2.default.createElement('div', { style: [_components.primaryTitle, _components.center, _style.textColor.white, _style.blockSpacing.one, { marginLeft: 'auto', marginRight: 'auto' }] }, 'HAR VIEWER'), _react2.default.createElement('div', null, _react2.default.createElement('a', { href: 'discuss.html', style: { textDecoration: 'none' } }, _react2.default.createElement('div', { style: [_style.blockSpacing.five, _components.chapterTitle, _components.center, _style.textColor.white, { marginRight: '50px' }] }, 'Let`s discuss'))));
         }
     }]);
 
@@ -30000,14 +30058,22 @@ function rootReducer() {
             }
         case _Constants.LOAD_HAR_SUCCESS:
             {
-                var val = Date.parse(action.payload.pages[0].startedDateTime);
-                var maxTime = findMaxSubstract(val, action.payload.entries);
+                var pages = action.payload.pages;
+                var entries = getPagesEntriesList(action.payload.entries, action.payload.pages);
+                var maxTimes = getSetOfMaxTimes(entries, pages);
+                console.log('Entries');
+                console.log(entries);
+                console.log('MaxTimes');
+                console.log(maxTimes);
+                console.log('Pages');
+                console.log(pages);
+                var statistics = getPagesListStatistics(entries);
                 return Object.assign({}, state, {
-                    entries: action.payload.entries,
-                    pages: action.payload.pages,
-                    statistics: action.payload.statistics,
+                    entries: entries,
+                    pages: pages,
+                    statistics: statistics,
                     isDataLoad: true,
-                    maxTime: maxTime
+                    maxTimes: maxTimes
                 });
             }
         default:
@@ -30023,6 +30089,92 @@ function findMaxSubstract(val, arr) {
         var maxDiff = Date.parse(item.startedDateTime) - val + item.time;
         if (maxDiff > result) result = maxDiff;
     });
+    return result;
+}
+
+function getPagesEntriesList(entriesList, pagesList) {
+    var result = [];
+    var temp = [];
+    for (var i = 0; i < pagesList.length; i++) {
+        for (var j = 0; j < entriesList.length; j++) {
+            if (pagesList[i].id == entriesList[j].pageref) {
+                temp.push(entriesList[j]);
+            }
+        }
+        result.push(temp);
+        temp = [];
+    }
+    return result;
+}
+
+function getSetOfMaxTimes(entries, pages) {
+    var result = [];
+    for (var i = 0; i < pages.length; i++) {
+        var val = Date.parse(pages[i].startedDateTime);
+        var maxTime = findMaxSubstract(val, entries[i]);
+        result.push(maxTime);
+    }
+    return result;
+}
+
+function getPageStatistics(entries) {
+    var responseContent = {
+        image: 0,
+        css: 0,
+        html: 0,
+        javascript: 0,
+        others: 0
+    };
+    var timing = {
+        blocked: 0,
+        dns: 0,
+        ssl: 0,
+        connect: 0,
+        send: 0,
+        wait: 0,
+        receive: 0
+    };
+    var headBody = {
+        headSend: 0,
+        bodySend: 0,
+        headReceive: 0,
+        bodyReceive: 0
+    };
+    var statistics = {
+        responseContent: responseContent,
+        timing: timing,
+        headBody: headBody
+    };
+    entries.forEach(function (entrie) {
+        var mimeType = entrie.response.content.mimeType;
+        var size = entrie.response.content.size;
+        if (mimeType.match('html')) responseContent.html += size;else if (mimeType.match('css')) responseContent.css += size;else if (mimeType.match('image')) responseContent.image += size;else if (mimeType.match('javascript')) responseContent.javascript += size;else responseContent.others += size;
+    });
+
+    entries.forEach(function (entrie) {
+        if (entrie.timings.blocked >= 0) timing.blocked += Math.round(entrie.timings.blocked);
+        if (entrie.timings.dns >= 0) timing.dns += Math.round(entrie.timings.dns);
+        if (entrie.timings.ssl >= 0) timing.ssl += Math.round(entrie.timings.ssl);
+        if (entrie.timings.connect >= 0) timing.connect += Math.round(entrie.timings.connect);
+        if (entrie.timings.send >= 0) timing.send += Math.round(entrie.timings.send);
+        if (entrie.timings.wait >= 0) timing.wait += Math.round(entrie.timings.wait);
+        if (entrie.timings.receive >= 0) timing.receive += Math.round(entrie.timings.receive);
+    });
+
+    entries.forEach(function (entrie) {
+        if (entrie.request.bodySize >= 0) headBody.bodySend += entrie.request.bodySize;
+        if (entrie.request.headersSize >= 0) headBody.headSend += entrie.request.headersSize;
+        if (entrie.response.bodySize >= 0) headBody.bodyReceive += entrie.response.bodySize;
+        if (entrie.response.headersSize >= 0) headBody.headReceive += entrie.response.headersSize;
+    });
+    return statistics;
+}
+
+function getPagesListStatistics(entries) {
+    var result = [];
+    for (var i = 0; i < entries.length; i++) {
+        result.push(getPageStatistics(entries[i]));
+    }
     return result;
 }
 
@@ -44131,7 +44283,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = calc;
 
-var _getPrefixedValue = __webpack_require__(16);
+var _getPrefixedValue = __webpack_require__(17);
 
 var _getPrefixedValue2 = _interopRequireDefault(_getPrefixedValue);
 
@@ -44166,7 +44318,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = flex;
 
-var _getPrefixedValue = __webpack_require__(16);
+var _getPrefixedValue = __webpack_require__(17);
 
 var _getPrefixedValue2 = _interopRequireDefault(_getPrefixedValue);
 
@@ -44203,7 +44355,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = flexboxIE;
 
-var _getPrefixedValue = __webpack_require__(16);
+var _getPrefixedValue = __webpack_require__(17);
 
 var _getPrefixedValue2 = _interopRequireDefault(_getPrefixedValue);
 
@@ -44268,7 +44420,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = flexboxOld;
 
-var _getPrefixedValue = __webpack_require__(16);
+var _getPrefixedValue = __webpack_require__(17);
 
 var _getPrefixedValue2 = _interopRequireDefault(_getPrefixedValue);
 
@@ -44340,7 +44492,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = grabCursor;
 
-var _getPrefixedValue = __webpack_require__(16);
+var _getPrefixedValue = __webpack_require__(17);
 
 var _getPrefixedValue2 = _interopRequireDefault(_getPrefixedValue);
 
@@ -44376,7 +44528,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = gradient;
 
-var _getPrefixedValue = __webpack_require__(16);
+var _getPrefixedValue = __webpack_require__(17);
 
 var _getPrefixedValue2 = _interopRequireDefault(_getPrefixedValue);
 
@@ -44413,7 +44565,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = position;
 
-var _getPrefixedValue = __webpack_require__(16);
+var _getPrefixedValue = __webpack_require__(17);
 
 var _getPrefixedValue2 = _interopRequireDefault(_getPrefixedValue);
 
@@ -44446,7 +44598,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = sizing;
 
-var _getPrefixedValue = __webpack_require__(16);
+var _getPrefixedValue = __webpack_require__(17);
 
 var _getPrefixedValue2 = _interopRequireDefault(_getPrefixedValue);
 
@@ -44564,7 +44716,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = zoomCursor;
 
-var _getPrefixedValue = __webpack_require__(16);
+var _getPrefixedValue = __webpack_require__(17);
 
 var _getPrefixedValue2 = _interopRequireDefault(_getPrefixedValue);
 
@@ -47680,7 +47832,7 @@ var EventPropagators = __webpack_require__(28);
 var ExecutionEnvironment = __webpack_require__(8);
 var ReactDOMComponentTree = __webpack_require__(7);
 var ReactUpdates = __webpack_require__(14);
-var SyntheticEvent = __webpack_require__(17);
+var SyntheticEvent = __webpack_require__(18);
 
 var getEventTarget = __webpack_require__(58);
 var isEventSupported = __webpack_require__(59);
@@ -48316,7 +48468,7 @@ module.exports = FallbackCompositionState;
 
 
 
-var DOMProperty = __webpack_require__(18);
+var DOMProperty = __webpack_require__(19);
 
 var MUST_USE_PROPERTY = DOMProperty.injection.MUST_USE_PROPERTY;
 var HAS_BOOLEAN_VALUE = DOMProperty.injection.HAS_BOOLEAN_VALUE;
@@ -49786,7 +49938,7 @@ var AutoFocusUtils = __webpack_require__(374);
 var CSSPropertyOperations = __webpack_require__(376);
 var DOMLazyTree = __webpack_require__(23);
 var DOMNamespaces = __webpack_require__(48);
-var DOMProperty = __webpack_require__(18);
+var DOMProperty = __webpack_require__(19);
 var DOMPropertyOperations = __webpack_require__(205);
 var EventPluginHub = __webpack_require__(27);
 var EventPluginRegistry = __webpack_require__(32);
@@ -51242,7 +51394,7 @@ module.exports = ReactDOMInput;
 
 
 
-var DOMProperty = __webpack_require__(18);
+var DOMProperty = __webpack_require__(19);
 var ReactComponentTreeHook = __webpack_require__(11);
 
 var warning = __webpack_require__(3);
@@ -52214,7 +52366,7 @@ module.exports = {
 
 
 
-var DOMProperty = __webpack_require__(18);
+var DOMProperty = __webpack_require__(19);
 var EventPluginRegistry = __webpack_require__(32);
 var ReactComponentTreeHook = __webpack_require__(11);
 
@@ -53123,7 +53275,7 @@ module.exports = ReactHostOperationHistoryHook;
 
 
 
-var DOMProperty = __webpack_require__(18);
+var DOMProperty = __webpack_require__(19);
 var EventPluginHub = __webpack_require__(27);
 var EventPluginUtils = __webpack_require__(49);
 var ReactComponentEnvironment = __webpack_require__(52);
@@ -54696,7 +54848,7 @@ var EventPropagators = __webpack_require__(28);
 var ExecutionEnvironment = __webpack_require__(8);
 var ReactDOMComponentTree = __webpack_require__(7);
 var ReactInputSelection = __webpack_require__(211);
-var SyntheticEvent = __webpack_require__(17);
+var SyntheticEvent = __webpack_require__(18);
 
 var getActiveElement = __webpack_require__(71);
 var isTextInputElement = __webpack_require__(221);
@@ -54896,7 +55048,7 @@ var EventPropagators = __webpack_require__(28);
 var ReactDOMComponentTree = __webpack_require__(7);
 var SyntheticAnimationEvent = __webpack_require__(422);
 var SyntheticClipboardEvent = __webpack_require__(423);
-var SyntheticEvent = __webpack_require__(17);
+var SyntheticEvent = __webpack_require__(18);
 var SyntheticFocusEvent = __webpack_require__(426);
 var SyntheticKeyboardEvent = __webpack_require__(428);
 var SyntheticMouseEvent = __webpack_require__(34);
@@ -55122,7 +55274,7 @@ module.exports = SimpleEventPlugin;
 
 
 
-var SyntheticEvent = __webpack_require__(17);
+var SyntheticEvent = __webpack_require__(18);
 
 /**
  * @interface Event
@@ -55166,7 +55318,7 @@ module.exports = SyntheticAnimationEvent;
 
 
 
-var SyntheticEvent = __webpack_require__(17);
+var SyntheticEvent = __webpack_require__(18);
 
 /**
  * @interface Event
@@ -55209,7 +55361,7 @@ module.exports = SyntheticClipboardEvent;
 
 
 
-var SyntheticEvent = __webpack_require__(17);
+var SyntheticEvent = __webpack_require__(18);
 
 /**
  * @interface Event
@@ -55332,7 +55484,7 @@ module.exports = SyntheticFocusEvent;
 
 
 
-var SyntheticEvent = __webpack_require__(17);
+var SyntheticEvent = __webpack_require__(18);
 
 /**
  * @interface Event
@@ -55513,7 +55665,7 @@ module.exports = SyntheticTouchEvent;
 
 
 
-var SyntheticEvent = __webpack_require__(17);
+var SyntheticEvent = __webpack_require__(18);
 
 /**
  * @interface Event
