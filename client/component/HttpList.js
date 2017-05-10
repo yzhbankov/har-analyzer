@@ -19,8 +19,21 @@ export default
 class HttpList extends Component {
     constructor(props) {
         super(props);
-        this.state = {show: false};
-        this.center = false
+        this.state = {
+            show: false,
+            timeLineWidth: {width: 'calc(100% - 570px)'},
+            center: false
+        };
+    }
+
+    componentDidMount() {
+        window.addEventListener("resize", ()=> {
+            if (window.innerWidth < 1200) {
+                this.setState({timeLineWidth: {width: 'calc(100% - 240px)'}})
+            } else{
+                this.setState({timeLineWidth: {width: 'calc(100% - 570px)'}})
+            }
+        });
     }
 
     onBtnClick(e) {
@@ -52,12 +65,6 @@ class HttpList extends Component {
         }
         const backgroundStyle = {backgroundColor: color};
 
-        let timeLineWidth = {width: 'calc(100% - 570px)'};
-        console.log(window.innerWidth);
-        if (window.innerWidth < 1200){
-            timeLineWidth = {width: 'calc(100% - 240px)'}
-        }
-
         return (<div>
                 <hr style={{margin: 0}}/>
                 <a href='#' style={{textDecoration: 'none'}}>
@@ -76,14 +83,30 @@ class HttpList extends Component {
                                               margin: 0
                                           }}>
                     <div className='row' style={{height: '32px', backgroundColor: '#c6c6c6'}}>
-                        <div className="col-lg-1 hidden-xs hidden-md hidden-sm" style={[xxSmallBlock, regularTitle]}>#</div>
-                        <div className="col-lg-2 col-md-2 col-xs-2 col-sm-2" style={[xMedeumBlock, regularTitle]}>Title</div>
-                        <div className="col-lg-1 hidden-xs hidden-md hidden-sm" style={[xSmallBlock, regularTitle]}>Method</div>
-                        <div className="col-lg-1 hidden-xs hidden-md hidden-sm" style={[xSmallBlock, regularTitle]}>Status</div>
-                        <div className="col-lg-1 hidden-xs hidden-md hidden-sm" style={[xSmallBlock, regularTitle]}>Req size</div>
-                        <div className="col-lg-1 hidden-xs hidden-md hidden-sm" style={[xSmallBlock, regularTitle]}>Res size</div>
-                        <div className="col-lg-1 hidden-xs hidden-md hidden-sm" style={[xSmallBlock, regularTitle]}>Total time</div>
-                        <div className="col-lg-4 col-md-10 col-xs-10 col-sm-10" style={[timeLineWidth, regularTitle]}>Time line</div>
+                        <div className="col-lg-1 hidden-xs hidden-md hidden-sm" style={[xxSmallBlock, regularTitle]}>#
+                        </div>
+                        <div className="col-lg-2 col-md-2 col-xs-2 col-sm-2" style={[xMedeumBlock, regularTitle]}>
+                            Title
+                        </div>
+                        <div className="col-lg-1 hidden-xs hidden-md hidden-sm" style={[xSmallBlock, regularTitle]}>
+                            Method
+                        </div>
+                        <div className="col-lg-1 hidden-xs hidden-md hidden-sm" style={[xSmallBlock, regularTitle]}>
+                            Status
+                        </div>
+                        <div className="col-lg-1 hidden-xs hidden-md hidden-sm" style={[xSmallBlock, regularTitle]}>Req
+                            size
+                        </div>
+                        <div className="col-lg-1 hidden-xs hidden-md hidden-sm" style={[xSmallBlock, regularTitle]}>Res
+                            size
+                        </div>
+                        <div className="col-lg-1 hidden-xs hidden-md hidden-sm" style={[xSmallBlock, regularTitle]}>
+                            Total time
+                        </div>
+                        <div className="col-lg-4 col-md-10 col-xs-10 col-sm-10"
+                             style={[this.state.timeLineWidth, regularTitle]}>
+                            Time line
+                        </div>
                     </div>
                     {this.props.entries.map((entrie, number) =>
                             <HttpInfo

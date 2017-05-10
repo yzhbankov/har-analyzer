@@ -10,7 +10,20 @@ export default
 class HttpInfo extends Component {
     constructor(props) {
         super(props);
-        this.state = {show: false};
+        this.state = {
+            show: false,
+            timeLineWidth: {width: 'calc(100% - 570px)'}
+        };
+    }
+
+    componentDidMount() {
+        window.addEventListener("resize", ()=> {
+            if (window.innerWidth < 1200) {
+                this.setState({timeLineWidth: {width: 'calc(100% - 240px)'}})
+            } else {
+                this.setState({timeLineWidth: {width: 'calc(100% - 570px)'}})
+            }
+        });
     }
 
     onBtnClick(e) {
@@ -25,13 +38,8 @@ class HttpInfo extends Component {
         if (this.props.number % 2 != 0) {
             color = '#f8f8ff';
         }
-        let timeLineWidth = {width: 'calc(100% - 570px)'};
-        console.log(window.innerWidth);
-        if (window.innerWidth < 1200){
-            timeLineWidth = {width: 'calc(100% - 240px)'}
-        }
-
         const backgroundStyle = {backgroundColor: color};
+
         return (<div className="col-md-12 col-xs-12">
                 <hr style={{margin: 0, width: '100%'}}/>
                 <div className="row" style={[backgroundStyle]} onClick={this.onBtnClick.bind(this)}>
@@ -63,7 +71,7 @@ class HttpInfo extends Component {
                     </div>
                     <div className="col-md-1 hidden-xs hidden-md hidden-sm"
                          style={xSmallBlock}>{Math.round(this.props.totalTime * 100) / 100}</div>
-                    <div className="col-md-4 col-md-10 col-xs-10 col-sm-10" style={[timeLineWidth]}>
+                    <div className="col-md-4 col-md-10 col-xs-10 col-sm-10" style={[this.state.timeLineWidth]}>
                         <HttpInfoTimeLine entrie={this.props.entrie}
                                           page={this.props.page}
                                           maxTime={this.props.maxTime}/>
