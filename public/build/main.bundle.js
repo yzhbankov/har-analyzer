@@ -28445,26 +28445,12 @@ var HttpInfo = (0, _radium2.default)(_class = function (_Component) {
         var _this = _possibleConstructorReturn(this, (HttpInfo.__proto__ || Object.getPrototypeOf(HttpInfo)).call(this, props));
 
         _this.state = {
-            show: false,
-            timeLineWidth: { width: 'calc(100% - 570px)' }
+            show: false
         };
         return _this;
     }
 
     _createClass(HttpInfo, [{
-        key: 'componentDidMount',
-        value: function componentDidMount() {
-            var _this2 = this;
-
-            window.addEventListener("resize", function () {
-                if (window.innerWidth < 1200) {
-                    _this2.setState({ timeLineWidth: { width: 'calc(100% - 240px)' } });
-                } else {
-                    _this2.setState({ timeLineWidth: { width: 'calc(100% - 570px)' } });
-                }
-            });
-        }
-    }, {
         key: 'onBtnClick',
         value: function onBtnClick(e) {
             e.preventDefault();
@@ -28475,13 +28461,19 @@ var HttpInfo = (0, _radium2.default)(_class = function (_Component) {
     }, {
         key: 'render',
         value: function render() {
-            var _this3 = this;
+            var _this2 = this;
 
             var color = 'white';
+            var timeLineWidth = { width: 'calc(100% - 570px)' };
+
             if (this.props.number % 2 != 0) {
                 color = '#f8f8ff';
             }
             var backgroundStyle = { backgroundColor: color };
+
+            if (window.innerWidth < 1200) {
+                timeLineWidth = { width: 'calc(100% - 240px)' };
+            }
 
             return _react2.default.createElement('div', { className: 'col-md-12 col-xs-12' }, _react2.default.createElement('hr', { style: { margin: 0, width: '100%' } }), _react2.default.createElement('div', { className: 'row', style: [backgroundStyle], onClick: this.onBtnClick.bind(this) }, _react2.default.createElement('div', { className: 'col-md-1 hidden-xs hidden-md hidden-sm',
                 style: _components.xxSmallBlock }, this.props.number + 1), _react2.default.createElement('div', { className: 'col-md-2 col-xs-2',
@@ -28489,19 +28481,19 @@ var HttpInfo = (0, _radium2.default)(_class = function (_Component) {
                 href: '#' }, this.props.title)), _react2.default.createElement('div', { className: 'col-md-1 hidden-xs hidden-md hidden-sm',
                 style: _components.xSmallBlock }, this.props.reqMethod), _react2.default.createElement('div', { className: 'col-md-1 hidden-xs hidden-md hidden-sm',
                 style: _components.xSmallBlock }, this.props.resStatus), _react2.default.createElement('div', { className: 'col-md-1 hidden-xs hidden-md hidden-sm', style: _components.xSmallBlock }, function () {
-                if (_this3.props.reqSize <= 0) {
+                if (_this2.props.reqSize <= 0) {
                     return '-';
                 } else {
-                    return _this3.props.reqSize;
+                    return _this2.props.reqSize;
                 }
             }()), _react2.default.createElement('div', { className: 'col-md-1 hidden-xs hidden-md hidden-sm', style: _components.xSmallBlock }, function () {
-                if (_this3.props.resSize <= 0) {
+                if (_this2.props.resSize <= 0) {
                     return '-';
                 } else {
-                    return _this3.props.resSize;
+                    return _this2.props.resSize;
                 }
             }()), _react2.default.createElement('div', { className: 'col-md-1 hidden-xs hidden-md hidden-sm',
-                style: _components.xSmallBlock }, Math.round(this.props.totalTime * 100) / 100), _react2.default.createElement('div', { className: 'col-md-4 col-md-10 col-xs-10 col-sm-10', style: [this.state.timeLineWidth] }, _react2.default.createElement(_HttpInfoTimeLine2.default, { entrie: this.props.entrie,
+                style: _components.xSmallBlock }, Math.round(this.props.totalTime * 100) / 100), _react2.default.createElement('div', { className: 'col-md-4 col-md-10 col-xs-10 col-sm-10', style: [timeLineWidth] }, _react2.default.createElement(_HttpInfoTimeLine2.default, { entrie: this.props.entrie,
                 page: this.props.page,
                 maxTime: this.props.maxTime }))), !this.state.show || _react2.default.createElement(_HttpInfoDetails2.default, { entrie: this.props.entrie }));
         }
@@ -28621,12 +28613,13 @@ var HttpInfoDetails = (0, _radium2.default)(_class = function (_Component) {
     }, {
         key: 'render',
         value: function render() {
-            return _react2.default.createElement('div', null, _react2.default.createElement('div', null, _react2.default.createElement('div', { className: 'col-md-1' }), _react2.default.createElement('div', { className: 'col-md-1', style: _components.chapterTitle }, _react2.default.createElement('a', { 'data-name': 'reqShow',
+            console.log(this.props.entrie.response);
+            return _react2.default.createElement('div', null, _react2.default.createElement('div', { className: 'row' }, _react2.default.createElement('div', { className: 'col-md-1 hidden-xs hidden-md hidden-sm' }), _react2.default.createElement('div', { className: 'col-md-1 col-lg-1 col-sm-2 col-xs-2', style: _components.chapterTitle }, _react2.default.createElement('a', { 'data-name': 'reqShow',
                 onClick: this.showHideComponent.bind(this),
-                href: '#' }, 'Request')), _react2.default.createElement('div', { className: 'col-md-1', style: _components.chapterTitle }, _react2.default.createElement('a', { 'data-name': 'resShow',
+                href: '#' }, 'Request')), _react2.default.createElement('div', { className: 'col-md-1 col-lg-1 col-sm-2 col-xs-2', style: _components.chapterTitle }, _react2.default.createElement('a', { 'data-name': 'resShow',
                 onClick: this.showHideComponent.bind(this),
-                href: '#' }, 'Response')), _react2.default.createElement('div', { className: 'col-md-2', style: _components.chapterTitle }, _react2.default.createElement('a', { 'data-name': 'contentShow',
-                onClick: this.showHideComponent.bind(this), href: '#' }, 'Response content')), _react2.default.createElement('div', { className: 'col-md-1', style: _components.chapterTitle }, _react2.default.createElement('a', { 'data-name': 'cookiesShow',
+                href: '#' }, 'Response')), _react2.default.createElement('div', { className: 'col-md-2 col-lg-2 col-sm-4 col-xs-4', style: _components.chapterTitle }, _react2.default.createElement('a', { 'data-name': 'contentShow',
+                onClick: this.showHideComponent.bind(this), href: '#' }, 'Response content')), _react2.default.createElement('div', { className: 'col-md-1 col-lg-1 col-sm-2 col-xs-2', style: _components.chapterTitle }, _react2.default.createElement('a', { 'data-name': 'cookiesShow',
                 onClick: this.showHideComponent.bind(this), href: '#' }, 'Cookies'))), !this.state.reqShow || _react2.default.createElement(_HttpInfoDetailsRequest2.default, { request: this.props.entrie.request, response: this.props.entrie.response }), !this.state.resShow || _react2.default.createElement(_HttpInfoDetailsResponse2.default, { response: this.props.entrie.response }), !this.state.contentShow || _react2.default.createElement(_HttpInfoDetailsResponseContent2.default, { content: this.props.entrie.response.content }), !this.state.cookiesShow || _react2.default.createElement(_HttpInfoDetailsCookies2.default, { request: this.props.entrie.request, response: this.props.entrie.response }));
         }
     }]);
@@ -28710,7 +28703,7 @@ var HttpInfoDetailsCookies = (0, _radium2.default)(_class = function (_Component
         value: function render() {
             var _this2 = this;
 
-            return _react2.default.createElement('div', { style: [_components.medeumBlockContent, _style.blockSpacing.two, { borderWidth: '1px', borderStyle: 'solid', borderColor: '#c6c6c6' }, _style.borderRadii.two, _style.elementSpacing.two] }, _react2.default.createElement('div', { style: [_components.regularTitle] }, 'Request cookies'), _react2.default.createElement('hr', { style: _style.blockSpacing.one }), function () {
+            return _react2.default.createElement('div', { className: 'col-md-9 col-lg-6 col-sm-12 col-xs-12', style: [_style.blockSpacing.two, { borderWidth: '1px', borderStyle: 'solid', borderColor: '#c6c6c6', overflowX: 'auto' }, _style.borderRadii.two, _style.elementSpacing.two] }, _react2.default.createElement('div', { style: [_components.regularTitle] }, 'Request cookies'), _react2.default.createElement('hr', { style: _style.blockSpacing.one }), function () {
                 if (_this2.props.request.cookies == 0) {
                     return _react2.default.createElement('div', null, 'No cookies send');
                 } else {
@@ -28807,9 +28800,9 @@ var HttpInfoDetailsRequest = (0, _radium2.default)(_class = function (_Component
     _createClass(HttpInfoDetailsRequest, [{
         key: 'render',
         value: function render() {
-            return _react2.default.createElement('div', { style: [_components.medeumBlockContent, _style.blockSpacing.two, { borderWidth: '1px', borderStyle: 'solid', borderColor: '#c6c6c6' }, _style.borderRadii.two, _style.elementSpacing.two] }, _react2.default.createElement('div', { className: 'row' }, _react2.default.createElement('div', { className: 'col-md-2', style: [_components.regularTitle, { textAlign: 'right' }] }, 'Request URL'), _react2.default.createElement('div', { className: 'col-md-10' }, this.props.request.url)), _react2.default.createElement('div', { className: 'row' }, _react2.default.createElement('div', { className: 'col-md-2', style: [_components.regularTitle, { textAlign: 'right' }] }, 'Request Method'), _react2.default.createElement('div', { className: 'col-md-10' }, this.props.request.method)), _react2.default.createElement('div', { className: 'row' }, _react2.default.createElement('div', { className: 'col-md-2', style: [_components.regularTitle, { textAlign: 'right' }] }, 'Status'), _react2.default.createElement('div', { className: 'col-md-10' }, this.props.response.status)), _react2.default.createElement('div', { style: _components.regularTitle }, 'Request headers'), _react2.default.createElement('hr', { style: _style.blockSpacing.one }), this.props.request.headers.map(function (header) {
-                return _react2.default.createElement('div', { className: 'row' }, _react2.default.createElement('div', { className: 'col-md-2', style: [_components.regularTitle, { textAlign: 'right' }] }, header.name), _react2.default.createElement('div', { className: 'col-md-10' }, header.value));
-            }), _react2.default.createElement('div', { style: _components.regularTitle }, 'Size'), _react2.default.createElement('hr', { style: _style.blockSpacing.one }), _react2.default.createElement('div', { className: 'row' }, _react2.default.createElement('div', { className: 'col-md-2', style: [_components.regularTitle, { textAlign: 'right' }] }, 'Body size'), _react2.default.createElement('div', { className: 'col-md-10' }, this.props.request.bodySize, ' B')), _react2.default.createElement('div', { className: 'row' }, _react2.default.createElement('div', { className: 'col-md-2', style: [_components.regularTitle, { textAlign: 'right' }] }, 'Header size'), _react2.default.createElement('div', { className: 'col-md-10' }, this.props.request.headersSize, ' B')), _react2.default.createElement('div', { className: 'row' }, _react2.default.createElement('div', { className: 'col-md-2', style: [_components.regularTitle, { textAlign: 'right' }] }, 'Total'), _react2.default.createElement('div', { className: 'col-md-10' }, this.props.request.bodySize + this.props.request.headersSize, ' B')));
+            return _react2.default.createElement('div', { className: 'col-md-9 col-lg-6 col-sm-12 col-xs-12', style: [_style.blockSpacing.two, { borderWidth: '1px', borderStyle: 'solid', borderColor: '#c6c6c6', overflowX: 'auto' }, _style.borderRadii.two, _style.elementSpacing.two] }, _react2.default.createElement('div', { className: 'row' }, _react2.default.createElement('div', { className: 'col-md-3 col-lg-3 col-sm-3 col-xs-4', style: [_components.regularTitle, { textAlign: 'right' }] }, 'Request URL'), _react2.default.createElement('div', { className: 'col-md-9 col-lg-9 col-sm-9 col-xs-8' }, this.props.request.url)), _react2.default.createElement('div', { className: 'row' }, _react2.default.createElement('div', { className: 'col-md-3 col-lg-3 col-sm-3 col-xs-4', style: [_components.regularTitle, { textAlign: 'right' }] }, 'Request Method'), _react2.default.createElement('div', { className: 'col-md-9 col-lg-9 col-sm-9 col-xs-8' }, this.props.request.method)), _react2.default.createElement('div', { className: 'row' }, _react2.default.createElement('div', { className: 'col-md-3 col-lg-3 col-sm-3 col-xs-4', style: [_components.regularTitle, { textAlign: 'right' }] }, 'Status'), _react2.default.createElement('div', { className: 'col-md-9 col-lg-9 col-sm-9 col-xs-8' }, this.props.response.status)), _react2.default.createElement('div', { style: _components.regularTitle }, 'Request headers'), _react2.default.createElement('hr', { style: _style.blockSpacing.one }), this.props.request.headers.map(function (header) {
+                return _react2.default.createElement('div', { className: 'row' }, _react2.default.createElement('div', { className: 'col-md-3 col-lg-3 col-sm-3 col-xs-4', style: [_components.regularTitle, { textAlign: 'right' }] }, header.name), _react2.default.createElement('div', { className: 'col-md-9 col-lg-9 col-sm-9 col-xs-8' }, header.value));
+            }), _react2.default.createElement('div', { style: _components.regularTitle }, 'Size'), _react2.default.createElement('hr', { style: _style.blockSpacing.one }), _react2.default.createElement('div', { className: 'row' }, _react2.default.createElement('div', { className: 'col-md-3 col-lg-3 col-sm-3 col-xs-4', style: [_components.regularTitle, { textAlign: 'right' }] }, 'Body size'), _react2.default.createElement('div', { className: 'col-md-9 col-lg-9 col-sm-9 col-xs-8' }, this.props.request.bodySize, ' B')), _react2.default.createElement('div', { className: 'row' }, _react2.default.createElement('div', { className: 'col-md-3 col-lg-3 col-sm-3 col-xs-4', style: [_components.regularTitle, { textAlign: 'right' }] }, 'Header size'), _react2.default.createElement('div', { className: 'col-md-9 col-lg-9 col-sm-9 col-xs-8' }, this.props.request.headersSize, ' B')), _react2.default.createElement('div', { className: 'row' }, _react2.default.createElement('div', { className: 'col-md-3 col-lg-3 col-sm-3 col-xs-4', style: [_components.regularTitle, { textAlign: 'right' }] }, 'Total'), _react2.default.createElement('div', { className: 'col-md-9 col-lg-9 col-sm-9 col-xs-8' }, this.props.request.bodySize + this.props.request.headersSize, ' B')));
         }
     }]);
 
@@ -28890,10 +28883,10 @@ var HttpInfoDetailsResponse = (0, _radium2.default)(_class = function (_Componen
     _createClass(HttpInfoDetailsResponse, [{
         key: 'render',
         value: function render() {
-            return _react2.default.createElement('div', { style: [_components.medeumBlockContent, _style.blockSpacing.two, { borderWidth: '1px', borderStyle: 'solid', borderColor: '#c6c6c6' }, _style.borderRadii.two, _style.elementSpacing.two] }, _react2.default.createElement('div', { className: 'row' }, _react2.default.createElement('div', { className: 'col-md-2', style: [_components.regularTitle, { textAlign: 'right' }] }, 'Status'), _react2.default.createElement('div', { className: 'col-md-10' }, this.props.response.status, ' ', this.props.response.statusText, '.', this.props.response.httpVersion)), _react2.default.createElement('div', { style: [_components.regularTitle] }, 'Response headers'), _react2.default.createElement('hr', { style: _style.blockSpacing.one }), this.props.response.headers.map(function (header) {
-                return _react2.default.createElement('div', { className: 'row' }, _react2.default.createElement('div', { className: 'col-md-2',
-                    style: [_components.regularTitle, { textAlign: 'right' }] }, header.name), _react2.default.createElement('div', { className: 'col-md-10' }, header.value));
-            }), _react2.default.createElement('div', { style: [_components.regularTitle] }, 'Size'), _react2.default.createElement('hr', { style: _style.blockSpacing.one }), _react2.default.createElement('div', { className: 'row' }, _react2.default.createElement('div', { className: 'col-md-2', style: [_components.regularTitle, { textAlign: 'right' }] }, 'Body size'), _react2.default.createElement('div', { className: 'col-md-10' }, this.props.response.bodySize, ' B')), _react2.default.createElement('div', { className: 'row' }, _react2.default.createElement('div', { className: 'col-md-2', style: [_components.regularTitle, { textAlign: 'right' }] }, 'Header size'), _react2.default.createElement('div', { className: 'col-md-10' }, this.props.response.headersSize, ' B')), _react2.default.createElement('div', { className: 'row' }, _react2.default.createElement('div', { className: 'col-md-2', style: [_components.regularTitle, { textAlign: 'right' }] }, 'Total'), _react2.default.createElement('div', { className: 'col-md-10' }, this.props.response.bodySize + this.props.response.headersSize, ' B')));
+            return _react2.default.createElement('div', { className: 'col-md-9 col-lg-6 col-sm-12 col-xs-12', style: [_style.blockSpacing.two, { borderWidth: '1px', borderStyle: 'solid', borderColor: '#c6c6c6', overflowX: 'auto' }, _style.borderRadii.two, _style.elementSpacing.two] }, _react2.default.createElement('div', { className: 'row' }, _react2.default.createElement('div', { className: 'col-md-3 col-lg-3 col-sm-3 col-xs-4', style: [_components.regularTitle, { textAlign: 'right' }] }, 'Status'), _react2.default.createElement('div', { className: 'col-md-9 col-lg-9 col-sm-9 col-xs-8' }, this.props.response.status, ' ', this.props.response.statusText, '.', this.props.response.httpVersion)), _react2.default.createElement('div', { style: [_components.regularTitle] }, 'Response headers'), _react2.default.createElement('hr', { style: _style.blockSpacing.one }), this.props.response.headers.map(function (header) {
+                return _react2.default.createElement('div', { className: 'row' }, _react2.default.createElement('div', { className: 'col-md-3 col-lg-3 col-sm-3 col-xs-4',
+                    style: [_components.regularTitle, { textAlign: 'right' }] }, header.name), _react2.default.createElement('div', { className: 'col-md-9 col-lg-9 col-sm-9 col-xs-8' }, header.value));
+            }), _react2.default.createElement('div', { style: [_components.regularTitle] }, 'Size'), _react2.default.createElement('hr', { style: _style.blockSpacing.one }), _react2.default.createElement('div', { className: 'row' }, _react2.default.createElement('div', { className: 'col-md-3 col-lg-3 col-sm-3 col-xs-4', style: [_components.regularTitle, { textAlign: 'right' }] }, 'Body size'), _react2.default.createElement('div', { className: 'col-md-9 col-lg-9 col-sm-9 col-xs-8' }, this.props.response.bodySize, ' B')), _react2.default.createElement('div', { className: 'row' }, _react2.default.createElement('div', { className: 'col-md-3 col-lg-3 col-sm-3 col-xs-4', style: [_components.regularTitle, { textAlign: 'right' }] }, 'Header size'), _react2.default.createElement('div', { className: 'col-md-9 col-lg-9 col-sm-9 col-xs-8' }, this.props.response.headersSize, ' B')), _react2.default.createElement('div', { className: 'row' }, _react2.default.createElement('div', { className: 'col-md-3 col-lg-3 col-sm-3 col-xs-4', style: [_components.regularTitle, { textAlign: 'right' }] }, 'Total'), _react2.default.createElement('div', { className: 'col-md-9 col-lg-9 col-sm-9 col-xs-8' }, this.props.response.bodySize + this.props.response.headersSize, ' B')));
         }
     }]);
 
@@ -28974,7 +28967,7 @@ var HttpInfoDetailsResponseContent = (0, _radium2.default)(_class = function (_C
     _createClass(HttpInfoDetailsResponseContent, [{
         key: 'render',
         value: function render() {
-            return _react2.default.createElement('div', { style: [_components.medeumBlockContent, _style.blockSpacing.two, { borderWidth: '1px', borderStyle: 'solid', borderColor: '#c6c6c6' }, _style.borderRadii.two, _style.elementSpacing.two] }, _react2.default.createElement('div', { className: 'row' }, _react2.default.createElement('div', { className: 'col-md-2', style: [_components.regularTitle, { textAlign: 'right' }] }, 'Size'), _react2.default.createElement('div', { className: 'col-md-2' }, this.props.content.size, ' B')), _react2.default.createElement('div', { className: 'row' }, _react2.default.createElement('div', { className: 'col-md-2', style: [_components.regularTitle, { textAlign: 'right' }] }, 'MIME Type'), _react2.default.createElement('div', { className: 'col-md-2' }, this.props.content.mimeType)), _react2.default.createElement('div', { className: 'row' }, _react2.default.createElement('div', { className: 'col-md-2', style: [_components.regularTitle, { textAlign: 'right' }] }, 'Response content'), _react2.default.createElement('div', { className: 'col-md-10' }, this.props.content.text)));
+            return _react2.default.createElement('div', { className: 'col-md-9 col-lg-6 col-sm-12 col-xs-12', style: [_style.blockSpacing.two, { borderWidth: '1px', borderStyle: 'solid', borderColor: '#c6c6c6', overflowX: 'auto' }, _style.borderRadii.two, _style.elementSpacing.two] }, _react2.default.createElement('div', { className: 'row' }, _react2.default.createElement('div', { className: 'col-md-3 col-lg-3 col-sm-3 col-xs-4', style: [_components.regularTitle, { textAlign: 'right' }] }, 'Size'), _react2.default.createElement('div', { className: 'col-md-3 col-lg-3 col-sm-3 col-xs-4' }, this.props.content.size, ' B')), _react2.default.createElement('div', { className: 'row' }, _react2.default.createElement('div', { className: 'col-md-3 col-lg-3 col-sm-3 col-xs-4', style: [_components.regularTitle, { textAlign: 'right' }] }, 'MIME Type'), _react2.default.createElement('div', { className: 'col-md-3 col-lg-3 col-sm-3 col-xs-4' }, this.props.content.mimeType)), _react2.default.createElement('div', { className: 'row' }, _react2.default.createElement('div', { className: 'col-md-3 col-lg-3 col-sm-3 col-xs-4', style: [_components.regularTitle, { textAlign: 'right' }] }, 'Response content'), _react2.default.createElement('div', { className: 'col-md-9 col-lg-9 col-sm-9 col-xs-8' }, this.props.content.text)));
         }
     }]);
 
@@ -29234,26 +29227,12 @@ var HttpList = (0, _radium2.default)(_class = function (_Component) {
 
         _this.state = {
             show: false,
-            timeLineWidth: { width: 'calc(100% - 570px)' },
             center: false
         };
         return _this;
     }
 
     _createClass(HttpList, [{
-        key: 'componentDidMount',
-        value: function componentDidMount() {
-            var _this2 = this;
-
-            window.addEventListener("resize", function () {
-                if (window.innerWidth < 1200) {
-                    _this2.setState({ timeLineWidth: { width: 'calc(100% - 240px)' } });
-                } else {
-                    _this2.setState({ timeLineWidth: { width: 'calc(100% - 570px)' } });
-                }
-            });
-        }
-    }, {
         key: 'onBtnClick',
         value: function onBtnClick(e) {
             e.preventDefault();
@@ -29273,10 +29252,12 @@ var HttpList = (0, _radium2.default)(_class = function (_Component) {
     }, {
         key: 'render',
         value: function render() {
-            var _this3 = this;
+            var _this2 = this;
 
             var color = 'white';
             var centerTemp = {};
+            var timeLineWidth = { width: 'calc(100% - 570px)' };
+
             if (!this.state.center) {
                 centerTemp = {};
             } else {
@@ -29288,6 +29269,10 @@ var HttpList = (0, _radium2.default)(_class = function (_Component) {
             }
             var backgroundStyle = { backgroundColor: color };
 
+            if (window.innerWidth < 1200) {
+                timeLineWidth = { width: 'calc(100% - 240px)' };
+            }
+
             return _react2.default.createElement('div', null, _react2.default.createElement('hr', { style: { margin: 0 } }), _react2.default.createElement('a', { href: '#', style: { textDecoration: 'none' } }, _react2.default.createElement('div', { style: [_components.chapterTitle, _components.left, backgroundStyle, centerTemp, { marginLeft: '10px' }],
                 onClick: this.onBtnClick.bind(this) }, this.props.page.title)), _react2.default.createElement('hr', { style: { margin: 0 } }), !this.state.show || _react2.default.createElement('div', { className: 'row',
                 style: {
@@ -29297,9 +29282,9 @@ var HttpList = (0, _radium2.default)(_class = function (_Component) {
                     borderColor: '#c6c6c6',
                     margin: 0
                 } }, _react2.default.createElement('div', { className: 'row', style: { height: '32px', backgroundColor: '#c6c6c6' } }, _react2.default.createElement('div', { className: 'col-lg-1 hidden-xs hidden-md hidden-sm', style: [_components.xxSmallBlock, _components.regularTitle] }, '#'), _react2.default.createElement('div', { className: 'col-lg-2 col-md-2 col-xs-2 col-sm-2', style: [_components.xMedeumBlock, _components.regularTitle] }, 'Title'), _react2.default.createElement('div', { className: 'col-lg-1 hidden-xs hidden-md hidden-sm', style: [_components.xSmallBlock, _components.regularTitle] }, 'Method'), _react2.default.createElement('div', { className: 'col-lg-1 hidden-xs hidden-md hidden-sm', style: [_components.xSmallBlock, _components.regularTitle] }, 'Status'), _react2.default.createElement('div', { className: 'col-lg-1 hidden-xs hidden-md hidden-sm', style: [_components.xSmallBlock, _components.regularTitle] }, 'Req size'), _react2.default.createElement('div', { className: 'col-lg-1 hidden-xs hidden-md hidden-sm', style: [_components.xSmallBlock, _components.regularTitle] }, 'Res size'), _react2.default.createElement('div', { className: 'col-lg-1 hidden-xs hidden-md hidden-sm', style: [_components.xSmallBlock, _components.regularTitle] }, 'Total time'), _react2.default.createElement('div', { className: 'col-lg-4 col-md-10 col-xs-10 col-sm-10',
-                style: [this.state.timeLineWidth, _components.regularTitle] }, 'Time line')), this.props.entries.map(function (entrie, number) {
+                style: [timeLineWidth, _components.regularTitle] }, 'Time line')), this.props.entries.map(function (entrie, number) {
                 return _react2.default.createElement(_HttpInfo2.default, {
-                    page: _this3.props.page,
+                    page: _this2.props.page,
                     number: number,
                     entrie: entrie,
                     time: entrie.startedDateTime,
@@ -29309,7 +29294,7 @@ var HttpList = (0, _radium2.default)(_class = function (_Component) {
                     reqSize: entrie.request.headersSize,
                     resSize: entrie.response.headersSize + entrie.response.bodySize,
                     totalTime: entrie.time,
-                    maxTime: _this3.props.maxTime
+                    maxTime: _this2.props.maxTime
                 });
             })));
         }
@@ -30033,7 +30018,11 @@ var Title = (0, _radium2.default)(_class = function (_Component) {
                 opacity: 0,
                 filter: 'alpha(opacity=0)'
             };
-            return _react2.default.createElement('div', { style: { backgroundColor: 'grey', overflow: 'hidden', margin: '0', display: "flex" } }, _react2.default.createElement('div', { style: { width: '110px' } }, _react2.default.createElement('div', { style: [fileUpload, _components.defaultButton, { width: '110px' }] }, _react2.default.createElement('span', null, 'Load HAR File'), _react2.default.createElement('input', { type: 'file', style: upload, onChange: this.readFile.bind(this) }))), _react2.default.createElement('div', null), _react2.default.createElement('div', { style: [_components.primaryTitle, _components.center, _style.textColor.white, _style.blockSpacing.one, { marginLeft: 'auto', marginRight: 'auto' }] }, 'HAR VIEWER'), _react2.default.createElement('div', null, _react2.default.createElement('a', { href: 'discuss.html', style: { textDecoration: 'none' } }, _react2.default.createElement('div', { style: [_style.blockSpacing.five, _components.chapterTitle, _components.center, _style.textColor.white, { marginRight: '50px' }] }, 'Let`s discuss'))));
+            var display = { display: 'true' };
+            if (window.innerWidth < 1200) {
+                display = { display: 'none' };
+            }
+            return _react2.default.createElement('div', { style: { backgroundColor: 'grey', margin: '0', display: "flex" } }, _react2.default.createElement('div', { style: { width: '110px' } }, _react2.default.createElement('div', { style: [fileUpload, _components.defaultButton, { width: '110px' }] }, _react2.default.createElement('span', null, 'Load HAR File'), _react2.default.createElement('input', { type: 'file', style: upload, onChange: this.readFile.bind(this) }))), _react2.default.createElement('div', { style: [_components.primaryTitle, _style.textColor.white, _style.blockSpacing.one, { marginLeft: 'auto', marginRight: 'auto' }, display] }, 'HAR VIEWER'), _react2.default.createElement('div', null, _react2.default.createElement('a', { href: 'discuss.html', style: { textDecoration: 'none' } }, _react2.default.createElement('div', { style: [_style.blockSpacing.five, _components.chapterTitle, _style.textColor.white, { position: 'absolute', top: 0, right: '50px' }] }, 'Let`s discuss'))));
         }
     }]);
 
