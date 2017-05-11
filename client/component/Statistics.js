@@ -1,12 +1,10 @@
 import React, {Component} from 'react'
 import Radium from 'radium'
-import {defaultButton, primaryButton, successButton, regularTitle, chapterTitle, left} from '../style/components'
-import {blockSpacing} from '../style/style'
+import {defaultButton, regularTitle, chapterTitle, left} from '../style/components'
 
 import StatisticsResponseContent from './Statistics/StatisticsResponseContent'
 import StatisticsTiming from './Statistics/StatisticsTiming'
 import StatisticsHeaderBodySendReceive from './Statistics/StatisticsHeaderBodySendReceive'
-
 
 @Radium
 export default class Statistics extends Component {
@@ -19,7 +17,6 @@ export default class Statistics extends Component {
     }
 
     showHideStatistics() {
-
         this.setState({
             show: !this.state.show
         })
@@ -36,17 +33,17 @@ export default class Statistics extends Component {
     render() {
         return (<div style={left}>
                 <a href='#' onClick={this.showHideStatistics.bind(this)} style={{decoration:'none'}}>
-                <div style={[defaultButton, {position: 'absolute', top: 0, left: '150px', borderWidth:'1px'}]}
-                        >Show/hide statistics
+                <div style={[defaultButton, {position: 'absolute', top: 0, left: '150px', borderWidth:'1px'}]}>
+                    Show/hide statistics
                 </div>
                     </a>
                 {!this.state.show || <div style={chapterTitle}>STATISTICS</div>}
                 {!this.state.show || this.props.statistics.map((statistic, number) => {
-                    let color = 'white';
+                    let backgroundRowColor = 'white';
                     if (number % 2 != 0) {
-                        color = '#f8f8ff';
+                        backgroundRowColor = '#f8f8ff';
                     }
-                    const backgroundStyle = {backgroundColor: color};
+                    const backgroundStyle = {backgroundColor: backgroundRowColor};
                     return (
                         <div>
                             <hr style={{margin: 0}}/>
