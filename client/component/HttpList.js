@@ -2,17 +2,7 @@ import React, {Component} from 'react'
 import Radium from 'radium'
 
 import HttpInfo from '../component/HttpInfo'
-import {
-    regularTitle,
-    xxSmallBlock,
-    xSmallBlock,
-    xMedeumBlock,
-    xLargeBlock,
-    center,
-    chapterTitle,
-    left
-} from '../style/components.js'
-import {blockSpacing} from '../style/style.js'
+import {regularTitle, xxSmallBlock, xSmallBlock, xMedeumBlock, center, chapterTitle, left} from '../style/components.js'
 
 @Radium
 export default
@@ -41,9 +31,8 @@ class HttpList extends Component {
     }
 
     render() {
-        let color = 'white';
         let centerTemp = {};
-        let timeLineWidth = {width: 'calc(100% - 570px)'};
+        let timeLineWidth = {width: 'calc(100% - 590px)'};
 
         if (!this.state.center) {
             centerTemp = {}
@@ -51,19 +40,14 @@ class HttpList extends Component {
             centerTemp = center
         }
 
-        if (this.props.number % 2 != 0) {
-            color = '#f8f8ff';
-        }
-        const backgroundStyle = {backgroundColor: color};
-
         if (window.innerWidth < 1200) {
-            timeLineWidth = {width: 'calc(100% - 240px)'}
+            timeLineWidth = {width: 'calc(100% - 260px)'}
         }
 
         return (<div>
                 <hr style={{margin: 0}}/>
                 <a href='#' style={{textDecoration: 'none'}}>
-                    <div style={[chapterTitle, left, backgroundStyle, centerTemp, {marginLeft: '10px'}]}
+                    <div style={[chapterTitle, left,  centerTemp, {marginLeft: '10px'}]}
                          onClick={this.onBtnClick.bind(this)}>{this.props.page.title}
                     </div>
                 </a>
@@ -77,8 +61,8 @@ class HttpList extends Component {
                                               borderColor: '#c6c6c6',
                                               margin: 0
                                           }}>
-                    <div className='row' style={{height: '32px', backgroundColor: '#c6c6c6'}}>
-                        <div className="col-lg-1 hidden-xs hidden-md hidden-sm" style={[xxSmallBlock, regularTitle]}>#
+                    <div className='row' style={[{height: '32px', backgroundColor: '#c6c6c6'}]}>
+                        <div className="col-lg-1 hidden-xs hidden-md hidden-sm" style={[xxSmallBlock, regularTitle, {marginLeft: '20px'}]}>#
                         </div>
                         <div className="col-lg-2 col-md-2 col-xs-2 col-sm-2" style={[xMedeumBlock, regularTitle]}>
                             Title

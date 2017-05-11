@@ -2,8 +2,6 @@ import React, {Component} from 'react'
 import Radium from 'radium'
 import Chart from 'chart.js'
 
-import {canvas} from '../../style/components'
-
 @Radium
 export default class StatisticsHeaderBodySendReceive extends Component {
     componentDidMount() {
@@ -16,7 +14,6 @@ export default class StatisticsHeaderBodySendReceive extends Component {
         const dataSet = props.data;
         const id = "headBodyPie" + this.props.number;
         const ctx = document.getElementById(id);
-
         const data = {
             labels: [
                 "Bod/send",
@@ -56,7 +53,6 @@ export default class StatisticsHeaderBodySendReceive extends Component {
                         boxWidth: 10,
                         padding: 5
                     }
-
                 }
             }
         });

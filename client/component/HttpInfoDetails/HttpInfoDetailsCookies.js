@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import Radium from 'radium'
 
-import {medeumBlockContent, regularTitle} from '../../style/components.js'
+import {regularTitle, left} from '../../style/components.js'
 import {blockSpacing, borderRadii, elementSpacing} from '../../style/style'
 
 @Radium
@@ -17,7 +17,7 @@ export default class HttpInfoDetailsCookies extends Component {
                     } else {
                         return this.props.request.cookies.map(cookie => {
                             return (<div>
-                                    <div style={[regularTitle, {textAlign: 'left'}]}>{cookie.name}</div>
+                                    <div style={[regularTitle, left]}>{cookie.name}</div>
                                     <ul>
                                         <li>Value: {cookie.value}</li>
                                         <li>HTTP Only: {cookie.httpOnly}</li>
@@ -32,11 +32,11 @@ export default class HttpInfoDetailsCookies extends Component {
                 <hr style={blockSpacing.one}/>
                 {(() => {
                     if (this.props.response.cookies == 0) {
-                        return <div>No cookies send</div>
+                        return <div>No cookies receive</div>
                     } else {
                         return this.props.response.cookies.map(cookie => {
                             return (<div>
-                                    <div style={[regularTitle, {textAlign: 'left'}]}>{cookie.name}</div>
+                                    <div style={[regularTitle, left]}>{cookie.name}</div>
                                     <ul>
                                         <li>Value: {cookie.value}</li>
                                         <li>HTTP Only: {cookie.httpOnly}</li>

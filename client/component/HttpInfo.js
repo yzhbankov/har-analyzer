@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import Radium from 'radium'
-import {regularTitle, xxSmallBlock, xSmallBlock, xMedeumBlock, xLargeBlock} from '../style/components.js'
+import {xxSmallBlock, xSmallBlock, xMedeumBlock} from '../style/components.js'
 
 import HttpInfoDetails from '../component/HttpInfoDetails.js'
 import HttpInfoTimeLine from '../component/HttpInfoTimeLine'
@@ -23,21 +23,19 @@ class HttpInfo extends Component {
     }
 
     render() {
-        let color = 'white';
+        let backgroundRowColor = 'white';
         let timeLineWidth = {width: 'calc(100% - 570px)'};
-
         if (this.props.number % 2 != 0) {
-            color = '#f8f8ff';
+            backgroundRowColor = '#f8f8ff';
         }
-        const backgroundStyle = {backgroundColor: color};
-
+        const backgroundRowStyle = {backgroundColor: backgroundRowColor};
         if (window.innerWidth < 1200) {
             timeLineWidth = {width: 'calc(100% - 240px)'}
         }
 
         return (<div className="col-md-12 col-xs-12">
                 <hr style={{margin: 0, width: '100%'}}/>
-                <div className="row" style={[backgroundStyle]} onClick={this.onBtnClick.bind(this)}>
+                <div className="row" style={[backgroundRowStyle]} onClick={this.onBtnClick.bind(this)}>
                     <div className="col-md-1 hidden-xs hidden-md hidden-sm"
                          style={xxSmallBlock}>{this.props.number + 1}</div>
                     <div className="col-md-2 col-xs-2"

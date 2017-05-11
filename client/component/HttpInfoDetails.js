@@ -18,7 +18,7 @@ class HttpInfoDetails extends Component {
             resShow: false,
             contentShow: false,
             cookiesShow: false
-        };
+        }
     }
 
     showHideComponent(e) {

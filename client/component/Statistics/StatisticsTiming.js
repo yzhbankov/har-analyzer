@@ -2,8 +2,6 @@ import React, {Component} from 'react'
 import Radium from 'radium'
 import Chart from 'chart.js'
 
-import {canvas} from '../../style/components'
-
 @Radium
 export default class StatisticsTiming extends Component {
     componentDidMount() {
@@ -16,7 +14,6 @@ export default class StatisticsTiming extends Component {
         const dataSet = props.data;
         const id = 'timingPie' + this.props.number;
         const ctx = document.getElementById(id);
-
         const data = {
             labels: [
                 "Blocked",
@@ -65,7 +62,6 @@ export default class StatisticsTiming extends Component {
                         boxWidth: 10,
                         padding: 5
                     }
-
                 }
             }
         });

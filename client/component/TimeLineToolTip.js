@@ -1,24 +1,12 @@
 import React, {Component} from 'react'
 import Radium from 'radium'
-import {
-    regularTitle,
-    dnsTime,
-    connectTime,
-    sslTime,
-    blockTime,
-    sendTime,
-    waitTime,
-    contentLoad,
-    pageLoad,
-    receiveTime
-} from '../style/components.js'
+import {regularTitle, dnsTime, connectTime, sslTime, blockTime, sendTime, waitTime, contentLoad, pageLoad, receiveTime} from '../style/components.js'
 import {blockSpacing, elementSpacing, shadows, borderRadii} from '../style/style'
 
 @Radium
 export default
 class TimeLineToolTip extends Component {
     render() {
-
         function isNegative(num) {
             if (num > 0) {
                 return num

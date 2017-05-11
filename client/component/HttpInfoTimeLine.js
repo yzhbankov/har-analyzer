@@ -1,19 +1,8 @@
 import React, {Component} from 'react'
 import Radium from 'radium'
 import TimeLineToolTip from './TimeLineToolTip.js'
-import {
-    startTime,
-    timeLine,
-    dnsTime,
-    connectTime,
-    sslTime,
-    blockTime,
-    sendTime,
-    waitTime,
-    receiveTime,
-    contentLoad,
-    pageLoad
-} from '../style/components.js'
+import {startTime, timeLine, dnsTime, connectTime, sslTime, blockTime, sendTime, waitTime, receiveTime, contentLoad,
+    pageLoad} from '../style/components.js'
 
 @Radium
 export default
@@ -22,7 +11,7 @@ class HttpInfoTimeLine extends Component {
         let totalTime = props.page.pageTimings.onLoad;
         let maxTime = props.maxTime;
         if (totalTime > maxTime) {
-            maxTime = totalTime;
+            maxTime = totalTime
         }
         super(props);
         this.state = {
@@ -39,7 +28,7 @@ class HttpInfoTimeLine extends Component {
             sslTime: props.entrie.timings.ssl,
             showToolTip: false,
             maxTime: maxTime
-        };
+        }
     }
 
     componentWillReceiveProps(props) {

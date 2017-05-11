@@ -1,14 +1,6 @@
 import React, {Component} from 'react'
 import Radium from 'radium'
-import {
-    primaryTitle,
-    chapterTitle,
-    defaultButton,
-    primaryButton,
-    successButton,
-    dangerButton,
-    center, right
-} from '../style/components.js'
+import {primaryTitle, chapterTitle, defaultButton} from '../style/components.js'
 import {textColor, blockSpacing} from '../style/style'
 
 @Radium
@@ -19,12 +11,12 @@ class Title extends Component {
     }
 
     render() {
-        const fileUpload = {
+        const fileUploadStyle = {
             position: 'relative',
             overflow: 'hidden',
             margin: '10px'
         };
-        const upload = {
+        const uploadInputStyle = {
             position: 'absolute',
             top: 0,
             right: 0,
@@ -38,9 +30,9 @@ class Title extends Component {
         return (
             <div style={{backgroundColor:'grey', margin:'0', display:"flex"}}>
                 <div style={{width: '110px'}}>
-                    <div style={[fileUpload, defaultButton, {width: '110px'}]}>
+                    <div style={[fileUploadStyle, defaultButton, {width: '110px'}]}>
                         <span>Load HAR File</span>
-                        <input type="file" style={upload} onChange={this.readFile.bind(this)}/>
+                        <input type="file" style={uploadInputStyle} onChange={this.readFile.bind(this)}/>
                     </div>
                 </div>
                 <div className='hidden-lg hidden-md col-xs-5 col-sm-5'></div>
