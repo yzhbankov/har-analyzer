@@ -35,10 +35,6 @@ class Title extends Component {
             opacity: 0,
             filter: 'alpha(opacity=0)'
         };
-        let display = {display: 'true'};
-        if (window.innerWidth < 1200) {
-            display = {display: 'none'}
-        }
         return (
             <div style={{backgroundColor:'grey', margin:'0', display:"flex"}}>
                 <div style={{width: '110px'}}>
@@ -47,9 +43,16 @@ class Title extends Component {
                         <input type="file" style={upload} onChange={this.readFile.bind(this)}/>
                     </div>
                 </div>
-                <div style={[primaryTitle, textColor.white, blockSpacing.one, {marginLeft:'auto', marginRight:'auto'}, display]}>HAR VIEWER</div>
+                <div className='hidden-lg hidden-md col-xs-5 col-sm-5'></div>
+                <div className='hidden-sm hidden-xs'
+                     style={[primaryTitle, textColor.white, blockSpacing.one, {marginLeft:'auto', marginRight:'auto'}]}>
+                    HAR VIEWER
+                </div>
                 <div ><a href="discuss.html" style={{textDecoration: 'none'}}>
-                    <div style={[blockSpacing.five, chapterTitle, textColor.white, {position: 'absolute', top:0, right:'50px'}]}>Let`s discuss</div>
+                    <div
+                        style={[blockSpacing.five, chapterTitle, textColor.white, {position: 'absolute', top:0, right:'50px'}]}>
+                        Let`s discuss
+                    </div>
                 </a>
                 </div>
             </div>

@@ -50,7 +50,7 @@ export default class Statistics extends Component {
                     return (
                         <div>
                             <hr style={{margin: 0}}/>
-                            <a href="#" style={{textDecoration:'none'}}><div style={[chapterTitle, left, backgroundStyle]}
+                            <a href="#" style={{textDecoration:'none'}}><div style={[chapterTitle, left, backgroundStyle, {marginLeft: '10px'}]}
                                  onClick={this.showHidePageStatistics.bind(this, number)}>{this.props.pages[number].title}</div>
                             </a>
                             <hr style={{margin: 0}}/>
