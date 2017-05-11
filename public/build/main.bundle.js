@@ -29421,7 +29421,7 @@ var Statistics = (0, _radium2.default)(_class = function (_Component) {
                     color = '#f8f8ff';
                 }
                 var backgroundStyle = { backgroundColor: color };
-                return _react2.default.createElement('div', null, _react2.default.createElement('hr', { style: { margin: 0 } }), _react2.default.createElement('a', { href: '#', style: { textDecoration: 'none' } }, _react2.default.createElement('div', { style: [_components.chapterTitle, _components.left, backgroundStyle],
+                return _react2.default.createElement('div', null, _react2.default.createElement('hr', { style: { margin: 0 } }), _react2.default.createElement('a', { href: '#', style: { textDecoration: 'none' } }, _react2.default.createElement('div', { style: [_components.chapterTitle, _components.left, backgroundStyle, { marginLeft: '10px' }],
                     onClick: _this2.showHidePageStatistics.bind(_this2, number) }, _this2.props.pages[number].title)), _react2.default.createElement('hr', { style: { margin: 0 } }), !_this2.state.showPage[number] || _react2.default.createElement('div', { className: 'row', style: { margin: 0 } }, _react2.default.createElement('div', { style: _components.chapterTitle }, _this2.props.pages[number].title), _react2.default.createElement('div', { className: 'col-md-4', style: _components.regularTitle }, _react2.default.createElement('div', null, 'Response content statistics'), _react2.default.createElement(_StatisticsResponseContent2.default, { data: statistic.responseContent, number: number })), _react2.default.createElement('div', { className: 'col-md-4', style: _components.regularTitle }, _react2.default.createElement('div', null, 'Time statistics'), _react2.default.createElement(_StatisticsTiming2.default, { data: statistic.timing, number: number })), _react2.default.createElement('div', { className: 'col-md-4', style: _components.regularTitle }, _react2.default.createElement('div', null, 'Head/body statistics'), _react2.default.createElement(_StatisticsHeaderBodySendReceive2.default, { data: statistic.headBody, number: number }))));
             }));
         }
@@ -30018,11 +30018,9 @@ var Title = (0, _radium2.default)(_class = function (_Component) {
                 opacity: 0,
                 filter: 'alpha(opacity=0)'
             };
-            var display = { display: 'true' };
-            if (window.innerWidth < 1200) {
-                display = { display: 'none' };
-            }
-            return _react2.default.createElement('div', { style: { backgroundColor: 'grey', margin: '0', display: "flex" } }, _react2.default.createElement('div', { style: { width: '110px' } }, _react2.default.createElement('div', { style: [fileUpload, _components.defaultButton, { width: '110px' }] }, _react2.default.createElement('span', null, 'Load HAR File'), _react2.default.createElement('input', { type: 'file', style: upload, onChange: this.readFile.bind(this) }))), _react2.default.createElement('div', { style: [_components.primaryTitle, _style.textColor.white, _style.blockSpacing.one, { marginLeft: 'auto', marginRight: 'auto' }, display] }, 'HAR VIEWER'), _react2.default.createElement('div', null, _react2.default.createElement('a', { href: 'discuss.html', style: { textDecoration: 'none' } }, _react2.default.createElement('div', { style: [_style.blockSpacing.five, _components.chapterTitle, _style.textColor.white, { position: 'absolute', top: 0, right: '50px' }] }, 'Let`s discuss'))));
+            return _react2.default.createElement('div', { style: { backgroundColor: 'grey', margin: '0', display: "flex" } }, _react2.default.createElement('div', { style: { width: '110px' } }, _react2.default.createElement('div', { style: [fileUpload, _components.defaultButton, { width: '110px' }] }, _react2.default.createElement('span', null, 'Load HAR File'), _react2.default.createElement('input', { type: 'file', style: upload, onChange: this.readFile.bind(this) }))), _react2.default.createElement('div', { className: 'hidden-lg hidden-md col-xs-5 col-sm-5' }), _react2.default.createElement('div', { className: 'hidden-sm hidden-xs',
+                style: [_components.primaryTitle, _style.textColor.white, _style.blockSpacing.one, { marginLeft: 'auto', marginRight: 'auto' }] }, 'HAR VIEWER'), _react2.default.createElement('div', null, _react2.default.createElement('a', { href: 'discuss.html', style: { textDecoration: 'none' } }, _react2.default.createElement('div', {
+                style: [_style.blockSpacing.five, _components.chapterTitle, _style.textColor.white, { position: 'absolute', top: 0, right: '50px' }] }, 'Let`s discuss'))));
         }
     }]);
 
