@@ -28,7 +28,6 @@ class Statistics extends Component {
 
     render() {
         return (<div style={left}>
-
                 {!this.props.showStatistics || <div style={chapterTitle}>STATISTICS</div>}
                 {!this.props.showStatistics || this.props.statistics.map((statistic, number) => {
                     let backgroundRowColor = 'white';
