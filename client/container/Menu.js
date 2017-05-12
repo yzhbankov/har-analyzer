@@ -1,15 +1,17 @@
-import React, {Component} from 'react'
+import React, {Component, PropTypes} from 'react'
+import {connect} from 'react-redux'
 import Radium from 'radium'
+import * as HarActions from '../actions/HarActions'
+import {bindActionCreators} from 'redux'
+
 import {primaryTitle, chapterTitle, defaultButton} from '../style/components.js'
 import {textColor, blockSpacing} from '../style/style'
 
-@Radium
-export default
-class Title extends Component {
+@Radium class Menu extends Component {
     readFile(event) {
-        this.props.loadHarContent(event)
+        this.props.getHarActions.loadHarContent(event)
     }
-
+//loadHarContent={this.props.getHarActions.loadHarContent}
     render() {
         const fileUploadStyle = {
             position: 'relative',
@@ -34,6 +36,11 @@ class Title extends Component {
                         <span>Load HAR File</span>
                         <input type="file" style={uploadInputStyle} onChange={this.readFile.bind(this)}/>
                     </div>
+                    <a href='#' onClick={this.props.getHarActions.showHideStatistics.bind(this, this.props.showStatistics)} style={{decoration:'none'}}>
+                        <div style={[defaultButton]}>
+                            Show/hide statistics
+                        </div>
+                    </a>
                 </div>
                 <div className='hidden-lg hidden-md col-xs-5 col-sm-5'></div>
                 <div className='hidden-sm hidden-xs'
@@ -51,3 +58,11 @@ class Title extends Component {
         )
     }
 }
+
+function dispatchToComponent(dispatch) {
+    return {
+        getHarActions: bindActionCreators(HarActions, dispatch)
+    }
+}
+
+export default connect(null, dispatchToComponent)(Menu)
