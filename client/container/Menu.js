@@ -4,12 +4,19 @@ import Radium from 'radium'
 import * as HarActions from '../actions/HarActions'
 import {bindActionCreators} from 'redux'
 
-import {primaryTitle, chapterTitle, defaultButton} from '../style/components.js'
-import {textColor, blockSpacing} from '../style/style'
-
 @Radium class Menu extends Component {
     readFile(event) {
         this.props.getHarActions.loadHarContent(event)
+    }
+
+    toggleNav() {
+        const nav = document.getElementsByClassName("nav-menu")[0];
+        const className = nav.getAttribute("class");
+        if (className == "nav-right nav-menu") {
+            nav.className = "nav-right nav-menu is-active";
+        } else {
+            nav.className = "nav-right nav-menu";
+        }
     }
 
     render() {
@@ -30,36 +37,40 @@ import {textColor, blockSpacing} from '../style/style'
             filter: 'alpha(opacity=0)'
         };
         return (
-            <div style={{backgroundColor:'grey', margin:'0', display:"flex"}}>
-                <div style={[fileUploadStyle, defaultButton]}>
-                    <span>Load HAR File</span>
-                    <input type="file" style={uploadInputStyle} onChange={this.readFile.bind(this)}/>
-                </div>
+            <nav className="nav has-shadow">
+                <div className="container">
+                    <div className="nav-left">
+                        <a className="nav-item">
+                            <img src="../etc/img/logo.png" alt="Bulma logo"/>
+                        </a>
+                        <a className="nav-item is-tab is-hidden-mobile is-active">
+                            <div style={[fileUploadStyle]}>
+                                <span>Load HAR</span>
+                                <input type="file" style={uploadInputStyle} onChange={this.readFile.bind(this)}/>
+                            </div>
+                        </a>
+                        <a className="nav-item is-tab is-hidden-mobile"
+                           onClick={this.props.getHarActions.showHideStatistics.bind(this, this.props.showStatistics)}>Statistics</a>
+                    </div>
+                        <span className="nav-toggle" onClick={this.toggleNav}>
+                          <span></span>
+                          <span></span>
+                          <span></span>
+                        </span>
 
-                <div>
-                    <a href='#'
-                       onClick={this.props.getHarActions.showHideStatistics.bind(this, this.props.showStatistics)}
-                       style={{decoration:'none'}}>
-                        <div style={[defaultButton]}>
-                            Show/hide statistics
-                        </div>
-                    </a>
+                    <div className="nav-right nav-menu">
+                        <a className="nav-item is-tab is-hidden-tablet">
+                            <div style={[fileUploadStyle]}>
+                                <span>Load HAR</span>
+                                <input type="file" style={uploadInputStyle} onChange={this.readFile.bind(this)}/>
+                            </div>
+                        </a>
+                        <a className="nav-item is-tab is-hidden-tablet"
+                           onClick={this.props.getHarActions.showHideStatistics.bind(this, this.props.showStatistics)}>Statistics</a>
+                        <a className="nav-item is-tab" href="discuss.html">Discuss?</a>
+                    </div>
                 </div>
-
-                <div className='hidden-sm hidden-xs'
-                     style={[primaryTitle, textColor.white, blockSpacing.one, {marginLeft:'auto', marginRight:'auto'}]}>
-                    HAR VIEWER
-                </div>
-
-                <div>
-                    <a href="discuss.html" style={{textDecoration: 'none'}}>
-                        <div
-                            style={[blockSpacing.five, chapterTitle, textColor.white, {position: 'absolute', top:0, right:'50px'}]}>
-                            Let`s discuss
-                        </div>
-                    </a>
-                </div>
-            </div>
+            </nav>
         )
     }
 }
