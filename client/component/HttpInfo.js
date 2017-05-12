@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import Radium from 'radium'
-import {xxSmallBlock, xSmallBlock, xMedeumBlock} from '../style/components.js'
+import '../style/sass/styles.sass'
 
 import HttpInfoDetails from '../component/HttpInfoDetails.js'
 import HttpInfoTimeLine from '../component/HttpInfoTimeLine'
@@ -34,35 +34,42 @@ class HttpInfo extends Component {
         }
 
         return (<div>
-                <div className="columns" style={[backgroundRowStyle]} onClick={this.onBtnClick.bind(this)}>
+                <div className="columns is-gapless content is-small" style={[backgroundRowStyle]}
+                     onClick={this.onBtnClick.bind(this)}>
                     <div className='column is-one-third'>
                         <div className='columns'>
                             <div className="column is-1 has-text-centered">{this.props.number + 1}</div>
-                            <div className="column is-3 has-text-centered" style={[{overflowX: 'hidden', whiteSpace: 'nowrap'}]}><a
+                            <div className="column is-5 has-text-centered"
+                                 style={[{overflowX: 'hidden', whiteSpace: 'nowrap'}]}><a
                                 href='#'>{this.props.title}</a></div>
-                            <div className="column is-1 has-text-centered">{this.props.reqMethod}</div>
-                            <div className="column is-1 has-text-centered">{this.props.resStatus}</div>
-                            <div className="column is-2 has-text-centered">{(() => {
-                                if (this.props.reqSize <= 0) {
-                                    return '-'
-                                } else {
-                                    return this.props.reqSize
-                                }
-                            })()
-                            }</div>
-                            <div className="column is-2 has-text-centered">{(() => {
-                                if (this.props.resSize <= 0) {
-                                    return '-'
-                                } else {
-                                    return this.props.resSize
-                                }
-                            })()
-                            }
+                            <div className="column is-6">
+                                <div className="columns">
+                                    <div className="column is-2 has-text-centered">{this.props.reqMethod}</div>
+                                    <div className="column is-2 has-text-centered">{this.props.resStatus}</div>
+                                    <div className="column is-3 has-text-centered">{(() => {
+                                        if (this.props.reqSize <= 0) {
+                                            return '-'
+                                        } else {
+                                            return this.props.reqSize
+                                        }
+                                    })()
+                                    }</div>
+                                    <div className="column is-3 has-text-centered">{(() => {
+                                        if (this.props.resSize <= 0) {
+                                            return '-'
+                                        } else {
+                                            return this.props.resSize
+                                        }
+                                    })()
+                                    }
+                                    </div>
+                                    <div
+                                        className="column is-2 has-text-centered">{Math.round(this.props.totalTime * 100) / 100}</div>
+                                </div>
                             </div>
-                            <div className="column is-2 has-text-centered" style={xSmallBlock}>{Math.round(this.props.totalTime * 100) / 100}</div>
                         </div>
                     </div>
-                    <div className="column has-text-centered" style={[timeLineWidth]}>
+                    <div className="column is-two-thirds has-text-centered" style={[timeLineWidth]}>
                         <HttpInfoTimeLine entrie={this.props.entrie}
                                           page={this.props.page}
                                           maxTime={this.props.maxTime}/>

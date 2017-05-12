@@ -5,8 +5,6 @@ import Menu from './Menu.js'
 import HttpList from '../component/HttpList'
 import Statistics from '../component/Statistics'
 
-import {regularText, chapterTitle, center} from '../style/components.js'
-
 class App extends Component {
     render() {
         return (<div>
@@ -15,8 +13,7 @@ class App extends Component {
                             pages={this.props.pages}/>
 
                 <div>
-                    {this.props.isDataLoad || <div>LOAD YOUR HAR</div>}
-                    {!this.props.isDataLoad || <div>PAGES</div>}
+                    {this.props.isDataLoad || <div className="hero-body"><div className="title is-1 has-text-centered">LOAD YOUR HAR</div></div>}
                     {this.props.pages.map((page, number) =>
                             <HttpList
                                 entries={this.props.entries[number]}
