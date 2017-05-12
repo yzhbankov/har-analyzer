@@ -1,12 +1,9 @@
 import React, {Component} from 'react'
-import Radium from 'radium'
 
 import HttpInfo from '../component/HttpInfo'
-import {regularTitle, xxSmallBlock, xSmallBlock, xMedeumBlock, center, chapterTitle, left} from '../style/components.js'
+import '../style/sass/styles.sass'
 
-@Radium
-export default
-class HttpList extends Component {
+export default class HttpList extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -45,48 +42,27 @@ class HttpList extends Component {
         }
 
         return (<div>
-                <hr style={{margin: 0}}/>
-                <a href='#' style={{textDecoration: 'none'}}>
-                    <div style={[chapterTitle, left,  centerTemp, {marginLeft: '10px'}]}
-                         onClick={this.onBtnClick.bind(this)}>{this.props.page.title}
+                <a href='#'>
+                    <div className='title is-6' onClick={this.onBtnClick.bind(this)}>{this.props.page.title}
                     </div>
                 </a>
-                <hr style={{margin: 0}}/>
 
-                {!this.state.show || <div className='row'
-                                          style={{
-                                              minHeight: '200px',
-                                              borderStyle: 'solid',
-                                              borderWidth: '1px',
-                                              borderColor: '#c6c6c6',
-                                              margin: 0
-                                          }}>
-                    <div className='row' style={[{height: '32px', backgroundColor: '#c6c6c6'}]}>
-                        <div className="col-lg-1 hidden-xs hidden-md hidden-sm" style={[xxSmallBlock, regularTitle, {marginLeft: '20px'}]}>#
+                {!this.state.show || <div>
+                    <div className='columns'>
+                        <div className='column is-one-third'>
+                            <div className='columns'>
+                                <div className="column is-1 has-text-centered">#</div>
+                                <div className="column is-3 has-text-centered">Title</div>
+                                <div className="column is-1 has-text-centered">Method</div>
+                                <div className="column is-1 has-text-centered">Status</div>
+                                <div className="column is-2 has-text-centered">Req size</div>
+                                <div className="column is-2 has-text-centered">Res size</div>
+                                <div className="column is-2 has-text-centered">Total time</div>
+                            </div>
                         </div>
-                        <div className="col-lg-2 col-md-2 col-xs-2 col-sm-2" style={[xMedeumBlock, regularTitle]}>
-                            Title
-                        </div>
-                        <div className="col-lg-1 hidden-xs hidden-md hidden-sm" style={[xSmallBlock, regularTitle]}>
-                            Method
-                        </div>
-                        <div className="col-lg-1 hidden-xs hidden-md hidden-sm" style={[xSmallBlock, regularTitle]}>
-                            Status
-                        </div>
-                        <div className="col-lg-1 hidden-xs hidden-md hidden-sm" style={[xSmallBlock, regularTitle]}>Req
-                            size
-                        </div>
-                        <div className="col-lg-1 hidden-xs hidden-md hidden-sm" style={[xSmallBlock, regularTitle]}>Res
-                            size
-                        </div>
-                        <div className="col-lg-1 hidden-xs hidden-md hidden-sm" style={[xSmallBlock, regularTitle]}>
-                            Total time
-                        </div>
-                        <div className="col-lg-4 col-md-10 col-xs-10 col-sm-10"
-                             style={[timeLineWidth, regularTitle]}>
-                            Time line
-                        </div>
+                        <div className="column has-text-centered">Time line</div>
                     </div>
+
                     {this.props.entries.map((entrie, number) =>
                             <HttpInfo
                                 page={this.props.page}

@@ -33,38 +33,36 @@ class HttpInfo extends Component {
             timeLineWidth = {width: 'calc(100% - 240px)'}
         }
 
-        return (<div className="col-md-12 col-xs-12">
-                <hr style={{margin: 0, width: '100%'}}/>
-                <div className="row" style={[backgroundRowStyle]} onClick={this.onBtnClick.bind(this)}>
-                    <div className="col-md-1 hidden-xs hidden-md hidden-sm"
-                         style={xxSmallBlock}>{this.props.number + 1}</div>
-                    <div className="col-md-2 col-xs-2"
-                         style={[xMedeumBlock, {overflowX: 'hidden', whiteSpace: 'nowrap'}]}><a
-                        href='#'>{this.props.title}</a></div>
-                    <div className="col-md-1 hidden-xs hidden-md hidden-sm"
-                         style={xSmallBlock}>{this.props.reqMethod}</div>
-                    <div className="col-md-1 hidden-xs hidden-md hidden-sm"
-                         style={xSmallBlock}>{this.props.resStatus}</div>
-                    <div className="col-md-1 hidden-xs hidden-md hidden-sm" style={xSmallBlock}>{(() => {
-                        if (this.props.reqSize <= 0) {
-                            return '-'
-                        } else {
-                            return this.props.reqSize
-                        }
-                    })()
-                    }</div>
-                    <div className="col-md-1 hidden-xs hidden-md hidden-sm" style={xSmallBlock}>{(() => {
-                        if (this.props.resSize <= 0) {
-                            return '-'
-                        } else {
-                            return this.props.resSize
-                        }
-                    })()
-                    }
+        return (<div>
+                <div className="columns" style={[backgroundRowStyle]} onClick={this.onBtnClick.bind(this)}>
+                    <div className='column is-one-third'>
+                        <div className='columns'>
+                            <div className="column is-1 has-text-centered">{this.props.number + 1}</div>
+                            <div className="column is-3 has-text-centered" style={[{overflowX: 'hidden', whiteSpace: 'nowrap'}]}><a
+                                href='#'>{this.props.title}</a></div>
+                            <div className="column is-1 has-text-centered">{this.props.reqMethod}</div>
+                            <div className="column is-1 has-text-centered">{this.props.resStatus}</div>
+                            <div className="column is-2 has-text-centered">{(() => {
+                                if (this.props.reqSize <= 0) {
+                                    return '-'
+                                } else {
+                                    return this.props.reqSize
+                                }
+                            })()
+                            }</div>
+                            <div className="column is-2 has-text-centered">{(() => {
+                                if (this.props.resSize <= 0) {
+                                    return '-'
+                                } else {
+                                    return this.props.resSize
+                                }
+                            })()
+                            }
+                            </div>
+                            <div className="column is-2 has-text-centered" style={xSmallBlock}>{Math.round(this.props.totalTime * 100) / 100}</div>
+                        </div>
                     </div>
-                    <div className="col-md-1 hidden-xs hidden-md hidden-sm"
-                         style={xSmallBlock}>{Math.round(this.props.totalTime * 100) / 100}</div>
-                    <div className="col-md-4 col-md-10 col-xs-10 col-sm-10" style={[timeLineWidth]}>
+                    <div className="column has-text-centered" style={[timeLineWidth]}>
                         <HttpInfoTimeLine entrie={this.props.entrie}
                                           page={this.props.page}
                                           maxTime={this.props.maxTime}/>
