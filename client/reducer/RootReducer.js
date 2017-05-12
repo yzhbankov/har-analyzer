@@ -1,6 +1,7 @@
 import {
     LOAD_HAR_CONTENT,
-    LOAD_HAR_SUCCESS
+    LOAD_HAR_SUCCESS,
+    SHOW_HIDE_STATISTICS
 } from '../constants/Constants'
 
 
@@ -8,34 +9,42 @@ const initialState = {
     entries: [],
     pages: [],
     isDataLoad: false,
-    statistics: {}
+    statistics: {},
+    showStatistics: false
 };
 
 export default function rootReducer(state = initialState, action) {
     switch (action.type) {
-        case LOAD_HAR_CONTENT: {
+        case LOAD_HAR_CONTENT:
+        {
             return Object.assign({}, state, {})
         }
-        case LOAD_HAR_SUCCESS: {
+        case LOAD_HAR_SUCCESS:
+        {
             const pages = action.payload.pages;
             const entries = getPagesEntriesList(action.payload.entries, action.payload.pages);
             const maxTimes = getSetOfMaxTimes(entries, pages);
-            console.log('Entries');
-            console.log(entries);
-            console.log('MaxTimes');
-            console.log(maxTimes);
-            console.log('Pages');
-            console.log(pages);
             const statistics = getPagesListStatistics(entries);
+            const showStatistics = action.payload.showStatistics;
             return Object.assign({}, state, {
                 entries: entries,
                 pages: pages,
                 statistics: statistics,
                 isDataLoad: true,
-                maxTimes: maxTimes
+                maxTimes: maxTimes,
+                showStatistics: showStatistics
             })
         }
-        default: {
+        case SHOW_HIDE_STATISTICS:
+        {
+            console.log(action.payload);
+            return Object.assign({}, state, {
+                showStatistics: action.payload
+            })
+        }
+
+        default:
+        {
             return state
         }
     }

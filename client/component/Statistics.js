@@ -7,19 +7,15 @@ import StatisticsTiming from './Statistics/StatisticsTiming'
 import StatisticsHeaderBodySendReceive from './Statistics/StatisticsHeaderBodySendReceive'
 
 @Radium
-export default class Statistics extends Component {
+export default
+class Statistics extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            show: false,
-            showPage: [false, false, false]
+            showPage: props.pages.map(()=> {
+                return false
+            })
         };
-    }
-
-    showHideStatistics() {
-        this.setState({
-            show: !this.state.show
-        })
     }
 
     showHidePageStatistics(number) {
@@ -32,13 +28,8 @@ export default class Statistics extends Component {
 
     render() {
         return (<div style={left}>
-                <a href='#' onClick={this.showHideStatistics.bind(this)} style={{decoration:'none'}}>
-                <div style={[defaultButton, {position: 'absolute', top: 0, left: '150px', borderWidth:'1px'}]}>
-                    Show/hide statistics
-                </div>
-                    </a>
-                {!this.state.show || <div style={chapterTitle}>STATISTICS</div>}
-                {!this.state.show || this.props.statistics.map((statistic, number) => {
+                {!this.props.showStatistics || <div style={chapterTitle}>STATISTICS</div>}
+                {!this.props.showStatistics || this.props.statistics.map((statistic, number) => {
                     let backgroundRowColor = 'white';
                     if (number % 2 != 0) {
                         backgroundRowColor = '#f8f8ff';
@@ -47,8 +38,9 @@ export default class Statistics extends Component {
                     return (
                         <div>
                             <hr style={{margin: 0}}/>
-                            <a href="#" style={{textDecoration:'none'}}><div style={[chapterTitle, left, backgroundStyle, {marginLeft: '10px'}]}
-                                 onClick={this.showHidePageStatistics.bind(this, number)}>{this.props.pages[number].title}</div>
+                            <a href="#" style={{textDecoration:'none'}}>
+                                <div style={[chapterTitle, left, backgroundStyle, {marginLeft: '10px'}]}
+                                     onClick={this.showHidePageStatistics.bind(this, number)}>{this.props.pages[number].title}</div>
                             </a>
                             <hr style={{margin: 0}}/>
                             {!this.state.showPage[number] || <div className="row" style={{margin:0}}>
