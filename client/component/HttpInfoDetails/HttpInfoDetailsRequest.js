@@ -1,67 +1,64 @@
 import React, {Component} from 'react'
-import Radium from 'radium'
 
-import {regularTitle, right} from '../../style/components.js'
-import {blockSpacing, borderRadii, elementSpacing} from '../../style/style'
-
-@Radium
-export default
-class HttpInfoDetailsRequest extends Component {
+export default class HttpInfoDetailsRequest extends Component {
     render() {
         return (
-            <div className='col-md-9 col-lg-6 col-sm-12 col-xs-12'
-                 style={[blockSpacing.two, {borderWidth: '1px', borderStyle:'solid', borderColor:'#c6c6c6', overflowX: 'auto'}, borderRadii.two, elementSpacing.two]}>
-                <div className='row'>
-                    <div className='col-md-3 col-lg-3 col-sm-3 col-xs-4' style={[regularTitle, right]}>
+            <div className="box content is-small">
+                <div className='columns'>
+                    <div className='column is-3 has-text-right is-vertical-spaceless has-text-bold'>
                         Request URL
                     </div>
-                    <div className='col-md-9 col-lg-9 col-sm-9 col-xs-8'>{this.props.request.url}</div>
+                    <div className='column is-9 is-vertical-spaceless'>{this.props.request.url}</div>
                 </div>
-                <div className='row'>
-                    <div className='col-md-3 col-lg-3 col-sm-3 col-xs-4' style={[regularTitle, right]}>
+                <div className='columns'>
+                    <div className='column is-3 has-text-right is-vertical-spaceless has-text-bold'>
                         Request Method
                     </div>
-                    <div className='col-md-9 col-lg-9 col-sm-9 col-xs-8'>{this.props.request.method}</div>
+                    <div className='column is-9 is-vertical-spaceless'>{this.props.request.method}</div>
                 </div>
-                <div className='row'>
-                    <div className='col-md-3 col-lg-3 col-sm-3 col-xs-4' style={[regularTitle, right]}>
+                <div className='columns'>
+                    <div className='column is-3 has-text-right is-vertical-spaceless has-text-bold'>
                         Status
                     </div>
-                    <div className='col-md-9 col-lg-9 col-sm-9 col-xs-8'>{this.props.response.status}</div>
+                    <div className='column is-9 is-vertical-spaceless'>{this.props.response.status}</div>
                 </div>
-                <div style={regularTitle}>Request headers</div>
-                <hr style={blockSpacing.one}/>
+                <div className="columns">
+                    <div className="column is-3 has-text-bold has-text-left is-vertical-spaceless">Request headers</div>
+                </div>
+                <hr className="is-vertical-spaceless"/>
                 {
-                    this.props.request.headers.map((header)=> {
+                    this.props.request.headers.map((header) => {
                         return (
-                            <div className='row'>
-                                <div className='col-md-3 col-lg-3 col-sm-3 col-xs-4'
-                                     style={[regularTitle, right]}>{header.name}</div>
-                                <div className='col-md-9 col-lg-9 col-sm-9 col-xs-8'>{header.value}</div>
+                            <div className='columns'>
+                                <div
+                                    className='column is-3 has-text-right has-text-bold is-vertical-spaceless'>{header.name}</div>
+                                <div className='column is-9 is-vertical-spaceless'>{header.value}</div>
                             </div>
                         )
                     })
                 }
-                <div style={regularTitle}>Size</div>
-                <hr style={blockSpacing.one}/>
-                <div className='row'>
-                    <div className='col-md-3 col-lg-3 col-sm-3 col-xs-4' style={[regularTitle, right]}>
+                <div className="columns">
+                    <div className="column is-3 has-text-bold has-text-left is-vertical-spaceless">Size</div>
+                </div>
+                <hr/>
+                <div className='columns'>
+                    <div className='column is-3 has-text-right is-vertical-spaceless has-text-bold'>
                         Body size
                     </div>
-                    <div className='col-md-9 col-lg-9 col-sm-9 col-xs-8'>{this.props.request.bodySize} B</div>
+                    <div className='column is-9 is-vertical-spaceless'>{this.props.request.bodySize} B</div>
                 </div>
-                <div className='row'>
-                    <div className='col-md-3 col-lg-3 col-sm-3 col-xs-4' style={[regularTitle, right]}>
+                <div className='columns'>
+                    <div className='column is-3 has-text-right is-vertical-spaceless has-text-bold'>
                         Header size
                     </div>
-                    <div className='col-md-9 col-lg-9 col-sm-9 col-xs-8'>{this.props.request.headersSize} B</div>
+                    <div className='column is-9 is-vertical-spaceless'>{this.props.request.headersSize} B</div>
                 </div>
-                <div className='row'>
-                    <div className='col-md-3 col-lg-3 col-sm-3 col-xs-4' style={[regularTitle, right]}>
+                <div className='columns'>
+                    <div className='column is-3 has-text-right is-vertical-spaceless has-text-bold'>
                         Total
                     </div>
                     <div
-                        className='col-md-9 col-lg-9 col-sm-9 col-xs-8'>{this.props.request.bodySize + this.props.request.headersSize}
+                        className='column is-9 is-vertical-spaceless'>{this.props.request.bodySize + this.props.request.headersSize}
                         B
                     </div>
                 </div>

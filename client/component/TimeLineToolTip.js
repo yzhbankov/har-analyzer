@@ -1,11 +1,8 @@
 import React, {Component} from 'react'
 import Radium from 'radium'
 import {regularTitle, dnsTime, connectTime, sslTime, blockTime, sendTime, waitTime, contentLoad, pageLoad, receiveTime} from '../style/components.js'
-import {blockSpacing, elementSpacing, shadows, borderRadii} from '../style/style'
 
-@Radium
-export default
-class TimeLineToolTip extends Component {
+export default class TimeLineToolTip extends Component {
     render() {
         function isNegative(num) {
             if (num > 0) {
@@ -27,8 +24,8 @@ class TimeLineToolTip extends Component {
             top: top,
             left: left,
             zIndex: 99999,
-            backgroundColor: 'white',
-            minWidth: '440px'
+            backgroundColor: 'white'
+
         };
 
         const blockTimeVal = isNegative(this.props.data.blockTime);
@@ -47,97 +44,97 @@ class TimeLineToolTip extends Component {
         const receiveRelativeToReq = Math.round((waitRelativeToReq + waitTimeVal) * 100) / 100;
 
         return (
-            <div style={[pos, elementSpacing.two, shadows.one, borderRadii.two]}>
-                <div className='row'>
-                    <div className='col-md-2'>+{Math.round(this.props.data.startTime)}ms</div>
-                    <div className='col-md-10'>Request start time since the beginning</div>
+            <div style={pos}>
+                <div className='columns'>
+                    <div className='column is-2 is-vertical-spaceless'>+{Math.round(this.props.data.startTime)}ms</div>
+                    <div className='column is-10 is-vertical-spaceless'>Request start time since the beginning</div>
                 </div>
-                <hr style={blockSpacing.one}/>
-                <div style={regularTitle}>Request phases start and elapsed time relative to the request status:</div>
-                <hr style={blockSpacing.one}/>
-                <div className='row'>
-                    <div className='col-md-1'>
-                        <div style={[blockTime]}></div>
+                <hr/>
+                <div className="has-text-bold is-vertical-spaceless">Request phases start and elapsed time relative to the request status:</div>
+                <hr/>
+                <div className='columns'>
+                    <div className='column is-1 is-vertical-spaceless'>
+                        <div className="blockTime"></div>
                     </div>
-                    <div className='col-md-1'>0ms</div>
-                    <div className='col-md-1'></div>
-                    <div className='col-md-5'>{blockTimeVal}ms</div>
-                    <div className='col-md-3'>Blocking</div>
+                    <div className='column is-1 is-vertical-spaceless'>0ms</div>
+                    <div className='column is-1 is-vertical-spaceless'></div>
+                    <div className='column is-5 is-vertical-spaceless'>{blockTimeVal}ms</div>
+                    <div className='column is-3 is-vertical-spaceless'>Blocking</div>
                 </div>
-                <div className='row'>
-                    <div className='col-md-1'>
-                        <div style={[dnsTime]}></div>
+                <div className='columns'>
+                    <div className='column is-1 is-vertical-spaceless'>
+                        <div className="dnsTime"></div>
                     </div>
-                    <div className='col-md-1'>+{dnsRelativeToReq}ms</div>
-                    <div className='col-md-1'></div>
-                    <div className='col-md-5'>{dnsTimeVal}ms</div>
-                    <div className='col-md-3'>DNS Lookup</div>
+                    <div className='column is-1 is-vertical-spaceless'>+{dnsRelativeToReq}ms</div>
+                    <div className='column is-1 is-vertical-spaceless'></div>
+                    <div className='column is-5 is-vertical-spaceless'>{dnsTimeVal}ms</div>
+                    <div className='column is-3 is-vertical-spaceless'>DNS Lookup</div>
                 </div>
-                <div className='row'>
-                    <div className='col-md-1'>
-                        <div style={[connectTime]}></div>
+                <div className='columns'>
+                    <div className='column is-1 is-vertical-spaceless'>
+                        <div className="connectTime"></div>
                     </div>
-                    <div className='col-md-1'>+{connectRelativeToReq}ms</div>
-                    <div className='col-md-1'></div>
-                    <div className='col-md-5'>{connectTimeVal}ms</div>
-                    <div className='col-md-3'>Connecting</div>
+                    <div className='column is-1 is-vertical-spaceless'>+{connectRelativeToReq}ms</div>
+                    <div className='column is-1 is-vertical-spaceless'></div>
+                    <div className='column is-5 is-vertical-spaceless'>{connectTimeVal}ms</div>
+                    <div className='column is-3 is-vertical-spaceless'>Connecting</div>
                 </div>
-                <div className='row'>
-                    <div className='col-md-1'>
-                        <div style={[sslTime]}></div>
+                <div className='columns'>
+                    <div className='column is-1 is-vertical-spaceless'>
+                        <div className="sslTime"></div>
                     </div>
-                    <div className='col-md-1'>+{sslRelativeToReq}ms</div>
-                    <div className='col-md-1'></div>
-                    <div className='col-md-5'>{sslTimeVal}ms</div>
-                    <div className='col-md-3'>SSL</div>
+                    <div className='column is-1 is-vertical-spaceless'>+{sslRelativeToReq}ms</div>
+                    <div className='column is-1 is-vertical-spaceless'></div>
+                    <div className='column is-5 is-vertical-spaceless'>{sslTimeVal}ms</div>
+                    <div className='column is-3 is-vertical-spaceless'>SSL</div>
                 </div>
-                <div className='row'>
-                    <div className='col-md-1'>
-                        <div style={[sendTime]}></div>
+                <div className='columns'>
+                    <div className='column is-1 is-vertical-spaceless'>
+                        <div className="sendTime"></div>
                     </div>
-                    <div className='col-md-1'>+{sendRelativeToReq}ms</div>
-                    <div className='col-md-1'></div>
-                    <div className='col-md-5'>{sendTimeVal}ms</div>
-                    <div className='col-md-3'>Sending</div>
+                    <div className='column is-1 is-vertical-spaceless'>+{sendRelativeToReq}ms</div>
+                    <div className='column is-1 is-vertical-spaceless'></div>
+                    <div className='column is-5 is-vertical-spaceless'>{sendTimeVal}ms</div>
+                    <div className='column is-3 is-vertical-spaceless'>Sending</div>
                 </div>
-                <div className='row'>
-                    <div className='col-md-1'>
-                        <div style={[waitTime]}></div>
+                <div className='columns'>
+                    <div className='column is-1 is-vertical-spaceless'>
+                        <div className="waitTime"></div>
                     </div>
-                    <div className='col-md-1'>+{waitRelativeToReq}ms</div>
-                    <div className='col-md-1'></div>
-                    <div className='col-md-5'>{waitTimeVal}ms</div>
-                    <div className='col-md-3'>Waiting</div>
+                    <div className='column is-1 is-vertical-spaceless'>+{waitRelativeToReq}ms</div>
+                    <div className='column is-1 is-vertical-spaceless'></div>
+                    <div className='column is-5 is-vertical-spaceless'>{waitTimeVal}ms</div>
+                    <div className='column is-3 is-vertical-spaceless'>Waiting</div>
                 </div>
-                <div className='row'>
-                    <div className='col-md-1'>
-                        <div style={[receiveTime]}></div>
+                <div className='columns'>
+                    <div className='column is-1 is-vertical-spaceless'>
+                        <div className="receiveTime"></div>
                     </div>
-                    <div className='col-md-1'>+{receiveRelativeToReq}ms</div>
-                    <div className='col-md-1'></div>
-                    <div className='col-md-5'>{receiveTimeVal}ms</div>
-                    <div className='col-md-3'>Receiving</div>
+                    <div className='column is-1 is-vertical-spaceless'>+{receiveRelativeToReq}ms</div>
+                    <div className='column is-1 is-vertical-spaceless'></div>
+                    <div className='column is-5 is-vertical-spaceless'>{receiveTimeVal}ms</div>
+                    <div className='column is-3 is-vertical-spaceless'>Receiving</div>
                 </div>
-                <hr style={blockSpacing.one}/>
-                <div style={regularTitle}>Event timing relative to the request start:</div>
-                <hr style={blockSpacing.one}/>
-                <div className='row'>
-                    <div className='col-md-1'>
-                        <div style={[contentLoad, {height: '15px'}]}></div>
+                <hr/>
+                <div className="has-text-bold">Event timing relative to the request start:</div>
+                <hr/>
+                <div className='columns'>
+                    <div className='column is-1 is-vertical-spaceless'>
+                        <div className="contentLoad"></div>
                     </div>
-                    <div className='col-md-4'>{Math.round(this.props.data.contentLoadTime - this.props.data.startTime)}ms
+                    <div className='column is- is-vertical-spaceless4'>{Math.round(this.props.data.contentLoadTime - this.props.data.startTime)}ms
                     </div>
-                    <div className='col-md-1'></div>
-                    <div className='col-md-3'>DOM Loaded</div>
+                    <div className='column is-1 is-vertical-spaceless'></div>
+                    <div className='column is-3 is-vertical-spaceless'>DOM Loaded</div>
                 </div>
-                <div className='row'>
-                    <div className='col-md-1'>
-                        <div style={[pageLoad, {height: '15px', left: 'none'}]}></div>
+                <div className='columns'>
+                    <div className='column is-1 is-vertical-spaceless'>
+                        <div className="pageLoad"></div>
                     </div>
-                    <div className='col-md-4'>{Math.round(this.props.data.totalTime - this.props.data.startTime)}ms
+                    <div className='column is-4 is-vertical-spaceless'>{Math.round(this.props.data.totalTime - this.props.data.startTime)}ms
                     </div>
-                    <div className='col-md-1'></div>
-                    <div className='col-md-3'>Page Loaded</div>
+                    <div className='column is-1 is-vertical-spaceless'></div>
+                    <div className='column is-3 is-vertical-spaceless'>Page Loaded</div>
                 </div>
             </div>
         )

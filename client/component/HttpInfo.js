@@ -33,50 +33,39 @@ class HttpInfo extends Component {
             timeLineWidth = {width: 'calc(100% - 240px)'}
         }
 
-        return (<div>
-                <div className="columns is-gapless content is-small" style={[backgroundRowStyle]}
-                     onClick={this.onBtnClick.bind(this)}>
-                    <div className='column is-one-third'>
-                        <div className='columns'>
-                            <div className="column is-1 has-text-centered">{this.props.number + 1}</div>
-                            <div className="column is-5 has-text-centered"
-                                 style={[{overflowX: 'hidden', whiteSpace: 'nowrap'}]}><a
-                                href='#'>{this.props.title}</a></div>
-                            <div className="column is-6">
-                                <div className="columns">
-                                    <div className="column is-2 has-text-centered">{this.props.reqMethod}</div>
-                                    <div className="column is-2 has-text-centered">{this.props.resStatus}</div>
-                                    <div className="column is-3 has-text-centered">{(() => {
-                                        if (this.props.reqSize <= 0) {
-                                            return '-'
-                                        } else {
-                                            return this.props.reqSize
-                                        }
-                                    })()
-                                    }</div>
-                                    <div className="column is-3 has-text-centered">{(() => {
-                                        if (this.props.resSize <= 0) {
-                                            return '-'
-                                        } else {
-                                            return this.props.resSize
-                                        }
-                                    })()
-                                    }
-                                    </div>
-                                    <div
-                                        className="column is-2 has-text-centered">{Math.round(this.props.totalTime * 100) / 100}</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="column is-two-thirds has-text-centered" style={[timeLineWidth]}>
-                        <HttpInfoTimeLine entrie={this.props.entrie}
-                                          page={this.props.page}
-                                          maxTime={this.props.maxTime}/>
-                    </div>
-                </div>
-                {!this.state.show || <HttpInfoDetails entrie={this.props.entrie}/>}
-            </div>
+        return (
+            <tbody>
+            <tr onClick={this.onBtnClick.bind(this)}>
+                <td>{this.props.number + 1}</td>
+                <td><abbr title={this.props.title}><a href="#">{this.props.title.slice(0, 30)}</a></abbr></td>
+                <td>{this.props.reqMethod}</td>
+                <td>{this.props.resStatus}</td>
+                <td>{(() => {
+                    if (this.props.reqSize <= 0) {
+                        return '-'
+                    } else {
+                        return this.props.reqSize
+                    }
+                })()
+                }</td>
+                <td>{(() => {
+                    if (this.props.resSize <= 0) {
+                        return '-'
+                    } else {
+                        return this.props.resSize
+                    }
+                })()
+                }
+                </td>
+                <td>{Math.round(this.props.totalTime * 100) / 100}</td>
+                <td>
+                    <HttpInfoTimeLine entrie={this.props.entrie}
+                                      page={this.props.page}
+                                      maxTime={this.props.maxTime}/>
+                </td>
+            </tr>
+            {!this.state.show || <HttpInfoDetails entrie={this.props.entrie}/>}
+            </tbody>
         )
     }
 }

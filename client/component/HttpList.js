@@ -32,25 +32,27 @@ export default class HttpList extends Component {
                     </div>
                 </a>
 
-                {!this.state.show || <div>
-                    <div className='columns notification is-primary is-gapless content is-small'>
-                        <div className='column is-one-third'>
-                            <div className='columns'>
-                                <div className="column is-1 has-text-centered">#</div>
-                                <div className="column is-5 has-text-centered">Title</div>
-                                <div className="column is-6">
-                                    <div className="columns">
-                                        <div className="column is-2 has-text-centered">Method</div>
-                                        <div className="column is-2 has-text-centered">Status</div>
-                                        <div className="column is-3 has-text-centered">Req size</div>
-                                        <div className="column is-3 has-text-centered">Res size</div>
-                                        <div className="column is-2 has-text-centered">Time</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="column is-two-thirds has-text-centered">Time line</div>
-                    </div>
+                {!this.state.show || <table className="table is-bordered is-striped is-narrow content is-small">
+                    <col width="2%" />
+                    <col width="10%" />
+                    <col width="2%" />
+                    <col width="2%" />
+                    <col width="2%" />
+                    <col width="2%" />
+                    <col width="2%" />
+                    <col width="78%" />
+                    <thead>
+                    <tr className="is-selected">
+                        <th>#</th>
+                        <th><abbr title="Title">Title</abbr></th>
+                        <th><abbr title="Request method">M</abbr></th>
+                        <th><abbr title="Status">S</abbr></th>
+                        <th><abbr title="Request size, b">Req</abbr></th>
+                        <th><abbr title="Response size, b">Res</abbr></th>
+                        <th><abbr title="Total time, ms">T</abbr></th>
+                        <th><abbr title="Time line">TL</abbr></th>
+                    </tr>
+                    </thead>
 
                     {this.props.entries.map((entrie, number) =>
                         <HttpInfo
@@ -67,7 +69,7 @@ export default class HttpList extends Component {
                             maxTime={this.props.maxTime}
                         />
                     )}
-                </div>}</div>
+                </table>}</div>
         )
     }
 }
