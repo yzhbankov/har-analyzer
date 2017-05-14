@@ -37,7 +37,7 @@ class HttpInfo extends Component {
             <tbody>
             <tr onClick={this.onBtnClick.bind(this)}>
                 <td>{this.props.number + 1}</td>
-                <td><abbr title={this.props.title}><a href="#">{this.props.title.slice(0, 30)}</a></abbr></td>
+                <td><abbr title={this.props.title}><a href="#">{this.props.title.slice(0, 40)}</a></abbr></td>
                 <td>{this.props.reqMethod}</td>
                 <td>{this.props.resStatus}</td>
                 <td>{(() => {

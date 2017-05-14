@@ -14,9 +14,9 @@ export default class HttpInfoDetailsCookies extends Component {
                             return (<div>
                                     <div className="has-text-left has-text-bold">{cookie.name}</div>
                                     <ul>
-                                        <li>Value: {cookie.value}</li>
-                                        <li>HTTP Only: {cookie.httpOnly}</li>
-                                        <li>Expires: {cookie.expires}</li>
+                                        <li className="box-content">Value: {cookie.value}</li>
+                                        <li className="box-content">HTTP Only: {cookie.httpOnly}</li>
+                                        <li className="box-content">Expires: {cookie.expires}</li>
                                     </ul>
                                 </div>
                             )

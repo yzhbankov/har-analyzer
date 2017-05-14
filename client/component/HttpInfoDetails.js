@@ -36,22 +36,22 @@ export default class HttpInfoDetails extends Component {
                     <div className="box">
                         <div className='columns'>
                             <div className="column is-1"></div>
-                            <div className='column is-1 has-text-centered'><a className='title is-6 has-text-bold'
+                            <div className='column is-1 has-text-centered'><a className='button'
                                                                               data-name='reqShow'
                                                                               onClick={this.showHideComponent.bind(this)}
                                                                               href='#'>Request</a>
                             </div>
-                            <div className='column is-1 has-text-centered'><a className='title is-6 has-text-bold'
+                            <div className='column is-1 has-text-centered'><a className='button'
                                                                               data-name='resShow'
                                                                               onClick={this.showHideComponent.bind(this)}
                                                                               href='#'>Response</a>
                             </div>
                             <div className='column is-1 has-text-centered'>
-                                <a className='title is-6 has-text-bold' data-name='contentShow'
+                                <a className='button' data-name='contentShow'
                                    onClick={this.showHideComponent.bind(this)} href='#'>Response content</a>
                             </div>
                             <div className='column is-1 has-text-centered'>
-                                <a className='title is-6 has-text-bold' data-name='cookiesShow'
+                                <a className='button' data-name='cookiesShow'
                                    onClick={this.showHideComponent.bind(this)} href='#'>Cookies</a>
                             </div>
                         </div>

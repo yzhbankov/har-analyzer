@@ -5,9 +5,7 @@ export default class HttpInfoDetailsRequest extends Component {
         return (
             <div className="box content is-small">
                 <div className='columns'>
-                    <div className='column is-3 has-text-right is-vertical-spaceless has-text-bold'>
-                        Request URL
-                    </div>
+                    <div className='column is-3 has-text-right is-vertical-spaceless has-text-bold'>Request URL</div>
                     <div className='column is-9 is-vertical-spaceless'>{this.props.request.url}</div>
                 </div>
                 <div className='columns'>
@@ -32,7 +30,7 @@ export default class HttpInfoDetailsRequest extends Component {
                             <div className='columns'>
                                 <div
                                     className='column is-3 has-text-right has-text-bold is-vertical-spaceless'>{header.name}</div>
-                                <div className='column is-9 is-vertical-spaceless'>{header.value}</div>
+                                <div className='column is-9 is-vertical-spaceless box-content'>{header.value}</div>
                             </div>
                         )
                     })
