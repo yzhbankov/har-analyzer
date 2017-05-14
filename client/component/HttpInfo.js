@@ -1,13 +1,10 @@
 import React, {Component} from 'react'
-import Radium from 'radium'
 import '../style/sass/styles.sass'
 
 import HttpInfoDetails from '../component/HttpInfoDetails.js'
 import HttpInfoTimeLine from '../component/HttpInfoTimeLine'
 
-@Radium
-export default
-class HttpInfo extends Component {
+export default class HttpInfo extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -23,16 +20,6 @@ class HttpInfo extends Component {
     }
 
     render() {
-        let backgroundRowColor = 'white';
-        let timeLineWidth = {width: 'calc(100% - 570px)'};
-        if (this.props.number % 2 != 0) {
-            backgroundRowColor = '#f8f8ff';
-        }
-        const backgroundRowStyle = {backgroundColor: backgroundRowColor};
-        if (window.innerWidth < 1200) {
-            timeLineWidth = {width: 'calc(100% - 240px)'}
-        }
-
         return (
             <tbody>
             <tr onClick={this.onBtnClick.bind(this)}>

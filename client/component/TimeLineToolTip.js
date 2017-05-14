@@ -127,28 +127,6 @@ export default class TimeLineToolTip extends Component {
                     </tr>
                     </tbody>
                 </table>
-                {/*
-
-
-                 <div className="has-text-bold">Event timing relative to the request start:</div>
-                 <div className='columns'>
-                 <div className='column is-1'>
-                 <div className="contentLoad"></div>
-                 </div>
-                 <div className='column is-4'>{Math.round(this.props.data.contentLoadTime - this.props.data.startTime)}ms
-                 </div>
-                 <div className='column is-1'></div>
-                 <div className='column is-3'>DOM Loaded</div>
-                 </div>
-                 <div className='columns'>
-                 <div className='column is-1'>
-                 <div className="pageLoad"></div>
-                 </div>
-                 <div className='column is-4'>{Math.round(this.props.data.totalTime - this.props.data.startTime)}ms
-                 </div>
-                 <div className='column is-1'></div>
-                 <div className='column is-3'>Page Loaded</div>
-                 </div>*/}
             </div>
         )
     }

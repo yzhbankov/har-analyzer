@@ -1,8 +1,7 @@
 import React, {Component} from 'react'
 
 import TimeLineToolTip from './TimeLineToolTip.js'
-import {startTime, timeLine, dnsTime, connectTime, sslTime, blockTime, sendTime, waitTime, receiveTime, contentLoad,
-    pageLoad} from '../style/components.js'
+import {timeLine} from '../style/components.js'
 
 export default class HttpInfoTimeLine extends Component {
     constructor(props) {
@@ -68,11 +67,11 @@ export default class HttpInfoTimeLine extends Component {
     posToolTip(e) {
         e.preventDefault();
 
-        if ((e.clientX + 440) > window.innerWidth) {
-            e.clientX = e.clientX - 440
+        if ((e.clientX + 550) > window.innerWidth) {
+            e.clientX = e.clientX - 550
         }
-        if ((e.clientY + 300) > window.innerHeight) {
-            e.clientY = e.clientY - 300
+        if ((e.clientY + 420) > window.innerHeight) {
+            e.clientY = e.clientY - 420
         }
 
         this.setState({
