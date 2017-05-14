@@ -1,6 +1,4 @@
 import React, {Component} from 'react'
-import Radium from 'radium'
-import {regularTitle, dnsTime, connectTime, sslTime, blockTime, sendTime, waitTime, contentLoad, pageLoad, receiveTime} from '../style/components.js'
 
 export default class TimeLineToolTip extends Component {
     render() {
@@ -44,98 +42,113 @@ export default class TimeLineToolTip extends Component {
         const receiveRelativeToReq = Math.round((waitRelativeToReq + waitTimeVal) * 100) / 100;
 
         return (
-            <div style={pos}>
-                <div className='columns'>
-                    <div className='column is-2 is-vertical-spaceless'>+{Math.round(this.props.data.startTime)}ms</div>
-                    <div className='column is-10 is-vertical-spaceless'>Request start time since the beginning</div>
-                </div>
-                <hr/>
-                <div className="has-text-bold is-vertical-spaceless">Request phases start and elapsed time relative to the request status:</div>
-                <hr/>
-                <div className='columns'>
-                    <div className='column is-1 is-vertical-spaceless'>
-                        <div className="blockTime"></div>
-                    </div>
-                    <div className='column is-1 is-vertical-spaceless'>0ms</div>
-                    <div className='column is-1 is-vertical-spaceless'></div>
-                    <div className='column is-5 is-vertical-spaceless'>{blockTimeVal}ms</div>
-                    <div className='column is-3 is-vertical-spaceless'>Blocking</div>
-                </div>
-                <div className='columns'>
-                    <div className='column is-1 is-vertical-spaceless'>
-                        <div className="dnsTime"></div>
-                    </div>
-                    <div className='column is-1 is-vertical-spaceless'>+{dnsRelativeToReq}ms</div>
-                    <div className='column is-1 is-vertical-spaceless'></div>
-                    <div className='column is-5 is-vertical-spaceless'>{dnsTimeVal}ms</div>
-                    <div className='column is-3 is-vertical-spaceless'>DNS Lookup</div>
-                </div>
-                <div className='columns'>
-                    <div className='column is-1 is-vertical-spaceless'>
-                        <div className="connectTime"></div>
-                    </div>
-                    <div className='column is-1 is-vertical-spaceless'>+{connectRelativeToReq}ms</div>
-                    <div className='column is-1 is-vertical-spaceless'></div>
-                    <div className='column is-5 is-vertical-spaceless'>{connectTimeVal}ms</div>
-                    <div className='column is-3 is-vertical-spaceless'>Connecting</div>
-                </div>
-                <div className='columns'>
-                    <div className='column is-1 is-vertical-spaceless'>
-                        <div className="sslTime"></div>
-                    </div>
-                    <div className='column is-1 is-vertical-spaceless'>+{sslRelativeToReq}ms</div>
-                    <div className='column is-1 is-vertical-spaceless'></div>
-                    <div className='column is-5 is-vertical-spaceless'>{sslTimeVal}ms</div>
-                    <div className='column is-3 is-vertical-spaceless'>SSL</div>
-                </div>
-                <div className='columns'>
-                    <div className='column is-1 is-vertical-spaceless'>
-                        <div className="sendTime"></div>
-                    </div>
-                    <div className='column is-1 is-vertical-spaceless'>+{sendRelativeToReq}ms</div>
-                    <div className='column is-1 is-vertical-spaceless'></div>
-                    <div className='column is-5 is-vertical-spaceless'>{sendTimeVal}ms</div>
-                    <div className='column is-3 is-vertical-spaceless'>Sending</div>
-                </div>
-                <div className='columns'>
-                    <div className='column is-1 is-vertical-spaceless'>
-                        <div className="waitTime"></div>
-                    </div>
-                    <div className='column is-1 is-vertical-spaceless'>+{waitRelativeToReq}ms</div>
-                    <div className='column is-1 is-vertical-spaceless'></div>
-                    <div className='column is-5 is-vertical-spaceless'>{waitTimeVal}ms</div>
-                    <div className='column is-3 is-vertical-spaceless'>Waiting</div>
-                </div>
-                <div className='columns'>
-                    <div className='column is-1 is-vertical-spaceless'>
-                        <div className="receiveTime"></div>
-                    </div>
-                    <div className='column is-1 is-vertical-spaceless'>+{receiveRelativeToReq}ms</div>
-                    <div className='column is-1 is-vertical-spaceless'></div>
-                    <div className='column is-5 is-vertical-spaceless'>{receiveTimeVal}ms</div>
-                    <div className='column is-3 is-vertical-spaceless'>Receiving</div>
-                </div>
-                <hr/>
-                <div className="has-text-bold">Event timing relative to the request start:</div>
-                <hr/>
-                <div className='columns'>
-                    <div className='column is-1 is-vertical-spaceless'>
-                        <div className="contentLoad"></div>
-                    </div>
-                    <div className='column is- is-vertical-spaceless4'>{Math.round(this.props.data.contentLoadTime - this.props.data.startTime)}ms
-                    </div>
-                    <div className='column is-1 is-vertical-spaceless'></div>
-                    <div className='column is-3 is-vertical-spaceless'>DOM Loaded</div>
-                </div>
-                <div className='columns'>
-                    <div className='column is-1 is-vertical-spaceless'>
-                        <div className="pageLoad"></div>
-                    </div>
-                    <div className='column is-4 is-vertical-spaceless'>{Math.round(this.props.data.totalTime - this.props.data.startTime)}ms
-                    </div>
-                    <div className='column is-1 is-vertical-spaceless'></div>
-                    <div className='column is-3 is-vertical-spaceless'>Page Loaded</div>
-                </div>
+            <div className="box" style={pos}>
+                <table>
+                    <thead>
+                    <tr>
+                        <td colSpan={1}>+{Math.round(this.props.data.startTime)}ms</td>
+                        <td colSpan={3}>Request start time since the beginning</td>
+                    </tr>
+                    <tr>
+                        <th colSpan={4}>Request phases start and elapsed time relative to the request status:</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>
+                            <div className="blockTime"></div>
+                        </td>
+                        <td>0ms</td>
+                        <td>{blockTimeVal}ms</td>
+                        <td>Blocking</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div className="dnsTime"></div>
+                        </td>
+                        <td>+{dnsRelativeToReq}ms</td>
+                        <td>{dnsTimeVal}ms</td>
+                        <td>DNS Lookup</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div className="connectTime"></div>
+                        </td>
+                        <td>+{connectRelativeToReq}ms</td>
+                        <td>{connectTimeVal}ms</td>
+                        <td>Connecting</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div className="sslTime"></div>
+                        </td>
+                        <td>+{sslRelativeToReq}ms</td>
+                        <td>{sslTimeVal}ms</td>
+                        <td>SSL</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div className="sendTime"></div>
+                        </td>
+                        <td>+{sendRelativeToReq}ms</td>
+                        <td>{sendTimeVal}ms</td>
+                        <td>Sending</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div className="waitTime"></div>
+                        </td>
+                        <td>+{waitRelativeToReq}ms</td>
+                        <td>{waitTimeVal}ms</td>
+                        <td>Waiting</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div className="receiveTime"></div>
+                        </td>
+                        <td>+{receiveRelativeToReq}ms</td>
+                        <td>{receiveTimeVal}ms</td>
+                        <td>Receiving</td>
+                    </tr>
+                    <th colSpan={4}>Event timing relative to the request start:</th>
+                    <tr>
+                        <td>
+                            <div className="contentLoadToolTip"></div>
+                        </td>
+                        <td>{Math.round(this.props.data.contentLoadTime - this.props.data.startTime)}ms</td>
+                        <td colSpan={2}>DOM Loaded</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div className="pageLoadToolTip"></div>
+                        </td>
+                        <td>{Math.round(this.props.data.totalTime - this.props.data.startTime)}ms</td>
+                        <td colSpan={2}>Page Loaded</td>
+                    </tr>
+                    </tbody>
+                </table>
+                {/*
+
+
+                 <div className="has-text-bold">Event timing relative to the request start:</div>
+                 <div className='columns'>
+                 <div className='column is-1'>
+                 <div className="contentLoad"></div>
+                 </div>
+                 <div className='column is-4'>{Math.round(this.props.data.contentLoadTime - this.props.data.startTime)}ms
+                 </div>
+                 <div className='column is-1'></div>
+                 <div className='column is-3'>DOM Loaded</div>
+                 </div>
+                 <div className='columns'>
+                 <div className='column is-1'>
+                 <div className="pageLoad"></div>
+                 </div>
+                 <div className='column is-4'>{Math.round(this.props.data.totalTime - this.props.data.startTime)}ms
+                 </div>
+                 <div className='column is-1'></div>
+                 <div className='column is-3'>Page Loaded</div>
+                 </div>*/}
             </div>
         )
     }
