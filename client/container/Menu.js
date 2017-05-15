@@ -38,7 +38,7 @@ import {bindActionCreators} from 'redux'
         };
         return (
             <nav className="nav has-shadow">
-                <div className="container">
+                <div className="container ">
                     <div className="nav-left">
                         <a className="nav-item">
                             <img src="../etc/img/logo.png" alt="Bulma logo"/>

@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 import Menu from './Menu.js'
 import HttpList from '../component/HttpList'
 import Statistics from '../component/Statistics'
+import Footer from '../component/Footer.js'
 
 class App extends Component {
     render() {
@@ -13,7 +14,23 @@ class App extends Component {
                             pages={this.props.pages}/>
 
                 <div>
-                    {this.props.isDataLoad || <div className="hero-body"><div className="title is-1 has-text-centered">LOAD YOUR HAR</div></div>}
+                    {this.props.isDataLoad || <section className="hero is-primary is-fullheight">
+                        <div className="hero-body">
+                            <div className="container is-center">
+                                <h1 className="title is-1">
+                                    LOAD YOUR HAR
+                                </h1>
+                            </div>
+                        </div>
+                    </section>}
+                    {!this.props.isDataLoad || <section className="hero is-dark">
+                        <div className="hero-body">
+                            <div className="container is-center">
+                                <h1 className="title">PAGES</h1>
+                                <h2 className='subtitle'>Loaded from HAR file</h2>
+                            </div>
+                        </div>
+                    </section>}
                     {this.props.pages.map((page, number) =>
                             <HttpList
                                 entries={this.props.entries[number]}
@@ -23,6 +40,7 @@ class App extends Component {
                                 number={number}
                                 />
                     )}</div>
+                <Footer />
             </div>
         )
     }
