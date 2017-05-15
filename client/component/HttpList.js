@@ -1,25 +1,20 @@
 import React, {Component} from 'react'
-import Radium from 'radium'
 
 import HttpInfo from '../component/HttpInfo'
-import {regularTitle, xxSmallBlock, xSmallBlock, xMedeumBlock, center, chapterTitle, left} from '../style/components.js'
+import '../style/sass/styles.sass'
 
-@Radium
-export default
-class HttpList extends Component {
+export default class HttpList extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            show: false,
-            center: false
+            show: false
         };
     }
 
     onBtnClick(e) {
         e.preventDefault();
         this.setState({
-            show: !this.state.show,
-            center: !this.state.center
+            show: !this.state.show
         })
     }
 
@@ -31,78 +26,50 @@ class HttpList extends Component {
     }
 
     render() {
-        let centerTemp = {};
-        let timeLineWidth = {width: 'calc(100% - 590px)'};
-
-        if (!this.state.center) {
-            centerTemp = {}
-        } else {
-            centerTemp = center
-        }
-
-        if (window.innerWidth < 1200) {
-            timeLineWidth = {width: 'calc(100% - 260px)'}
-        }
-
         return (<div>
-                <hr style={{margin: 0}}/>
-                <a href='#' style={{textDecoration: 'none'}}>
-                    <div style={[chapterTitle, left,  centerTemp, {marginLeft: '10px'}]}
-                         onClick={this.onBtnClick.bind(this)}>{this.props.page.title}
+                <a href='#'>
+                    <div className='title is-6' onClick={this.onBtnClick.bind(this)}>{this.props.page.title}
                     </div>
                 </a>
-                <hr style={{margin: 0}}/>
 
-                {!this.state.show || <div className='row'
-                                          style={{
-                                              minHeight: '200px',
-                                              borderStyle: 'solid',
-                                              borderWidth: '1px',
-                                              borderColor: '#c6c6c6',
-                                              margin: 0
-                                          }}>
-                    <div className='row' style={[{height: '32px', backgroundColor: '#c6c6c6'}]}>
-                        <div className="col-lg-1 hidden-xs hidden-md hidden-sm" style={[xxSmallBlock, regularTitle, {marginLeft: '20px'}]}>#
-                        </div>
-                        <div className="col-lg-2 col-md-2 col-xs-2 col-sm-2" style={[xMedeumBlock, regularTitle]}>
-                            Title
-                        </div>
-                        <div className="col-lg-1 hidden-xs hidden-md hidden-sm" style={[xSmallBlock, regularTitle]}>
-                            Method
-                        </div>
-                        <div className="col-lg-1 hidden-xs hidden-md hidden-sm" style={[xSmallBlock, regularTitle]}>
-                            Status
-                        </div>
-                        <div className="col-lg-1 hidden-xs hidden-md hidden-sm" style={[xSmallBlock, regularTitle]}>Req
-                            size
-                        </div>
-                        <div className="col-lg-1 hidden-xs hidden-md hidden-sm" style={[xSmallBlock, regularTitle]}>Res
-                            size
-                        </div>
-                        <div className="col-lg-1 hidden-xs hidden-md hidden-sm" style={[xSmallBlock, regularTitle]}>
-                            Total time
-                        </div>
-                        <div className="col-lg-4 col-md-10 col-xs-10 col-sm-10"
-                             style={[timeLineWidth, regularTitle]}>
-                            Time line
-                        </div>
-                    </div>
+                {!this.state.show || <table className="table is-bordered is-striped is-narrow content is-small">
+                    <col width="2%" />
+                    <col width="10%" />
+                    <col width="2%" />
+                    <col width="2%" />
+                    <col width="2%" />
+                    <col width="2%" />
+                    <col width="2%" />
+                    <col width="78%" />
+                    <thead>
+                    <tr className="is-selected">
+                        <th>#</th>
+                        <th><abbr title="Title">Title</abbr></th>
+                        <th><abbr title="Request method">M</abbr></th>
+                        <th><abbr title="Status">S</abbr></th>
+                        <th><abbr title="Request size, b">Req</abbr></th>
+                        <th><abbr title="Response size, b">Res</abbr></th>
+                        <th><abbr title="Total time, ms">T</abbr></th>
+                        <th><abbr title="Time line">TL</abbr></th>
+                    </tr>
+                    </thead>
+
                     {this.props.entries.map((entrie, number) =>
-                            <HttpInfo
-                                page={this.props.page}
-                                number={number}
-                                entrie={entrie}
-                                time={entrie.startedDateTime}
-                                title={entrie.request.url}
-                                reqMethod={entrie.request.method}
-                                resStatus={entrie.response.status}
-                                reqSize={entrie.request.headersSize}
-                                resSize={entrie.response.headersSize + entrie.response.bodySize}
-                                totalTime={entrie.time}
-                                maxTime={this.props.maxTime}
-                                />
+                        <HttpInfo
+                            page={this.props.page}
+                            number={number}
+                            entrie={entrie}
+                            time={entrie.startedDateTime}
+                            title={entrie.request.url}
+                            reqMethod={entrie.request.method}
+                            resStatus={entrie.response.status}
+                            reqSize={entrie.request.headersSize}
+                            resSize={entrie.response.headersSize + entrie.response.bodySize}
+                            totalTime={entrie.time}
+                            maxTime={this.props.maxTime}
+                        />
                     )}
-                </div>}</div>
+                </table>}</div>
         )
     }
 }

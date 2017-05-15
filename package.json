@@ -30,10 +30,14 @@
     "json-loader": "^0.5.4",
     "less": "^2.7.2",
     "less-loader": "^4.0.3",
+    "node-sass": "^4.5.2",
+    "sass": "^0.5.0",
+    "sass-loader": "^6.0.5",
     "style-loader": "^0.16.1",
     "webpack": "^2.4.1"
   },
   "dependencies": {
+    "bulma": "^0.4.1",
     "chart.js": "^2.5.0",
     "radium": "^0.18.2",
     "react": "^15.5.4",

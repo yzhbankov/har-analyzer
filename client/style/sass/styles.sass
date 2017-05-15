@@ -1,0 +1,100 @@
+$family-sans-serif: 'Arial'
+$size-7: 0.9rem
+@import "./node_modules/bulma/bulma.sass"
+
+.has-text-bold
+  font-weight: 700
+.has-text-slim
+  font-weight: 400
+
+.is-space-less
+  margin: 0
+.is-small
+  font-size: 0.75rem
+
+.is-vertical-spaceless
+  padding-top: 0
+  padding-bottom: 0
+hr
+  margin: 1rem
+.box
+  overflow-x: hidden
+
+//Time line classes
+.timeLine
+  position: relative
+  float: left
+  display: flex
+  height: 20px
+  width: 100%
+  
+  
+.startTime
+  border-right: 1px solid black
+  height: 20px
+  
+.dnsTime
+  background-color: $yellow
+  height: 20px
+  
+  
+.connectTime
+  background-color: $turquoise
+  height: 20px
+  
+  
+.receiveTime
+  border-right: 1px solid #848484
+  background-color: $green
+  height: 20px
+  
+  
+.blockTime
+  background-color: $red
+  height: 20px
+  
+  
+.sendTime
+  background-color: $blue
+  height: 20px
+  
+  
+.waitTime
+  background-color: $purple
+  height: 20px
+  
+  
+.sslTime
+  background-color: $orange
+  height: 20px
+  
+  
+.contentLoad
+  position: absolute
+  width: 1px
+  height: 200%
+  background: #1c80bd
+  top: -25%
+  
+.pageLoad
+  position: absolute
+  width: 1px
+  height: 200%
+  background: #ff0024
+  top: -25%
+
+.contentLoadToolTip
+  width: 1px
+  height: 20px
+  background: #1c80bd
+
+.pageLoadToolTip
+  width: 1px
+  height: 20px
+  background: #ff0024
+
+.box-content
+  width: 50rem !important
+  max-height: 50rem
+  overflow-x: auto
+  overflow-y: auto

@@ -20,8 +20,8 @@ module.exports = {
                 exclude: [/node_modules/, /public/]
             },
             {
-                test: /\.less$/,
-                loader: "style-loader!css-loader!autoprefixer-loader!less-loader",
+                test: /\.sass$/,
+                loader: "style-loader!css-loader!autoprefixer-loader!sass-loader",
                 exclude: [/node_modules/, /public/]
             },
             {

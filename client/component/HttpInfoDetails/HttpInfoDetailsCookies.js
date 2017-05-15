@@ -1,42 +1,37 @@
 import React, {Component} from 'react'
-import Radium from 'radium'
 
-import {regularTitle, left} from '../../style/components.js'
-import {blockSpacing, borderRadii, elementSpacing} from '../../style/style'
-
-@Radium
 export default class HttpInfoDetailsCookies extends Component {
     render() {
         return (
-            <div className='col-md-9 col-lg-6 col-sm-12 col-xs-12' style={[blockSpacing.two, {borderWidth: '1px', borderStyle:'solid', borderColor:'#c6c6c6', overflowX: 'auto'}, borderRadii.two, elementSpacing.two]}>
-                <div style={[regularTitle]}>Request cookies</div>
-                <hr style={blockSpacing.one}/>
+            <div className='column is-12 box content is-small'>
+                <div className="has-text-bold is-vertical-spaceless">Request cookies</div>
+                <hr/>
                 {(() => {
                     if (this.props.request.cookies == 0) {
                         return <div>No cookies send</div>
                     } else {
                         return this.props.request.cookies.map(cookie => {
                             return (<div>
-                                    <div style={[regularTitle, left]}>{cookie.name}</div>
+                                    <div className="has-text-left has-text-bold">{cookie.name}</div>
                                     <ul>
-                                        <li>Value: {cookie.value}</li>
-                                        <li>HTTP Only: {cookie.httpOnly}</li>
-                                        <li>Expires: {cookie.expires}</li>
+                                        <li className="box-content">Value: {cookie.value}</li>
+                                        <li className="box-content">HTTP Only: {cookie.httpOnly}</li>
+                                        <li className="box-content">Expires: {cookie.expires}</li>
                                     </ul>
                                 </div>
                             )
                         })
                     }
                 })()}
-                <div style={[regularTitle]}>Response cookies</div>
-                <hr style={blockSpacing.one}/>
+                <div className="has-text-bold is-vertical-spaceless">Response cookies</div>
+                <hr/>
                 {(() => {
                     if (this.props.response.cookies == 0) {
                         return <div>No cookies receive</div>
                     } else {
                         return this.props.response.cookies.map(cookie => {
                             return (<div>
-                                    <div style={[regularTitle, left]}>{cookie.name}</div>
+                                    <div className="has-text-left has-text-bold">{cookie.name}</div>
                                     <ul>
                                         <li>Value: {cookie.value}</li>
                                         <li>HTTP Only: {cookie.httpOnly}</li>
