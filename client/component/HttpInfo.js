@@ -23,11 +23,11 @@ export default class HttpInfo extends Component {
         return (
             <tbody>
             <tr onClick={this.onBtnClick.bind(this)}>
-                <td>{this.props.number + 1}</td>
+                <td className='is-hidden-mobile'>{this.props.number + 1}</td>
                 <td><abbr title={this.props.title}><a href="#">{this.props.title.slice(0, 30)+'...'}</a></abbr></td>
-                <td>{this.props.reqMethod}</td>
-                <td>{this.props.resStatus}</td>
-                <td>{(() => {
+                <td className='is-hidden-mobile'>{this.props.reqMethod}</td>
+                <td className='is-hidden-mobile'>{this.props.resStatus}</td>
+                <td className='is-hidden-mobile'>{(() => {
                     if (this.props.reqSize <= 0) {
                         return '-'
                     } else {
@@ -35,7 +35,7 @@ export default class HttpInfo extends Component {
                     }
                 })()
                 }</td>
-                <td>{(() => {
+                <td className='is-hidden-mobile'>{(() => {
                     if (this.props.resSize <= 0) {
                         return '-'
                     } else {
@@ -44,7 +44,7 @@ export default class HttpInfo extends Component {
                 })()
                 }
                 </td>
-                <td>{Math.round(this.props.totalTime * 100) / 100}</td>
+                <td className='is-hidden-mobile'>{Math.round(this.props.totalTime * 100) / 100}</td>
                 <td>
                     <HttpInfoTimeLine entrie={this.props.entrie}
                                       page={this.props.page}

@@ -39,23 +39,23 @@ export default class HttpList extends Component {
                 </table>
 
                 {!this.state.show || <table className="table is-bordered is-striped is-narrow content is-small">
-                    <col width="2%"/>
+                    <col className='is-hidden-mobile' width="2%"/>
                     <col width="10%"/>
-                    <col width="2%"/>
-                    <col width="2%"/>
-                    <col width="2%"/>
-                    <col width="2%"/>
-                    <col width="2%"/>
+                    <col className='is-hidden-mobile' width="2%"/>
+                    <col className='is-hidden-mobile' width="2%"/>
+                    <col className='is-hidden-mobile' width="2%"/>
+                    <col className='is-hidden-mobile' width="2%"/>
+                    <col className='is-hidden-mobile' width="2%"/>
                     <col width="78%"/>
                     <thead>
                     <tr className="is-selected">
-                        <th>#</th>
+                        <th className='is-hidden-mobile'>#</th>
                         <th><abbr title="Title">Title</abbr></th>
-                        <th><abbr title="Request method">M</abbr></th>
-                        <th><abbr title="Status">S</abbr></th>
-                        <th><abbr title="Request size, b">Req</abbr></th>
-                        <th><abbr title="Response size, b">Res</abbr></th>
-                        <th><abbr title="Total time, ms">T</abbr></th>
+                        <th className='is-hidden-mobile'><abbr title="Request method">M</abbr></th>
+                        <th className='is-hidden-mobile'><abbr title="Status">S</abbr></th>
+                        <th className='is-hidden-mobile'><abbr title="Request size, b">Req</abbr></th>
+                        <th className='is-hidden-mobile'><abbr title="Response size, b">Res</abbr></th>
+                        <th className='is-hidden-mobile'><abbr title="Total time, ms">T</abbr></th>
                         <th><abbr title="Time line">TL</abbr></th>
                     </tr>
                     </thead>
