@@ -13,8 +13,8 @@ export default class Footer extends Component {
                 <div className="container">
                     <div className="content has-text-centered">
                         <p>
-                            <strong>HARVIE</strong> by <a href="http://jgthms.com">Igor Nesterenko and Iaroslav
-                            Zhbankov</a>. The source code is licensed
+                            <strong>HARVIE</strong> by <a href="https://www.zorko.io">Zorko comp.</a> The source code is
+                            licensed
                             <a href="http://opensource.org/licenses/mit-license.php"> MIT</a>. <strong>HARVIE</strong> is a har file
                             analyser for a web development.
                         </p>
