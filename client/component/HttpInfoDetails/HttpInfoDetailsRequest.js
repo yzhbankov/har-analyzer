@@ -3,64 +3,55 @@ import React, {Component} from 'react'
 export default class HttpInfoDetailsRequest extends Component {
     render() {
         return (
-            <div className="box content is-small">
-                <div className='columns is-mobile'>
-                    <div className='column is-3 has-text-right is-vertical-spaceless has-text-bold'>Request URL</div>
-                    <div className='column is-9 is-vertical-spaceless box-content'>{this.props.request.url}</div>
-                </div>
-                <div className='columns is-mobile'>
-                    <div className='column is-3 has-text-right is-vertical-spaceless has-text-bold'>
-                        Request Method
-                    </div>
-                    <div className='column is-9 is-vertical-spaceless'>{this.props.request.method}</div>
-                </div>
-                <div className='columns is-mobile'>
-                    <div className='column is-3 has-text-right is-vertical-spaceless has-text-bold'>
-                        Status
-                    </div>
-                    <div className='column is-9 is-vertical-spaceless'>{this.props.response.status}</div>
-                </div>
-                <div className="columns is-mobile">
-                    <div className="column is-12 has-text-bold has-text-left is-vertical-spaceless">Request headers</div>
-                </div>
-
-                {
-                    this.props.request.headers.map((header) => {
-                        return (
-                            <div className='columns is-mobile'>
-                                <div
-                                    className='column is-3 has-text-right has-text-bold is-vertical-spaceless'>{header.name}</div>
-                                <div className='column is-9 is-vertical-spaceless box-content'>{header.value}</div>
-                            </div>
-                        )
-                    })
-                }
-                <div className="columns is-mobile">
-                    <div className="column is-12 has-text-bold has-text-left is-vertical-spaceless">Size</div>
-                </div>
-
-                <div className='columns is-mobile'>
-                    <div className='column is-3 has-text-right is-vertical-spaceless has-text-bold'>
-                        Body size
-                    </div>
-                    <div className='column is-9 is-vertical-spaceless'>{this.props.request.bodySize} B</div>
-                </div>
-                <div className='columns is-mobile'>
-                    <div className='column is-3 has-text-right is-vertical-spaceless has-text-bold'>
-                        Header size
-                    </div>
-                    <div className='column is-9 is-vertical-spaceless'>{this.props.request.headersSize} B</div>
-                </div>
-                <div className='columns is-mobile'>
-                    <div className='column is-3 has-text-right is-vertical-spaceless has-text-bold'>
-                        Total
-                    </div>
-                    <div
-                        className='column is-9 is-vertical-spaceless'>{this.props.request.bodySize + this.props.request.headersSize}
-                        B
-                    </div>
-                </div>
-            </div>
+                <table className="table is-striped">
+                    <thead>
+                    <tr>
+                        <th colSpan={2} className='is-center title is-5'>Request</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td className='has-text-right has-text-bold'>Request URL</td>
+                        <td><div className="box-content">{this.props.request.url}</div></td>
+                    </tr>
+                    <tr>
+                        <td className='has-text-right has-text-bold'>Request Method</td>
+                        <td><div className='box-content'>{this.props.request.method}</div></td>
+                    </tr>
+                    <tr>
+                        <td className='has-text-right has-text-bold'>Status</td>
+                        <td><div className='box-content'>{this.props.response.status}</div></td>
+                    </tr>
+                    <tr>
+                        <th colSpan={2} className="has-text-bold is-center">Request headers</th>
+                    </tr>
+                    {
+                        this.props.request.headers.map((header) => {
+                            return (
+                                <tr>
+                                    <td className='has-text-right has-text-bold '>{header.name}</td>
+                                    <td><div className='box-content'>{header.value}</div></td>
+                                </tr>
+                            )
+                        })
+                    }
+                    <tr>
+                        <th colSpan={2} className="has-text-bold is-center">Size</th>
+                    </tr>
+                    <tr>
+                        <td className='has-text-right has-text-bold'>Body size</td>
+                        <td><div className='box-content'>{this.props.request.bodySize} B</div></td>
+                    </tr>
+                    <tr>
+                        <td className='has-text-right has-text-bold'>Header size</td>
+                        <td><div className='box-content'>{this.props.request.headersSize} B</div></td>
+                    </tr>
+                    <tr>
+                        <td className='has-text-right has-text-bold'>Total</td>
+                        <td><div className='box-content'>{this.props.request.bodySize + this.props.request.headersSize} B</div></td>
+                    </tr>
+                    </tbody>
+                </table>
         )
     }
 }

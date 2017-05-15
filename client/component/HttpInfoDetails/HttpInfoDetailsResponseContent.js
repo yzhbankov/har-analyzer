@@ -3,20 +3,29 @@ import React, {Component} from 'react'
 export default class HttpInfoDetailsResponseContent extends Component {
     render() {
         return (
-            <div className='column is-12 box content is-small'>
-                <div className='columns is-mobile'>
-                    <div className='column is-3 has-text-right is-vertical-spaceless has-text-bold'>Size</div>
-                    <div className='column is-3 is-vertical-spaceless'>{this.props.content.size} B</div>
-                </div>
-                <div className='columns is-mobile'>
-                    <div className='column is-3 has-text-right is-vertical-spaceless has-text-bold'>MIME Type</div>
-                    <div className='column is-3 is-vertical-spaceless'>{this.props.content.mimeType}</div>
-                </div>
-                <div className='columns is-mobile'>
-                    <div className='column is-3 has-text-right is-vertical-spaceless has-text-bold'>Response content</div>
-                    <div className='column is-9 is-vertical-spaceless box-content'>{this.props.content.text}</div>
-                </div>
-            </div>
+            <table className="table is-striped">
+                <thead>
+                <tr>
+                    <th colSpan={2} className='is-center title is-5'>Response content</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td className='has-text-right has-text-bold'>Size</td>
+                    <td>{this.props.content.size} B</td>
+                </tr>
+                <tr>
+                    <td className='has-text-right has-text-bold'>MIME Type</td>
+                    <td>{this.props.content.mimeType}</td>
+                </tr>
+                <tr>
+                    <td className='has-text-right has-text-bold'>Response content</td>
+                    <td>
+                        <div className='box-content'>{this.props.content.text}</div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
         )
     }
 }
