@@ -41,7 +41,7 @@ import {bindActionCreators} from 'redux'
                 <div className="container">
                     <div className="nav-left">
                         <a className="nav-item">
-                            <img src="../etc/img/logo.png" alt="Bulma logo"/>
+                            <img src="./etc/img/logo.png" alt="Bulma logo"/>
                         </a>
                         <a className="nav-item is-tab is-hidden-mobile is-active">
                             <div style={[fileUploadStyle]}>
