@@ -14,7 +14,7 @@ class App extends Component {
                             pages={this.props.pages}/>
 
                 <div>
-                    {this.props.isDataLoad || <section className="hero is-primary is-fullheight">
+                    {this.props.isDataLoad || <section className="hero is-dark is-fullheight">
                         <div className="hero-body">
                             <div className="container is-center">
                                 <h1 className="title is-1">

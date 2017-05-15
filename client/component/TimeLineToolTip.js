@@ -42,7 +42,7 @@ export default class TimeLineToolTip extends Component {
         const receiveRelativeToReq = Math.round((waitRelativeToReq + waitTimeVal) * 100) / 100;
 
         return (
-            <div className="box" style={pos}>
+            <div className="box is-hidden-mobile" style={pos}>
                 <table>
                     <thead>
                     <tr>
