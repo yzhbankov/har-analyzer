@@ -27,20 +27,26 @@ export default class HttpList extends Component {
 
     render() {
         return (<div>
-                <a href='#'>
-                    <div className='title is-6' onClick={this.onBtnClick.bind(this)}>{this.props.page.title}
-                    </div>
-                </a>
+                <table className='table is-bordered is-marginless'>
+                    <tr>
+                        <td>
+                            <a href='#'>
+                                <div className='title is-6'
+                                     onClick={this.onBtnClick.bind(this)}>{this.props.page.title}</div>
+                            </a>
+                        </td>
+                    </tr>
+                </table>
 
                 {!this.state.show || <table className="table is-bordered is-striped is-narrow content is-small">
-                    <col width="2%" />
-                    <col width="10%" />
-                    <col width="2%" />
-                    <col width="2%" />
-                    <col width="2%" />
-                    <col width="2%" />
-                    <col width="2%" />
-                    <col width="78%" />
+                    <col width="2%"/>
+                    <col width="10%"/>
+                    <col width="2%"/>
+                    <col width="2%"/>
+                    <col width="2%"/>
+                    <col width="2%"/>
+                    <col width="2%"/>
+                    <col width="78%"/>
                     <thead>
                     <tr className="is-selected">
                         <th>#</th>
@@ -55,19 +61,19 @@ export default class HttpList extends Component {
                     </thead>
 
                     {this.props.entries.map((entrie, number) =>
-                        <HttpInfo
-                            page={this.props.page}
-                            number={number}
-                            entrie={entrie}
-                            time={entrie.startedDateTime}
-                            title={entrie.request.url}
-                            reqMethod={entrie.request.method}
-                            resStatus={entrie.response.status}
-                            reqSize={entrie.request.headersSize}
-                            resSize={entrie.response.headersSize + entrie.response.bodySize}
-                            totalTime={entrie.time}
-                            maxTime={this.props.maxTime}
-                        />
+                            <HttpInfo
+                                page={this.props.page}
+                                number={number}
+                                entrie={entrie}
+                                time={entrie.startedDateTime}
+                                title={entrie.request.url}
+                                reqMethod={entrie.request.method}
+                                resStatus={entrie.response.status}
+                                reqSize={entrie.request.headersSize}
+                                resSize={entrie.response.headersSize + entrie.response.bodySize}
+                                totalTime={entrie.time}
+                                maxTime={this.props.maxTime}
+                                />
                     )}
                 </table>}</div>
         )
