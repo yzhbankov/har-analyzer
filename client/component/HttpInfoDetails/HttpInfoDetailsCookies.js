@@ -3,46 +3,59 @@ import React, {Component} from 'react'
 export default class HttpInfoDetailsCookies extends Component {
     render() {
         return (
-            <div className='column is-12 box content is-small'>
-                <div className="has-text-bold is-vertical-spaceless">Request cookies</div>
-                <hr/>
+            <table className="table is-striped">
+                <thead>
+                <tr>
+                    <th colSpan={2} className='is-center title is-5'>Response content</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th colSpan={2} className="has-text-bold is-center">Request cookies</th>
+                </tr>
                 {(() => {
                     if (this.props.request.cookies == 0) {
-                        return <div>No cookies send</div>
+                        return <tr>
+                            <td colSpan={2}>No cookies send</td>
+                        </tr>
                     } else {
                         return this.props.request.cookies.map(cookie => {
-                            return (<div>
-                                    <div className="has-text-left has-text-bold">{cookie.name}</div>
-                                    <ul>
-                                        <li className="box-content">Value: {cookie.value}</li>
-                                        <li className="box-content">HTTP Only: {cookie.httpOnly}</li>
-                                        <li className="box-content">Expires: {cookie.expires}</li>
-                                    </ul>
-                                </div>
+                            return (<tr>
+                                    <td className="has-text-left has-text-bold">{cookie.name.slice(0, 10)}</td>
+                                    <td>
+                                        <div className="box-content"><strong>Value:</strong> {cookie.value}</div>
+                                        <div className="box-content"><strong>HTTP Only:</strong> {cookie.httpOnly}</div>
+                                        <div className="box-content"><strong>Expires:</strong> {cookie.expires}</div>
+                                    </td>
+                                </tr>
                             )
                         })
                     }
                 })()}
-                <div className="has-text-bold is-vertical-spaceless">Response cookies</div>
-                <hr/>
+                <tr>
+                    <th colSpan={2} className="has-text-bold is-center">Response cookies</th>
+                </tr>
                 {(() => {
                     if (this.props.response.cookies == 0) {
-                        return <div>No cookies receive</div>
+                        return <tr>
+                            <td colSpan={2}>No cookies receive</td>
+                        </tr>
                     } else {
                         return this.props.response.cookies.map(cookie => {
-                            return (<div>
-                                    <div className="has-text-left has-text-bold">{cookie.name}</div>
-                                    <ul>
-                                        <li>Value: {cookie.value}</li>
-                                        <li>HTTP Only: {cookie.httpOnly}</li>
-                                        <li>Expires: {cookie.expires}</li>
-                                    </ul>
-                                </div>
+                            return (<tr>
+                                    <td className="has-text-left has-text-bold">{cookie.name.slice(0, 10)}</td>
+                                    <td>
+                                        <div className="box-content"><strong>Value:</strong> {cookie.value}</div>
+                                        <div className="box-content"><strong>HTTP Only:</strong> {cookie.httpOnly}</div>
+                                        <div className="box-content"><strong>Expires:</strong> {cookie.expires}</div>
+                                    </td>
+                                </tr>
                             )
                         })
                     }
                 })()}
-            </div>
+                </tbody>
+            </table>
         )
     }
 }
