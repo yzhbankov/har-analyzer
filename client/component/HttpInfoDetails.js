@@ -34,25 +34,53 @@ export default class HttpInfoDetails extends Component {
         return (<tr>
                 <td colSpan={8}>
                     <div className="box">
-                        <div className='columns'>
-                            <div className="column is-1"></div>
-                            <div className='column is-1 has-text-centered'><a className='button'
+                        <div className='columns is-mobile'>
+                            <div className='column is-2 has-text-centered'>
+                                {/* Mobile size*/}
+                                <a className='button is-hidden-tablet is-small'
                                                                               data-name='reqShow'
                                                                               onClick={this.showHideComponent.bind(this)}
-                                                                              href='#'>Request</a>
+                                                                              href='#'>RQ</a>
+                                {/*Desktop size*/}
+                                <a className='button is-hidden-mobile'
+                                                                               data-name='reqShow'
+                                                                               onClick={this.showHideComponent.bind(this)}
+                                                                               href='#'>Request</a>
                             </div>
-                            <div className='column is-1 has-text-centered'><a className='button'
+
+                            <div className='column is-2 has-text-centered'>
+                                {/*Mobile size*/}
+                                <a className='button is-hidden-tablet is-small'
                                                                               data-name='resShow'
                                                                               onClick={this.showHideComponent.bind(this)}
-                                                                              href='#'>Response</a>
+                                                                              href='#'>RS</a>
+                                {/*Desktop size*/}
+                                <a className='button is-hidden-mobile'
+                                                                               data-name='resShow'
+                                                                               onClick={this.showHideComponent.bind(this)}
+                                                                               href='#'>Response</a>
                             </div>
-                            <div className='column is-1 has-text-centered'>
-                                <a className='button' data-name='contentShow'
-                                   onClick={this.showHideComponent.bind(this)} href='#'>Response content</a>
+
+                            <div className='column is-2 has-text-centered'>
+                                {/*Mobile size*/}
+                                <a className='button is-hidden-tablet is-small' data-name='contentShow'
+                                                                                onClick={this.showHideComponent.bind(this)}
+                                                                                href='#'>RC</a>
+                                {/*Desktop size*/}
+                                <a className='button is-hidden-mobile' data-name='contentShow'
+                                                                                onClick={this.showHideComponent.bind(this)}
+                                                                                href='#'>Response content</a>
+
                             </div>
-                            <div className='column is-1 has-text-centered'>
-                                <a className='button' data-name='cookiesShow'
-                                   onClick={this.showHideComponent.bind(this)} href='#'>Cookies</a>
+                            <div className='column is-2 has-text-centered'>
+                                {/*Mobile size*/}
+                                <a className='button is-hidden-tablet is-small' data-name='cookiesShow'
+                                                                                onClick={this.showHideComponent.bind(this)}
+                                                                                href='#'>C</a>
+                                {/*Desktop size*/}
+                                <a className='button is-hidden-mobile' data-name='cookiesShow'
+                                                                                onClick={this.showHideComponent.bind(this)}
+                                                                                href='#'>Cookies</a>
                             </div>
                         </div>
                         {!this.state.reqShow ||
