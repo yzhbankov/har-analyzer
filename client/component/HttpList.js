@@ -40,7 +40,7 @@ export default class HttpList extends Component {
 
                 {!this.state.show || <table className="table is-bordered is-striped is-narrow content is-small">
                     <col className='is-hidden-mobile' width="2%"/>
-                    <col width="10%"/>
+                    <col className='is-hidden-mobile' width="10%"/>
                     <col className='is-hidden-mobile' width="2%"/>
                     <col className='is-hidden-mobile' width="2%"/>
                     <col className='is-hidden-mobile' width="2%"/>
@@ -50,7 +50,7 @@ export default class HttpList extends Component {
                     <thead>
                     <tr className="is-selected">
                         <th className='is-hidden-mobile'>#</th>
-                        <th><abbr title="Title">Title</abbr></th>
+                        <th className='is-hidden-mobile'><abbr title="Title">Title</abbr></th>
                         <th className='is-hidden-mobile'><abbr title="Request method">M</abbr></th>
                         <th className='is-hidden-mobile'><abbr title="Status">S</abbr></th>
                         <th className='is-hidden-mobile'><abbr title="Request size, b">Req</abbr></th>

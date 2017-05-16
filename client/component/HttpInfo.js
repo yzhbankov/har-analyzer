@@ -24,7 +24,7 @@ export default class HttpInfo extends Component {
             <tbody>
             <tr onClick={this.onBtnClick.bind(this)}>
                 <td className='is-hidden-mobile'>{this.props.number + 1}</td>
-                <td><abbr title={this.props.title}><a href="#">{this.props.title.slice(0, 30)+'...'}</a></abbr></td>
+                <td className='is-hidden-mobile'><abbr title={this.props.title}><a href="#">{this.props.title.slice(0, 30)+'...'}</a></abbr></td>
                 <td className='is-hidden-mobile'>{this.props.reqMethod}</td>
                 <td className='is-hidden-mobile'>{this.props.resStatus}</td>
                 <td className='is-hidden-mobile'>{(() => {
