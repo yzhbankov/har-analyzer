@@ -10,7 +10,7 @@ import Footer from '../component/Footer.js'
 
 class App extends Component {
     readFile(event) {
-        this.props.getHarActions.loadHarContent(event)
+        this.props.getHarActions.loadHarContent(event);
     }
 
     render() {
@@ -20,7 +20,7 @@ class App extends Component {
         };
         const uploadInputStyle = {
             position: 'absolute',
-            top: 0,
+            top: '0',
             right: 0,
             margin: 0,
             padding: 0,
@@ -42,7 +42,9 @@ class App extends Component {
                                 <h1 className="title is-5">
                                     LOAD YOUR HAR
                                 </h1>
-                                <input type="file" style={uploadInputStyle} onChange={this.readFile.bind(this)}/>
+                                <div className="is-small is-hidden-touch">You can simply drag and drop your file here</div>
+                                <div className="is-small is-hidden-desktop">You can simply click here</div>
+                                <input type="file" style={uploadInputStyle} onChange={this.readFile.bind(this)} onDrop={this.readFile.bind(this)}/>
                             </div>
                         </div>
                     </section>}
