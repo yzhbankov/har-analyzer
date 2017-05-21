@@ -7,8 +7,15 @@ import HttpInfoTimeLine from '../component/HttpInfoTimeLine'
 export default class HttpInfo extends Component {
     constructor(props) {
         super(props);
+        let totalReqTime = props.totalTime;
+        if (totalReqTime == null){
+            for (let key in props.entrie.timings){
+                totalReqTime += props.entrie.timings[key]
+            }
+        }
         this.state = {
-            show: false
+            show: false,
+            totalReqTime: totalReqTime
         };
     }
 
@@ -44,7 +51,7 @@ export default class HttpInfo extends Component {
                 })()
                 }
                 </td>
-                <td className='is-hidden-mobile'>{Math.round(this.props.totalTime * 100) / 100}</td>
+                <td className='is-hidden-mobile'>{Math.round(this.state.totalReqTime * 100) / 100}</td>
                 <td>
                     <HttpInfoTimeLine entrie={this.props.entrie}
                                       page={this.props.page}
