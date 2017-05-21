@@ -28238,8 +28238,15 @@ var HttpInfo = function (_Component) {
 
         var _this = _possibleConstructorReturn(this, (HttpInfo.__proto__ || Object.getPrototypeOf(HttpInfo)).call(this, props));
 
+        var totalReqTime = props.totalTime;
+        if (totalReqTime == null) {
+            for (var key in props.entrie.timings) {
+                totalReqTime += props.entrie.timings[key];
+            }
+        }
         _this.state = {
-            show: false
+            show: false,
+            totalReqTime: totalReqTime
         };
         return _this;
     }
@@ -28269,7 +28276,7 @@ var HttpInfo = function (_Component) {
                 } else {
                     return _this2.props.resSize;
                 }
-            }()), _react2.default.createElement('td', { className: 'is-hidden-mobile' }, Math.round(this.props.totalTime * 100) / 100), _react2.default.createElement('td', null, _react2.default.createElement(_HttpInfoTimeLine2.default, { entrie: this.props.entrie,
+            }()), _react2.default.createElement('td', { className: 'is-hidden-mobile' }, Math.round(this.state.totalReqTime * 100) / 100), _react2.default.createElement('td', null, _react2.default.createElement(_HttpInfoTimeLine2.default, { entrie: this.props.entrie,
                 page: this.props.page,
                 maxTime: this.props.maxTime }))), !this.state.show || _react2.default.createElement(_HttpInfoDetails2.default, { entrie: this.props.entrie }));
         }
@@ -28788,10 +28795,17 @@ var HttpInfoTimeLine = function (_Component) {
 
         var _this = _possibleConstructorReturn(this, (HttpInfoTimeLine.__proto__ || Object.getPrototypeOf(HttpInfoTimeLine)).call(this, props));
 
+        var totalReqTime = props.entrie.time;
+        if (totalReqTime == null) {
+            for (var key in props.entrie.timings) {
+                totalReqTime += props.entrie.timings[key];
+            }
+        }
+
         _this.state = {
             totalTime: totalTime,
             contentLoadTime: props.page.pageTimings.onContentLoad,
-            totalReqTime: props.entrie.time,
+            totalReqTime: totalReqTime,
             startTime: Date.parse(props.entrie.startedDateTime) - Date.parse(props.page.startedDateTime),
             dnsTime: props.entrie.timings.dns,
             connectTime: props.entrie.timings.connect,
@@ -28807,29 +28821,6 @@ var HttpInfoTimeLine = function (_Component) {
     }
 
     _createClass(HttpInfoTimeLine, [{
-        key: 'componentWillReceiveProps',
-        value: function componentWillReceiveProps(props) {
-            var totalTime = props.page.pageTimings.onLoad;
-            var maxTime = props.maxTime;
-            if (totalTime > maxTime) {
-                maxTime = totalTime;
-            }
-            this.setState({
-                totalTime: totalTime,
-                contentLoadTime: props.page.pageTimings.onContentLoad,
-                totalReqTime: props.entrie.time,
-                startTime: Date.parse(props.entrie.startedDateTime) - Date.parse(props.page.startedDateTime),
-                dnsTime: props.entrie.timings.dns,
-                connectTime: props.entrie.timings.connect,
-                blockTime: props.entrie.timings.blocked,
-                sendTime: props.entrie.timings.send,
-                waitTime: props.entrie.timings.wait,
-                receiveTime: props.entrie.timings.receive,
-                sslTime: props.entrie.timings.ssl,
-                maxTime: maxTime
-            });
-        }
-    }, {
         key: 'showToolTip',
         value: function showToolTip(e) {
             e.preventDefault();
@@ -28879,6 +28870,7 @@ var HttpInfoTimeLine = function (_Component) {
             var sslStyle = { width: Math.abs(this.state.sslTime / this.state.totalReqTime) * relativeReqTime + '%' };
 
             var pageLoadStyle = { left: this.state.totalTime / this.state.maxTime * 100 + '%' };
+            console.log(this.state.maxTime);
             return _react2.default.createElement('div', { style: _components.timeLine, onMouseOver: this.showToolTip.bind(this), onMouseOut: this.hideToolTip.bind(this),
                 onMouseMove: this.posToolTip.bind(this) }, _react2.default.createElement('div', { className: 'startTime', style: startStyle }), _react2.default.createElement('div', { className: 'blockTime', style: blockStyle }), _react2.default.createElement('div', { className: 'dnsTime', style: dnsStyle }), _react2.default.createElement('div', { className: 'connectTime', style: connectStyle }), _react2.default.createElement('div', { className: 'sslTime', style: sslStyle }), _react2.default.createElement('div', { className: 'sendTime', style: sendStyle }), _react2.default.createElement('div', { className: 'waitTime', style: waitStyle }), _react2.default.createElement('div', { className: 'receiveTime', style: receiveStyle }), _react2.default.createElement('div', null, Math.round(this.state.totalReqTime * 10) / 10, 'ms'), _react2.default.createElement('div', { className: 'contentLoad', style: contentLoadStyle }), _react2.default.createElement('div', { className: 'pageLoad', style: pageLoadStyle }), !this.state.showToolTip || _react2.default.createElement(_TimeLineToolTip2.default, { data: this.state, position: this.state.toolTipPos }));
         }
