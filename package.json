@@ -39,11 +39,13 @@
   "dependencies": {
     "bulma": "^0.4.1",
     "chart.js": "^2.5.0",
+    "prop-types": "^15.5.10",
     "radium": "^0.18.2",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "react-redux": "^5.0.4",
     "redux": "^3.6.0",
-    "redux-thunk": "^2.2.0"
+    "redux-thunk": "^2.2.0",
+    "shortid": "^2.2.8"
   }
 }

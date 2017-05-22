@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import shortid from 'shortid'
 
 import StatisticsResponseContent from './Statistics/StatisticsResponseContent'
 import StatisticsTiming from './Statistics/StatisticsTiming'
@@ -35,8 +36,9 @@ export default class Statistics extends Component {
                 </section>}
                 {!this.props.showStatistics || this.props.statistics.map((statistic, number) => {
                     return (
-                        <div>
+                        <div key={shortid.generate()}>
                             <table className='table is-bordered is-marginless'>
+                                <tbody>
                                 <tr>
                                     <td>
                                         <a href="#">
@@ -44,6 +46,7 @@ export default class Statistics extends Component {
                                         </a>
                                     </td>
                                 </tr>
+                                </tbody>
                             </table>
 
                             {!this.state.showPage[number] || <div className="columns">

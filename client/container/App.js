@@ -1,4 +1,6 @@
-import React, {Component, PropTypes} from 'react'
+import React, {Component} from 'react'
+import PropTypes from 'prop-types'
+import shortid from 'shortid'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import * as HarActions from '../actions/HarActions'
@@ -65,6 +67,7 @@ class App extends Component {
                     </section>}
                     {this.props.pages.map((page, number) =>
                             <HttpList
+                                key={shortid.generate()}
                                 entries={this.props.entries[number]}
                                 page={page}
                                 maxTime={this.props.maxTimes[number]}

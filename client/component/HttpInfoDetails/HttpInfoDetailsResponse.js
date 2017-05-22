@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import shortid from 'shortid'
 
 export default class HttpInfoDetailsResponse extends Component {
     render() {
@@ -23,7 +24,7 @@ export default class HttpInfoDetailsResponse extends Component {
                 {
                     this.props.response.headers.map((header) => {
                         return (
-                            <tr>
+                            <tr key={shortid.generate()}>
                                 <td className='has-text-right has-text-bold'>{header.name}</td>
                                 <td >
                                     <div className="box-content">{header.value}</div>
