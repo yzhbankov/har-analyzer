@@ -21,7 +21,9 @@ class App extends Component {
     render() {
         const fileUploadStyle = {
             position: 'relative',
-            overflow: 'hidden'
+            overflow: 'hidden',
+            paddingTop: '70px',
+            height: '200px'
         };
         const uploadInputStyle = {
             position: 'absolute',
@@ -43,7 +45,7 @@ class App extends Component {
                 <div>
                     {this.props.isDataLoad || <section className="hero is-dark is-fullheight">
                         <div className="hero-body" onClick={this.bodyReadFile}>
-                            <div style={fileUploadStyle} className="container is-center">
+                            <div style={fileUploadStyle} className="container is-center drag-and-drop">
                                 <h1 className="title is-5">
                                     LOAD YOUR HAR
                                 </h1>
