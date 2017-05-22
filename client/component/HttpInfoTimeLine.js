@@ -78,9 +78,8 @@ export default class HttpInfoTimeLine extends Component {
         const receiveStyle = {width: Math.abs(this.state.receiveTime / this.state.totalReqTime) * relativeReqTime + '%'};
         const contentLoadStyle = {left: (this.state.contentLoadTime / this.state.maxTime) * 100 + '%'};
         const sslStyle = {width: Math.abs(this.state.sslTime / this.state.totalReqTime) * relativeReqTime + '%'};
-
         const pageLoadStyle = {left: (this.state.totalTime / this.state.maxTime) * 100 + '%'};
-        console.log(this.state.maxTime);
+
         return (
             <div style={timeLine} onMouseOver={this.showToolTip.bind(this)} onMouseOut={this.hideToolTip.bind(this)}
                  onMouseMove={this.posToolTip.bind(this)}>
@@ -93,8 +92,8 @@ export default class HttpInfoTimeLine extends Component {
                 <div className="waitTime" style={waitStyle}>{/*{this.state.waitTime}*/}</div>
                 <div className="receiveTime" style={receiveStyle}>{/*{this.state.receiveTime}*/}</div>
                 <div>{Math.round(this.state.totalReqTime * 10) / 10}ms</div>
-                <div className="contentLoad" style={contentLoadStyle}></div>
-                <div className="pageLoad" style={pageLoadStyle}></div>
+                {this.state.contentLoadTime==-1 || <div className="contentLoad" style={contentLoadStyle}></div>}
+                {this.state.contentLoadTime==-1 || <div className="pageLoad" style={pageLoadStyle}></div>}
                 {!this.state.showToolTip || <TimeLineToolTip data={this.state} position={this.state.toolTipPos}/>}
             </div>
         )
