@@ -13,6 +13,11 @@ class App extends Component {
         this.props.getHarActions.loadHarContent(event);
     }
 
+    bodyReadFile(event){
+        event.stopPropagation();
+        document.querySelector('input').click();
+    }
+
     render() {
         const fileUploadStyle = {
             position: 'relative',
@@ -37,7 +42,7 @@ class App extends Component {
 
                 <div>
                     {this.props.isDataLoad || <section className="hero is-dark is-fullheight">
-                        <div className="hero-body">
+                        <div className="hero-body" onClick={this.bodyReadFile}>
                             <div style={fileUploadStyle} className="container is-center">
                                 <h1 className="title is-5">
                                     LOAD YOUR HAR
