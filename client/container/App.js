@@ -1,4 +1,6 @@
-import React, {Component, PropTypes} from 'react'
+import React, {Component} from 'react'
+import PropTypes from 'prop-types'
+import shortid from 'shortid'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import * as HarActions from '../actions/HarActions'
@@ -13,10 +15,17 @@ class App extends Component {
         this.props.getHarActions.loadHarContent(event);
     }
 
+    bodyReadFile(event){
+        event.stopPropagation();
+        document.querySelector('input').click();
+    }
+
     render() {
         const fileUploadStyle = {
             position: 'relative',
-            overflow: 'hidden'
+            overflow: 'hidden',
+            paddingTop: '70px',
+            height: '200px'
         };
         const uploadInputStyle = {
             position: 'absolute',
@@ -37,8 +46,8 @@ class App extends Component {
 
                 <div>
                     {this.props.isDataLoad || <section className="hero is-dark is-fullheight">
-                        <div className="hero-body">
-                            <div style={fileUploadStyle} className="container is-center">
+                        <div className="hero-body" onClick={this.bodyReadFile}>
+                            <div style={fileUploadStyle} className="container is-center drag-and-drop">
                                 <h1 className="title is-5">
                                     LOAD YOUR HAR
                                 </h1>
@@ -58,6 +67,7 @@ class App extends Component {
                     </section>}
                     {this.props.pages.map((page, number) =>
                             <HttpList
+                                key={shortid.generate()}
                                 entries={this.props.entries[number]}
                                 page={page}
                                 maxTime={this.props.maxTimes[number]}

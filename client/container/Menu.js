@@ -1,4 +1,5 @@
-import React, {Component, PropTypes} from 'react'
+import React, {Component} from 'react'
+import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import Radium from 'radium'
 import * as HarActions from '../actions/HarActions'
@@ -66,8 +67,9 @@ import {bindActionCreators} from 'redux'
                             </div>
                         </a>
                         <a className="nav-item is-tab is-hidden-tablet"
-                           onClick={this.props.getHarActions.showHideStatistics.bind(this, this.props.showStatistics)}>Statistics</a>
-                        <a className="nav-item is-tab" href="discuss.html">Discuss?</a>
+                           onClick={this.props.getHarActions.showHideStatistics.bind(this, this.props.showStatistics)}>Statistics
+                        </a>
+                        <a className="nav-item is-tab is-active" href="discuss.html">Discuss?</a>
                     </div>
                 </div>
             </nav>

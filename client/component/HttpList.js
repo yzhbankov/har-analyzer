@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-
+import shortid from 'shortid'
 import HttpInfo from '../component/HttpInfo'
 import '../style/sass/styles.sass'
 
@@ -28,6 +28,7 @@ export default class HttpList extends Component {
     render() {
         return (<div>
                 <table className='table is-bordered is-marginless'>
+                    <tbody>
                     <tr>
                         <td>
                             <a href='#'>
@@ -36,17 +37,20 @@ export default class HttpList extends Component {
                             </a>
                         </td>
                     </tr>
+                    </tbody>
                 </table>
 
                 {!this.state.show || <table className="table is-bordered is-striped is-narrow content is-small">
-                    <col className='is-hidden-mobile' width="2%"/>
-                    <col className='is-hidden-mobile' width="10%"/>
-                    <col className='is-hidden-mobile' width="2%"/>
-                    <col className='is-hidden-mobile' width="2%"/>
-                    <col className='is-hidden-mobile' width="2%"/>
-                    <col className='is-hidden-mobile' width="2%"/>
-                    <col className='is-hidden-mobile' width="2%"/>
-                    <col width="78%"/>
+                    <colgroup>
+                        <col className='is-hidden-mobile' width="2%"/>
+                        <col className='is-hidden-mobile' width="10%"/>
+                        <col className='is-hidden-mobile' width="2%"/>
+                        <col className='is-hidden-mobile' width="2%"/>
+                        <col className='is-hidden-mobile' width="2%"/>
+                        <col className='is-hidden-mobile' width="2%"/>
+                        <col className='is-hidden-mobile' width="2%"/>
+                        <col width="78%"/>
+                    </colgroup>
                     <thead>
                     <tr className="is-selected">
                         <th className='is-hidden-mobile'>#</th>
@@ -61,19 +65,20 @@ export default class HttpList extends Component {
                     </thead>
 
                     {this.props.entries.map((entrie, number) =>
-                            <HttpInfo
-                                page={this.props.page}
-                                number={number}
-                                entrie={entrie}
-                                time={entrie.startedDateTime}
-                                title={entrie.request.url}
-                                reqMethod={entrie.request.method}
-                                resStatus={entrie.response.status}
-                                reqSize={entrie.request.headersSize}
-                                resSize={entrie.response.headersSize + entrie.response.bodySize}
-                                totalTime={entrie.time}
-                                maxTime={this.props.maxTime}
-                                />
+                        <HttpInfo
+                            key={shortid.generate()}
+                            page={this.props.page}
+                            number={number}
+                            entrie={entrie}
+                            time={entrie.startedDateTime}
+                            title={entrie.request.url}
+                            reqMethod={entrie.request.method}
+                            resStatus={entrie.response.status}
+                            reqSize={entrie.request.headersSize}
+                            resSize={entrie.response.headersSize + entrie.response.bodySize}
+                            totalTime={entrie.time}
+                            maxTime={this.props.maxTime}
+                        />
                     )}
                 </table>}</div>
         )

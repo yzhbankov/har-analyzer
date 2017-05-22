@@ -110,7 +110,7 @@ export default class TimeLineToolTip extends Component {
                         <td>{receiveTimeVal}ms</td>
                         <td>Receiving</td>
                     </tr>
-                    <th colSpan={4}>Event timing relative to the request start:</th>
+                    <tr><th colSpan={4}>Event timing relative to the request start:</th></tr>
                     <tr>
                         <td>
                             <div className="contentLoadToolTip"></div>

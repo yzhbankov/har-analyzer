@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import shortid from 'shortid'
 
 export default class HttpInfoDetailsCookies extends Component {
     render() {
@@ -20,7 +21,7 @@ export default class HttpInfoDetailsCookies extends Component {
                         </tr>
                     } else {
                         return this.props.request.cookies.map(cookie => {
-                            return (<tr>
+                            return (<tr key={shortid.generate()}>
                                     <td className="has-text-left has-text-bold">{cookie.name.slice(0, 10)}</td>
                                     <td>
                                         <div className="box-content"><strong>Value:</strong> {cookie.value}</div>
@@ -42,7 +43,7 @@ export default class HttpInfoDetailsCookies extends Component {
                         </tr>
                     } else {
                         return this.props.response.cookies.map(cookie => {
-                            return (<tr>
+                            return (<tr key={shortid.generate()}>
                                     <td className="has-text-left has-text-bold">{cookie.name.slice(0, 10)}</td>
                                     <td>
                                         <div className="box-content"><strong>Value:</strong> {cookie.value}</div>
