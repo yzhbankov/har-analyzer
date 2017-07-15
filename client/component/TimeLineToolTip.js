@@ -1,11 +1,6 @@
 import React, {Component} from 'react'
-import Radium from 'radium'
-import {regularTitle, dnsTime, connectTime, sslTime, blockTime, sendTime, waitTime, contentLoad, pageLoad, receiveTime} from '../style/components.js'
-import {blockSpacing, elementSpacing, shadows, borderRadii} from '../style/style'
 
-@Radium
-export default
-class TimeLineToolTip extends Component {
+export default class TimeLineToolTip extends Component {
     render() {
         function isNegative(num) {
             if (num > 0) {
@@ -27,8 +22,8 @@ class TimeLineToolTip extends Component {
             top: top,
             left: left,
             zIndex: 99999,
-            backgroundColor: 'white',
-            minWidth: '440px'
+            backgroundColor: 'white'
+
         };
 
         const blockTimeVal = isNegative(this.props.data.blockTime);
@@ -47,98 +42,91 @@ class TimeLineToolTip extends Component {
         const receiveRelativeToReq = Math.round((waitRelativeToReq + waitTimeVal) * 100) / 100;
 
         return (
-            <div style={[pos, elementSpacing.two, shadows.one, borderRadii.two]}>
-                <div className='row'>
-                    <div className='col-md-2'>+{Math.round(this.props.data.startTime)}ms</div>
-                    <div className='col-md-10'>Request start time since the beginning</div>
-                </div>
-                <hr style={blockSpacing.one}/>
-                <div style={regularTitle}>Request phases start and elapsed time relative to the request status:</div>
-                <hr style={blockSpacing.one}/>
-                <div className='row'>
-                    <div className='col-md-1'>
-                        <div style={[blockTime]}></div>
-                    </div>
-                    <div className='col-md-1'>0ms</div>
-                    <div className='col-md-1'></div>
-                    <div className='col-md-5'>{blockTimeVal}ms</div>
-                    <div className='col-md-3'>Blocking</div>
-                </div>
-                <div className='row'>
-                    <div className='col-md-1'>
-                        <div style={[dnsTime]}></div>
-                    </div>
-                    <div className='col-md-1'>+{dnsRelativeToReq}ms</div>
-                    <div className='col-md-1'></div>
-                    <div className='col-md-5'>{dnsTimeVal}ms</div>
-                    <div className='col-md-3'>DNS Lookup</div>
-                </div>
-                <div className='row'>
-                    <div className='col-md-1'>
-                        <div style={[connectTime]}></div>
-                    </div>
-                    <div className='col-md-1'>+{connectRelativeToReq}ms</div>
-                    <div className='col-md-1'></div>
-                    <div className='col-md-5'>{connectTimeVal}ms</div>
-                    <div className='col-md-3'>Connecting</div>
-                </div>
-                <div className='row'>
-                    <div className='col-md-1'>
-                        <div style={[sslTime]}></div>
-                    </div>
-                    <div className='col-md-1'>+{sslRelativeToReq}ms</div>
-                    <div className='col-md-1'></div>
-                    <div className='col-md-5'>{sslTimeVal}ms</div>
-                    <div className='col-md-3'>SSL</div>
-                </div>
-                <div className='row'>
-                    <div className='col-md-1'>
-                        <div style={[sendTime]}></div>
-                    </div>
-                    <div className='col-md-1'>+{sendRelativeToReq}ms</div>
-                    <div className='col-md-1'></div>
-                    <div className='col-md-5'>{sendTimeVal}ms</div>
-                    <div className='col-md-3'>Sending</div>
-                </div>
-                <div className='row'>
-                    <div className='col-md-1'>
-                        <div style={[waitTime]}></div>
-                    </div>
-                    <div className='col-md-1'>+{waitRelativeToReq}ms</div>
-                    <div className='col-md-1'></div>
-                    <div className='col-md-5'>{waitTimeVal}ms</div>
-                    <div className='col-md-3'>Waiting</div>
-                </div>
-                <div className='row'>
-                    <div className='col-md-1'>
-                        <div style={[receiveTime]}></div>
-                    </div>
-                    <div className='col-md-1'>+{receiveRelativeToReq}ms</div>
-                    <div className='col-md-1'></div>
-                    <div className='col-md-5'>{receiveTimeVal}ms</div>
-                    <div className='col-md-3'>Receiving</div>
-                </div>
-                <hr style={blockSpacing.one}/>
-                <div style={regularTitle}>Event timing relative to the request start:</div>
-                <hr style={blockSpacing.one}/>
-                <div className='row'>
-                    <div className='col-md-1'>
-                        <div style={[contentLoad, {height: '15px'}]}></div>
-                    </div>
-                    <div className='col-md-4'>{Math.round(this.props.data.contentLoadTime - this.props.data.startTime)}ms
-                    </div>
-                    <div className='col-md-1'></div>
-                    <div className='col-md-3'>DOM Loaded</div>
-                </div>
-                <div className='row'>
-                    <div className='col-md-1'>
-                        <div style={[pageLoad, {height: '15px', left: 'none'}]}></div>
-                    </div>
-                    <div className='col-md-4'>{Math.round(this.props.data.totalTime - this.props.data.startTime)}ms
-                    </div>
-                    <div className='col-md-1'></div>
-                    <div className='col-md-3'>Page Loaded</div>
-                </div>
+            <div className="box is-hidden-mobile" style={pos}>
+                <table>
+                    <thead>
+                    <tr>
+                        <td colSpan={1}>+{Math.round(this.props.data.startTime)}ms</td>
+                        <td colSpan={3}>Request start time since the beginning</td>
+                    </tr>
+                    <tr>
+                        <th colSpan={4}>Request phases start and elapsed time relative to the request status:</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>
+                            <div className="blockTime"></div>
+                        </td>
+                        <td>0ms</td>
+                        <td>{blockTimeVal}ms</td>
+                        <td>Blocking</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div className="dnsTime"></div>
+                        </td>
+                        <td>+{dnsRelativeToReq}ms</td>
+                        <td>{dnsTimeVal}ms</td>
+                        <td>DNS Lookup</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div className="connectTime"></div>
+                        </td>
+                        <td>+{connectRelativeToReq}ms</td>
+                        <td>{connectTimeVal}ms</td>
+                        <td>Connecting</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div className="sslTime"></div>
+                        </td>
+                        <td>+{sslRelativeToReq}ms</td>
+                        <td>{sslTimeVal}ms</td>
+                        <td>SSL</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div className="sendTime"></div>
+                        </td>
+                        <td>+{sendRelativeToReq}ms</td>
+                        <td>{sendTimeVal}ms</td>
+                        <td>Sending</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div className="waitTime"></div>
+                        </td>
+                        <td>+{waitRelativeToReq}ms</td>
+                        <td>{waitTimeVal}ms</td>
+                        <td>Waiting</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div className="receiveTime"></div>
+                        </td>
+                        <td>+{receiveRelativeToReq}ms</td>
+                        <td>{receiveTimeVal}ms</td>
+                        <td>Receiving</td>
+                    </tr>
+                    <tr><th colSpan={4}>Event timing relative to the request start:</th></tr>
+                    <tr>
+                        <td>
+                            <div className="contentLoadToolTip"></div>
+                        </td>
+                        <td>{Math.round(this.props.data.contentLoadTime - this.props.data.startTime)}ms</td>
+                        <td colSpan={2}>DOM Loaded</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div className="pageLoadToolTip"></div>
+                        </td>
+                        <td>{Math.round(this.props.data.totalTime - this.props.data.startTime)}ms</td>
+                        <td colSpan={2}>Page Loaded</td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
         )
     }

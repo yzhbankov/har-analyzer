@@ -1,12 +1,9 @@
 import React, {Component} from 'react'
-import Radium from 'radium'
-import TimeLineToolTip from './TimeLineToolTip.js'
-import {startTime, timeLine, dnsTime, connectTime, sslTime, blockTime, sendTime, waitTime, receiveTime, contentLoad,
-    pageLoad} from '../style/components.js'
 
-@Radium
-export default
-class HttpInfoTimeLine extends Component {
+import TimeLineToolTip from './TimeLineToolTip.js'
+import {timeLine} from '../style/components.js'
+
+export default class HttpInfoTimeLine extends Component {
     constructor(props) {
         let totalTime = props.page.pageTimings.onLoad;
         let maxTime = props.maxTime;
@@ -14,10 +11,17 @@ class HttpInfoTimeLine extends Component {
             maxTime = totalTime
         }
         super(props);
+        let totalReqTime = props.entrie.time;
+        if (totalReqTime == null){
+            for (let key in props.entrie.timings){
+                totalReqTime += props.entrie.timings[key]
+            }
+        }
+
         this.state = {
             totalTime: totalTime,
             contentLoadTime: props.page.pageTimings.onContentLoad,
-            totalReqTime: props.entrie.time,
+            totalReqTime: totalReqTime,
             startTime: Date.parse(props.entrie.startedDateTime) - Date.parse(props.page.startedDateTime),
             dnsTime: props.entrie.timings.dns,
             connectTime: props.entrie.timings.connect,
@@ -29,28 +33,6 @@ class HttpInfoTimeLine extends Component {
             showToolTip: false,
             maxTime: maxTime
         }
-    }
-
-    componentWillReceiveProps(props) {
-        let totalTime = props.page.pageTimings.onLoad;
-        let maxTime = props.maxTime;
-        if (totalTime > maxTime) {
-            maxTime = totalTime;
-        }
-        this.setState({
-            totalTime: totalTime,
-            contentLoadTime: props.page.pageTimings.onContentLoad,
-            totalReqTime: props.entrie.time,
-            startTime: Date.parse(props.entrie.startedDateTime) - Date.parse(props.page.startedDateTime),
-            dnsTime: props.entrie.timings.dns,
-            connectTime: props.entrie.timings.connect,
-            blockTime: props.entrie.timings.blocked,
-            sendTime: props.entrie.timings.send,
-            waitTime: props.entrie.timings.wait,
-            receiveTime: props.entrie.timings.receive,
-            sslTime: props.entrie.timings.ssl,
-            maxTime: maxTime
-        })
     }
 
     showToolTip(e) {
@@ -70,11 +52,11 @@ class HttpInfoTimeLine extends Component {
     posToolTip(e) {
         e.preventDefault();
 
-        if ((e.clientX + 440) > window.innerWidth) {
-            e.clientX = e.clientX - 440
+        if ((e.clientX + 550) > window.innerWidth) {
+            e.clientX = e.clientX - 550
         }
-        if ((e.clientY + 300) > window.innerHeight) {
-            e.clientY = e.clientY - 300
+        if ((e.clientY + 420) > window.innerHeight) {
+            e.clientY = e.clientY - 420
         }
 
         this.setState({
@@ -96,22 +78,22 @@ class HttpInfoTimeLine extends Component {
         const receiveStyle = {width: Math.abs(this.state.receiveTime / this.state.totalReqTime) * relativeReqTime + '%'};
         const contentLoadStyle = {left: (this.state.contentLoadTime / this.state.maxTime) * 100 + '%'};
         const sslStyle = {width: Math.abs(this.state.sslTime / this.state.totalReqTime) * relativeReqTime + '%'};
-
         const pageLoadStyle = {left: (this.state.totalTime / this.state.maxTime) * 100 + '%'};
+
         return (
             <div style={timeLine} onMouseOver={this.showToolTip.bind(this)} onMouseOut={this.hideToolTip.bind(this)}
                  onMouseMove={this.posToolTip.bind(this)}>
-                <div style={[startStyle, startTime]}>{/*{this.state.startTime}*/}</div>
-                <div style={[blockStyle, blockTime]}>{/*{this.state.blockTime}*/}</div>
-                <div style={[dnsStyle, dnsTime]}>{/*{this.state.dnsTime}*/}</div>
-                <div style={[connectStyle, connectTime]}>{/*{this.state.connectTime}*/}</div>
-                <div style={[sslStyle, sslTime]}>{/*{this.state.waitTime}*/}</div>
-                <div style={[sendStyle, sendTime]}>{/*{this.state.sendTime}*/}</div>
-                <div style={[waitStyle, waitTime]}>{/*{this.state.waitTime}*/}</div>
-                <div style={[receiveStyle, receiveTime]}>{/*{this.state.receiveTime}*/}</div>
+                <div className="startTime" style={startStyle}>{/*{this.state.startTime}*/}</div>
+                <div className="blockTime" style={blockStyle}>{/*{this.state.blockTime}*/}</div>
+                <div className="dnsTime" style={dnsStyle}>{/*{this.state.dnsTime}*/}</div>
+                <div className="connectTime" style={connectStyle}>{/*{this.state.connectTime}*/}</div>
+                <div className="sslTime" style={sslStyle}>{/*{this.state.waitTime}*/}</div>
+                <div className="sendTime" style={sendStyle}>{/*{this.state.sendTime}*/}</div>
+                <div className="waitTime" style={waitStyle}>{/*{this.state.waitTime}*/}</div>
+                <div className="receiveTime" style={receiveStyle}>{/*{this.state.receiveTime}*/}</div>
                 <div>{Math.round(this.state.totalReqTime * 10) / 10}ms</div>
-                <div style={[contentLoadStyle, contentLoad]}></div>
-                <div style={[pageLoad, pageLoadStyle]}></div>
+                {this.state.contentLoadTime==-1 || <div className="contentLoad" style={contentLoadStyle}></div>}
+                {this.state.contentLoadTime==-1 || <div className="pageLoad" style={pageLoadStyle}></div>}
                 {!this.state.showToolTip || <TimeLineToolTip data={this.state} position={this.state.toolTipPos}/>}
             </div>
         )

@@ -1,48 +1,55 @@
 import React, {Component} from 'react'
-import Radium from 'radium'
+import shortid from 'shortid'
 
-import {regularTitle, right} from '../../style/components.js'
-import {blockSpacing, borderRadii, elementSpacing} from '../../style/style'
-
-@Radium
 export default class HttpInfoDetailsResponse extends Component {
     render() {
         return (
-            <div className='col-md-9 col-lg-6 col-sm-12 col-xs-12' style={[blockSpacing.two, {borderWidth: '1px', borderStyle:'solid', borderColor:'#c6c6c6', overflowX: 'auto'}, borderRadii.two, elementSpacing.two]}>
-                <div className='row'>
-                    <div className='col-md-3 col-lg-3 col-sm-3 col-xs-4' style={[regularTitle, right]}>Status</div>
-                    <div className='col-md-9 col-lg-9 col-sm-9 col-xs-8'>{this.props.response.status} {this.props.response.statusText}.
-                        {this.props.response.httpVersion}</div>
-                </div>
-
-                <div style={[regularTitle]}>Response headers</div>
-                <hr style={blockSpacing.one}/>
+            <table className="table is-striped">
+                <thead>
+                <tr>
+                    <th colSpan={2} className='is-center title is-5'>Response</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td className='has-text-right has-text-bold'>Status</td>
+                    <td >
+                        <div className="box-content">{this.props.response.status} {this.props.response.statusText}.
+                            {this.props.response.httpVersion}</div>
+                    </td>
+                </tr>
+                <tr>
+                    <th colSpan={2} className="has-text-bold is-center">Response headers</th>
+                </tr>
                 {
                     this.props.response.headers.map((header) => {
                         return (
-                            <div className='row'>
-                                <div className='col-md-3 col-lg-3 col-sm-3 col-xs-4'
-                                     style={[regularTitle, right]}>{header.name}</div>
-                                <div className='col-md-9 col-lg-9 col-sm-9 col-xs-8'>{header.value}</div>
-                            </div>
+                            <tr key={shortid.generate()}>
+                                <td className='has-text-right has-text-bold'>{header.name}</td>
+                                <td >
+                                    <div className="box-content">{header.value}</div>
+                                </td>
+                            </tr>
                         )
                     })
                 }
-                <div style={[regularTitle]}>Size</div>
-                <hr style={blockSpacing.one}/>
-                <div className='row'>
-                    <div className='col-md-3 col-lg-3 col-sm-3 col-xs-4' style={[regularTitle, right]}>Body size</div>
-                    <div className='col-md-9 col-lg-9 col-sm-9 col-xs-8'>{this.props.response.bodySize} B</div>
-                </div>
-                <div className='row'>
-                    <div className='col-md-3 col-lg-3 col-sm-3 col-xs-4' style={[regularTitle, right]}>Header size</div>
-                    <div className='col-md-9 col-lg-9 col-sm-9 col-xs-8'>{this.props.response.headersSize} B</div>
-                </div>
-                <div className='row'>
-                    <div className='col-md-3 col-lg-3 col-sm-3 col-xs-4' style={[regularTitle, right]}>Total</div>
-                    <div className='col-md-9 col-lg-9 col-sm-9 col-xs-8'>{this.props.response.bodySize + this.props.response.headersSize} B</div>
-                </div>
-            </div>
+                <tr>
+                    <th colSpan={2} className="has-text-bold is-center">Size</th>
+                </tr>
+                <tr>
+                    <td className='has-text-right has-text-bold'>Body size</td>
+                    <td >{this.props.response.bodySize} B</td>
+                </tr>
+                <tr>
+                    <td className='has-text-right has-text-bold'>Header size</td>
+                    <td >{this.props.response.headersSize} B</td>
+                </tr>
+                <tr>
+                    <td className='has-text-right has-text-bold'>Total</td>
+                    <td >{this.props.response.bodySize + this.props.response.headersSize} B</td>
+                </tr>
+                </tbody>
+            </table>
         )
     }
 }

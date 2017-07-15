@@ -1,53 +1,62 @@
 import React, {Component} from 'react'
-import Radium from 'radium'
+import shortid from 'shortid'
 
-import {regularTitle, left} from '../../style/components.js'
-import {blockSpacing, borderRadii, elementSpacing} from '../../style/style'
-
-@Radium
 export default class HttpInfoDetailsCookies extends Component {
     render() {
         return (
-            <div className='col-md-9 col-lg-6 col-sm-12 col-xs-12' style={[blockSpacing.two, {borderWidth: '1px', borderStyle:'solid', borderColor:'#c6c6c6', overflowX: 'auto'}, borderRadii.two, elementSpacing.two]}>
-                <div style={[regularTitle]}>Request cookies</div>
-                <hr style={blockSpacing.one}/>
+            <table className="table is-striped">
+                <thead>
+                <tr>
+                    <th colSpan={2} className='is-center title is-5'>Response content</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th colSpan={2} className="has-text-bold is-center">Request cookies</th>
+                </tr>
                 {(() => {
                     if (this.props.request.cookies == 0) {
-                        return <div>No cookies send</div>
+                        return <tr>
+                            <td colSpan={2}>No cookies send</td>
+                        </tr>
                     } else {
                         return this.props.request.cookies.map(cookie => {
-                            return (<div>
-                                    <div style={[regularTitle, left]}>{cookie.name}</div>
-                                    <ul>
-                                        <li>Value: {cookie.value}</li>
-                                        <li>HTTP Only: {cookie.httpOnly}</li>
-                                        <li>Expires: {cookie.expires}</li>
-                                    </ul>
-                                </div>
+                            return (<tr key={shortid.generate()}>
+                                    <td className="has-text-left has-text-bold">{cookie.name.slice(0, 10)}</td>
+                                    <td>
+                                        <div className="box-content"><strong>Value:</strong> {cookie.value}</div>
+                                        <div className="box-content"><strong>HTTP Only:</strong> {cookie.httpOnly}</div>
+                                        <div className="box-content"><strong>Expires:</strong> {cookie.expires}</div>
+                                    </td>
+                                </tr>
                             )
                         })
                     }
                 })()}
-                <div style={[regularTitle]}>Response cookies</div>
-                <hr style={blockSpacing.one}/>
+                <tr>
+                    <th colSpan={2} className="has-text-bold is-center">Response cookies</th>
+                </tr>
                 {(() => {
                     if (this.props.response.cookies == 0) {
-                        return <div>No cookies receive</div>
+                        return <tr>
+                            <td colSpan={2}>No cookies receive</td>
+                        </tr>
                     } else {
                         return this.props.response.cookies.map(cookie => {
-                            return (<div>
-                                    <div style={[regularTitle, left]}>{cookie.name}</div>
-                                    <ul>
-                                        <li>Value: {cookie.value}</li>
-                                        <li>HTTP Only: {cookie.httpOnly}</li>
-                                        <li>Expires: {cookie.expires}</li>
-                                    </ul>
-                                </div>
+                            return (<tr key={shortid.generate()}>
+                                    <td className="has-text-left has-text-bold">{cookie.name.slice(0, 10)}</td>
+                                    <td>
+                                        <div className="box-content"><strong>Value:</strong> {cookie.value}</div>
+                                        <div className="box-content"><strong>HTTP Only:</strong> {cookie.httpOnly}</div>
+                                        <div className="box-content"><strong>Expires:</strong> {cookie.expires}</div>
+                                    </td>
+                                </tr>
                             )
                         })
                     }
                 })()}
-            </div>
+                </tbody>
+            </table>
         )
     }
 }

@@ -1,25 +1,73 @@
-import React, {Component, PropTypes} from 'react'
+import React, {Component} from 'react'
+import PropTypes from 'prop-types'
+import shortid from 'shortid'
 import {connect} from 'react-redux'
-import Radium from 'radium'
+import {bindActionCreators} from 'redux'
+import * as HarActions from '../actions/HarActions'
 
 import Menu from './Menu.js'
 import HttpList from '../component/HttpList'
 import Statistics from '../component/Statistics'
+import Footer from '../component/Footer.js'
 
-import {regularText, chapterTitle, center} from '../style/components.js'
+class App extends Component {
+    readFile(event) {
+        this.props.getHarActions.loadHarContent(event);
+    }
 
-@Radium class App extends Component {
+    bodyReadFile(event){
+        event.stopPropagation();
+        document.querySelector('input').click();
+    }
+
     render() {
-        return (<div style={regularText}>
+        const fileUploadStyle = {
+            position: 'relative',
+            overflow: 'hidden',
+            paddingTop: '70px',
+            height: '200px'
+        };
+        const uploadInputStyle = {
+            position: 'absolute',
+            top: '0',
+            right: 0,
+            margin: 0,
+            padding: 0,
+            width: '100%',
+            height: '100%',
+            cursor: 'pointer',
+            opacity: 0,
+            filter: 'alpha(opacity=0)'
+        };
+        return (<div>
                 <Menu showStatistics={this.props.showStatistics}/>
                 <Statistics showStatistics={this.props.showStatistics} statistics={this.props.statistics}
                             pages={this.props.pages}/>
 
-                <div style={{overflow:'auto'}}>
-                    {this.props.isDataLoad || <div style={[{fontSize:100, marginTop: '100px'}, center]}>LOAD YOUR HAR</div>}
-                    {!this.props.isDataLoad || <div style={chapterTitle}>PAGES</div>}
+                <div>
+                    {this.props.isDataLoad || <section className="hero is-dark is-fullheight">
+                        <div className="hero-body" onClick={this.bodyReadFile}>
+                            <div style={fileUploadStyle} className="container is-center drag-and-drop">
+                                <h1 className="title is-5">
+                                    LOAD YOUR HAR
+                                </h1>
+                                <div className="is-small is-hidden-touch">You can simply drag and drop your file here</div>
+                                <div className="is-small is-hidden-desktop">You can simply click here</div>
+                                <input type="file" style={uploadInputStyle} onChange={this.readFile.bind(this)} onDrop={this.readFile.bind(this)}/>
+                            </div>
+                        </div>
+                    </section>}
+                    {!this.props.isDataLoad || <section className="hero is-dark">
+                        <div className="hero-body">
+                            <div className="container is-center">
+                                <h1 className="title">PAGES</h1>
+                                <h2 className='subtitle'>Loaded from HAR file</h2>
+                            </div>
+                        </div>
+                    </section>}
                     {this.props.pages.map((page, number) =>
                             <HttpList
+                                key={shortid.generate()}
                                 entries={this.props.entries[number]}
                                 page={page}
                                 maxTime={this.props.maxTimes[number]}
@@ -27,6 +75,7 @@ import {regularText, chapterTitle, center} from '../style/components.js'
                                 number={number}
                                 />
                     )}</div>
+                <Footer />
             </div>
         )
     }
@@ -43,4 +92,10 @@ function stateToComponent(state) {
     }
 }
 
-export default connect(stateToComponent)(App)
+function dispatchToComponent(dispatch) {
+    return {
+        getHarActions: bindActionCreators(HarActions, dispatch)
+    }
+}
+
+export default connect(stateToComponent, dispatchToComponent)(App)
