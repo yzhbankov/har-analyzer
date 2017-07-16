@@ -1,8 +1,13 @@
 import {
     LOAD_HAR_CONTENT,
     LOAD_HAR_SUCCESS,
-    SHOW_HIDE_STATISTICS
+    SHOW_HIDE_STATISTICS,
+    LINK_GENERATE_SUCCESS,
+    LINK_GENERATE_REQUEST,
+    LINK_GENERATE_FAILURE
 } from '../constants/Constants'
+
+import api from '../api/harApi'
 
 
 export function loadHarContent(event) {
@@ -29,5 +34,24 @@ export function showHideStatistics(showStatistics) {
             type: SHOW_HIDE_STATISTICS,
             payload: !showStatistics
         })
+    }
+}
+
+export function generateLink() {
+    return (dispatch) => {
+        api.generateLink()
+            .then((data) => {
+                dispatch({
+                    type: LINK_GENERATE_SUCCESS,
+                    payload: data
+                })
+            })
+            .catch((err) => {
+                dispatch({
+                    type: LINK_GENERATE_FAILURE,
+                    payload: err,
+                    error: true
+                })
+            })
     }
 }

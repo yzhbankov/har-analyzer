@@ -8,7 +8,7 @@ import * as db from '../utils/dbutils'
 const router = express.Router();
 const uid = uuid.v4;
 
-router.get('/', (req, res)=> {
+router.get('/link', (req, res)=> {
     res.send(uid());
 });
 

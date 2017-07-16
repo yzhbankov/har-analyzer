@@ -1,7 +1,10 @@
 import {
     LOAD_HAR_CONTENT,
     LOAD_HAR_SUCCESS,
-    SHOW_HIDE_STATISTICS
+    SHOW_HIDE_STATISTICS,
+    LINK_GENERATE_SUCCESS,
+    LINK_GENERATE_REQUEST,
+    LINK_GENERATE_FAILURE
 } from '../constants/Constants'
 
 
@@ -10,7 +13,9 @@ const initialState = {
     pages: [],
     isDataLoad: false,
     statistics: {},
-    showStatistics: false
+    showStatistics: false,
+    generatedLink:'',
+    isLoading: false
 };
 
 export default function rootReducer(state = initialState, action) {
@@ -40,6 +45,21 @@ export default function rootReducer(state = initialState, action) {
             console.log(action.payload);
             return Object.assign({}, state, {
                 showStatistics: action.payload
+            })
+        }
+
+        case LINK_GENERATE_SUCCESS:
+        {
+            return Object.assign({}, state, {
+                generatedLink: action.payload,
+                isLoading: false
+            })
+        }
+        case LINK_GENERATE_FAILURE:
+        {
+            return Object.assign({}, state, {
+                error: action.payload,
+                isLoading: false
             })
         }
 

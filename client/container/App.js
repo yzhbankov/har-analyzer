@@ -88,7 +88,8 @@ function stateToComponent(state) {
         isDataLoad: state.isDataLoad,
         statistics: state.statistics,
         maxTimes: state.maxTimes,
-        showStatistics: state.showStatistics
+        showStatistics: state.showStatistics,
+        isLoading: state.isLoading
     }
 }
 

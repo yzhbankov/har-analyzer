@@ -10,6 +10,10 @@ import {bindActionCreators} from 'redux'
         this.props.getHarActions.loadHarContent(event)
     }
 
+    generateRandomLink() {
+        this.props.getHarActions.generateLink();
+    }
+
     toggleNav() {
         const nav = document.getElementsByClassName("nav-menu")[0];
         const className = nav.getAttribute("class");
@@ -51,7 +55,13 @@ import {bindActionCreators} from 'redux'
                             </div>
                         </a>
                         <a className="nav-item is-tab is-hidden-mobile"
-                           onClick={this.props.getHarActions.showHideStatistics.bind(this, this.props.showStatistics)}>Statistics</a>
+                           onClick={this.props.getHarActions.showHideStatistics.bind(this, this.props.showStatistics)}>Statistics
+                        </a>
+                        <a className="nav-item is-tab is-hidden-mobile"
+                           onClick={this.generateRandomLink.bind(this)}>
+                            Shear
+                        </a>
+{/*                        <a>{this.props.generatedLink.data}</a>*/}
                     </div>
                         <span className="nav-toggle" onClick={this.toggleNav}>
                           <span></span>
@@ -77,10 +87,16 @@ import {bindActionCreators} from 'redux'
     }
 }
 
+function stateToComponent(state) {
+    return {
+        generatedLink: state.generatedLink
+    }
+}
+
 function dispatchToComponent(dispatch) {
     return {
         getHarActions: bindActionCreators(HarActions, dispatch)
     }
 }
 
-export default connect(null, dispatchToComponent)(Menu)
+export default connect(stateToComponent, dispatchToComponent)(Menu)
