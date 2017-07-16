@@ -2,12 +2,14 @@
  * Created by iaroslav on 10.07.17.
  */
 import express from 'express';
+import uuid from 'uuid';
 import * as db from '../utils/dbutils'
 
 const router = express.Router();
+const uid = uuid.v4;
 
 router.get('/', (req, res)=> {
-    res.send('Hello');
+    res.send(uid());
 });
 
 router
