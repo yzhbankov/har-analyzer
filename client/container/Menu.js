@@ -10,8 +10,8 @@ import {bindActionCreators} from 'redux'
         this.props.getHarActions.loadHarContent(event)
     }
 
-    generateRandomLink() {
-        this.props.getHarActions.generateLink(this.props.harContent);
+    saveAndShearHar() {
+        this.props.getHarActions.saveHarContent(this.props.harContent);
     }
 
     toggleNav() {
@@ -58,7 +58,7 @@ import {bindActionCreators} from 'redux'
                            onClick={this.props.getHarActions.showHideStatistics.bind(this, this.props.showStatistics)}>Statistics
                         </a>
                         <a className="nav-item is-tab is-hidden-mobile"
-                           onClick={this.saveHarContent.bind(this)}>
+                           onClick={this.saveAndShearHar.bind(this)}>
                             Save&Shear
                         </a>
 {/*                        <a>{this.props.generatedLink.data}</a>*/}
