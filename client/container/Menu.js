@@ -11,7 +11,7 @@ import {bindActionCreators} from 'redux'
     }
 
     generateRandomLink() {
-        this.props.getHarActions.generateLink();
+        this.props.getHarActions.generateLink(this.props.harContent);
     }
 
     toggleNav() {
@@ -58,8 +58,8 @@ import {bindActionCreators} from 'redux'
                            onClick={this.props.getHarActions.showHideStatistics.bind(this, this.props.showStatistics)}>Statistics
                         </a>
                         <a className="nav-item is-tab is-hidden-mobile"
-                           onClick={this.generateRandomLink.bind(this)}>
-                            Shear
+                           onClick={this.saveHarContent.bind(this)}>
+                            Save&Shear
                         </a>
 {/*                        <a>{this.props.generatedLink.data}</a>*/}
                     </div>
@@ -88,8 +88,20 @@ import {bindActionCreators} from 'redux'
 }
 
 function stateToComponent(state) {
+    const harContent = state.entries.map( entrie => {
+        return entrie.map(item => {
+            item.request.cookies = 'REMOVED';
+            item.response.content.text = 'REMOVED';
+            return item;
+        })
+    });
+
     return {
-        generatedLink: state.generatedLink
+        entries: state.entries,
+        isDataLoad: state.isDataLoad,
+        generatedLink: state.generatedLink,
+        harContent: harContent
+
     }
 }
 

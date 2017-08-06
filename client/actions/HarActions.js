@@ -37,10 +37,12 @@ export function showHideStatistics(showStatistics) {
     }
 }
 
-export function generateLink() {
+export function saveHarContent(harContent) {
+    console.log('harContent', harContent);
     return (dispatch) => {
-        api.generateLink()
+        api.saveHarContent(harContent)
             .then((data) => {
+            console.log('response for save har content', data);
                 dispatch({
                     type: LINK_GENERATE_SUCCESS,
                     payload: data

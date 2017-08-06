@@ -6,9 +6,7 @@ import mongoose from 'mongoose'
 const Schema = mongoose.Schema;
 
 const harSchema = new Schema({
-    uid: {type: String},
-    title: {type: String},
-    text: {type: String},
+    data: {type: String},
     date: {type: Date}
 });
 

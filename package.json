@@ -47,6 +47,7 @@
     "bulma": "^0.4.1",
     "chart.js": "^2.5.0",
     "express": "^4.15.3",
+    "json-size": "^1.0.0",
     "mongoose": "^4.11.3",
     "prop-types": "^15.5.10",
     "radium": "^0.18.2",

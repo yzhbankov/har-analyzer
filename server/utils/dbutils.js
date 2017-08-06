@@ -15,10 +15,10 @@ export function listHars() {
 }
 
 export function addHar(data) {
+    data = JSON.stringify(data);
+    console.log(data);
     const har = Har({
-        uid: data.uid,
-        title: data.title,
-        text: data.text,
+        data: data,
         date: new Date()
     });
     return har.save();

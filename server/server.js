@@ -4,11 +4,13 @@
 import express from 'express'
 import bodyParser from 'body-parser'
 import router from './router/api'
+import * as db from './utils/dbutils'
 
 const app = express();
+db.setUpConnect();
 
+app.use(bodyParser.json({limit:1024102420, type:'application/json'}));
 
-app.use(bodyParser.json());
 app.use((req, res, next) => {
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.setHeader("Access-Control-Allow-Credentials", "true");
