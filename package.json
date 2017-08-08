@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --watch",
+    "dev-server": "webpack-dev-server --debug --hot --devtool eval-source-map --output-pathinfo --watch --colors --inline --content-base public --port 8083 --host 0.0.0.0",
     "server": "babel-node server/server.js --presets es2015,stage-2"
   },
   "repository": {
@@ -36,7 +37,8 @@
     "sass": "^0.5.0",
     "sass-loader": "^6.0.5",
     "style-loader": "^0.16.1",
-    "webpack": "^2.4.1"
+    "webpack": "^2.4.1",
+    "webpack-dev-server": "^2.6.1"
   },
   "dependencies": {
     "axios": "^0.16.2",
@@ -53,6 +55,7 @@
     "radium": "^0.18.2",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
+    "react-json-pretty": "^1.6.3",
     "react-redux": "^5.0.4",
     "redux": "^3.6.0",
     "redux-thunk": "^2.2.0",
