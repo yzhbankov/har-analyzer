@@ -91,7 +91,7 @@ function stateToComponent(state) {
     const harContent = state.entries.map( entrie => {
         return entrie.map(item => {
             item.request.cookies = 'REMOVED';
-            item.response.content.text = 'REMOVED';
+            //item.response.content.text = 'REMOVED';
             return item;
         })
     });

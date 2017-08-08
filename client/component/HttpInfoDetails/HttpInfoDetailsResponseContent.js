@@ -1,4 +1,15 @@
 import React, {Component} from 'react'
+import JSONPretty from 'react-json-pretty';
+
+const renderResponseContent =(content)=>{
+    switch (content.mimeType){
+        case "application/json":
+            return (<JSONPretty id="json-pretty" json={content.text}></JSONPretty>);
+            break;
+        default:
+            return (<div className='box-content'>{content.text}</div>);
+    }
+};
 
 export default class HttpInfoDetailsResponseContent extends Component {
     render() {
@@ -21,7 +32,7 @@ export default class HttpInfoDetailsResponseContent extends Component {
                 <tr>
                     <td className='has-text-right has-text-bold'>Response content</td>
                     <td>
-                        <div className='box-content'>{this.props.content.text}</div>
+                        {renderResponseContent(this.props.content)}
                     </td>
                 </tr>
                 </tbody>
