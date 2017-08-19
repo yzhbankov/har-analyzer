@@ -20,6 +20,7 @@ app.use((req, res, next) => {
 });
 
 app.use('/', router);
+app.use('/', express.static('public'));
 
 const server = app.listen(8080, ()=>{
     console.log('Server listening on port 8080');
