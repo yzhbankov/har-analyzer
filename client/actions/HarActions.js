@@ -38,11 +38,11 @@ export function showHideStatistics(showStatistics) {
 }
 
 export function saveHarContent(harContent) {
-    console.log('harContent', harContent);
+    //console.log('harContent', harContent);
     return (dispatch) => {
         api.saveHarContent(harContent)
             .then((data) => {
-            console.log('response for save har content', data);
+            //console.log('response for save har content', data);
                 dispatch({
                     type: LINK_GENERATE_SUCCESS,
                     payload: data

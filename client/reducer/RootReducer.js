@@ -50,8 +50,9 @@ export default function rootReducer(state = initialState, action) {
 
         case LINK_GENERATE_SUCCESS:
         {
+            //console.log('action.payload', action.payload);
             return Object.assign({}, state, {
-                generatedLink: action.payload,
+                generatedLink: action.payload.data,
                 isLoading: false
             })
         }

@@ -14,9 +14,12 @@ export function listHars() {
     return Har.find({});
 }
 
+export function findHar(uid) {
+    return Har.findOne({_id: uid});
+}
+
 export function addHar(data) {
     data = JSON.stringify(data);
-    console.log(data);
     const har = Har({
         data: data,
         date: new Date()

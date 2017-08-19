@@ -20,7 +20,7 @@ router
             })
     })
     .get('/hars/:uid', (req, res)=> {
-        db.getAllHars(req.params.uid)
+        db.findHar(req.params.uid)
             .then(data=> {
                 res.send(data)
             })
@@ -28,7 +28,8 @@ router
     .post('/hars', (req, res)=> {
         db.addHar(req.body)
             .then(data=> {
-                res.send(data)
+                console.log('data._id', data._id)
+                res.send(data._id)
             })
     })
     .delete('/hars/:uid', (req, res)=> {
