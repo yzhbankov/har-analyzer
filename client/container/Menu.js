@@ -67,7 +67,7 @@ class Menu extends Component {
                     <div className="container ">
                         <div className="nav-left">
                             <a className="nav-item">
-                                <img src="../etc/img/logo.png" alt="HARVIE logo"/>
+                                <img src="./assets/img/logo.png" alt="HARVIE logo"/>
                             </a>
                             <a className="nav-item is-tab is-hidden-mobile is-active">
                                 <div style={[fileUploadStyle]}>
