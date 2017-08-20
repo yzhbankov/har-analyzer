@@ -2,6 +2,7 @@
  * Created by Iaroslav Zhbankov on 19.08.2017.
  */
 import React, {Component} from 'react'
+import Clipboard from 'clipboard'
 
 export default class LinkModal extends Component {
     constructor(props) {
@@ -18,6 +19,14 @@ export default class LinkModal extends Component {
                 modal: "modal is-active"
             })
         }
+    }
+
+    componentDidMount(){
+        this.clipboard = new Clipboard('.copy');
+    }
+
+    componentWillUnmount(){
+        this.clipboard.destroy();
     }
 
     closeModal = (e) => {
@@ -39,7 +48,7 @@ export default class LinkModal extends Component {
                         http://localhost:8080/hars/{this.props.generatedLink}
                     </section>
                     <footer className="modal-card-foot">
-                        <button className="button is-success">Copy link</button>
+                        <button className="button is-success copy" data-clipboard-target=".modal-card-body">Copy link</button>
                         <button onClick={this.closeModal} className="button">Close</button>
                     </footer>
                 </div>
